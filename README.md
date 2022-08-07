@@ -1,13 +1,13 @@
-# ÀÎÀû¼º °Ë»ç ( »ç¶÷ÀÎ )
+# ì¸ì ì„±ê²€ì‚¬ ( Saramin )
 
-## Æú´õ
+## í´ë”
 ### Assets
-* 02. Textures
-	** Spaceship
-	** Office
-	** Common
-* 03. Objects
-	** Prefabs
-		*** Spaceship
-		*** Office
+* Textures
+	* Spaceship
+	* Office
+	* Common
+* Objects
+	* Prefabs
+		* Spaceship
+		* Office
 
