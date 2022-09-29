@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CSpaceAppEngine : MonoBehaviour
 {
-    public GameObject[] m_listObjectOutline = new GameObject[3];
+    //public GameObject[] m_listObjectOutline = new GameObject[3];
 
     Vector3 m_vecMouseDownPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        HideAllObjectOutline();
+        //HideAllObjectOutline();
     }
 
     // Update is called once per frame
@@ -27,27 +27,31 @@ public class CSpaceAppEngine : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                //Debug.Log(hit.collider.name);
-                if (hit.collider.name == "Screen_main")
+                Debug.Log(hit.collider.name);
+                if( hit.collider.name.Equals("screen_left"))
                 {
-                    Debug.Log("!!!!!!!!!!!!!");
-                    CUIsSpaceUIManager.Instance.ShowScreen(0);
+                    CUIsSpaceManager.Instance.ShowLeftPage();
                 }
-                else if (hit.collider.name == "Screen_spaceship")
-                {
-                    ShowObjectOutline(1);
-                    Debug.Log("22222222222222");
-                    CUIsSpaceUIManager.Instance.ShowScreen(1);
-                }
-                else if (hit.collider.name == "Screen_comunication")
-                {
-                    ShowObjectOutline(2);
-                    Debug.Log("333333333333333");
-                }
+                //if (hit.collider.name == "Screen_main")
+                //{
+                //    Debug.Log("!!!!!!!!!!!!!");
+                //    CUIsSpaceUIManager.Instance.ShowScreen(0);
+                //}
+                //else if (hit.collider.name == "Screen_spaceship")
+                //{
+                //    //ShowObjectOutline(1);
+                //    Debug.Log("22222222222222");
+                //    CUIsSpaceUIManager.Instance.ShowScreen(1);
+                //}
+                //else if (hit.collider.name == "Screen_comunication")
+                //{
+                //    //ShowObjectOutline(2);
+                //    Debug.Log("333333333333333");
+                //} 
             }
             else
             {
-                HideAllObjectOutline();
+                //HideAllObjectOutline();
             }
         } else
         {
@@ -56,20 +60,20 @@ public class CSpaceAppEngine : MonoBehaviour
                 //Debug.Log(hit.collider.name);
                 if (hit.collider.name == "Screen_main")
                 {
-                    ShowObjectOutline(0);
+                    //ShowObjectOutline(0);
                 }
                 else if (hit.collider.name == "Screen_spaceship")
                 {
-                    ShowObjectOutline(1);
+                    //ShowObjectOutline(1);
                 }
                 else if (hit.collider.name == "Screen_comunication")
                 {
-                    ShowObjectOutline(2);
+                    //ShowObjectOutline(2);
                 }
             }
             else
             {
-                HideAllObjectOutline();
+                //HideAllObjectOutline();
             }
 
         }
@@ -84,17 +88,17 @@ public class CSpaceAppEngine : MonoBehaviour
         //}
     }
 
-    public void ShowObjectOutline(int nIndex)
-    {
-        HideAllObjectOutline();
-        m_listObjectOutline[nIndex].SetActive(true);
-    }
+    //public void ShowObjectOutline(int nIndex)
+    //{
+    //    HideAllObjectOutline();
+    //    m_listObjectOutline[nIndex].SetActive(true);
+    //}
 
-    public void HideAllObjectOutline()
-    {
-        for (int i = 0; i < m_listObjectOutline.Length; i++)
-        {
-            m_listObjectOutline[i].SetActive(false);
-        }
-    }
+    //public void HideAllObjectOutline()
+    //{
+    //    for (int i = 0; i < m_listObjectOutline.Length; i++)
+    //    {
+    //        m_listObjectOutline[i].SetActive(false);
+    //    }
+    //}
 }

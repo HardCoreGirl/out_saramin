@@ -969,15 +969,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446965237}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 156c0c2d4ddf55149baa30e59201bda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_listObjectOutline:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!4 &1446965239
 Transform:
   m_ObjectHideFlags: 0
@@ -1226,7 +1222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1590518028459170485, guid: b2a52f24245dc42a98eaa37d86f81b68, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1786348360067609415, guid: b2a52f24245dc42a98eaa37d86f81b68, type: 3}
       propertyPath: m_Pivot.x
@@ -1416,7 +1412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6857880474924155481, guid: 62ba4f2832dab4e8cab2247e5839f178, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62ba4f2832dab4e8cab2247e5839f178, type: 3}
