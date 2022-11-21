@@ -1,0 +1,12 @@
+{
+  "code": 200,
+  "message": "OK",
+  "body": [
+    {
+      "part_idx": 1
+    },
+    {
+      "part_idx": 2
+    }
+  ]
+}

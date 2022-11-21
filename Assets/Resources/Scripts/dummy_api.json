@@ -1,0 +1,920 @@
+{
+  "code": 200,
+  "message": "OK",
+  "body": [
+    {
+      "part_idx": 1,
+      "exm_time": 1500,
+      "progress_time": 1000,
+      "prg_st_cd": "TAE",
+      "set_dir_tp_cd": "TEXT",
+      "set_dir_cnnt": "문항유형 지시문 (리커트)",
+      "set_gudes": [],
+      "qst_tp_cd": "RQT",
+      "last_qst_idx": 1,
+      "last_page_no": 0,
+      "sets": [
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "평소 자신의 생각과 느낌을 잘 표현하는 응답을 선택하여 주십시오.",
+          "questions": [
+            {
+              "test_qst_idx": 1,
+              "test_anwr_idx": [
+                1
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 100,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "스트레스가 많이 쌓였을 때라도 항상 다른 사람들에게 친절과 예의를 지킨다.",
+              "answers": [
+                {
+                  "anwr_idx": 1,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 아니다"
+                },
+                {
+                  "anwr_idx": 2,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "아니다"
+                },
+                {
+                  "anwr_idx": 3,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "그렇다"
+                },
+                {
+                  "anwr_idx": 4,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 그렇다"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "dir_tp_cd": "IMG",
+          "dir_cnnt": "http://domain/img.png",
+          "questions": [
+            {
+              "test_qst_idx": 2,
+              "test_anwr_idx": [
+                6
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 101,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "스트레스가 많이 쌓였을 때라도 항상 다른 사람들에게 친절과 예의를 지킨다.",
+              "answers": [
+                {
+                  "anwr_idx": 5,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 아니다"
+                },
+                {
+                  "anwr_idx": 6,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "아니다"
+                },
+                {
+                  "anwr_idx": 7,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "그렇다"
+                },
+                {
+                  "anwr_idx": 8,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 그렇다"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "dir_tp_cd": "IMG",
+          "dir_cnnt": "http://domain/img.png",
+          "questions": [
+            {
+              "test_qst_idx": 3,
+              "test_anwr_idx": [
+                11
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 103,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "스트레스가 많이 쌓였을 때라도 항상 다른 사람들에게 친절과 예의를 지킨다.",
+              "answers": [
+                {
+                  "anwr_idx": 9,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 아니다"
+                },
+                {
+                  "anwr_idx": 10,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "아니다"
+                },
+                {
+                  "anwr_idx": 11,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "보통이다"
+                },
+                {
+                  "anwr_idx": 12,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "그렇다"
+                },
+                {
+                  "anwr_idx": 13,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 그렇다"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part_idx": 2,
+      "exm_time": 3000,
+      "progress_time": 2000,
+      "prg_st_cd": "WAITING",
+      "set_dir_tp_cd": "TEXT",
+      "set_dir_cnnt": "문항유형 지시문 (CST)",
+      "set_gudes": [],
+      "qst_tp_cd": "CST",
+      "last_qst_idx": 1,
+      "last_page_no": 1,
+      "sets": [
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "안내문|예를들어 생선,전자기기를 번갈아가면서..",
+          "questions": [
+            {
+              "test_qst_idx": 10,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [
+                "잉어",
+                "고등어"
+              ],
+              "test_prg_time": 120,
+              "qst_idx": 102,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "SBCT",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "물고기",
+              "answers": [
+                {
+                  "anwr_idx": 20,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": ""
+                }
+              ]
+            },
+            {
+              "test_qst_idx": 11,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 102,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "SBCT",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "과일",
+              "answers": [
+                {
+                  "anwr_idx": 20,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "dir_tp_cd": "IMG",
+          "dir_cnnt": "http://domain/image.png",
+          "questions": [
+            {
+              "test_qst_idx": 3,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 102,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "SBCT",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "과일,가구에 속하는 단어를 번갈아가면서 입력해주세요",
+              "answers": [
+                {},
+                {
+                  "anwr_idx": 22,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "전자기기"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part_idx": 3,
+      "exm_time": 4000,
+      "progress_time": 0,
+      "prg_st_cd": "TAE_FSH",
+      "set_dir_tp_cd": "TEXT",
+      "set_dir_cnnt": "문항유형 지시문 (RAT)",
+      "set_gudes": [],
+      "qst_tp_cd": "RAT",
+      "last_qst_idx": 0,
+      "last_page_no": 0,
+      "sets": [
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "아래 세개의 사진과 표에서 제시된 음절을 고려하여 공통으로 관련된 단어를 찾으세요",
+          "questions": [
+            {
+              "test_qst_idx": 10,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [
+                "답변"
+              ],
+              "test_prg_time": 10,
+              "qst_idx": 300,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "SBCT",
+              "qst_ans_cnt": 1,
+              "qst_dics": [
+                {
+                  "dic_tp_cd": "IMG",
+                  "dic_wrd_nm": "http://domain/img.png",
+                  "dic_scre": 0
+                },
+                {
+                  "dic_tp_cd": "IMG",
+                  "dic_wrd_nm": "http://domain/img.png",
+                  "dic_scre": -1
+                },
+                {
+                  "dic_tp_cd": "IMG",
+                  "dic_wrd_nm": "http://domain/img.png",
+                  "dic_scre": -2
+                }
+              ],
+              "qst_brws_cnnt": "대,래,문,소,가,작",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "아래 세개의 사진과 표에서 제시된 음절을 고려하여 공통으로 관련된 단어를 찾으세요",
+              "answers": [
+                {
+                  "anwr_idx": 30,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "아래 세개의 사진과 표에서 제시된 음절을 고려하여 공통으로 관련된 단어를 찾으세요",
+          "questions": [
+            {
+              "test_qst_idx": 31,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [
+                "대래"
+              ],
+              "test_prg_time": 100,
+              "qst_idx": 301,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "SBCT",
+              "qst_ans_cnt": 1,
+              "qst_dics": [
+                {
+                  "dic_tp_cd": "IMG",
+                  "dic_wrd_nm": "http://domain/img.png",
+                  "dic_scre": 0
+                },
+                {
+                  "dic_tp_cd": "IMG",
+                  "dic_wrd_nm": "http://domain/img.png",
+                  "dic_scre": -10
+                }
+              ],
+              "qst_brws_cnnt": "대,래,문,소,가,작",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "아래 세개의 사진과 표에서 제시된 음절을 고려하여 공통으로 관련된 단어를 찾으세요",
+              "answers": [
+                {
+                  "anwr_idx": 31,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part_idx": 4,
+      "exm_time": 5000,
+      "progress_time": 0,
+      "prg_st_cd": "WAITING",
+      "set_dir_tp_cd": "IMG",
+      "set_gudes": [],
+      "qst_tp_cd": "HPTS",
+      "last_qst_idx": 0,
+      "last_page_no": 0,
+      "sets": [
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "인간의 3가지 욕망은 자기보존의 어쩌구 저쩌구..",
+          "questions": [
+            {
+              "test_qst_idx": 40,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [],
+              "test_prg_time": 0,
+              "qst_idx": 400,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "성공과 개체의 성공은 서로 갈등적이라고 주장했는데, 이는 농업혁명의 결과와 {{answers}} 볼 수 있다.",
+              "answers": [
+                {
+                  "anwr_idx": 40,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "일치한다고"
+                },
+                {
+                  "anwr_idx": 41,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "반대된다고"
+                }
+              ]
+            },
+            {
+              "test_qst_idx": 41,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [],
+              "test_prg_time": 0,
+              "qst_idx": 401,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "농업혁명은 {{answers}} 의 성공을 상징하며,",
+              "answers": [
+                {
+                  "anwr_idx": 42,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "동물"
+                },
+                {
+                  "anwr_idx": 43,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "종"
+                },
+                {
+                  "anwr_idx": 44,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "개체"
+                }
+              ]
+            },
+            {
+              "test_qst_idx": 41,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [],
+              "test_prg_time": 0,
+              "qst_idx": 402,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "그 근거는 {{answers}} 에서 찾을 수 있다.",
+              "answers": [
+                {
+                  "anwr_idx": 43,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "업무시간"
+                },
+                {
+                  "anwr_idx": 44,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "인구"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "인간의 5가지 욕망은 자기보존의 어쩌구 저쩌구..",
+          "questions": [
+            {
+              "test_qst_idx": 43,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [],
+              "test_prg_time": 0,
+              "qst_idx": 403,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "성공과 개체의 성공은 서로 갈등적이라고 주장했는데, 이는 농업혁명의 결과와 {{answers}} 볼 수 있다.",
+              "answers": [
+                {
+                  "anwr_idx": 45,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "일치한다고"
+                },
+                {
+                  "anwr_idx": 46,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "반대된다고"
+                }
+              ]
+            },
+            {
+              "test_qst_idx": 41,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [],
+              "test_prg_time": 0,
+              "qst_idx": 401,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "농업혁명은 {{answers}} 의 성공을 상징하며,",
+              "answers": [
+                {
+                  "anwr_idx": 47,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "동물"
+                },
+                {
+                  "anwr_idx": 48,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "종"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part_idx": 5,
+      "exm_time": 1000,
+      "progress_time": 0,
+      "prg_st_cd": "WAITING",
+      "set_dir_tp_cd": "TEXT",
+      "set_dir_cnnt": "문항유형 지시문 (선다형1)",
+      "set_gudes": [],
+      "qst_tp_cd": "APTD1",
+      "last_qst_idx": 0,
+      "last_page_no": 0,
+      "sets": [
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "인간의 3가지 욕망은 자기보존의 어쩌구 저쩌구..",
+          "questions": [
+            {
+              "test_qst_idx": 50,
+              "test_anwr_idx": [
+                50
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 0,
+              "qst_idx": 500,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "IMG",
+              "qst_cnnt": "http://domain/img.png",
+              "answers": [
+                {
+                  "anwr_idx": 50,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                },
+                {
+                  "anwr_idx": 51,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                },
+                {
+                  "anwr_idx": 52,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "인간의 3가지 욕망은 자기보존의 어쩌구 저쩌구..",
+          "questions": [
+            {
+              "test_qst_idx": 51,
+              "test_anwr_idx": [
+                51
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 0,
+              "qst_idx": 501,
+              "qst_exos_cd": "FORM_B",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "IMG",
+              "qst_cnnt": "http://domain/img.png",
+              "answers": [
+                {
+                  "anwr_idx": 53,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                },
+                {
+                  "anwr_idx": 54,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                },
+                {
+                  "anwr_idx": 55,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                },
+                {
+                  "anwr_idx": 55,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part_idx": 5,
+      "exm_time": 1000,
+      "progress_time": 0,
+      "prg_st_cd": "WAITING",
+      "set_dir_tp_cd": "TEXT",
+      "set_dir_cnnt": "문항유형 지시문 (선다형2)",
+      "set_gudes": [],
+      "qst_tp_cd": "APTD2",
+      "last_qst_idx": 0,
+      "last_page_no": 0,
+      "sets": [
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "인간의 3가지 욕망은 자기보존의 어쩌구 저쩌구..",
+          "questions": [
+            {
+              "test_qst_idx": 50,
+              "test_anwr_idx": [
+                50
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 0,
+              "qst_idx": 500,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "IMG",
+              "qst_cnnt": "http://domain/img.png",
+              "answers": [
+                {
+                  "anwr_idx": 50,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                },
+                {
+                  "anwr_idx": 51,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                },
+                {
+                  "anwr_idx": 52,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "인간의 3가지 욕망은 자기보존의 어쩌구 저쩌구..",
+          "questions": [
+            {
+              "test_qst_idx": 51,
+              "test_anwr_idx": [
+                51
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 0,
+              "qst_idx": 501,
+              "qst_exos_cd": "FORM_B",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "IMG",
+              "qst_cnnt": "http://domain/img.png",
+              "answers": [
+                {
+                  "anwr_idx": 53,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                },
+                {
+                  "anwr_idx": 54,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                },
+                {
+                  "anwr_idx": 55,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                },
+                {
+                  "anwr_idx": 55,
+                  "anwr_brws_cd": "IMG",
+                  "anwr_cnnt": "http://domain/img.png"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part_idx": 6,
+      "exm_time": 3000,
+      "progress_time": 1000,
+      "prg_st_cd": "WAITING",
+      "set_dir_tp_cd": "TEXT",
+      "set_dir_cnnt": "문항유형 지시문 (LT형)",
+      "set_gudes": [
+        {
+          "gude_deth": 1,
+          "gude_tp_cd": "DIR",
+          "gude_nm": "우주탐사 개발",
+          "gude_seur_grd": "1등급",
+          "gude_reg_dtm": "2022-10-10",
+          "gude_cnnt": "",
+          "gude_img": ""
+        },
+        {
+          "gude_deth": 2,
+          "gude_tp_cd": "FILE",
+          "gude_nm": "우주탐사 개발",
+          "gude_seur_grd": "2등급",
+          "gude_reg_dtm": "2022-10-11",
+          "gude_cnnt": "피닉스는 어쩌고 저쩌고",
+          "gude_img": "http://domain/img.png"
+        },
+        {
+          "gude_deth": 1,
+          "gude_tp_cd": "FILE",
+          "gude_nm": "우주탐사 개발",
+          "gude_seur_grd": "3등급",
+          "gude_reg_dtm": "2022-10-12",
+          "gude_cnnt": "피닉스는 어쩌고 저쩌고",
+          "gude_img": "http://domain/img.png"
+        }
+      ],
+      "qst_tp_cd": "LGTK",
+      "last_qst_idx": 0,
+      "last_page_no": 0,
+      "sets": [
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "안녕하세요. {{user_name}}님. 이번 임무의 보고를 받게된 아무개입니다.",
+          "questions": [
+            {
+              "test_qst_idx": 60,
+              "test_anwr_idx": [
+                60,
+                61
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 0,
+              "qst_idx": 500,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 2,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "적지까지 얼마나 남았습니까?",
+              "answers": [
+                {
+                  "anwr_idx": 60,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "수성"
+                },
+                {
+                  "anwr_idx": 61,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "금성"
+                },
+                {
+                  "anwr_idx": 62,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "지구"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "",
+          "questions": [
+            {
+              "test_qst_idx": 61,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [
+                "수성",
+                "금성"
+              ],
+              "test_prg_time": 0,
+              "qst_idx": 500,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "SBCT",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "행성을 작성해주세요 (콤마로 구분)",
+              "answers": [
+                {
+                  "anwr_idx": 63,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "",
+          "questions": [
+            {
+              "test_qst_idx": 62,
+              "test_anwr_idx": [],
+              "test_anwr_sbct": [],
+              "test_prg_time": 0,
+              "qst_idx": 500,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "최종 행성을 선택해주세요.",
+              "answers": [
+                {
+                  "anwr_idx": 65,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "수성"
+                },
+                {
+                  "anwr_idx": 66,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "금성"
+                },
+                {
+                  "anwr_idx": 67,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "지구"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part_idx": 7,
+      "exm_time": 2000,
+      "progress_time": 1000,
+      "prg_st_cd": "TAE",
+      "set_dir_tp_cd": "TEXT",
+      "set_dir_cnnt": "문항유형 지시문 (영상면접)",
+      "sets": [
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "문제시간동안 응답하세요",
+          "questions": [
+            {
+              "test_qst_idx": 2,
+              "test_anwr_idx": [
+                70
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 701,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "SBCT",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "본인에 관해서 1분동안 소개해 주세요",
+              "answers": [
+                {
+                  "anwr_idx": 70,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "문제시간동안 응답하세요",
+          "questions": [
+            {
+              "test_qst_idx": 2,
+              "test_anwr_idx": [
+                70
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 701,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "SBCT",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "어떤점이 좋은가요?",
+              "answers": [
+                {
+                  "anwr_idx": 71,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

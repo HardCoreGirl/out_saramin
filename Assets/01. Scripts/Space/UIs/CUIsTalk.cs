@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CUIsDummyTalk : MonoBehaviour
+public class CUIsTalk : MonoBehaviour
 {
     public int m_nQuizIndex;
 
@@ -23,7 +23,7 @@ public class CUIsDummyTalk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void InitUIs()
@@ -39,10 +39,11 @@ public class CUIsDummyTalk : MonoBehaviour
 
         CUIsSpaceScreenLeft.Instance.ShowQuiz(m_nQuizIndex + 1);
 
-        if( m_nSelectIndex == 1 || m_nSelectIndex == 2 )
+        if (m_nSelectIndex == 1 || m_nSelectIndex == 2)
         {
             m_goBtnReset.transform.localPosition = new Vector3(445, 0, 0);
-        } else
+        }
+        else
         {
             m_goBtnReset.transform.localPosition = new Vector3(410, 0, 0);
         }
@@ -74,7 +75,7 @@ public class CUIsDummyTalk : MonoBehaviour
 
     public void HideAllSelected()
     {
-        for(int i = 0; i < m_listSelected.Length; i++)
+        for (int i = 0; i < m_listSelected.Length; i++)
         {
             HideSelected(i);
         }
@@ -90,5 +91,4 @@ public class CUIsDummyTalk : MonoBehaviour
     {
         m_listSelected[nIndex].SetActive(false);
     }
-    
 }

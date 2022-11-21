@@ -1,0 +1,64 @@
+{
+  "code": 200,
+  "message": "OK",
+  "body": [
+    {
+      "part_idx": 1,
+      "exm_time": 1500,
+      "progress_time": 1000,
+      "prg_st_cd": "TAE",
+      "set_dir_tp_cd": "TEXT",
+      "set_dir_cnnt": "문항유형 지시문 (리커트)",
+      "set_gudes": [],
+      "qst_tp_cd": "RQT",
+      "last_qst_idx": 1,
+      "last_page_no": 0,
+      "sets": [
+        {
+          "dir_tp_cd": "TEXT",
+          "dir_cnnt": "평소 자신의 생각과 느낌을 잘 표현하는 응답을 선택하여 주십시오.",
+          "questions": [
+            {
+              "test_qst_idx": 1,
+              "test_anwr_idx": [
+                1
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 100,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "스트레스가 많이 쌓였을 때라도 항상 다른 사람들에게 친절과 예의를 지킨다.",
+              "answers": [
+                {
+                  "anwr_idx": 1,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 아니다"
+                },
+                {
+                  "anwr_idx": 2,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "아니다"
+                },
+                {
+                  "anwr_idx": 3,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "그렇다"
+                },
+                {
+                  "anwr_idx": 4,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 그렇다"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

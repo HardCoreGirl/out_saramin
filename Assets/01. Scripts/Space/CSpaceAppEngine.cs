@@ -27,16 +27,25 @@ public class CSpaceAppEngine : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                Debug.Log(hit.collider.name);
-                if( hit.collider.name.Equals("screen_left"))
+                if( !CUIsSpaceManager.Instance.IsScreenActive() )
                 {
-                    CUIsSpaceManager.Instance.ShowLeftPage();
+                    Debug.Log(hit.collider.name);
+                    if (hit.collider.name.Equals("screen_left"))
+                    {
+                        CUIsSpaceManager.Instance.ScreenActive(true);
+                        CUIsSpaceManager.Instance.ShowLeftPage();
+                    }
+                    else if (hit.collider.name == "screen_main")
+                    {
+                        CUIsSpaceManager.Instance.ScreenActive(true);
+                        CUIsSpaceManager.Instance.ShowCenterPage();
+                    }
+                    else if (hit.collider.name == "screen_right")
+                    {
+                        CUIsSpaceManager.Instance.ScreenActive(true);
+                        CUIsSpaceManager.Instance.ShowRightPage();
+                    }
                 }
-                //if (hit.collider.name == "Screen_main")
-                //{
-                //    Debug.Log("!!!!!!!!!!!!!");
-                //    CUIsSpaceUIManager.Instance.ShowScreen(0);
-                //}
                 //else if (hit.collider.name == "Screen_spaceship")
                 //{
                 //    //ShowObjectOutline(1);

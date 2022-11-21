@@ -1,0 +1,18 @@
+{
+  "code": 200,
+  "message": "OK",
+  "body": [
+    {
+      "part_idx": 1,
+      "exm_time": 1500,
+      "progress_time": 1000,
+      "prg_st_cd": "TAE",
+      "set_dir_tp_cd": "TEXT",
+      "set_dir_cnnt": "문항유형 지시문 (리커트)",
+      "set_gudes": [],
+      "qst_tp_cd": "RQT",
+      "last_qst_idx": 1,
+      "last_page_no": 0
+    }
+  ]
+}

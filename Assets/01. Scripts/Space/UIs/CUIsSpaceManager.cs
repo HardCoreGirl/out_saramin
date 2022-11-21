@@ -34,6 +34,10 @@ public class CUIsSpaceManager : MonoBehaviour
     #endregion
 
     public GameObject m_goLeftPage;
+    public GameObject m_goCenterPage;
+    public GameObject m_goRightPage;
+
+    public bool m_bIsActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -50,15 +54,51 @@ public class CUIsSpaceManager : MonoBehaviour
     public void HideAllPage()
     {
         HideLeftPage();
+        HideCenterPage();
+        HideRightPage();
     }
 
     public void ShowLeftPage()
     {
         m_goLeftPage.SetActive(true);
+        m_goLeftPage.GetComponent<CUIsSpaceScreenLeft>().InitUIs();
     }
 
     public void HideLeftPage()
     {
+        ScreenActive(false);
         m_goLeftPage.SetActive(false);
+    }
+
+    public void ShowCenterPage()
+    {
+        m_goCenterPage.SetActive(true);
+    }
+
+    public void HideCenterPage()
+    {
+        ScreenActive(false);
+        m_goCenterPage.SetActive(false);
+    }
+
+    public void ShowRightPage()
+    {
+        m_goRightPage.SetActive(true);
+    }
+
+    public void HideRightPage()
+    {
+        ScreenActive(false);
+        m_goRightPage.SetActive(false);
+    }
+
+    public void ScreenActive(bool bActive)
+    {
+        m_bIsActive = bActive;
+    }
+
+    public bool IsScreenActive()
+    {
+        return m_bIsActive;
     }
 }
