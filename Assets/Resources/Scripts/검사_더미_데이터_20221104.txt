@@ -1,0 +1,702 @@
+code n = 200
+message s = OK
+body[0]
+  //문항유형 번호
+  part_idx n = 1
+  //문항유형 검사시간
+  exm_time n = 1500
+  //문항유형 검사 남은시간
+  progress_time n = 1000
+  // 진행상태 (WAITING:대기/TAE:진행중/TAE_FSH:완료/TAE_OVER:시간초과)
+  prg_st_cd s = TAE
+  // 세트 유형 (TEXT:텍스트/IMG:이미지)
+  set_dir_tp_cd s = TEXT
+  // 문항유형 지시문
+  set_dir_cnnt s = 문항유형 지시문 (리커트)
+  // 문항유형 가이드
+  set_gudes[] s
+  // 문항유형 타입 (RQT:리커트/CST:CST/RAT:RAT/HPTS:가설설정/APTD1:선다형1/APTD2:선다형2/LGTK:LT/VDIV:영상면접)
+  qst_tp_cd s = RQT
+  // 마지막 문항번호
+  last_qst_idx n = 1
+  // 마지막 페이지
+  last_page_no n = 0
+  sets[0]
+    // 세트 지시문 유형 (TEXT:텍스트/IMG:이미지)
+    dir_tp_cd s = TEXT
+    // 세트 지시문 내용
+    dir_cnnt s = 평소 자신의 생각과 느낌을 잘 표현하는 응답을 선택하여 주십시오.
+    questions[0]
+      // 응시자 문항번호
+      test_qst_idx n = 1
+      // 응시자 문항 답변정보 (객관식)
+      test_anwr_idx[] n = 1 
+      // 응시자 문항 답변정보 (주관식)
+      test_anwr_sbct[] s
+      // 응시자 문항 남은시간
+      test_prg_time n = 120
+      // 검사 문항번호
+      qst_idx n = 100
+      // 검사 문항노출유형 (FORM_A:A타입/FORM_B:B타입/ORM_C:C타입/FORM_D:D타입)
+      qst_exos_cd s = FORM_A
+      // 검사 문항유형 (OBJ:객관식/SBCT:주관식)
+      qst_sove_cd s = OBJ
+      // 검사 문항 답변수
+      qst_ans_cnt n = 1
+      // 검사 문항풀이 보조정보 (감점)
+      qst_dics[] s
+      // 검사 문항 예시/보기
+      qst_brws_cnnt s
+      // 검사 문항 내용유형 (TEXT:텍스트/IMG:이미지)
+      qst_brws_cd s = TEXT
+      // 검사 문항 내용
+      qst_cnnt s = 스트레스가 많이 쌓였을 때라도 항상 다른 사람들에게 친절과 예의를 지킨다.
+      answers[0]
+        // 검사 문항 답변번호
+        anwr_idx n = 1
+        // 검사 문항 답변유형 (TEXT:텍스트/IMG:이미지)
+        anwr_brws_cd s = TEXT
+        // 검사 문항 답변명
+        anwr_cnnt s = 매우 아니다
+      answers[1]
+        anwr_idx n = 2
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 아니다
+      answers[2]
+        anwr_idx n = 3
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 그렇다
+      answers[3]
+        anwr_idx n = 4
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 매우 그렇다
+  sets[1]
+    dir_tp_cd s = IMG
+    dir_cnnt s = http://domain/img.png
+    questions[0]
+      test_qst_idx n = 2
+      test_anwr_idx[] n = 6
+      test_anwr_sbct[] s
+      test_prg_time n = 120
+      qst_idx n = 101
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 스트레스가 많이 쌓였을 때라도 항상 다른 사람들에게 친절과 예의를 지킨다.
+      answers[0]
+        anwr_idx n = 5
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 매우 아니다
+      answers[1]
+        anwr_idx n = 6
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 아니다
+      answers[2]
+        anwr_idx n = 7
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 그렇다
+      answers[3]
+        anwr_idx n = 8
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 매우 그렇다
+  sets[2]
+    dir_tp_cd s = IMG
+    dir_cnnt s = http://domain/img.png
+    questions[0]
+      test_qst_idx n = 3
+      test_anwr_idx[] n = 11
+      test_anwr_sbct[] s
+      test_prg_time n = 120
+      qst_idx n = 103
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 스트레스가 많이 쌓였을 때라도 항상 다른 사람들에게 친절과 예의를 지킨다.
+      answers[0]
+        anwr_idx n = 9
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 매우 아니다
+      answers[1]
+        anwr_idx n = 10
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 아니다
+      answers[2]
+        anwr_idx n = 11
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 보통이다
+      answers[3]
+        anwr_idx n = 12
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 그렇다
+      answers[4]
+        anwr_idx n = 13
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 매우 그렇다
+body[1]
+  part_idx n = 2
+  exm_time n = 3000
+  progress_time n = 2000
+  prg_st_cd s = WAITING
+  set_dir_tp_cd s = TEXT
+  set_dir_cnnt s = 문항유형 지시문 (CST)
+  set_gudes[] s
+  qst_tp_cd s = CST
+  last_qst_idx n = 1
+  last_page_no n = 1
+  sets[0]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 안내문|예를들어 생선,전자기기를 번갈아가면서..
+    questions[0]
+      test_qst_idx n = 10
+      test_anwr_idx[] n
+      test_anwr_sbct[] s = 잉어,고등어
+      test_prg_time n = 120
+      qst_idx n = 102
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = SBCT
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 물고기
+      answers[0]
+        anwr_idx n = 20
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s
+    questions[1]
+      test_qst_idx n = 11
+      test_anwr_idx[] n
+      test_anwr_sbct[] s
+      test_prg_time n = 120
+      qst_idx n = 102
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = SBCT
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 과일
+      answers[0]
+        anwr_idx n = 20
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s
+  sets[1]
+    dir_tp_cd s = IMG
+    dir_cnnt s = http://domain/image.png
+    questions[0]
+      test_qst_idx n = 3
+      test_anwr_idx[] n
+      test_anwr_sbct[] s
+      test_prg_time n = 120
+      qst_idx n = 102
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = SBCT
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 과일,가구에 속하는 단어를 번갈아가면서 입력해주세요
+      answers[1]
+        anwr_idx n = 22
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 전자기기
+body[2]
+  part_idx n = 3
+  exm_time n = 4000
+  progress_time n = 0
+  prg_st_cd s = TAE_FSH
+  set_dir_tp_cd s = TEXT
+  set_dir_cnnt s = 문항유형 지시문 (RAT)
+  set_gudes[] s
+  qst_tp_cd s = RAT
+  last_qst_idx n = 0
+  last_page_no n = 0
+  sets[0]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 아래 세개의 사진과 표에서 제시된 음절을 고려하여 공통으로 관련된 단어를 찾으세요
+    questions[0]
+      test_qst_idx n = 10
+      test_anwr_idx[] n
+      test_anwr_sbct[] s = 답변
+      test_prg_time n = 10
+      qst_idx n = 300
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = SBCT
+      qst_ans_cnt n = 1
+      qst_dics[0]
+        dic_tp_cd s = IMG
+        dic_wrd_nm s = http://domain/img.png
+        dic_scre n = 0
+      qst_dics[1]
+        dic_tp_cd s = IMG
+        dic_wrd_nm s = http://domain/img.png
+        dic_scre n = -1
+      qst_dics[2]
+        dic_tp_cd s = IMG
+        dic_wrd_nm s = http://domain/img.png
+        dic_scre n = -2
+      qst_brws_cnnt s = 대,래,문,소,가,작
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 아래 세개의 사진과 표에서 제시된 음절을 고려하여 공통으로 관련된 단어를 찾으세요
+      answers[0]
+        anwr_idx n = 30
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s
+  sets[1]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 아래 세개의 사진과 표에서 제시된 음절을 고려하여 공통으로 관련된 단어를 찾으세요
+    questions[0]
+      test_qst_idx n = 31
+      test_anwr_idx[] n
+      test_anwr_sbct[] s = 대래
+      test_prg_time n = 100
+      qst_idx n = 301
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = SBCT
+      qst_ans_cnt n = 1
+      qst_dics[0]
+        dic_tp_cd s = IMG
+        dic_wrd_nm s = http://domain/img.png
+        dic_scre n = 0
+      qst_dics[1]
+        dic_tp_cd s = IMG
+        dic_wrd_nm s = http://domain/img.png
+        dic_scre n = -10
+      qst_brws_cnnt s = 대,래,문,소,가,작
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 아래 세개의 사진과 표에서 제시된 음절을 고려하여 공통으로 관련된 단어를 찾으세요
+      answers[0]
+        anwr_idx n = 31
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s
+body[3]
+  part_idx n = 4
+  exm_time n = 5000
+  progress_time n = 0
+  prg_st_cd s = WAITING
+  set_dir_tp_cd s = IMG
+  set_dir_cnnt s = http://domain/img.png
+  set_gudes[] s
+  qst_tp_cd s = HPTS (가설설정)
+  last_qst_idx n = 0
+  last_page_no n = 0
+  sets[0]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 인간의 3가지 욕망은 자기보존의 어쩌구 저쩌구..
+    questions[0]
+      test_qst_idx n = 40
+      test_anwr_idx[] n
+      test_anwr_sbct[] s
+      test_prg_time n = 0
+      qst_idx n = 400
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 성공과 개체의 성공은 서로 갈등적이라고 주장했는데, 이는 농업혁명의 결과와 {{answers}} 볼 수 있다.
+      answers[0]
+        anwr_idx n = 40
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 일치한다고
+      answers[1]
+        anwr_idx n = 41
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 반대된다고
+    questions[1]
+      test_qst_idx n = 41
+      test_anwr_idx[] n
+      test_anwr_sbct[] s
+      test_prg_time n = 0
+      qst_idx n = 401
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 농업혁명은 {{answers}} 의 성공을 상징하며,
+      answers[0]
+        anwr_idx n = 42
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 동물
+      answers[1]
+        anwr_idx n = 43
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 종
+      answers[2]
+        anwr_idx n = 44
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 개체
+    questions[2]
+      test_qst_idx n = 41
+      test_anwr_idx[] n
+      test_anwr_sbct[] s
+      test_prg_time n = 0
+      qst_idx n = 402
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 그 근거는 {{answers}} 에서 찾을 수 있다.
+      answers[0]
+        anwr_idx n = 43
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 업무시간
+      answers[1]
+        anwr_idx n = 44
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 인구
+  sets[1]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 인간의 5가지 욕망은 자기보존의 어쩌구 저쩌구..
+    questions[0]
+      test_qst_idx n = 43
+      test_anwr_idx[] n
+      test_anwr_sbct[] s
+      test_prg_time n = 0
+      qst_idx n = 403
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 성공과 개체의 성공은 서로 갈등적이라고 주장했는데, 이는 농업혁명의 결과와 {{answers}} 볼 수 있다.
+      answers[0]
+        anwr_idx n = 45
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 일치한다고
+      answers[1]
+        anwr_idx n = 46
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 반대된다고
+    questions[1]
+      test_qst_idx n = 41
+      test_anwr_idx[] n
+      test_anwr_sbct[] s
+      test_prg_time n = 0
+      qst_idx n = 401
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 농업혁명은 {{answers}} 의 성공을 상징하며,
+      answers[0]
+        anwr_idx n = 47
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 동물
+      answers[1]
+        anwr_idx n = 48
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 종
+body[4]
+  part_idx n = 5
+  exm_time n = 1000
+  progress_time n = 0
+  prg_st_cd s = WAITING
+  set_dir_tp_cd s = TEXT
+  set_dir_cnnt s = 문항유형 지시문 (선다형1)
+  set_gudes[] s
+  qst_tp_cd s = APTD1
+  last_qst_idx n = 0
+  last_page_no n = 0
+  sets[0]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 인간의 3가지 욕망은 자기보존의 어쩌구 저쩌구..
+    questions[0]
+      test_qst_idx n = 50
+      test_anwr_idx[] n = 50
+      test_anwr_sbct[] s
+      test_prg_time n = 0
+      qst_idx n = 500
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = IMG
+      qst_cnnt s = http://domain/img.png
+      answers[0]
+        anwr_idx n = 50
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+      answers[1]
+        anwr_idx n = 51
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+      answers[2]
+        anwr_idx n = 52
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+  sets[1]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 인간의 3가지 욕망은 자기보존의 어쩌구 저쩌구..
+    questions[0]
+      test_qst_idx n = 51
+      test_anwr_idx[] n = 51
+      test_anwr_sbct[] s
+      test_prg_time n = 0
+      qst_idx n = 501
+      qst_exos_cd s = FORM_B
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = IMG
+      qst_cnnt s = http://domain/img.png
+      answers[0]
+        anwr_idx n = 53
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+      answers[1]
+        anwr_idx n = 54
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+      answers[2]
+        anwr_idx n = 55
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+      answers[3]
+        anwr_idx n = 55
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+body[5]
+  part_idx n = 5
+  exm_time n = 1000
+  progress_time n = 0
+  prg_st_cd s = WAITING
+  set_dir_tp_cd s = TEXT
+  set_dir_cnnt s = 문항유형 지시문 (선다형2)
+  set_gudes[] s
+  qst_tp_cd s = APTD2
+  last_qst_idx n = 0
+  last_page_no n = 0
+  sets[0]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 인간의 3가지 욕망은 자기보존의 어쩌구 저쩌구..
+    questions[0]
+      test_qst_idx n = 50
+      test_anwr_idx[] n = 50
+      test_anwr_sbct[] s
+      test_prg_time n = 0
+      qst_idx n = 500
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = IMG
+      qst_cnnt s = http://domain/img.png
+      answers[0]
+        anwr_idx n = 50
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+      answers[1]
+        anwr_idx n = 51
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+      answers[2]
+        anwr_idx n = 52
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+  sets[1]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 인간의 3가지 욕망은 자기보존의 어쩌구 저쩌구..
+    questions[0]
+      test_qst_idx n = 51
+      test_anwr_idx[] n = 51
+      test_anwr_sbct[] s
+      test_prg_time n = 0
+      qst_idx n = 501
+      qst_exos_cd s = FORM_B
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = IMG
+      qst_cnnt s = http://domain/img.png
+      answers[0]
+        anwr_idx n = 53
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+      answers[1]
+        anwr_idx n = 54
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+      answers[2]
+        anwr_idx n = 55
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+      answers[3]
+        anwr_idx n = 55
+        anwr_brws_cd s = IMG
+        anwr_cnnt s = http://domain/img.png
+body[6]
+  part_idx n = 6
+  exm_time n = 3000
+  progress_time n = 1000
+  prg_st_cd s = WAITING
+  set_dir_tp_cd s = TEXT
+  set_dir_cnnt s = 문항유형 지시문 (LT형)
+  set_gudes[0]
+    gude_deth n = 1
+    gude_tp_cd s = DIR
+    gude_nm s = 우주탐사 개발
+    gude_seur_grd s = 1등급
+    gude_reg_dtm s = 2022-10-10
+    gude_cnnt s
+    gude_img s
+  set_gudes[1]
+    gude_deth n = 2
+    gude_tp_cd s = FILE
+    gude_nm s = 우주탐사 개발
+    gude_seur_grd s = 2등급
+    gude_reg_dtm s = 2022-10-11
+    gude_cnnt s = 피닉스는 어쩌고 저쩌고
+    gude_img s = http://domain/img.png
+  set_gudes[2]
+    gude_deth n = 1
+    gude_tp_cd s = FILE
+    gude_nm s = 우주탐사 개발
+    gude_seur_grd s = 3등급
+    gude_reg_dtm s = 2022-10-12
+    gude_cnnt s = 피닉스는 어쩌고 저쩌고
+    gude_img s = http://domain/img.png
+  qst_tp_cd s = LGTK
+  last_qst_idx n = 0
+  last_page_no n = 0
+  sets[0]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 안녕하세요. {{user_name}}님. 이번 임무의 보고를 받게된 아무개입니다.
+    questions[0]
+      test_qst_idx n = 60
+      test_anwr_idx[] n = 60,61
+      test_anwr_sbct[] s
+      test_prg_time n = 0
+      qst_idx n = 500
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 2
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 적지까지 얼마나 남았습니까?
+      answers[0]
+        anwr_idx n = 60
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 수성
+      answers[1]
+        anwr_idx n = 61
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 금성
+      answers[2]
+        anwr_idx n = 62
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 지구
+  sets[1]
+    dir_tp_cd s = TEXT
+    dir_cnnt s 
+    questions[0]
+      test_qst_idx n = 61
+      test_anwr_idx[] n 
+      test_anwr_sbct[] s = 수성,금성
+      test_prg_time n = 0
+      qst_idx n = 500
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = SBCT
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 행성을 작성해주세요 (콤마로 구분)
+      answers[0]
+        anwr_idx n = 63
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s
+  sets[2]
+    dir_tp_cd s = TEXT
+    dir_cnnt s
+    questions[0]
+      test_qst_idx n = 62
+      test_anwr_idx[] n 
+      test_anwr_sbct[] s
+      test_prg_time n = 0
+      qst_idx n = 500
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = OBJ
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 최종 행성을 선택해주세요.
+      answers[0]
+        anwr_idx n = 65
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 수성
+      answers[1]
+        anwr_idx n = 66
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 금성
+      answers[2]
+        anwr_idx n = 67
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s = 지구
+body[7]
+  part_idx n = 7
+  exm_time n = 2000
+  progress_time n = 1000
+  prg_st_cd s = TAE
+  set_dir_tp_cd s = TEXT
+  set_dir_cnnt s = 문항유형 지시문 (영상면접)
+  sets[0]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 문제시간동안 응답하세요
+    questions[0]
+      test_qst_idx n = 2
+      test_anwr_idx[] n = 70
+      test_anwr_sbct[] s
+      test_prg_time n = 120
+      qst_idx n = 701
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = SBCT
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 본인에 관해서 1분동안 소개해 주세요
+      answers[0]
+        anwr_idx n = 70
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s
+  sets[1]
+    dir_tp_cd s = TEXT
+    dir_cnnt s = 문제시간동안 응답하세요
+    questions[0]
+      test_qst_idx n = 2
+      test_anwr_idx[] n = 70
+      test_anwr_sbct[] s
+      test_prg_time n = 120
+      qst_idx n = 701
+      qst_exos_cd s = FORM_A
+      qst_sove_cd s = SBCT
+      qst_ans_cnt n = 1
+      qst_dics[] s
+      qst_brws_cnnt s
+      qst_brws_cd s = TEXT
+      qst_cnnt s = 어떤점이 좋은가요?
+      answers[0]
+        anwr_idx n = 71
+        anwr_brws_cd s = TEXT
+        anwr_cnnt s

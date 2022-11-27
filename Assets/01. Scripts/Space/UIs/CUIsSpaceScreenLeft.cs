@@ -40,6 +40,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public Text[] m_listQuizCount = new Text[4];
     public Text[] m_listExmTime = new Text[4];
 
+    public GameObject m_goTalkContents;
+
     public GameObject[] m_listQuiz = new GameObject[6];
 
     public GameObject m_goPopupFinish;
@@ -157,7 +159,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         HideAllPages();
         m_listPage[nPage].SetActive(true);
 
-        if(nPage == 0)
+        if (nPage == 0)
         {
             Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT");
             m_listQuizCount[0].text = quizRQT.sets.Length.ToString() + " 문항";
@@ -170,6 +172,17 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
             m_listExmTime[2].text = quizRQT.exm_time.ToString() + " 분";
             m_listQuizCount[3].text = CQuizData.Instance.GetQuizTotalCount("HPTS").ToString() + " 문항";
             m_listExmTime[3].text = quizRQT.exm_time.ToString() + " 분";
+        }
+        else if (nPage == 1)
+        {
+            Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT");
+            Debug.Log(quizRQT.sets.Length);
+            for(int i = 0; i < quizRQT.sets.Length; i++)
+            {
+                GameObject goTalk = Instantiate(Resources.Load("Prefabs/talk_list") as GameObject);
+                goTalk.transform.parent = m_goTalkContents.transform;
+                goTalk.GetComponent<CUIsRQTTalkChat>().InitObject(i, quizRQT.sets[i].dir_cnnt);
+            }
         }
     }
 
@@ -228,3 +241,4 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         m_goPopupTimeover.SetActive(false);
     }
 }
+
