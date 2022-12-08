@@ -152,18 +152,22 @@ public class CQuizData : MonoBehaviour
 
     public PacketQuiz m_packetQuiz;
 
+    public PacketQuiz m_packetRQTTutorial;
+
     // Start is called before the first frame update
     void Start()
     {
         m_packetQuiz = new PacketQuiz();
 
         TextAsset textAsset = Resources.Load<TextAsset>("Scripts/dummy_api");
-        Debug.Log(textAsset.text);
         m_packetQuiz = JsonUtility.FromJson<PacketQuiz>(textAsset.text);
 
-        Debug.Log(JsonUtility.ToJson(m_packetQuiz));
+        TextAsset textAssetRQTTutorial = Resources.Load<TextAsset>("Scripts/rqt_tutorial");
+        m_packetRQTTutorial = JsonUtility.FromJson<PacketQuiz>(textAssetRQTTutorial.text);
+
+        Debug.Log(JsonUtility.ToJson(m_packetRQTTutorial));
         //GetQuiz("RQT");
-        Debug.Log(GetQuiz("RQT").qst_tp_cd);
+        //Debug.Log(GetQuiz("RQT").qst_tp_cd);
     }
 
     // Update is called once per frame
@@ -172,9 +176,16 @@ public class CQuizData : MonoBehaviour
         
     }
 
-    public Quiz GetQuiz(string strTPCD)
+    public Quiz GetQuiz(string strTPCD, bool bTutoral = false)
     {
         //Debug.Log(m_packetQuiz.code);
+        if(bTutoral)
+        {
+            if( strTPCD == "RQT")
+            {
+                return m_packetRQTTutorial.body[0];
+            }
+        }
 
         for (int i = 0; i < m_packetQuiz.body.Length; i++)
         {
@@ -185,9 +196,9 @@ public class CQuizData : MonoBehaviour
         return null;
     }
 
-    public int GetQuizTotalCount(string strTPCD)
+    public int GetQuizTotalCount(string strTPCD, bool bTutoral = false)
     {
-        Quiz quiz = GetQuiz(strTPCD);
+        Quiz quiz = GetQuiz(strTPCD, bTutoral);
         return quiz.sets.Length;
     }
 }

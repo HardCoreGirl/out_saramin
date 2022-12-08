@@ -37,6 +37,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
     public GameObject[] m_listPage = new GameObject[2];
 
+    public GameObject[] m_listToturialPage = new GameObject[2];
+
     public Text[] m_listQuizCount = new Text[4];
     public Text[] m_listExmTime = new Text[4];
 
@@ -58,6 +60,10 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     private int m_nRemainTime = 30;
 
     private float m_fScrollViewHeight = 0;
+
+    private int m_nLastQuizIndex = 0;
+
+    private bool m_bIsRQTTutorial = true;
 
     // Start is called before the first frame update
     void Start()
@@ -87,11 +93,11 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public void OnClickMission(int nIndex)
     {
         //ShowPopupFinish();
-        ShowPage(1);
+        ShowPage(1, true);
         HideAllQuiz();
-        ShowQuiz(nIndex);
+        //ShowQuiz(nIndex);
 
-        InitQuiz();
+        //InitQuiz();
     }
 
     public void InitQuiz()
@@ -154,7 +160,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         }
     }
 
-    public void ShowPage(int nPage)
+    public void ShowPage(int nPage, bool bTutorial = false)
     {
         HideAllPages();
         m_listPage[nPage].SetActive(true);
@@ -175,13 +181,13 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         }
         else if (nPage == 1)
         {
-            Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT");
+            Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", bTutorial);
             Debug.Log(quizRQT.sets.Length);
             for(int i = 0; i < quizRQT.sets.Length; i++)
             {
                 GameObject goTalk = Instantiate(Resources.Load("Prefabs/talk_list") as GameObject);
                 goTalk.transform.parent = m_goTalkContents.transform;
-                goTalk.GetComponent<CUIsRQTTalkChat>().InitObject(i, quizRQT.sets[i].dir_cnnt);
+                goTalk.GetComponent<CUIsRQTTalkChat>().InitObject(i, quizRQT.sets[i].dir_cnnt, true);
             }
         }
     }
@@ -200,19 +206,52 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         }
     }
 
-    public void ShowQuiz(int nIndex)
+    public void ShowQuiz(int nSetIndex, int nIndex, bool bTutorial = false)
     {
+        Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", bTutorial);
+        GameObject goTalk = Instantiate(Resources.Load("Prefabs/quizContent") as GameObject);
+        goTalk.transform.parent = m_goContents.transform;
+        goTalk.GetComponent<CUIsTalk>().InitUIs(nSetIndex, nIndex, bTutorial);
+
+
+        //string[] listQuiz = quizRQT.sets[0].questions[0].qst_cnnt.Split("\n");
+
+        //for (int i = 0; i < listQuiz.Length; i++)
+        //{
+        //    Debug.Log(listQuiz[i]);
+
+        //}
+
+
+
+        //goTalk.transform.parent = m_goTalkContents.transform;
+        //goTalk.GetComponent<CUIsRQTTalkChat>().InitObject(0, quizRQT.sets[0].dir_cnnt);
+        /*
         m_nOpenQuiz = nIndex;
         m_listQuiz[nIndex].SetActive(true);
         if (nIndex < m_listQuiz.Length - 1 )
             m_listQuiz[nIndex].GetComponent<CUIsDummyTalk>().InitUIs();
 
         UpdateScrollView();
+        */
     }
 
     public void HideQuiz(int nIndex)
     {
         m_listQuiz[nIndex].SetActive(false);
+    }
+
+    public void DelQuiz()
+    {
+        Component[] listChilds = m_goContents.GetComponentsInChildren<Component>();
+
+        foreach (Component iter in listChilds)
+        {
+            if ( iter.transform != m_goContents.transform )
+            {
+                Destroy(iter.gameObject);
+            }
+        }
     }
 
     public void HideAllPopup()
@@ -239,6 +278,65 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public void HidePopupTimeover()
     {
         m_goPopupTimeover.SetActive(false);
+    }
+
+    public void InitRQTQuiz(bool bIsTutorial)
+    {
+        SetRQTTutorial(bIsTutorial);
+        SetLastQuizIndex(0);
+        if (!bIsTutorial)
+        {
+            Quiz quizData = CQuizData.Instance.GetQuiz("RQT", true);
+            m_nRemainTime = quizData.exm_time;
+            StartCoroutine("ProcessRQTQuiz");
+        }
+    }
+
+    IEnumerator ProcessRQTQuiz()
+    {
+        int nMin = (int)(m_nRemainTime / 60);
+        int nSec = (int)(m_nRemainTime % 60);
+
+        m_txtRemain.text = nMin.ToString("00") + ":" +  nSec.ToString("00");
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+
+            m_nRemainTime--;
+
+            nMin = (int)(m_nRemainTime / 60);
+            nSec = (int)(m_nRemainTime % 60);
+
+            m_txtRemain.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+            if (m_nRemainTime == 0)
+                break;
+        }
+
+        Debug.Log("TimeOut");
+        CUIsSpaceScreenLeft.Instance.HideAllPopup();
+        CUIsSpaceScreenLeft.Instance.ShowPopupTimeover();
+
+    }
+
+    public void SetLastQuizIndex(int nIndex)
+    {
+        m_nLastQuizIndex = nIndex;
+    }
+
+    public int GetLastQuizIndex()
+    {
+        return m_nLastQuizIndex;
+    }
+
+    public void SetRQTTutorial(bool bIsTutorial)
+    {
+        m_bIsRQTTutorial = bIsTutorial;
+    }
+
+    public bool IsRQTTutorial()
+    {
+        return m_bIsRQTTutorial;
     }
 }
 

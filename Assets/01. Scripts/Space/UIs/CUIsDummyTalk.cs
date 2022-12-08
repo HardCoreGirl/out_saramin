@@ -37,7 +37,7 @@ public class CUIsDummyTalk : MonoBehaviour
         ShowSelect(1);
         ShowSelected(m_nSelectIndex);
 
-        CUIsSpaceScreenLeft.Instance.ShowQuiz(m_nQuizIndex + 1);
+        CUIsSpaceScreenLeft.Instance.ShowQuiz(0, m_nQuizIndex + 1);
 
         if( m_nSelectIndex == 1 || m_nSelectIndex == 2 )
         {

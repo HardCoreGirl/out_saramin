@@ -32,7 +32,7 @@
               "qst_dics": [],
               "qst_brws_cnnt": "",
               "qst_brws_cd": "TEXT",
-              "qst_cnnt": "스트레스가 많이 쌓였을 때라도 항상 다른 사람들에게 친절과 예의를 지킨다.",
+              "qst_cnnt": "지금 내가 가지고 있는 것보다 더 많은 것을 가지고 싶다.",
               "answers": [
                 {
                   "anwr_idx": 1,
@@ -55,7 +55,145 @@
                   "anwr_cnnt": "매우 그렇다"
                 }
               ]
+            },
+            {
+              "test_qst_idx": 1,
+              "test_anwr_idx": [
+                1
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 100,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "Tôi nhất định phải tìm kiếm sự đồng ý từ bố mẹ hay những người thân thiết trước khi đưa ra quyết định nào đó thì mới có thể an tâm.",
+              "answers": [
+                {
+                  "anwr_idx": 1,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 아니다"
+                },
+                {
+                  "anwr_idx": 2,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "아니다"
+                },
+                {
+                  "anwr_idx": 3,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "그렇다"
+                },
+                {
+                  "anwr_idx": 4,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 그렇다"
+                }
+              ]
+            },
+            {
+              "test_qst_idx": 1,
+              "test_anwr_idx": [
+                1
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 100,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "나는 모임에서 적극적인 의견제시와 중재역할로 분위기를 주도하는 편이다.",
+              "answers": [
+                {
+                  "anwr_idx": 1,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 아니다"
+                },
+                {
+                  "anwr_idx": 2,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "아니다"
+                },
+                {
+                  "anwr_idx": 3,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "그렇다"
+                },
+                {
+                  "anwr_idx": 4,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 그렇다"
+                }
+              ]
+            },
+            {
+              "test_qst_idx": 1,
+              "test_anwr_idx": [
+                1
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 100,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "나는 다른 사람들과 공동으로 진행하는 업무나 프로젝트를 더 선호한다.",
+              "answers": [
+                {
+                  "anwr_idx": 1,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 아니다"
+                },
+                {
+                  "anwr_idx": 2,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "아니다"
+                },
+                {
+                  "anwr_idx": 3,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "그렇다"
+                },
+                {
+                  "anwr_idx": 4,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "매우 그렇다"
+                }
+              ]
+            },
+            {
+              "test_qst_idx": 1,
+              "test_anwr_idx": [
+                1
+              ],
+              "test_anwr_sbct": [],
+              "test_prg_time": 120,
+              "qst_idx": 100,
+              "qst_exos_cd": "FORM_A",
+              "qst_sove_cd": "OBJ",
+              "qst_ans_cnt": 1,
+              "qst_dics": [],
+              "qst_brws_cnnt": "",
+              "qst_brws_cd": "TEXT",
+              "qst_cnnt": "자아탐색을 위한 모든 질문에 성실히 답변해 주었습니다. 감사합니다.",
+              "answers": [
+                {
+                  "anwr_idx": 1,
+                  "anwr_brws_cd": "TEXT",
+                  "anwr_cnnt": "자아탐색 완료"
+                }
+              ]
             }
+
           ]
         },
         {

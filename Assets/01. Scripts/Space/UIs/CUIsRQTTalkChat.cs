@@ -10,6 +10,8 @@ public class CUIsRQTTalkChat : MonoBehaviour
 
     private int m_nIndex;
 
+    private bool m_bIsTutorial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +24,17 @@ public class CUIsRQTTalkChat : MonoBehaviour
         
     }
 
-    public void InitObject(int nIndex, string strDisc)
+    public void InitObject(int nIndex, string strDisc, bool bIsToturial = false)
     {
         m_nIndex = nIndex;
         m_txtDisc.text = strDisc;
+        m_bIsTutorial = bIsToturial;
     }
 
     public void OnClickTalk()
     {
         Debug.Log("OnClickTalk : " + m_nIndex);
+
+        CUIsSpaceScreenLeft.Instance.ShowQuiz(0, 0, CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
     }
 }
