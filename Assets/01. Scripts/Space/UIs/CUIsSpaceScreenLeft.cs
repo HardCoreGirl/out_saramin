@@ -36,8 +36,9 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     #endregion
 
     public GameObject[] m_listPage = new GameObject[2];
-
     public GameObject[] m_listToturialPage = new GameObject[2];
+
+    public GameObject[] m_listCSTPage = new GameObject[3];
 
     public Text[] m_listQuizCount = new Text[4];
     public Text[] m_listExmTime = new Text[4];
@@ -47,13 +48,23 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public GameObject[] m_listQuiz = new GameObject[6];
 
     public GameObject m_goPopupFinish;
-    public GameObject m_goPopupTimeover;
+    
     public GameObject m_goPopupExit;
 
     public GameObject m_goScrollView;
     public GameObject m_goContents;
 
     public Text m_txtRemain;
+
+    public GameObject m_goPoupSendAnswer;
+    public Text m_txtSendAnswerRemainTime;
+
+    public GameObject m_goPopupTimeover;
+
+    public GameObject m_goPopupToLobby;
+    public Text m_txtToLobbyRemainTime;
+
+    public GameObject m_goPopupToLobbyOver;
 
     private int m_nOpenQuiz;
 
@@ -87,7 +98,16 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
     public void OnClickClose()
     {
-        CUIsSpaceManager.Instance.HideLeftPage();
+        //CUIsSpaceManager.Instance.HideLeftPage();
+        if (IsRQTTutorial())
+        {
+            HideAllPopup();
+            HideAllPages();
+            CUIsSpaceManager.Instance.ScreenActive(false);
+            return;
+        }
+
+        ShowPopupToLobby();
     }
 
     public void OnClickMission(int nIndex)
@@ -256,8 +276,13 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
     public void HideAllPopup()
     {
-        HidePopupFinish();
+        //HidePopupFinish();
+        
+
+        HidePopupSendAnswer();
         HidePopupTimeover();
+        HidePopupToLobby();
+        HidePopupToLobbyOver();
     }
     public void ShowPopupFinish()
     {
@@ -270,15 +295,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         m_goPopupFinish.SetActive(false);
     }
 
-    public void ShowPopupTimeover()
-    {
-        m_goPopupTimeover.SetActive(true);
-    }
 
-    public void HidePopupTimeover()
-    {
-        m_goPopupTimeover.SetActive(false);
-    }
 
     public void InitRQTQuiz(bool bIsTutorial)
     {
@@ -286,7 +303,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         SetLastQuizIndex(0);
         if (!bIsTutorial)
         {
-            Quiz quizData = CQuizData.Instance.GetQuiz("RQT", true);
+            Quiz quizData = CQuizData.Instance.GetQuiz("RQT");
             m_nRemainTime = quizData.exm_time;
             StartCoroutine("ProcessRQTQuiz");
         }
@@ -314,9 +331,10 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         }
 
         Debug.Log("TimeOut");
-        CUIsSpaceScreenLeft.Instance.HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.ShowPopupTimeover();
 
+
+        HideAllPopup();
+        ShowPopupTimeover();
     }
 
     public void SetLastQuizIndex(int nIndex)
@@ -338,5 +356,104 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         return m_bIsRQTTutorial;
     }
+
+    // Popup Send Answer -------------------------------------------
+    public void ShowPopupSendAnswer()
+    {
+        m_goPoupSendAnswer.SetActive(true);
+
+        int nMin = (int)(m_nRemainTime / 60);
+        int nSec = (int)(m_nRemainTime % 60);
+
+        m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+    }
+
+    public void HidePopupSendAnswer()
+    {
+        m_goPoupSendAnswer.SetActive(false);
+    }
+
+    public void OnClickSendAnswer()
+    {
+        StopCoroutine("ProcessRQTQuiz");
+        HideAllPopup();
+        HideAllPages();
+        CUIsSpaceManager.Instance.ScreenActive(false);
+    }
+
+    public void OnClickSendAnswerContinue()
+    {
+        HidePopupSendAnswer();
+    }
+    // -------------------------------------------------------------
+
+    // Popup Time Out -------------------------------------------
+    public void ShowPopupTimeover()
+    {
+        m_goPopupTimeover.SetActive(true);
+    }
+
+    public void HidePopupTimeover()
+    {
+        m_goPopupTimeover.SetActive(false);
+    }
+
+    public void OnClickTimeoverLobby()
+    {
+        StopCoroutine("ProcessRQTQuiz");
+        HideAllPopup();
+        HideAllPages();
+        CUIsSpaceManager.Instance.ScreenActive(false);
+    }
+    // -------------------------------------------------------------
+
+    // Popup To Lobby -------------------------------------------
+    public void ShowPopupToLobby()
+    {
+        m_goPopupToLobby.SetActive(true);
+
+        int nMin = (int)(m_nRemainTime / 60);
+        int nSec = (int)(m_nRemainTime % 60);
+
+        //m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+        m_txtToLobbyRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+    }
+
+    public void HidePopupToLobby()
+    {
+        m_goPopupToLobby.SetActive(false);
+    }
+
+    public void OnClickToLobby()
+    {
+        StopCoroutine("ProcessRQTQuiz");
+        HideAllPopup();
+        HideAllPages();
+        CUIsSpaceManager.Instance.ScreenActive(false);
+
+    }
+
+    public void OnClickToLobbyContinue()
+    {
+        HideAllPopup();
+    }
+    // -------------------------------------------------------------
+
+    // Popup To Lobby Over -------------------------------------------
+    public void ShowPopupToLobbyOver()
+    {
+        m_goPopupToLobbyOver.SetActive(true);
+    }
+
+    public void HidePopupToLobbyOver()
+    {
+        m_goPopupToLobbyOver.SetActive(false);
+    }
+
+    public void OnClickToLobbyOverContinue()
+    {
+        HideAllPopup();
+    }
+    // -------------------------------------------------------------
 }
 
