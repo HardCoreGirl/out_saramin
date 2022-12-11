@@ -38,7 +38,9 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public GameObject[] m_listPage = new GameObject[2];
     public GameObject[] m_listToturialPage = new GameObject[2];
 
-    public GameObject[] m_listCSTPage = new GameObject[3];
+    public GameObject m_goCSTPage;
+    public GameObject m_goRATPage;
+    public GameObject m_goHPTSPage;
 
     public Text[] m_listQuizCount = new Text[4];
     public Text[] m_listExmTime = new Text[4];
@@ -76,6 +78,12 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
     private bool m_bIsRQTTutorial = true;
 
+    private bool m_bIsCSTTutorial = true;
+    private bool m_bIsRATTutorial = true;
+    private bool m_bIsHPTSTutorial = true;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +101,9 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public void InitUIs()
     {
         HideAllPopup();
+
+        SetCSTTutorial(true);
+
         ShowPage(0);
     }
 
@@ -455,5 +466,86 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         HideAllPopup();
     }
     // -------------------------------------------------------------
+
+    // CST -------------------------------------------------------------
+    public void HideRightAllPage()
+    {
+        HideCSTPage();
+        HideRATPage();
+        HideHPTSPage();
+    }
+
+
+    public void ShowCSTPage()
+    {
+        m_goCSTPage.SetActive(true);
+
+    }
+
+    public void HideCSTPage()
+    {
+        m_goCSTPage.SetActive(false);
+    }
+
+    public void OnClickPlayCST()
+    {
+        HideAllPages();
+        // TODO : Text
+        //ShowCSTPage();
+        //ShowRATPage();
+        ShowHPTSPage();
+    }
+
+    public void SetCSTTutorial(bool bIsTutorial)
+    {
+        m_bIsCSTTutorial = bIsTutorial;
+    }    
+
+    public bool IsCSTTutorial()
+    {
+        return m_bIsCSTTutorial;
+    }
+
+    // RAT -----------------------------------------------------
+    public void ShowRATPage()
+    {
+        m_goRATPage.SetActive(true);
+    }
+
+    public void HideRATPage()
+    {
+        m_goRATPage.SetActive(false);
+    }
+
+    public void SetRATTutorial(bool bIsTutorial)
+    {
+        m_bIsRATTutorial = bIsTutorial;
+    }
+
+    public bool IsRATTutorial()
+    {
+        return m_bIsRATTutorial;
+    }
+
+    // HPTS -----------------------------------------------------
+    public void ShowHPTSPage()
+    {
+        m_goHPTSPage.SetActive(true);
+    }
+
+    public void HideHPTSPage()
+    {
+        m_goHPTSPage.SetActive(false);
+    }
+
+    public void SetHPTSTutorial(bool bIsTutorial)
+    {
+        m_bIsHPTSTutorial = bIsTutorial;
+    }
+
+    public bool IsHPTSTutorial()
+    {
+        return m_bIsHPTSTutorial;
+    }
 }
 

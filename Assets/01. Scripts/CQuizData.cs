@@ -12,6 +12,14 @@ public class Answers
 }
 
 [Serializable]
+public class QSTDics
+{
+    public string dic_tp_cd;
+    public string dic_wrd_nm;
+    public int dic_scre;
+}
+
+[Serializable]
 public class Questions
 {
     public int test_qst_idx;
@@ -22,7 +30,7 @@ public class Questions
     public string qst_exos_cd;
     public string qst_sove_cd;
     public int qst_ans_cnt;
-    public int[] qst_dics;
+    public QSTDics[] qst_dics;
     public string qst_brws_cnnt;
     public string qst_brws_cd;
     public string qst_cnnt;
