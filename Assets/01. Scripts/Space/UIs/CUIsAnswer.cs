@@ -78,7 +78,6 @@ public class CUIsAnswer : MonoBehaviour
             {
                 // TODO : 시험 종료
                 Debug.Log("Finish Exam");
-                CUIsSpaceScreenLeft.Instance.ShowPopupSendAnswer();
                 return;
             }
         }
