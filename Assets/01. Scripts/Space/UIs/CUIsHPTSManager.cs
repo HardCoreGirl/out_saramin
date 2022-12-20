@@ -11,6 +11,8 @@ public class CUIsHPTSManager : MonoBehaviour
     public Text m_txtBtnSendAnswer;
     public Text m_txtRemainTime;
 
+    public GameObject m_goContents;
+
     private int m_nTutorialStep = 0;
     private int m_nRemainTime = 0;
 
@@ -42,24 +44,198 @@ public class CUIsHPTSManager : MonoBehaviour
     {
         HideTutorialMsg();
 
+        DelListAnswers();
+
         if (CUIsSpaceScreenLeft.Instance.IsHPTSTutorial())
         {
             m_txtBtnSendAnswer.text = "본 퀴즈 시작하기";
             m_txtRemainTime.text = "시작전";
+
+            GameObject goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
+            goQuiz.transform.parent = m_goContents.transform;
+            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz("평소 명상을 많이 하는 사람은 그렇지 않은 사람보다", "", "", "", "");
+
+            goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
+            goQuiz.transform.parent = m_goContents.transform;
+            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz("엔돌핀 수준이", "높음", "낮음", "", "것이다. 동일한 양의 초콜렛을 먹는다고 가정할 때,");
+
+            goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
+            goQuiz.transform.parent = m_goContents.transform;
+            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz("초콜렛을 좋아하는 정도가 엔돌핀 양에 영향을", "줄 것이다", "주지 않을 것이다", "", ". 매우 슬픈 사람과");
+
+            goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
+            goQuiz.transform.parent = m_goContents.transform;
+            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz("매우 기쁜 사람의 엔돌핀 수치를 비교했을 때, 그 결과를 예상할 수", "있다", "없다", "", "");
         }
         else
         {
             Quiz quizData = CQuizData.Instance.GetQuiz("HPTS");
             if (m_nQuizIndex == 0)
             {
+                m_txtBtnSendAnswer.text = "다음문제 (1/2)";
                 m_nRemainTime = quizData.exm_time;
                 StartCoroutine("ProcessPlayExam");
+
+                for(int i = 0; i < quizData.sets[0].questions.Length; i++)
+                {
+                    string[] listQuiz = quizData.sets[0].questions[i].qst_cnnt.Split('\n');
+                    if( listQuiz.Length > 1 )
+                    {
+                        for(int j = 0; j < listQuiz.Length; j++)
+                        {
+                            GameObject goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
+                            goQuiz.transform.parent = m_goContents.transform;
+
+                            if ( listQuiz[j].Contains("{{answers}}") )
+                            {
+                                string[] listAnswer = listQuiz[j].Split("{{answers}}");
+                                string[] listSelector = new string[3];
+                                for (int k = 0; k < listSelector.Length; k++)
+                                {
+                                    listSelector[k] = "";
+                                }
+                                for (int k = 0; k < quizData.sets[0].questions[i].answers.Length; k++)
+                                {
+                                    listSelector[k] = quizData.sets[0].questions[i].answers[k].anwr_cnnt;
+                                }
+
+                                if ( listAnswer.Length > 1 )
+                                {
+                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                                } else
+                                {
+                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], "", "", "", "");
+                                }
+                            }
+                            else
+                            {
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listQuiz[j], "", "", "", "");
+                            }
+                        }
+                    } else
+                    {
+                        GameObject goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
+                        goQuiz.transform.parent = m_goContents.transform;
+
+                        if (listQuiz[0].Contains("{{answers}}"))
+                        {
+                            string[] listAnswer = listQuiz[0].Split("{{answers}}");
+                            string[] listSelector = new string[3];
+                            for (int k = 0; k < listSelector.Length; k++)
+                            {
+                                listSelector[k] = "";
+                            }
+                            for (int k = 0; k < quizData.sets[0].questions[i].answers.Length; k++)
+                            {
+                                listSelector[k] = quizData.sets[0].questions[i].answers[k].anwr_cnnt;
+                            }
+
+                            if (listAnswer.Length > 1)
+                            {
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                            }
+                            else
+                            {
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], "", "", "", "");
+                            }
+                        }
+                        else
+                        {
+                            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listQuiz[0], "", "", "", "");
+                        }
+                    }
+                }
             }
             else
             {
+                m_txtBtnSendAnswer.text = "답변 제출하기";
+                for (int i = 0; i < quizData.sets[1].questions.Length; i++)
+                {
+                    string[] listQuiz = quizData.sets[0].questions[i].qst_cnnt.Split('\n');
+                    if (listQuiz.Length > 1)
+                    {
+                        for (int j = 0; j < listQuiz.Length; j++)
+                        {
+                            GameObject goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
+                            goQuiz.transform.parent = m_goContents.transform;
 
+                            if (listQuiz[j].Contains("{{answers}}"))
+                            {
+                                string[] listAnswer = listQuiz[j].Split("{{answers}}");
+                                string[] listSelector = new string[3];
+                                for (int k = 0; k < listSelector.Length; k++)
+                                {
+                                    listSelector[k] = "";
+                                }
+                                for (int k = 0; k < quizData.sets[0].questions[i].answers.Length; k++)
+                                {
+                                    listSelector[k] = quizData.sets[0].questions[i].answers[k].anwr_cnnt;
+                                }
+
+                                if (listAnswer.Length > 1)
+                                {
+                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                                }
+                                else
+                                {
+                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], "", "", "", "");
+                                }
+                            }
+                            else
+                            {
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listQuiz[j], "", "", "", "");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        GameObject goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
+                        goQuiz.transform.parent = m_goContents.transform;
+
+                        if (listQuiz[0].Contains("{{answers}}"))
+                        {
+                            string[] listAnswer = listQuiz[0].Split("{{answers}}");
+                            string[] listSelector = new string[3];
+                            for (int k = 0; k < listSelector.Length; k++)
+                            {
+                                listSelector[k] = "";
+                            }
+                            for (int k = 0; k < quizData.sets[0].questions[i].answers.Length; k++)
+                            {
+                                listSelector[k] = quizData.sets[0].questions[i].answers[k].anwr_cnnt;
+                            }
+
+                            if (listAnswer.Length > 1)
+                            {
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                            }
+                            else
+                            {
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], "", "", "", "");
+                            }
+                        }
+                        else
+                        {
+                            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listQuiz[0], "", "", "", "");
+                        }
+                    }
+                }
             }
         }
+    }
+
+    public void DelListAnswers()
+    {
+        Component[] listChilds = m_goContents.GetComponentsInChildren<Component>();
+
+        foreach (Component iter in listChilds)
+        {
+            if (iter.transform != m_goContents.transform)
+            {
+                Destroy(iter.gameObject);
+            }
+        }
+
     }
 
     IEnumerator ProcessPlayExam()
@@ -83,7 +259,12 @@ public class CUIsHPTSManager : MonoBehaviour
                 break;
         }
 
-        //ShowPopupTimeOver();
+        ShowPopupTimeOver();
+    }
+
+    public void OnClickExit()
+    {
+        ShowPopupToLobby();
     }
 
     public void ShowTutorialMsg()

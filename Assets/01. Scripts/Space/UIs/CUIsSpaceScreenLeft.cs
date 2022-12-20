@@ -239,6 +239,12 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
     public void ShowQuiz(int nSetIndex, int nIndex, bool bTutorial = false)
     {
+        if (nIndex == 0)
+        {
+            SetLastQuizIndex(0);
+            DelQuiz();
+        }
+
         Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", bTutorial);
         GameObject goTalk = Instantiate(Resources.Load("Prefabs/quizContent") as GameObject);
         goTalk.transform.parent = m_goContents.transform;
@@ -491,9 +497,9 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         HideAllPages();
         // TODO : Text
-        //ShowCSTPage();
+        ShowCSTPage();
         //ShowRATPage();
-        ShowHPTSPage();
+        //ShowHPTSPage();
     }
 
     public void SetCSTTutorial(bool bIsTutorial)

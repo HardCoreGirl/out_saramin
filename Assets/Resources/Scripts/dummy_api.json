@@ -534,7 +534,7 @@
               "qst_dics": [],
               "qst_brws_cnnt": "",
               "qst_brws_cd": "TEXT",
-              "qst_cnnt": "성공과 개체의 성공은 서로 갈등적이라고 주장했는데, 이는 농업혁명의 결과와 {{answers}} 볼 수 있다.",
+              "qst_cnnt": "성공과 개체의 성공은 서로 갈등적이라고 주장했는데,\n이는 농업혁명의 결과와 {{answers}} 볼 수 있다.",
               "answers": [
                 {
                   "anwr_idx": 40,
@@ -623,7 +623,7 @@
               "qst_dics": [],
               "qst_brws_cnnt": "",
               "qst_brws_cd": "TEXT",
-              "qst_cnnt": "성공과 개체의 성공은 서로 갈등적이라고 주장했는데, 이는 농업혁명의 결과와 {{answers}} 볼 수 있다.",
+              "qst_cnnt": "성공과 개체의 성공은 서로 갈등적이라고 주장했는데,\n이는 농업혁명의 결과와 {{answers}} 볼 수 있다.",
               "answers": [
                 {
                   "anwr_idx": 45,
