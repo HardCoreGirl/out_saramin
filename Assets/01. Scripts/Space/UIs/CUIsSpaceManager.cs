@@ -84,6 +84,7 @@ public class CUIsSpaceManager : MonoBehaviour
     public void ShowRightPage()
     {
         m_goRightPage.SetActive(true);
+        m_goRightPage.GetComponent<CUIsAPTManager>().InitAPTPage();
     }
 
     public void HideRightPage()

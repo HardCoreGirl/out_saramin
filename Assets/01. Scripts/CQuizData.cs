@@ -12,6 +12,14 @@ public class Answers
 }
 
 [Serializable]
+public class QSTDics
+{
+    public string dic_tp_cd;
+    public string dic_wrd_nm;
+    public int dic_scre;
+}
+
+[Serializable]
 public class Questions
 {
     public int test_qst_idx;
@@ -22,7 +30,7 @@ public class Questions
     public string qst_exos_cd;
     public string qst_sove_cd;
     public int qst_ans_cnt;
-    public int[] qst_dics;
+    public QSTDics[] qst_dics;
     public string qst_brws_cnnt;
     public string qst_brws_cd;
     public string qst_cnnt;
@@ -37,6 +45,25 @@ public class Sets
     public Questions[] questions;
 }
 
+[Serializable]
+public class SetGudes
+{
+    public string gude_deth;
+    public string gude_tp_cd;
+    public string gude_rm;
+    public string gude_seur_grd;
+    public string gude_reg_dtm;
+    public string gude_cnnt;
+    public string gude_img;
+}
+
+//"gude_deth": 2,
+//          "gude_tp_cd": "FILE",
+//          "gude_nm": "우주탐사 개발",
+//          "gude_seur_grd": "2등급",
+//          "gude_reg_dtm": "2022-10-11",
+//          "gude_cnnt": "피닉스는 어쩌고 저쩌고",
+//          "gude_img": "http://domain/img.png"
 
 [Serializable]
 public class Quiz
@@ -47,7 +74,7 @@ public class Quiz
     public string prg_st_cd;
     public string set_dir_tp_cd;
     public string set_dir_cnnt;
-    public int[] set_gudes;
+    public SetGudes[] set_gudes;
     public string qst_tp_cd;
     public int last_qst_idx;
     public int last_page_no;
@@ -186,6 +213,8 @@ public class CQuizData : MonoBehaviour
                 return m_packetRQTTutorial.body[0];
             }
         }
+
+        Debug.Log(strTPCD);
 
         for (int i = 0; i < m_packetQuiz.body.Length; i++)
         {

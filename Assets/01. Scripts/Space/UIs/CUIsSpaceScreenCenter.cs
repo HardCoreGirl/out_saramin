@@ -7,6 +7,9 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
     public GameObject m_goMain;
     public GameObject m_goDetail;
 
+    public GameObject m_goLGTKMain;
+    public GameObject m_goLGTKTalkBox;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +20,11 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void InitLGTKMainager()
+    {
+
     }
 
     public void OnClickExit()

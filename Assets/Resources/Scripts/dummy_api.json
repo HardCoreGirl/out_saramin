@@ -372,7 +372,6 @@
               "qst_brws_cd": "TEXT",
               "qst_cnnt": "과일,가구에 속하는 단어를 번갈아가면서 입력해주세요",
               "answers": [
-                {},
                 {
                   "anwr_idx": 22,
                   "anwr_brws_cd": "TEXT",
@@ -414,21 +413,31 @@
               "qst_dics": [
                 {
                   "dic_tp_cd": "IMG",
-                  "dic_wrd_nm": "http://domain/img.png",
+                  "dic_wrd_nm": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA4MTJfMTMg%2FMDAxNjI4NzYyMDQyOTc5.ZF8PH-l8f2mXr0wuz5igfhVCZa84ecvNEIqI39ndllkg.E5zfooOCWX3le3svkhTvA8WYwwLLzlzrOBYsiuZ5PA4g.JPEG.giddus24%2F01.jpg&type=a340",
                   "dic_scre": 0
                 },
                 {
                   "dic_tp_cd": "IMG",
-                  "dic_wrd_nm": "http://domain/img.png",
+                  "dic_wrd_nm": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2Fdata29%2F2008%2F1%2F8%2F37%2F%25C4%25AB%25B9%25CC%25B3%25AA_tkfka1959.jpg&type=a340",
                   "dic_scre": -1
                 },
                 {
                   "dic_tp_cd": "IMG",
-                  "dic_wrd_nm": "http://domain/img.png",
+                  "dic_wrd_nm": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20131022_110%2Fpkj1379_1382417098715f4Nox_JPEG%2F__copy-lostinzero.jpeg&type=a340",
+                  "dic_scre": -2
+                },
+                {
+                  "dic_tp_cd": "IMG",
+                  "dic_wrd_nm": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150708_41%2Fkimtake85_1436349772111JFDxe_JPEG%2F03_%25285%2529.JPG&type=a340",
+                  "dic_scre": -2
+                },
+                {
+                  "dic_tp_cd": "IMG",
+                  "dic_wrd_nm": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA1MTlfMTkw%2FMDAxNTI2Njk2ODcyMTEy.d9TD515Jr-RmgYvPacIT2vHfTDz4vfG8RQu12yvGIpsg.jL06gZ5HmQQvwJ7j55NwIwHZtZ_Aw31oHacmafvdRT8g.JPEG.canals%2Fo0515055514193246215.jpg&type=a340",
                   "dic_scre": -2
                 }
               ],
-              "qst_brws_cnnt": "대,래,문,소,가,작",
+              "qst_brws_cnnt": "대,래,문,소,가,너,를,미,때,음,치,양,소,량,판",
               "qst_brws_cd": "TEXT",
               "qst_cnnt": "아래 세개의 사진과 표에서 제시된 음절을 고려하여 공통으로 관련된 단어를 찾으세요",
               "answers": [
@@ -459,16 +468,31 @@
               "qst_dics": [
                 {
                   "dic_tp_cd": "IMG",
-                  "dic_wrd_nm": "http://domain/img.png",
+                  "dic_wrd_nm": "https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20140317_72%2Fsmileahj12_13950476544105tWCC_JPEG%2F037d3acc-12c2-40cb-a11b-a80589c9379c_580.jpg&type=a340",
                   "dic_scre": 0
                 },
                 {
                   "dic_tp_cd": "IMG",
-                  "dic_wrd_nm": "http://domain/img.png",
+                  "dic_wrd_nm": "https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxNzAxMTVfMjAg%2FMDAxNDg0NDA3MDUzMTIy.8F1RqvQuEED3apEfJWJkwm8HBxfsvVnSJzJN4N3B8u8g.LANNWjwOUNOOmi0K1OCcEVmzmXx7D-atKz2Z7aU-gZ0g.JPEG.minje9007%2FexternalFile.jpg&type=a340",
                   "dic_scre": -10
+                },
+                {
+                  "dic_tp_cd": "IMG",
+                  "dic_wrd_nm": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fcdn.mule.co.kr%2Fdata%2Fthumb%2F2021%2F05%2F10%2Fa5117a70-b0d9-11eb-9f89-a991b7b4ad54.jpeg&type=a340",
+                  "dic_scre": -2
+                },
+                {
+                  "dic_tp_cd": "IMG",
+                  "dic_wrd_nm": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MjdfMjYy%2FMDAxNjMyNzQ5NzIyOTg2.XEtsBkMW9jXE9PCgYg6HzheEpIwx9A_0_OYfn1pLZKIg.t7HPoH6GINnYW97YyCyqwkWS-St_JRCU6xLnrW1a1mQg.JPEG.guitarroomrepair%2FKakaoTalk_20210927_221727251.jpg&type=a340",
+                  "dic_scre": -2
+                },
+                {
+                  "dic_tp_cd": "IMG",
+                  "dic_wrd_nm": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MjdfMTgg%2FMDAxNjMyNzQ5NjIxMzYy.bOHvmrYAo34F9gFIobkrX9GfHtsm5WXlKFicT_5KQiog.li1VfhFqrDE9eo-HofLcoz3_pxWD3tfmzi_HzQNcFS4g.JPEG.guitarroomrepair%2FKakaoTalk_20210927_221729572.jpg&type=a340",
+                  "dic_scre": -2
                 }
               ],
-              "qst_brws_cnnt": "대,래,문,소,가,작",
+              "qst_brws_cnnt": "대,래,문,소,가,너,를,미,때,음,치,양,소,량,판",
               "qst_brws_cd": "TEXT",
               "qst_cnnt": "아래 세개의 사진과 표에서 제시된 음절을 고려하여 공통으로 관련된 단어를 찾으세요",
               "answers": [
