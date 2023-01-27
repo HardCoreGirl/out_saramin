@@ -4,6 +4,38 @@ using UnityEngine;
 
 public class CSpaceAppEngine : MonoBehaviour
 {
+    #region SingleTon
+    public static CSpaceAppEngine _instance = null;
+
+    public static CSpaceAppEngine Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.Log("CSpaceAppEngine install null");
+
+            return _instance;
+        }
+    }
+
+    void Awake()
+    {
+        if (_instance == null)
+            _instance = this;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            _instance = null;
+        }
+    }
+    #endregion
+
+    //private string m_strServerType = "LOCAL";
+    private string m_strServerType = "DEV2";
+
     //public GameObject[] m_listObjectOutline = new GameObject[3];
 
     Vector3 m_vecMouseDownPos;
@@ -12,6 +44,10 @@ public class CSpaceAppEngine : MonoBehaviour
     void Start()
     {
         //HideAllObjectOutline();
+        //Server.Instance.GetComponent()
+        //Server.Instance.RequestTest();
+        Server.Instance.SetToken("07d1b9d9-a164-48cd-9d8b-4acc99c4f6f7");
+        Server.Instance.RequestTestCheck();
     }
 
     // Update is called once per frame
@@ -110,4 +146,9 @@ public class CSpaceAppEngine : MonoBehaviour
     //        m_listObjectOutline[i].SetActive(false);
     //    }
     //}
+
+    public string GetServerType()
+    {
+        return m_strServerType;
+    }
 }

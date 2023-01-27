@@ -42,6 +42,8 @@ public class CUIsLGTKManager : MonoBehaviour
 
     public Text m_txtRemain;
 
+    public GameObject m_goDropdownContent;
+
     private bool m_bIsTutorial = true;
     private int m_nRemainTime;
 
@@ -69,6 +71,13 @@ public class CUIsLGTKManager : MonoBehaviour
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
             m_nRemainTime = quizLGTK.exm_time;
             //m_nRemainTime = 30;
+
+            for(int i= 0; i < quizLGTK.set_gudes.Length; i++)
+            {
+                GameObject goDropdown = Instantiate(Resources.Load("Prefabs/LGTKDropdown") as GameObject);
+                goDropdown.transform.parent = m_goDropdownContent.transform;
+                goDropdown.GetComponent<CObjectLGTKDropdown>().InitLGTKDropdown(quizLGTK.set_gudes[i].gude_nm, quizLGTK.set_gudes[i].gude_seur_grd, quizLGTK.set_gudes[i].gude_reg_dtm);
+            }
 
             StartCoroutine("ProcessPlayExam");
         }

@@ -50,7 +50,7 @@ public class SetGudes
 {
     public string gude_deth;
     public string gude_tp_cd;
-    public string gude_rm;
+    public string gude_nm;
     public string gude_seur_grd;
     public string gude_reg_dtm;
     public string gude_cnnt;
