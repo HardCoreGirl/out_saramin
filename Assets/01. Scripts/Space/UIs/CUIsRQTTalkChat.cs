@@ -36,5 +36,6 @@ public class CUIsRQTTalkChat : MonoBehaviour
         Debug.Log("OnClickTalk : " + m_nIndex);
 
         CUIsSpaceScreenLeft.Instance.ShowQuiz(0, 0, CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
+
     }
 }

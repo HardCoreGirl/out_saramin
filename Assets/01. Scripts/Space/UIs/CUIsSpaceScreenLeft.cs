@@ -65,8 +65,11 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
     public GameObject m_goPopupToLobby;
     public Text m_txtToLobbyRemainTime;
+    public Text m_txtToLobbyRemainCnt;
 
     public GameObject m_goPopupToLobbyOver;
+    public Text m_txtToLobbyOverRemainTime;
+    public Text m_txtToLobbyOverRemainCnt;
 
     private int m_nOpenQuiz;
 
@@ -82,7 +85,10 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     private bool m_bIsRATTutorial = true;
     private bool m_bIsHPTSTutorial = true;
 
-    
+    private int m_nRQTExitCount = 0;
+    private int m_nRQTMaxExitCount = 5;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -118,14 +124,26 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
             return;
         }
 
-        ShowPopupToLobby();
+        if (m_nRQTExitCount > 0)
+            ShowPopupToLobby();
+        else
+            ShowPopupToLobbyOver();
     }
 
     public void OnClickMission(int nIndex)
     {
+        string strKey = "RQT";
+        if (nIndex == 1)
+            strKey = "CST";
+
+        Quiz quizData = CQuizData.Instance.GetQuiz(strKey);
+        Server.Instance.RequestPOSTQuestions(quizData.part_idx);
+
         //ShowPopupFinish();
         ShowPage(1, true);
         HideAllQuiz();
+
+        
         //ShowQuiz(nIndex);
 
         //InitQuiz();
@@ -160,22 +178,26 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
     public void UpdateScrollView()
     {
-        Debug.Log(m_fScrollViewHeight);
+        //Debug.Log(m_fScrollViewHeight);
 
         StartCoroutine("ProcessUpdateScrollView");
     }
 
     IEnumerator ProcessUpdateScrollView()
     {
-        yield return new WaitForSeconds(0.1f);
+        //yield return new WaitForSeconds(0.1f);
 
-        if (m_goContents.GetComponent<RectTransform>().sizeDelta.y > m_fScrollViewHeight)
-        {
-            Vector3 vecPoz = m_goContents.transform.localPosition;
-            vecPoz.y = (m_goContents.GetComponent<RectTransform>().sizeDelta.y - m_fScrollViewHeight);
-            m_goContents.transform.localPosition = vecPoz;
-        }
+        //if (m_goContents.GetComponent<RectTransform>().sizeDelta.y > m_fScrollViewHeight)
+        //{
+        //    Vector3 vecPoz = m_goContents.transform.localPosition;
+        //    vecPoz.y = (m_goContents.GetComponent<RectTransform>().sizeDelta.y - m_fScrollViewHeight);
+        //    m_goContents.transform.localPosition = vecPoz;
+        //}
 
+        Debug.Log("ProcessUpdateScrollView");
+        yield return new WaitForEndOfFrame();
+
+        m_goScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
     }
 
     public void OnClickFinish()
@@ -198,28 +220,51 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
         if (nPage == 0)
         {
-            Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT");
-            m_listQuizCount[0].text = quizRQT.sets.Length.ToString() + " 문항";
+            //Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT");
+            Quiz quizRQT = CQuizData.Instance.GetRQT().body;
+            //m_listQuizCount[0].text = quizRQT.sets.Length.ToString() + " 문항";
+            m_listQuizCount[0].text = "150 문항";
             m_listExmTime[0].text = quizRQT.exm_time.ToString() + " 초";
-            Debug.Log("Exm Time : " + quizRQT.exm_time);
+            Debug.Log("RQT Exm Time : " + quizRQT.exm_time);
 
-            m_listQuizCount[1].text = CQuizData.Instance.GetQuizTotalCount("CST").ToString() + " 문항";
-            m_listExmTime[1].text = quizRQT.exm_time.ToString() + " 분";
-            m_listQuizCount[2].text = CQuizData.Instance.GetQuizTotalCount("RAT").ToString() + " 문항";
-            m_listExmTime[2].text = quizRQT.exm_time.ToString() + " 분";
-            m_listQuizCount[3].text = CQuizData.Instance.GetQuizTotalCount("HPTS").ToString() + " 문항";
-            m_listExmTime[3].text = quizRQT.exm_time.ToString() + " 분";
+            // TODO
+            //m_listQuizCount[1].text = CQuizData.Instance.GetQuizTotalCount("CST").ToString() + " 문항";
+            //m_listQuizCount[1].text = CQuizData.Instance.GetQuiz("CST").sets.Length.ToString()  + " 문항";
+            m_listQuizCount[1].text = "1 문항";
+            m_listExmTime[1].text = CQuizData.Instance.GetQuiz("CST").exm_time.ToString() + " 분";
+            //m_listQuizCount[2].text = CQuizData.Instance.GetQuiz("RAT").sets.Length.ToString() + " 문항";
+            m_listQuizCount[2].text = "1 문항";
+            m_listExmTime[2].text = CQuizData.Instance.GetQuiz("RAT").exm_time.ToString() + " 분";
+            //m_listQuizCount[3].text = CQuizData.Instance.GetQuiz("HPTS").sets.Length.ToString() + " 문항";
+            m_listQuizCount[3].text = "1 문항";
+            m_listExmTime[3].text = CQuizData.Instance.GetQuiz("HPTS").exm_time.ToString() + " 분";
         }
         else if (nPage == 1)
         {
-            Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", bTutorial);
-            Debug.Log(quizRQT.sets.Length);
-            for(int i = 0; i < quizRQT.sets.Length; i++)
+            //Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", bTutorial);
+            Quiz quizRQT = CQuizData.Instance.GetRQT().body;
+            Debug.Log("Quiz RQT Set Cnt : " + quizRQT.sets.Length);
+            if(bTutorial)
             {
-                GameObject goTalk = Instantiate(Resources.Load("Prefabs/talk_list") as GameObject);
-                goTalk.transform.parent = m_goTalkContents.transform;
-                goTalk.GetComponent<CUIsRQTTalkChat>().InitObject(i, quizRQT.sets[i].dir_cnnt, true);
+                m_txtRemain.text = "시작 전";
             }
+            //if (bTutorial )
+            //{
+            //    for (int i = 0; i < quizRQT.sets.Length; i++)
+            //    {
+            //        GameObject goTalk = Instantiate(Resources.Load("Prefabs/talk_list") as GameObject);
+            //        goTalk.transform.parent = m_goTalkContents.transform;
+            //        goTalk.GetComponent<CUIsRQTTalkChat>().InitObject(i, quizRQT.sets[i].dir_cnnt, true);
+            //    }
+            //}
+            //else
+            //{
+                //GameObject goTalk = Instantiate(Resources.Load("Prefabs/talk_list") as GameObject);
+                //goTalk.transform.parent = m_goTalkContents.transform;
+                //// TODO
+                //goTalk.GetComponent<CUIsRQTTalkChat>().InitObject(0, "test", true);
+            //}
+            
         }
     }
 
@@ -245,10 +290,14 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
             DelQuiz();
         }
 
-        Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", bTutorial);
+
+        //Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", bTutorial);
         GameObject goTalk = Instantiate(Resources.Load("Prefabs/quizContent") as GameObject);
         goTalk.transform.parent = m_goContents.transform;
+        Debug.Log("Show Quiz : " + bTutorial.ToString());
         goTalk.GetComponent<CUIsTalk>().InitUIs(nSetIndex, nIndex, bTutorial);
+
+        UpdateScrollView();
 
 
         //string[] listQuiz = quizRQT.sets[0].questions[0].qst_cnnt.Split("\n");
@@ -320,10 +369,17 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         SetLastQuizIndex(0);
         if (!bIsTutorial)
         {
-            Quiz quizData = CQuizData.Instance.GetQuiz("RQT");
-            m_nRemainTime = quizData.exm_time;
+            if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+            {
+                Quiz quizData = CQuizData.Instance.GetQuiz("RQT");
+                m_nRemainTime = quizData.exm_time;
+            } else
+            {
+                Quiz quizRQT = CQuizData.Instance.GetRQT().body;
+                m_nRemainTime = quizRQT.exm_time;               
+            }
             StartCoroutine("ProcessRQTQuiz");
-        }
+        } 
     }
 
     IEnumerator ProcessRQTQuiz()
@@ -332,11 +388,30 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         int nSec = (int)(m_nRemainTime % 60);
 
         m_txtRemain.text = nMin.ToString("00") + ":" +  nSec.ToString("00");
+        m_txtRemain.color = new Color(0, 0.5215687f, 1f);
+        int m_nRemainTimeState = 0;
+
         while (true)
         {
             yield return new WaitForSeconds(1f);
 
             m_nRemainTime--;
+
+            if(m_nRemainTimeState == 0)
+            {
+                if( m_nRemainTime <= 60 * 5 )
+                {
+                    m_nRemainTimeState = 1;
+                    m_txtRemain.color = new Color(1f, 0.6588235f, 0);
+                }
+            } else if(m_nRemainTimeState == 1)
+            {
+                if (m_nRemainTime <= 60 * 1)
+                {
+                    m_nRemainTimeState = 2;
+                    m_txtRemain.color = new Color(1f, 0, 0);
+                }
+            } 
 
             nMin = (int)(m_nRemainTime / 60);
             nSec = (int)(m_nRemainTime % 60);
@@ -434,6 +509,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
         //m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         m_txtToLobbyRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+        m_txtToLobbyRemainCnt.text = "아직 시간이 남아있습니다. 메인 로비로 이동한 후 다시 본 미션을 수행하려면 총 <color=#FF0000>" + m_nRQTMaxExitCount.ToString() + "</color>번의 메인로비 이동 기회 중 1회 차감됨니다.<color=#FF0000>(" + m_nRQTExitCount.ToString() + "/" + m_nRQTMaxExitCount.ToString() + ")</color>";
     }
 
     public void HidePopupToLobby()
@@ -460,6 +537,15 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public void ShowPopupToLobbyOver()
     {
         m_goPopupToLobbyOver.SetActive(true);
+
+        int nMin = (int)(m_nRemainTime / 60);
+        int nSec = (int)(m_nRemainTime % 60);
+
+        //m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+        m_txtToLobbyOverRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+        m_txtToLobbyOverRemainCnt.text = "메인 로비 이동횟수를 모두 사용하셨습니다<color=#FF0000>(0/" + m_nRQTMaxExitCount.ToString() + ")</color>.\n본 미션을 완료한 후에 이동할 수 있습니다.";
+
     }
 
     public void HidePopupToLobbyOver()

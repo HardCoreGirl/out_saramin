@@ -15,6 +15,8 @@ public class CUIsRATManager : MonoBehaviour
     public Image[] m_listImageHint = new Image[5];
     public Text[] m_listTxtHintWord = new Text[16];
 
+    public GameObject[] m_listImageHintTutorial = new GameObject[5];
+
     public InputField m_ifAnswer;
 
     public GameObject m_goPopupSendAnswer;
@@ -73,16 +75,26 @@ public class CUIsRATManager : MonoBehaviour
 
         m_ifAnswer.text = "";
 
+        for (int i = 0; i < m_listImageHintTutorial.Length; i++)
+        {
+            m_listImageHintTutorial[i].SetActive(false);
+        }
+
         if ( CUIsSpaceScreenLeft.Instance.IsRATTutorial() )
         {
             m_txtBtnSendAnswer.text = "본 퀴즈 시작하기";
             m_txtRemainTime.text = "시작전";
 
-            m_listHintURL[0] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMjBfMTM4%2FMDAxNjY4OTAzNjE4NDUz.vUJ7W_roz4Zm8W3i0CGHdU68AgBk-wIv1yvKBzqpC-4g.bCV4H4hhl9HfaEV6L8l6oKSe7U9s9hYabQK46x6by3Ag.JPEG.runabd%2F20221018%25A3%25DF182021.jpg&type=a340";
-            m_listHintURL[1] = "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2Ffc%2F75%2F95%2Ffc7595d8e4d5c0db2124c0c43c00d9ec.jpg&type=a340";
-            m_listHintURL[2] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMjZfMTMy%2FMDAxNjY5NDE4MzMwODc5.1LEWPRuLoxijrOBL5q6GX9YvhlX1ngkCnDS29hd-euwg.kjebxyj-NYwihV_5sGS9nToLNHN96iPhdBj28Dj4LOUg.PNG.baekhw1%2F20221126_081425-removebg-preview.png&type=a340";
-            m_listHintURL[3] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MDFfNzAg%2FMDAxNjU2Njg2MTMxNjE3.7ncCz9d7XgMyjYUTCZAQWh1gFIYuajZyPP1UxIkJ1mwg.yWa2Z2QakUy1DjkKo2e2_ck8-MzBc4Is8FX-ARKJ-fUg.JPEG.chlwogud123%2F59bbf73b123d0f9f693be3c3de9506b24a1f2a3067b4ffd0207a3a08eee32d750ebf1ca3e330.jpg&type=a340";
-            m_listHintURL[4] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMjZfNzAg%2FMDAxNjY5NDY3MDIyODU4.xLZcFMLv9G3K3kDNWsvc2EGE2fvSHYq53TDEqnENCCAg.wDhs92vnxU-3OqLPzip9TSuPNQWouEGJFMVpwx0T5tgg.JPEG.tigersoomi%2FScreenshot%25A3%25DF20221126%25A3%25AD213739%25A3%25DFGoogle.jpg&type=a340";
+            //for(int i = 0; i < m_listImageHintTutorial.Length; i++)
+            for (int i = 0; i < 3; i++)
+            {
+                m_listImageHintTutorial[i].SetActive(true);
+            }
+            //m_listHintURL[0] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMjBfMTM4%2FMDAxNjY4OTAzNjE4NDUz.vUJ7W_roz4Zm8W3i0CGHdU68AgBk-wIv1yvKBzqpC-4g.bCV4H4hhl9HfaEV6L8l6oKSe7U9s9hYabQK46x6by3Ag.JPEG.runabd%2F20221018%25A3%25DF182021.jpg&type=a340";
+            //m_listHintURL[1] = "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2Ffc%2F75%2F95%2Ffc7595d8e4d5c0db2124c0c43c00d9ec.jpg&type=a340";
+            //m_listHintURL[2] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMjZfMTMy%2FMDAxNjY5NDE4MzMwODc5.1LEWPRuLoxijrOBL5q6GX9YvhlX1ngkCnDS29hd-euwg.kjebxyj-NYwihV_5sGS9nToLNHN96iPhdBj28Dj4LOUg.PNG.baekhw1%2F20221126_081425-removebg-preview.png&type=a340";
+            //m_listHintURL[3] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MDFfNzAg%2FMDAxNjU2Njg2MTMxNjE3.7ncCz9d7XgMyjYUTCZAQWh1gFIYuajZyPP1UxIkJ1mwg.yWa2Z2QakUy1DjkKo2e2_ck8-MzBc4Is8FX-ARKJ-fUg.JPEG.chlwogud123%2F59bbf73b123d0f9f693be3c3de9506b24a1f2a3067b4ffd0207a3a08eee32d750ebf1ca3e330.jpg&type=a340";
+            //m_listHintURL[4] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMjZfNzAg%2FMDAxNjY5NDY3MDIyODU4.xLZcFMLv9G3K3kDNWsvc2EGE2fvSHYq53TDEqnENCCAg.wDhs92vnxU-3OqLPzip9TSuPNQWouEGJFMVpwx0T5tgg.JPEG.tigersoomi%2FScreenshot%25A3%25DF20221126%25A3%25AD213739%25A3%25DFGoogle.jpg&type=a340";
 
             m_listTxtHintWord[0].text = "화";
             m_listTxtHintWord[1].text = "식";
@@ -111,26 +123,30 @@ public class CUIsRATManager : MonoBehaviour
 
                 for (int i = 0; i < 5; i++)
                 {
-                    m_listHintURL[i] = quizData.sets[0].questions[0].qst_dics[i].dic_wrd_nm;
+                    // TODO
+                    //m_listHintURL[i] = quizData.sets[0].questions[0].qst_dics[i].dic_wrd_nm;
+                    Debug.Log("RAT Quiz : " + m_listHintURL[i]);
                 }
-                string strWordHind = quizData.sets[0].questions[0].qst_brws_cnnt;
-                string[] listWordHint = strWordHind.Split(',');
-                for (int i = 0; i < listWordHint.Length; i++)
-                    m_listTxtHintWord[i].text = listWordHint[i];
+                // TODO
+                //string strWordHind = quizData.sets[0].questions[0].qst_brws_cnnt;
+                //string[] listWordHint = strWordHind.Split(',');
+                //for (int i = 0; i < listWordHint.Length; i++)
+                //    m_listTxtHintWord[i].text = listWordHint[i];
 
                 m_txtBtnSendAnswer.text = "다음 문제(1/2)";
 
             } else
             {
-                for (int i = 0; i < 5; i++)
-                {
-                    m_listHintURL[i] = quizData.sets[1].questions[0].qst_dics[i].dic_wrd_nm;
-                }
+                // TODO
+                //for (int i = 0; i < 5; i++)
+                //{
+                //    m_listHintURL[i] = quizData.sets[1].questions[0].qst_dics[i].dic_wrd_nm;
+                //}
 
-                string strWordHind = quizData.sets[1].questions[0].qst_brws_cnnt;
-                string[] listWordHint = strWordHind.Split(',');
-                for (int i = 0; i < listWordHint.Length; i++)
-                    m_listTxtHintWord[i].text = listWordHint[i];
+                //string strWordHind = quizData.sets[1].questions[0].qst_brws_cnnt;
+                //string[] listWordHint = strWordHind.Split(',');
+                //for (int i = 0; i < listWordHint.Length; i++)
+                //    m_listTxtHintWord[i].text = listWordHint[i];
                 m_txtBtnSendAnswer.text = "답변 제출하기";
             }
         }
@@ -165,9 +181,22 @@ public class CUIsRATManager : MonoBehaviour
         ShowPopupTimeOver();
     }
 
+    //public void ShowTutorialMsg()
+    //{
+    //    m_goTutorialMsg.SetActive(true);
+    //}
+
     public void ShowTutorialMsg()
     {
+        //m_goTutorialMsg.SetActive(true);
+        StartCoroutine("ProcessTutorialMsg");
+    }
+
+    IEnumerator ProcessTutorialMsg()
+    {
         m_goTutorialMsg.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        HideTutorialMsg();
     }
 
     public void HideTutorialMsg()
@@ -204,6 +233,8 @@ public class CUIsRATManager : MonoBehaviour
 
     public void OnClickHint(int nIndex)
     {
+        if(CUIsSpaceScreenLeft.Instance.IsRATTutorial())
+            m_listImageHintTutorial[nIndex].SetActive(true);
         m_listImageHint[nIndex].color = new Color(1, 1, 1, 1);
     }
 

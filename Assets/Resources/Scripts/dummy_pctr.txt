@@ -1,0 +1,979 @@
+{
+  "code": 200,
+  "message": "OK",
+  "body": {
+    "part_idx": 79907,
+    "exm_time": 480,
+    "progress_time": 480,
+    "prg_st_cd": "TAE",
+    "set_dir_tp_cd": "TEXT",
+    "set_dir_cnnt": "",
+    "guide_idx": 0,
+    "qst_tp_cd": "PCTR",
+    "last_qst_idx": 0,
+    "last_page_no": 0,
+    "sets": [
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 첫 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3012,
+            "test_qst_idx": 394905,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5359,
+            "qst_cnnt": "지금 자신의 상태를 가장 잘 설명해 줄 수 있는 단어가 무엇인지, 왜 그렇게 생각하는지 말씀해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17722,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 첫 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3013,
+            "test_qst_idx": 394906,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5360,
+            "qst_cnnt": "본인을 가장 잘 표현할 수 있는 단어가 무엇인지, 왜 그렇게 생각하는지 말씀해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17723,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 첫 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3014,
+            "test_qst_idx": 394933,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5388,
+            "qst_cnnt": "본인에 관해서 1분 동안 소개해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17751,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 첫 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3015,
+            "test_qst_idx": 394934,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5389,
+            "qst_cnnt": "1분 동안 본인이 어떤 매력을 지닌 사람인지 소개해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17752,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 두 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3016,
+            "test_qst_idx": 394928,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5383,
+            "qst_cnnt": "지원 직무에 관해 얼마나 알고 있는지 설명해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17746,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 두 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3017,
+            "test_qst_idx": 394927,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5382,
+            "qst_cnnt": "해당 직무를 수행하기 위해 어떤 능력을 키워왔는지 말씀해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17745,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 두 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3018,
+            "test_qst_idx": 394926,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5381,
+            "qst_cnnt": "해당 직무를 선택한 이유는 무엇인가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17744,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 두 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3019,
+            "test_qst_idx": 394925,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5380,
+            "qst_cnnt": "해당 직무에 지원하면서 가장 중요하게 고려한 것은 무엇인가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17743,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 두 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3020,
+            "test_qst_idx": 394924,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5379,
+            "qst_cnnt": "해당 직무에 지원하겠다고 결심한 계기는 무엇입니까?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17742,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 두 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3021,
+            "test_qst_idx": 394923,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5378,
+            "qst_cnnt": "면접관이 본인을 채용해야 하는 이유를 말씀해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17741,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 두 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3022,
+            "test_qst_idx": 394922,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5377,
+            "qst_cnnt": "다른 지원자에 비해 경쟁력이 있다고 생각하는 부분에 대해 말씀해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17740,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 두 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3023,
+            "test_qst_idx": 394920,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5375,
+            "qst_cnnt": "본인이 해당 직무와 잘 맞는다고 생각하는 부분이 있다면 말씀해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17738,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 두 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3024,
+            "test_qst_idx": 394919,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5374,
+            "qst_cnnt": "다른 지원자와 비교했을 때 본인의 강점은 무엇인가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17737,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 두 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3025,
+            "test_qst_idx": 394918,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5373,
+            "qst_cnnt": "해당 직무로 입사 지원을 결심한 근거는 무엇인가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17736,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 두 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3026,
+            "test_qst_idx": 394917,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5372,
+            "qst_cnnt": "해당 분야에 지원한 이유는 무엇인가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17735,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 세 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3027,
+            "test_qst_idx": 394912,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5367,
+            "qst_cnnt": "본인의 인생에서 가장 큰 도전이라고 생각했던 경험 하나만 말씀해 주세요(선정 이유 포함).",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17730,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 세 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3028,
+            "test_qst_idx": 394913,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5368,
+            "qst_cnnt": "남들은 해결하지 못했던 문제를 사고나 발상을 전환해서 해결했던 경험이 있으신가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17731,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 세 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3029,
+            "test_qst_idx": 394914,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5369,
+            "qst_cnnt": "다른 사람들보다 빠르게 문제상황을 인식하고 대응했던 경험이 있으신가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 2,
+            "answers": [
+              {
+                "anwr_idx": 17732,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 세 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3030,
+            "test_qst_idx": 394915,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5370,
+            "qst_cnnt": "본인에게 부여된 여러 미션을 성공적으로 완수하기 위해 어떤 전략을 세우고 과제에 임했는지 말씀해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17733,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 세 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3031,
+            "test_qst_idx": 394916,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5371,
+            "qst_cnnt": "여러 가지 과제가 동시에 주어졌을 때 보통 어떤 순서로 일을 처리하는지 말씀해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17734,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 네 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3032,
+            "test_qst_idx": 394932,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5387,
+            "qst_cnnt": "다른 사람들은 쉽게 알아차리지 못한 문제를 파악해서 이슈를 제기해 본 경험이 있으신가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17750,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 네 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3033,
+            "test_qst_idx": 394931,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5386,
+            "qst_cnnt": "어떤 일이 발생했을 때 그 상황을 분석하기 위해 보통 어떤 노력을 하시나요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17749,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 네 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3034,
+            "test_qst_idx": 394930,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5385,
+            "qst_cnnt": "자신에게 당면한 문제가 무엇인지에 대해 스스로 생각하고 정의 내려 본 경험이 있으신가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17748,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 네 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3035,
+            "test_qst_idx": 394929,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5384,
+            "qst_cnnt": "다른 사람들이 간과한 문제를 빠르게 인식하고 대응한 경험이 있으신가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17747,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 네 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3036,
+            "test_qst_idx": 394921,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5376,
+            "qst_cnnt": "무엇이 문제인지 정확하게 규명하기 위해 구체적인 노력을 기울인 경험이 있으신가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17739,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 네 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3037,
+            "test_qst_idx": 394911,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5366,
+            "qst_cnnt": "핵심을 파악을 잘 한다는 이야기를 들어본 경험이 있으신가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17729,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 네 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3038,
+            "test_qst_idx": 394935,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5390,
+            "qst_cnnt": "빠르게 상황을 분석해서 문제의 핵심을 파악해 낸 경험이 있으신가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17753,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 다섯 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3039,
+            "test_qst_idx": 394910,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5364,
+            "qst_cnnt": "손해나 위험을 감수하고 과감한 결정을 내린 경험이 있나요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17727,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 다섯 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3040,
+            "test_qst_idx": 394909,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5363,
+            "qst_cnnt": "어려운 상황에서도 자신의 결정을 이행하기 위해 과감한 행동을 취해본 경험이 있나요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17726,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 다섯 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3041,
+            "test_qst_idx": 394908,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5362,
+            "qst_cnnt": "가장 최근 과감한 결단을 내렸던 경험이 있다면 말씀해 주세요.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17725,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "전체 질문 다섯 개 중 다섯 번째 질문입니다. 준비시간 30초가 지나면 응답하세요.",
+        "questions": [
+          {
+            "set_dir_idx": 3042,
+            "test_qst_idx": 394907,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5361,
+            "qst_cnnt": "생각만 하다 기회를 놓치는 것과, 무모한 행동으로 후회하는 것 중 본인의 평소 성향에 가까운 것은 무엇인가요?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "SBCT",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0.6,
+            "answers": [
+              {
+                "anwr_idx": 17724,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1398 @@
+{
+  "code": 200,
+  "message": "OK",
+  "body": {
+    "part_idx": 79906,
+    "exm_time": 720,
+    "progress_time": 720,
+    "prg_st_cd": "TAE",
+    "set_dir_tp_cd": "TEXT",
+    "set_dir_cnnt": "",
+    "guide_idx": 0,
+    "qst_tp_cd": "APTD2",
+    "last_qst_idx": 0,
+    "last_page_no": 0,
+    "sets": [
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2977,
+            "test_qst_idx": 394899,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5431,
+            "qst_cnnt": "다음은 8개월 간 기체결함 발생 횟수를 그래프로 나타낸 것이다. 이에 대한 해석으로 가장 적절하지 않은 것은?",
+            "qst_exos_cd": "FORM_D",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17914,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "전월 대비 결함 횟수가 가장 증가한 달은 3월이다."
+              },
+              {
+                "anwr_idx": 17915,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "7월 결함 횟수가 6월에 비해 2배 증가하였는지는 알 수 없다."
+              },
+              {
+                "anwr_idx": 17916,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "2월과 5월만큼 전월 대비 변동 폭이 큰 달은 없다."
+              },
+              {
+                "anwr_idx": 17917,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "1월은 비교적 결함 횟수가 많은 달 중 하나이다."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2978,
+            "test_qst_idx": 394900,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5432,
+            "qst_cnnt": "다음은 8개월간 기체 결함을 위해 사용한 부속품 수를 그래프로 나타낸 것이다. 이에 대한 해석으로 가장 적절하지 않은 것은?",
+            "qst_exos_cd": "FORM_D",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17918,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "전월 대비 사용한 부속품 수의 변동 폭이 가장 큰 달은 2월이다."
+              },
+              {
+                "anwr_idx": 17919,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "3월 사용 부속품 수가 4월에 비해 정확히 두 배 많은지는 알 수 없다."
+              },
+              {
+                "anwr_idx": 17920,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "1월에 사용한 부속품 수는 3, 4월에 사용한 부속품 수를 합친 것보다 더 많다."
+              },
+              {
+                "anwr_idx": 17921,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "4월부터 7월까지 사용한 부속품 수는 상승 추세이다."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2979,
+            "test_qst_idx": 394901,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5433,
+            "qst_cnnt": "다음은 8개월간 기체결함 자동 수리 프로그램 가동률을 그래프로 나타낸 것이다. 이에 대한 해석으로 가장 적절하지 않은 것은?",
+            "qst_exos_cd": "FORM_D",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17922,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "추세를 보았을 때 향후 프로그램 가동률이 증가할 것이다."
+              },
+              {
+                "anwr_idx": 17923,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "프로그램 가동률이 직전 달 대비 하락한 달은 두 개뿐이다."
+              },
+              {
+                "anwr_idx": 17924,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "5월부터 8월까지 프로그램 가동률은 상승 추세이다."
+              },
+              {
+                "anwr_idx": 17925,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "6, 7, 8월의 합은 1월부터 5월까지의 합보다 크다."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2980,
+            "test_qst_idx": 394902,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5434,
+            "qst_cnnt": "다음 기체 결함 수리표와 일치하는 그래프는?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17926,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "1"
+              },
+              {
+                "anwr_idx": 17927,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "2"
+              },
+              {
+                "anwr_idx": 17928,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "3"
+              },
+              {
+                "anwr_idx": 17929,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2981,
+            "test_qst_idx": 394903,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5435,
+            "qst_cnnt": "다음 기체 결함 수리표와 일치하는 그래프는?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17930,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "1"
+              },
+              {
+                "anwr_idx": 17931,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "2"
+              },
+              {
+                "anwr_idx": 17932,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "3"
+              },
+              {
+                "anwr_idx": 17933,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2982,
+            "test_qst_idx": 394904,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5436,
+            "qst_cnnt": "다음 기체 결함 수리표와 일치하는 그래프는?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17934,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "1"
+              },
+              {
+                "anwr_idx": 17935,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "2"
+              },
+              {
+                "anwr_idx": 17936,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "3"
+              },
+              {
+                "anwr_idx": 17937,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "4"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2987,
+            "test_qst_idx": 394896,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5426,
+            "qst_cnnt": "소행성 무리와 충돌 사고로 우조선 태양전지 패널이 파손되었다. 파손된 부분을 메우려면 필요한 부품이 무엇인가? (단, 부품은 회전하지 않는다)",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17894,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17894"
+              },
+              {
+                "anwr_idx": 17895,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17895"
+              },
+              {
+                "anwr_idx": 17896,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17896"
+              },
+              {
+                "anwr_idx": 17897,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17897"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2988,
+            "test_qst_idx": 394897,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5427,
+            "qst_cnnt": "소행성 무리와 충돌 사고로 우조선 태양전지 패널이 파손되었다. 파손된 부분을 메우려면 필요한 부품이 무엇인가? (단, 부품은 회전하지 않는다)",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17898,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17898"
+              },
+              {
+                "anwr_idx": 17899,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17899"
+              },
+              {
+                "anwr_idx": 17900,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17900"
+              },
+              {
+                "anwr_idx": 17901,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17901"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2989,
+            "test_qst_idx": 394898,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5430,
+            "qst_cnnt": "소행성 무리와 충돌 사고로 우주선 태양전지 패널이 파손되었다. 파손된 부분을 메우려면 필요한 부품이 무엇인가? (단, 부품은 회전하지 않는다)",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17910,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17910"
+              },
+              {
+                "anwr_idx": 17911,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17911"
+              },
+              {
+                "anwr_idx": 17912,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17912"
+              },
+              {
+                "anwr_idx": 17913,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17913"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2990,
+            "test_qst_idx": 394884,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5404,
+            "qst_cnnt": "아래 전개도로 만들 수 없는 장치는 무엇인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17806,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17806"
+              },
+              {
+                "anwr_idx": 17807,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17807"
+              },
+              {
+                "anwr_idx": 17808,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17808"
+              },
+              {
+                "anwr_idx": 17809,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17809"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2991,
+            "test_qst_idx": 394885,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5405,
+            "qst_cnnt": "아래 전개도로 만들 수 없는 장치는 무엇인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17810,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17810"
+              },
+              {
+                "anwr_idx": 17811,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17811"
+              },
+              {
+                "anwr_idx": 17812,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17812"
+              },
+              {
+                "anwr_idx": 17813,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17813"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2992,
+            "test_qst_idx": 394886,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5406,
+            "qst_cnnt": "아래 전개도로 만들 수 없는 장치는 무엇인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17814,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17814"
+              },
+              {
+                "anwr_idx": 17815,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17815"
+              },
+              {
+                "anwr_idx": 17816,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17816"
+              },
+              {
+                "anwr_idx": 17817,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17817"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2993,
+            "test_qst_idx": 394895,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5425,
+            "qst_cnnt": "소행성 무리와 충돌 사고로 우주선 외판의 일부가 손상되었다. 우주선 외판 나사 구멍에 맞추어 외판을 제작하려면 어떻게 구멍을 뚫어야 하는가?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17890,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17890"
+              },
+              {
+                "anwr_idx": 17891,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17891"
+              },
+              {
+                "anwr_idx": 17892,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17892"
+              },
+              {
+                "anwr_idx": 17893,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17893"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2994,
+            "test_qst_idx": 394894,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5424,
+            "qst_cnnt": "소행성 무리와 충돌 사고로 우주선 외판의 일부가 손상되었다. 우주선 외판 나사 구멍에 맞추어 외판을 제작하려면 어떻게 구멍을 뚫어야 하는가?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17886,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17886"
+              },
+              {
+                "anwr_idx": 17887,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17887"
+              },
+              {
+                "anwr_idx": 17888,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17888"
+              },
+              {
+                "anwr_idx": 17889,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17889"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2995,
+            "test_qst_idx": 394893,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5423,
+            "qst_cnnt": "소행성 무리와 충돌 사고로 우주선 외판의 일부가 손상되었다. 우주선 외판 나사 구멍에 맞추어 외판을 제작하려면 어떻게 구멍을 뚫어야 하는가?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17882,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17882"
+              },
+              {
+                "anwr_idx": 17883,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17883"
+              },
+              {
+                "anwr_idx": 17884,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17884"
+              },
+              {
+                "anwr_idx": 17885,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17885"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2996,
+            "test_qst_idx": 394892,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5422,
+            "qst_cnnt": "다음 중 정육면체로 구성된 아래 입체물이 통과할 수 있는 모양은 무엇인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17878,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17878"
+              },
+              {
+                "anwr_idx": 17879,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17879"
+              },
+              {
+                "anwr_idx": 17880,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17880"
+              },
+              {
+                "anwr_idx": 17881,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17881"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2997,
+            "test_qst_idx": 394891,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5421,
+            "qst_cnnt": "다음 중 정육면체로 구성된 아래 입체물이 통과할 수 있는 모양은 무엇인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17874,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17874"
+              },
+              {
+                "anwr_idx": 17875,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17875"
+              },
+              {
+                "anwr_idx": 17876,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17876"
+              },
+              {
+                "anwr_idx": 17877,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17877"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2998,
+            "test_qst_idx": 394890,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5420,
+            "qst_cnnt": "다음 중 정육면체로 구성된 아래 입체물이 통과할 수 있는 모양은 무엇인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17870,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17870"
+              },
+              {
+                "anwr_idx": 17871,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17871"
+              },
+              {
+                "anwr_idx": 17872,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17872"
+              },
+              {
+                "anwr_idx": 17873,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17873"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2999,
+            "test_qst_idx": 394888,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5417,
+            "qst_cnnt": "메인보드에 CPU와 GPU, RAM을 꽂으려고 한다. 모든 부품 위치를 변경할 수 있을 때 최대로 꽂을 수 있는 RAM은 몇 개인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17858,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17858"
+              },
+              {
+                "anwr_idx": 17859,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17859"
+              },
+              {
+                "anwr_idx": 17860,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17860"
+              },
+              {
+                "anwr_idx": 17861,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17861"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3000,
+            "test_qst_idx": 394889,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5418,
+            "qst_cnnt": "메인보드에 CPU와 GPU, RAM을 꽂으려고 한다. 모든 부품 위치를 변경할 수 있을 때 최대로 꽂을 수 있는 RAM은 몇 개인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17862,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17862"
+              },
+              {
+                "anwr_idx": 17863,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17863"
+              },
+              {
+                "anwr_idx": 17864,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17864"
+              },
+              {
+                "anwr_idx": 17865,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17865"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3001,
+            "test_qst_idx": 394887,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5416,
+            "qst_cnnt": "메인보드에 CPU와 GPU, RAM을 꽂으려고 한다. 모든 부품 위치를 변경할 수 있을 때 최대로 꽂을 수 있는 RAM은 몇 개인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 1,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17854,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17854"
+              },
+              {
+                "anwr_idx": 17855,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17855"
+              },
+              {
+                "anwr_idx": 17856,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17856"
+              },
+              {
+                "anwr_idx": 17857,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17857"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3066,
+            "test_qst_idx": 394875,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5302,
+            "qst_cnnt": "엔진으로 냉각수를 공급하기 위해 파이프 조각을 연결해야 한다. 모양에 관계없이 최소 개수의 파이프 조각을 사용하여 냉각수가 새는 곳이 없도록 연결할 때, 어떠한 경우에도 불필요한 파이프 조각은? (파이프 조각은 중복해서 사용할 수 있으며, 회전은 불가능하다.)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17554,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17554"
+              },
+              {
+                "anwr_idx": 17555,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17555"
+              },
+              {
+                "anwr_idx": 17556,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17556"
+              },
+              {
+                "anwr_idx": 17557,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17557"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3067,
+            "test_qst_idx": 394876,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5303,
+            "qst_cnnt": "엔진으로 냉각수를 공급하기 위해 파이프 조각을 연결해야 한다. 모양에 관계없이 최소 개수의 파이프 조각을 사용하여 냉각수가 새는 곳이 없도록 연결할 때, 어떠한 경우에도 불필요한 파이프 조각은? (파이프 조각은 중복해서 사용할 수 있으며, 회전은 불가능하다.)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17558,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17558"
+              },
+              {
+                "anwr_idx": 17559,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17559"
+              },
+              {
+                "anwr_idx": 17560,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17560"
+              },
+              {
+                "anwr_idx": 17561,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17561"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3068,
+            "test_qst_idx": 394877,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5304,
+            "qst_cnnt": "엔진으로 냉각수를 공급하기 위해 파이프 조각을 연결해야 한다. 모양에 관계없이 최소 개수의 파이프 조각을 사용하여 냉각수가 새는 곳이 없도록 연결할 때, 어떠한 경우에도 불필요한 파이프 조각은? (파이프 조각은 중복해서 사용할 수 있으며, 회전은 불가능하다.)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17562,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17562"
+              },
+              {
+                "anwr_idx": 17563,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17563"
+              },
+              {
+                "anwr_idx": 17564,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17564"
+              },
+              {
+                "anwr_idx": 17565,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17565"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3069,
+            "test_qst_idx": 394878,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5305,
+            "qst_cnnt": "끊어진 연료 파이프를 연결하려고 한다. 남아 있는 파이프를 모두 이으면서 연료가 새는 곳이 없도록 연결하기 위한 최소한의 파이프 개수는? (단, 검은색 영역은 사용하지 않는다)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17566,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "10개"
+              },
+              {
+                "anwr_idx": 17567,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "11개"
+              },
+              {
+                "anwr_idx": 17568,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "12개"
+              },
+              {
+                "anwr_idx": 17569,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "13개"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3070,
+            "test_qst_idx": 394879,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5324,
+            "qst_cnnt": "끊어진 연료 파이프를 연결하려고 한다. 남아 있는 파이프를 모두 이으면서 연료가 새는 곳이 없도록 연결하기 위한 최소한의 파이프 개수는? (단, 검은색 영역은 사용하지 않는다)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 0,
+            "answers": [
+              {
+                "anwr_idx": 17606,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "10개"
+              },
+              {
+                "anwr_idx": 17607,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "11개"
+              },
+              {
+                "anwr_idx": 17608,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "12개"
+              },
+              {
+                "anwr_idx": 17609,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "13개"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3071,
+            "test_qst_idx": 394880,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5325,
+            "qst_cnnt": "끊어진 연료 파이프를 연결하려고 한다. 남아 있는 파이프를 모두 이으면서 연료가 새는 곳이 없도록 연결하기 위한 최소한의 파이프 개수는? (단, 검은색 영역은 사용하지 않는다)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17610,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "10개"
+              },
+              {
+                "anwr_idx": 17611,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "11개"
+              },
+              {
+                "anwr_idx": 17612,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "12개"
+              },
+              {
+                "anwr_idx": 17613,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "13개"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3072,
+            "test_qst_idx": 394881,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5326,
+            "qst_cnnt": "제어로봇이 화물칸에서 빠져나올 수 있도록 화물들을 치워야 한다. 화물을 최소 몇 회를 움직여야 할까?\r\n(조건1. 화물은 놓인 방향을 따라 직선으로만 움직일 수 있다)\r\n(조건2. 제어로봇은 앞으로만 이동할 수 있다)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17614,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "5회"
+              },
+              {
+                "anwr_idx": 17615,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "6회"
+              },
+              {
+                "anwr_idx": 17616,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "7회"
+              },
+              {
+                "anwr_idx": 17617,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "8회"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3073,
+            "test_qst_idx": 394882,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5327,
+            "qst_cnnt": "제어로봇이 화물칸에서 빠져나올 수 있도록 화물을 치워야 한다. 화물을 최소 몇 회를 움직여야 할까?\r\n(조건1. 화물은 놓인 방향을 따라 직선으로만 움직일 수 있다)\r\n(조건2. 제어로봇은 앞으로만 이동할 수 있다)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17618,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "5회"
+              },
+              {
+                "anwr_idx": 17619,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "6회"
+              },
+              {
+                "anwr_idx": 17620,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "7회"
+              },
+              {
+                "anwr_idx": 17621,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "8회"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3074,
+            "test_qst_idx": 394883,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5328,
+            "qst_cnnt": "제어로봇이 화물칸에서 빠져나올 수 있도록 화물을 치워야 한다. 화물을 최소 몇 회를 움직여야 할까?\r\n(조건1. 화물은 놓인 방향을 따라 직선으로만 움직일 수 있다)\r\n(조건2. 제어로봇은 앞으로만 이동할 수 있다)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17622,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "5회"
+              },
+              {
+                "anwr_idx": 17623,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "6회"
+              },
+              {
+                "anwr_idx": 17624,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "7회"
+              },
+              {
+                "anwr_idx": 17625,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "8회"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

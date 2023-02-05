@@ -22,9 +22,10 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
         
     }
 
-    public void InitLGTKMainager()
+    public void InitLGTKManager()
     {
-
+        m_goLGTKMain.SetActive(true);
+        m_goLGTKMain.GetComponent<CUIsLGTKManager>().InitLGTK();
     }
 
     public void OnClickExit()

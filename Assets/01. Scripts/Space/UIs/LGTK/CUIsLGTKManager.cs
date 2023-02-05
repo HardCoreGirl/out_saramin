@@ -50,7 +50,7 @@ public class CUIsLGTKManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitLGTK();   
+        //InitLGTK();   
     }
 
     // Update is called once per frame
@@ -66,18 +66,21 @@ public class CUIsLGTKManager : MonoBehaviour
         if( m_bIsTutorial)
         {
             m_txtRemain.text = "Ω√¿€¿¸";
+            OnClickTalkBox();
         } else
         {
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
             m_nRemainTime = quizLGTK.exm_time;
+            Debug.Log("LGTK Remain Time : " + m_nRemainTime);
             //m_nRemainTime = 30;
 
-            for(int i= 0; i < quizLGTK.set_gudes.Length; i++)
-            {
-                GameObject goDropdown = Instantiate(Resources.Load("Prefabs/LGTKDropdown") as GameObject);
-                goDropdown.transform.parent = m_goDropdownContent.transform;
-                goDropdown.GetComponent<CObjectLGTKDropdown>().InitLGTKDropdown(quizLGTK.set_gudes[i].gude_nm, quizLGTK.set_gudes[i].gude_seur_grd, quizLGTK.set_gudes[i].gude_reg_dtm);
-            }
+            // TODO : Set_Gudes
+            //for(int i= 0; i < quizLGTK.set_gudes.Length; i++)
+            //{
+            //    GameObject goDropdown = Instantiate(Resources.Load("Prefabs/LGTKDropdown") as GameObject);
+            //    goDropdown.transform.parent = m_goDropdownContent.transform;
+            //    goDropdown.GetComponent<CObjectLGTKDropdown>().InitLGTKDropdown(quizLGTK.set_gudes[i].gude_nm, quizLGTK.set_gudes[i].gude_seur_grd, quizLGTK.set_gudes[i].gude_reg_dtm);
+            //}
 
             StartCoroutine("ProcessPlayExam");
         }

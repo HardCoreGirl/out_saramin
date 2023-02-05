@@ -1,0 +1,49 @@
+{
+  "code": 200,
+  "message": "OK",
+  "body": {
+    "rct_idx": 1503,
+    "part_idx": 66975,
+    "qst_tp_cd": "RQT",
+    "part_sort_seq": 1,
+    "last_qst_idx": 0,
+    "last_page_no": 0,
+    "finish_yn": "N",
+    "status": "WAITING",
+    "exm_cls_cd": "EXMS",
+    "part_list": [
+      {
+        "part_idx": 66975,
+        "part_sort_seq": 1
+      },
+      {
+        "part_idx": 66968,
+        "part_sort_seq": 2
+      },
+      {
+        "part_idx": 66969,
+        "part_sort_seq": 3
+      },
+      {
+        "part_idx": 66970,
+        "part_sort_seq": 4
+      },
+      {
+        "part_idx": 66971,
+        "part_sort_seq": 5
+      },
+      {
+        "part_idx": 66972,
+        "part_sort_seq": 6
+      },
+      {
+        "part_idx": 66973,
+        "part_sort_seq": 7
+      },
+      {
+        "part_idx": 66974,
+        "part_sort_seq": 8
+      }
+    ]
+  }
+}

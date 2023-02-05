@@ -267,9 +267,22 @@ public class CUIsHPTSManager : MonoBehaviour
         ShowPopupToLobby();
     }
 
+    //public void ShowTutorialMsg()
+    //{
+    //    m_goTutorialMsg.SetActive(true);
+    //}
+
     public void ShowTutorialMsg()
     {
+        //m_goTutorialMsg.SetActive(true);
+        StartCoroutine("ProcessTutorialMsg");
+    }
+
+    IEnumerator ProcessTutorialMsg()
+    {
         m_goTutorialMsg.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        HideTutorialMsg();
     }
 
     public void HideTutorialMsg()

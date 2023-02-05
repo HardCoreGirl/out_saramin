@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.Networking;
+using UnityEngine.UI;
+
+using System.Runtime.InteropServices;
+
 public class CSpaceAppEngine : MonoBehaviour
 {
     #region SingleTon
@@ -33,6 +38,8 @@ public class CSpaceAppEngine : MonoBehaviour
     }
     #endregion
 
+    public Text m_txtDebug;
+
     //private string m_strServerType = "LOCAL";
     private string m_strServerType = "DEV2";
 
@@ -40,19 +47,31 @@ public class CSpaceAppEngine : MonoBehaviour
 
     Vector3 m_vecMouseDownPos;
 
-    // Start is called before the first frame update
+
+    private bool m_bIsQuizLoaded = false;
+
+
+    
+        // Start is called before the first frame update
     void Start()
     {
         //HideAllObjectOutline();
         //Server.Instance.GetComponent()
         //Server.Instance.RequestTest();
-        Server.Instance.SetToken("07d1b9d9-a164-48cd-9d8b-4acc99c4f6f7");
-        Server.Instance.RequestTestCheck();
+        //Server.Instance.SetToken("aW5kZXB0aEFwcDojQClAIXRsYWNtZDEyKSM=");
+        //Server.Instance.RequestTestCheck();
+        //foreach(var s in WWW.GetResopseHeader())
+        //{
+        //    Debug.Log(s);
+        //}
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        m_txtDebug.text = "Width : " + Screen.width.ToString() + ", Hight : " + Screen.height.ToString();
+
         m_vecMouseDownPos = Input.mousePosition;
 
         Vector2 pos = Camera.main.ScreenToWorldPoint(m_vecMouseDownPos);
@@ -65,20 +84,60 @@ public class CSpaceAppEngine : MonoBehaviour
             {
                 if( !CUIsSpaceManager.Instance.IsScreenActive() )
                 {
-                    Debug.Log(hit.collider.name);
+                    Debug.Log("GetMouseButtonDown : " + hit.collider.name);
+                    if( !m_bIsQuizLoaded)
+                    {
+                        Debug.Log("GetMouseButtonDown Quiz Loaded");
+                        m_bIsQuizLoaded = true;
+                        CUIsSpaceManager.Instance.ScreenActive(true);
+
+                        if (GetServerType().Equals("LOCAL"))
+                        {
+                            //Debug.Log("Screen Left - LOCAL LOADED");
+                            Server.Instance.RequestGETQuestions(0);
+                            //CUIsSpaceManager.Instance.ShowLeftPage();
+                            //return;
+                        } else
+                        {
+                            STTestCheck stTestCheck = CQuizData.Instance.GetTestCheck();
+                            for (int i = 0; i < stTestCheck.body.part_list.Length; i++)
+                            {
+                                Server.Instance.RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
+                            }
+                        }
+                    }
                     if (hit.collider.name.Equals("screen_left"))
                     {
                         CUIsSpaceManager.Instance.ScreenActive(true);
+                        //if (GetServerType().Equals("LOCAL"))
+                        //{
+                        //    //Debug.Log("Screen Left - LOCAL LOADED");
+                        //    //Server.Instance.RequestGETQuestions(0);
+                        //}
+
                         CUIsSpaceManager.Instance.ShowLeftPage();
+                        //CUIsSpaceManager.Instance.ShowLeftPage();
                     }
                     else if (hit.collider.name == "screen_main")
                     {
                         CUIsSpaceManager.Instance.ScreenActive(true);
+                        if (GetServerType().Equals("LOCAL"))
+                        {
+                            //Server.Instance.RequestGETQuestions(0);
+                            CUIsSpaceManager.Instance.ShowCenterPage();
+                            return;
+                        }
+
                         CUIsSpaceManager.Instance.ShowCenterPage();
                     }
                     else if (hit.collider.name == "screen_right")
                     {
                         CUIsSpaceManager.Instance.ScreenActive(true);
+                        if (GetServerType().Equals("LOCAL"))
+                        {
+                            Server.Instance.RequestGETQuestions(0);
+                        }
+
                         CUIsSpaceManager.Instance.ShowRightPage();
                     }
                 }
@@ -147,6 +206,10 @@ public class CSpaceAppEngine : MonoBehaviour
     //    }
     //}
 
+    public void SetServerType(string strServerType)
+    {
+        m_strServerType = strServerType;
+    }
     public string GetServerType()
     {
         return m_strServerType;

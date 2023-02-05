@@ -40,7 +40,10 @@ public class CUIsAnswer : MonoBehaviour
         m_goSelected.SetActive(false);
         m_goSelector.SetActive(true);
 
-        m_listAnswer = quizRQT.sets[nSetIndex].questions[nQuizIndex].answers;
+        if( bTutorial)
+            m_listAnswer = quizRQT.sets[nSetIndex].questions[nQuizIndex].answers;
+        else
+            m_listAnswer = quizRQT.sets[nQuizIndex].questions[0].answers;
 
         for (int i = 0; i < m_listBtnSelector.Length; i++)
         {
@@ -56,16 +59,6 @@ public class CUIsAnswer : MonoBehaviour
             rectSize.x = m_listBtnSelector[i].GetComponentInChildren<Text>().preferredWidth + 32;
             m_listBtnSelector[i].GetComponent<RectTransform>().sizeDelta = rectSize;
         }
-
-        //for (int i = 0; i < m_listAnswer.Length; i++)
-        //{
-        //    Debug.Log("Button : " + m_listAnswer[i].anwr_cnnt + ", " + m_listBtnSelector[i].GetComponentInChildren<Text>().preferredWidth);
-        //    m_listBtnSelector[i].GetComponentInChildren<Text>().text = m_listAnswer[i].anwr_cnnt;
-        //    var rectSize = m_listBtnSelector[i].GetComponent<RectTransform>().sizeDelta;
-        //    rectSize.x = m_listBtnSelector[i].GetComponentInChildren<Text>().preferredWidth + 32;
-        //    m_listBtnSelector[i].GetComponent<RectTransform>().sizeDelta = rectSize;
-
-        //}
     }
 
     public void OnClickAnswer(int nIndex)
@@ -73,13 +66,30 @@ public class CUIsAnswer : MonoBehaviour
         if (!CUIsSpaceScreenLeft.Instance.IsRQTTutorial())
         {
             Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
-            Debug.Log("Exam Cnt : " + quizRQT.sets[0].questions.Length + ", QuizIndex : " + m_nQuizIndex);
-            if (m_nQuizIndex >= quizRQT.sets[0].questions.Length - 1)
+            //if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+            //{
+            //    //Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
+            //    Debug.Log("Exam Cnt : " + quizRQT.sets[0].questions.Length + ", QuizIndex : " + m_nQuizIndex);
+
+            //    if (m_nQuizIndex >= quizRQT.sets[0].questions.Length - 1)
+            //    {
+            //        // TODO : 시험 종료
+            //        Debug.Log("Finish Exam");
+            //        return;
+            //    }
+            //} else
+            //{
+            //Quiz quizRQT = CQuizData.Instance.GetRQT().body;
+            Debug.Log("Exam Cnt : " + quizRQT.sets.Length + ", QuizIndex : " + m_nQuizIndex);
+
+            if (m_nQuizIndex >= quizRQT.sets.Length - 1)
             {
                 // TODO : 시험 종료
-                Debug.Log("Finish Exam");
+                //Debug.Log("Finish Exam");
+                CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("RQT").part_idx);
+                CUIsSpaceManager.Instance.HideLeftPage();
                 return;
-            }
+             }
         }
 
         m_nSelectIndex = nIndex;
@@ -97,6 +107,7 @@ public class CUIsAnswer : MonoBehaviour
             {
                 CUIsSpaceScreenLeft.Instance.DelQuiz();
                 CUIsSpaceScreenLeft.Instance.InitRQTQuiz(false);
+                CUIsSpaceScreenLeft.Instance.ShowQuiz(0, 0, CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
                 return;
             }
             else if (m_nQuizIndex == 2)
@@ -105,6 +116,7 @@ public class CUIsAnswer : MonoBehaviour
                 {
                     CUIsSpaceScreenLeft.Instance.DelQuiz();
                     CUIsSpaceScreenLeft.Instance.InitRQTQuiz(false);
+                    CUIsSpaceScreenLeft.Instance.ShowQuiz(0, 0, CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
                     return;
                 }
             }
@@ -113,6 +125,11 @@ public class CUIsAnswer : MonoBehaviour
         if (CUIsSpaceScreenLeft.Instance.GetLastQuizIndex() <= m_nQuizIndex)
         {
             CUIsSpaceScreenLeft.Instance.SetLastQuizIndex(m_nQuizIndex + 1);
+            int nNextQuizIndex = m_nQuizIndex + 1;
+            if( (nNextQuizIndex % 4) == 0 )
+            {
+                CUIsSpaceScreenLeft.Instance.DelQuiz();
+            }
             CUIsSpaceScreenLeft.Instance.ShowQuiz(m_nSetIndex, m_nQuizIndex + 1, CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
         }
     }

@@ -86,15 +86,16 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         {
             m_txtSendAnswer.text = "본 퀴즈 시작하기";
             m_txtRemainTime.text = "시작전";
-            m_txtMission.text = "{name}님,  플레이샵에 오신 것을 환영합니다! 첫 번째 라운드는 사고 유연성 테스트입니다. 안내문 내용을 참고하시어 아래 빈 칸에 알맞은 단어를 작성해 주세요.본 퀴즈는 연습이오니 부담 갖지 마시고 충분히 작성하셔도 됩니다.";
+            m_txtMission.text = CQuizData.Instance.GetUserName() + "님,  플레이샵에 오신 것을 환영합니다! 첫 번째 라운드는 사고 유연성 테스트입니다. 안내문 내용을 참고하시어 아래 빈 칸에 알맞은 단어를 작성해 주세요.본 퀴즈는 연습이오니 부담 갖지 마시고 충분히 작성하셔도 됩니다.";
             m_txtLeftContent.text = "음식";
             m_txtRightContent.text = "사무용품";
         } else
         {
             m_txtSendAnswer.text = "답변 제출하기";
             
-            m_txtMission.text = "과일, 가구에 속하는 단어를 번갈아 가며 최대한 많이 작성해 주시기 바랍니다.";
+            //m_txtMission.text = "과일, 가구에 속하는 단어를 번갈아 가며 최대한 많이 작성해 주시기 바랍니다.";
             Quiz quizData = CQuizData.Instance.GetQuiz("CST");
+            m_txtMission.text = quizData.sets[0].dir_cnnt;
             m_nRemainTime = quizData.exm_time;
             //m_nRemainTime = 60;
             m_txtLeftContent.text = quizData.sets[0].questions[0].qst_cnnt;
@@ -153,7 +154,13 @@ public class CUIsCSTPage2Manager : MonoBehaviour
                 break;
         }
 
-        ShowPopupTimeOver();
+        for (int i = 0; i < 25; i++)
+        {
+            m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().DisableInputField();
+            m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().DisableInputField();
+
+        }
+        //ShowPopupTimeOver();
     }
 
     public void OnClickSendAnswer()
@@ -177,7 +184,15 @@ public class CUIsCSTPage2Manager : MonoBehaviour
 
     public void ShowTutorialMsg()
     {
+        //m_goTutorialMsg.SetActive(true);
+        StartCoroutine("ProcessTutorialMsg");
+    }
+
+    IEnumerator ProcessTutorialMsg()
+    {
         m_goTutorialMsg.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        HideTutorialMsg();
     }
 
     public void HideTutorialMsg()

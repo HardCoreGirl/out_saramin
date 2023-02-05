@@ -4,6 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
+public class STTestCheckBodyPartList
+{
+    public int part_idx;
+    public int part_sort_seq;
+}
+
+[Serializable]
+public class STTestCheckBody
+{
+    public int rct_idx;
+    public int part_idx;
+    public string qst_tp_cd;
+    public int part_sort_seq;
+    public int last_qst_idx;
+    public int last_page_no;
+    public string finish_yn;
+    public string status;
+    public string exm_cls_cd;
+    public STTestCheckBodyPartList[] part_list;
+}
+
+[Serializable]
+public class STTestCheck
+{
+    public int code;
+    public string message;
+    public STTestCheckBody body;
+}
+
+[Serializable]
 public class Answers
 {
     public int anwr_idx;
@@ -29,6 +59,7 @@ public class Questions
     public int qst_idx;
     public string qst_exos_cd;
     public string qst_sove_cd;
+    public string qst_ans_cd;
     public int qst_ans_cnt;
     public QSTDics[] qst_dics;
     public string qst_brws_cnnt;
@@ -57,14 +88,6 @@ public class SetGudes
     public string gude_img;
 }
 
-//"gude_deth": 2,
-//          "gude_tp_cd": "FILE",
-//          "gude_nm": "우주탐사 개발",
-//          "gude_seur_grd": "2등급",
-//          "gude_reg_dtm": "2022-10-11",
-//          "gude_cnnt": "피닉스는 어쩌고 저쩌고",
-//          "gude_img": "http://domain/img.png"
-
 [Serializable]
 public class Quiz
 {
@@ -86,6 +109,13 @@ public class PacketQuiz
     public int code;
     public string message;
     public Quiz[] body;
+}
+
+public class PacketQuizPart
+{
+    public int code;
+    public string message;
+    public Quiz body;
 }
 
 public class CQuizData : MonoBehaviour
@@ -180,10 +210,25 @@ public class CQuizData : MonoBehaviour
     public PacketQuiz m_packetQuiz;
 
     public PacketQuiz m_packetRQTTutorial;
+    public PacketQuizPart m_packetRQT;
+    public PacketQuizPart m_packetAPTD1;
+    public PacketQuizPart m_packetAPTD2;
+    public PacketQuizPart m_packetCST;
+    public PacketQuizPart m_packetHPTS;
+    public PacketQuizPart m_packetLGTK;
+    public PacketQuizPart m_packetPCTR;
+    public PacketQuizPart m_packetRAT;
+
+    private STTestCheck m_stTestCheck;
+
+    private string m_strUserName;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_stTestCheck = new STTestCheck();
+        m_packetRQT = new PacketQuizPart();
+
         m_packetQuiz = new PacketQuiz();
 
         TextAsset textAsset = Resources.Load<TextAsset>("Scripts/dummy_api");
@@ -193,6 +238,8 @@ public class CQuizData : MonoBehaviour
         m_packetRQTTutorial = JsonUtility.FromJson<PacketQuiz>(textAssetRQTTutorial.text);
 
         Debug.Log(JsonUtility.ToJson(m_packetRQTTutorial));
+
+        m_strUserName = "TestUser";
         //GetQuiz("RQT");
         //Debug.Log(GetQuiz("RQT").qst_tp_cd);
     }
@@ -214,13 +261,32 @@ public class CQuizData : MonoBehaviour
             }
         }
 
-        Debug.Log(strTPCD);
+        //Debug.Log(strTPCD);
 
-        for (int i = 0; i < m_packetQuiz.body.Length; i++)
-        {
-            if (m_packetQuiz.body[i].qst_tp_cd.Equals(strTPCD))
-                return m_packetQuiz.body[i];
-        }
+        //if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        //{
+        //    for (int i = 0; i < m_packetQuiz.body.Length; i++)
+        //    {
+        //        if (m_packetQuiz.body[i].qst_tp_cd.Equals(strTPCD))
+        //            return m_packetQuiz.body[i];
+        //    }
+        //} else
+        //{
+        if (strTPCD.Equals("RQT"))
+            return GetRQT().body;
+        else if (strTPCD.Equals("CST"))
+            return GetCST().body;
+        else if (strTPCD.Equals("RAT"))
+            return GetRAT().body;
+        else if (strTPCD.Equals("LGTK"))
+            return GetLGTK().body;
+        else if (strTPCD.Equals("APTD1"))
+            return GetAPTD1().body;
+        else if (strTPCD.Equals("APTD2"))
+            return GetAPTD2().body;
+        else if (strTPCD.Equals("HPTS"))
+            return GetHPTS().body;
+        //}
 
         return null;
     }
@@ -230,6 +296,61 @@ public class CQuizData : MonoBehaviour
         Quiz quiz = GetQuiz(strTPCD, bTutoral);
         return quiz.sets.Length;
     }
+
+    public void SetTestCheck(STTestCheck stTestCheck)
+    {
+        m_stTestCheck = stTestCheck;
+    }
+
+    public STTestCheck GetTestCheck()
+    {
+        return m_stTestCheck;
+    }
+
+    public void SetRQT(PacketQuizPart packetQuiz)
+    {
+        m_packetRQT = packetQuiz;
+    }
+
+    public PacketQuizPart GetRQT()
+    {
+        return m_packetRQT;
+    }
+
+    public void SetUserName(string strUserName)
+    {
+        m_strUserName = strUserName;
+    }
+
+    public string GetUserName()
+    {
+        return m_strUserName;
+    }
+
+    //public PacketQuizPart m_packetAPTD1;
+    //public PacketQuizPart m_packetAPTD2;
+    //public PacketQuizPart m_packetCST;
+    //public PacketQuizPart m_packetHPTS;
+    //public PacketQuizPart m_packetLGTK;
+    //public PacketQuizPart m_packetPCTR;
+    //public PacketQuizPart m_packetRAT;
+
+    public void SetAPTD1(PacketQuizPart packetQuiz) { m_packetAPTD1 = packetQuiz; }
+    public PacketQuizPart GetAPTD1() { return m_packetAPTD1; }
+
+    public void SetAPTD2(PacketQuizPart packetQuiz) { m_packetAPTD2 = packetQuiz; }
+    public PacketQuizPart GetAPTD2() { return m_packetAPTD2; }
+    public void SetCST(PacketQuizPart packetQuiz) { m_packetCST = packetQuiz; }
+    public PacketQuizPart GetCST() { return m_packetCST; }
+    public void SetHPTS(PacketQuizPart packetQuiz) { m_packetHPTS = packetQuiz; }
+    public PacketQuizPart GetHPTS() { return m_packetHPTS; }
+    public void SetLGTK(PacketQuizPart packetQuiz) { m_packetLGTK = packetQuiz; }
+    public PacketQuizPart GetLGTK() { return m_packetLGTK; }
+    public void SetPCTR(PacketQuizPart packetQuiz) { m_packetPCTR = packetQuiz; }
+    public PacketQuizPart GetPCTR() { return m_packetPCTR; }
+    public void SetRAT(PacketQuizPart packetQuiz) { m_packetRAT = packetQuiz; }
+    public PacketQuizPart GetRAT() { return m_packetRAT; }
+
 }
 
 //public class CQuizQuestion

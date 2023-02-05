@@ -1,0 +1,2088 @@
+{
+  "code": 200,
+  "message": "OK",
+  "body": {
+    "part_idx": 79905,
+    "exm_time": 1080,
+    "progress_time": 1080,
+    "prg_st_cd": "TAE",
+    "set_dir_tp_cd": "TEXT",
+    "set_dir_cnnt": "",
+    "guide_idx": 0,
+    "qst_tp_cd": "APTD1",
+    "last_qst_idx": 0,
+    "last_page_no": 0,
+    "sets": [
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2956,
+            "test_qst_idx": 394841,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5148,
+            "qst_cnnt": "A, B 두 개의 주사위를 던질 때, 주사위 A는 짝수, 주사위 B는 4의 약수가 나오는 경우의 수는?",
+            "qst_exos_cd": "FORM_E",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17101,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "8"
+              },
+              {
+                "anwr_idx": 17102,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "9"
+              },
+              {
+                "anwr_idx": 17103,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "10"
+              },
+              {
+                "anwr_idx": 17104,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "11"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2957,
+            "test_qst_idx": 394842,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5172,
+            "qst_cnnt": "A, B, C 지점별 이동 수단과 이동 가능 노선은 다음과 같다. A 지점에서 B 지점으로 이동할 때 수단 2를, B 지점에서 C 지점으로 이동할 때 수단 3을 사용할 수 없다. A 지점에서 B 지점을 거쳐 C 지점으로 이동하는 방법의 수는?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17197,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "12"
+              },
+              {
+                "anwr_idx": 17198,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "13"
+              },
+              {
+                "anwr_idx": 17199,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "14"
+              },
+              {
+                "anwr_idx": 17200,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "15"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2958,
+            "test_qst_idx": 394843,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5173,
+            "qst_cnnt": "키트와 음료 한 종류씩 묶어 비상식량 세트를 만들 예정이다. 오믈렛과 이온음료를 사용할 수 없을 때, 만들 수 있는 비상식량 세트의 수는?  ",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17201,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "20"
+              },
+              {
+                "anwr_idx": 17202,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "18"
+              },
+              {
+                "anwr_idx": 17203,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "16"
+              },
+              {
+                "anwr_idx": 17204,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "14"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2959,
+            "test_qst_idx": 394840,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5145,
+            "qst_cnnt": "숫자 2, 3, 4, 5을 한 번씩 사용하여 만들 수 있는 네 자리 짝수의 개수는?",
+            "qst_exos_cd": "FORM_E",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17089,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "8"
+              },
+              {
+                "anwr_idx": 17090,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "10"
+              },
+              {
+                "anwr_idx": 17091,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "12"
+              },
+              {
+                "anwr_idx": 17092,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "14"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2960,
+            "test_qst_idx": 394839,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5144,
+            "qst_cnnt": "숫자 5, 6, 7, 8을 한 번씩 사용하여 만들 수 있는 네 자리 홀수의 개수는?",
+            "qst_exos_cd": "FORM_E",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17085,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "10"
+              },
+              {
+                "anwr_idx": 17086,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "12"
+              },
+              {
+                "anwr_idx": 17087,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "14"
+              },
+              {
+                "anwr_idx": 17088,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "16"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2961,
+            "test_qst_idx": 394838,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5143,
+            "qst_cnnt": "숫자 1, 2, 4, 6을 한 번씩 사용하여 만들 수 있는 세 자리 짝수의 개수는?",
+            "qst_exos_cd": "FORM_E",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17081,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "12"
+              },
+              {
+                "anwr_idx": 17082,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "14"
+              },
+              {
+                "anwr_idx": 17083,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "16"
+              },
+              {
+                "anwr_idx": 17084,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "18"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2962,
+            "test_qst_idx": 394844,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5174,
+            "qst_cnnt": "물음표(?)에 적합한 값은 무엇인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17205,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "5"
+              },
+              {
+                "anwr_idx": 17206,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "6"
+              },
+              {
+                "anwr_idx": 17207,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "7"
+              },
+              {
+                "anwr_idx": 17208,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "8"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2963,
+            "test_qst_idx": 394845,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5175,
+            "qst_cnnt": "물음표(?)에 적합한 값은 무엇인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17209,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "4"
+              },
+              {
+                "anwr_idx": 17210,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "5"
+              },
+              {
+                "anwr_idx": 17211,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "6"
+              },
+              {
+                "anwr_idx": 17212,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "7"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2964,
+            "test_qst_idx": 394846,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5176,
+            "qst_cnnt": "물음표(?)에 적합한 값은 무엇인가?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17213,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "5"
+              },
+              {
+                "anwr_idx": 17214,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "6"
+              },
+              {
+                "anwr_idx": 17215,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "7"
+              },
+              {
+                "anwr_idx": 17216,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "8"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2965,
+            "test_qst_idx": 394837,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5139,
+            "qst_cnnt": "물음표(?)에 들어갈 숫자는?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17065,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "2"
+              },
+              {
+                "anwr_idx": 17066,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "10"
+              },
+              {
+                "anwr_idx": 17067,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "14"
+              },
+              {
+                "anwr_idx": 17068,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "20"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2966,
+            "test_qst_idx": 394836,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5138,
+            "qst_cnnt": "물음표(?)에 들어갈 숫자는?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17061,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "6"
+              },
+              {
+                "anwr_idx": 17062,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "11"
+              },
+              {
+                "anwr_idx": 17063,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "28"
+              },
+              {
+                "anwr_idx": 17064,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "44"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2967,
+            "test_qst_idx": 394835,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5137,
+            "qst_cnnt": "물음표(?)에 들어갈 숫자는?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17057,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "22"
+              },
+              {
+                "anwr_idx": 17058,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "52"
+              },
+              {
+                "anwr_idx": 17059,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "56"
+              },
+              {
+                "anwr_idx": 17060,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "78"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2968,
+            "test_qst_idx": 394831,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5132,
+            "qst_cnnt": "다음 중 나머지와 규칙이 가장 다른 수열은?",
+            "qst_exos_cd": "FORM_E",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17037,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "5\t10\t15\t30\t35\t70"
+              },
+              {
+                "anwr_idx": 17038,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "3\t9\t12\t36\t39\t117"
+              },
+              {
+                "anwr_idx": 17039,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "4\t8\t12\t24\t28\t56"
+              },
+              {
+                "anwr_idx": 17040,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "2\t4\t8\t10\t20\t22"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2969,
+            "test_qst_idx": 394830,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5131,
+            "qst_cnnt": "다음 중 나머지와 규칙이 가장 다른 수열은?",
+            "qst_exos_cd": "FORM_E",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17033,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "10\t20\t18\t28\t26\t36"
+              },
+              {
+                "anwr_idx": 17034,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "5\t10\t8\t16\t14\t28"
+              },
+              {
+                "anwr_idx": 17035,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "8\t16\t10\t20\t14\t28"
+              },
+              {
+                "anwr_idx": 17036,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "7\t14\t10\t20\t16\t32"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2970,
+            "test_qst_idx": 394847,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5179,
+            "qst_cnnt": "다음 중 나머지와 규칙이 가장 다른 수열은?",
+            "qst_exos_cd": "FORM_E",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17221,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "5\t9\t18\t22\t44\t48"
+              },
+              {
+                "anwr_idx": 17222,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "3\t6\t18\t21\t63\t66"
+              },
+              {
+                "anwr_idx": 17223,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "4\t6\t12\t14\t28\t30"
+              },
+              {
+                "anwr_idx": 17224,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "2\t4\t6\t12\t14\t28"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2971,
+            "test_qst_idx": 394834,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5135,
+            "qst_cnnt": "A는 6분에 1km를 달린다. 직사각형 모양의 공원 한 변을 달리는데 30분이 걸렸고, 한 바퀴 도는데 144분이 걸렸다. 공원의 넓이는?",
+            "qst_exos_cd": "FORM_E",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17049,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "28km²"
+              },
+              {
+                "anwr_idx": 17050,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "30km²"
+              },
+              {
+                "anwr_idx": 17051,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "32.5km²"
+              },
+              {
+                "anwr_idx": 17052,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "35km²"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2972,
+            "test_qst_idx": 394833,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5134,
+            "qst_cnnt": "A가 직사각형 수영장을 한바퀴 도는데 4시간이 걸렸다. 수영장의 한 변이 6km이고, 수영장 넓이가 24km²라고 하면 A가 1시간에 헤엄친 거리는 얼마인가?",
+            "qst_exos_cd": "FORM_E",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17045,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "4km"
+              },
+              {
+                "anwr_idx": 17046,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "5km"
+              },
+              {
+                "anwr_idx": 17047,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "6km"
+              },
+              {
+                "anwr_idx": 17048,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "7km"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2973,
+            "test_qst_idx": 394832,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5133,
+            "qst_cnnt": "A는 6분에 1km를 달린다. 직사각형 운동장의 넓이가 35km²이고, 한 변을 달리는데 42분이 걸렸다면 A가 운동장 한바퀴를 도는데 걸리는 시간은 얼마인가?",
+            "qst_exos_cd": "FORM_E",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17041,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "132분"
+              },
+              {
+                "anwr_idx": 17042,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "138분"
+              },
+              {
+                "anwr_idx": 17043,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "144분"
+              },
+              {
+                "anwr_idx": 17044,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "210분"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2974,
+            "test_qst_idx": 394849,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5181,
+            "qst_cnnt": "선택지 중 세번째로 무거운 것은?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17229,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "200kg"
+              },
+              {
+                "anwr_idx": 17230,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "0.3t"
+              },
+              {
+                "anwr_idx": 17231,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "350lb"
+              },
+              {
+                "anwr_idx": 17232,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "6000oz"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2975,
+            "test_qst_idx": 394848,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5180,
+            "qst_cnnt": "선택지 중 두번째로 빠른 것은?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17225,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "400m/s"
+              },
+              {
+                "anwr_idx": 17226,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "700kn"
+              },
+              {
+                "anwr_idx": 17227,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "0.8mach"
+              },
+              {
+                "anwr_idx": 17228,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "1100km/h"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2976,
+            "test_qst_idx": 394850,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5182,
+            "qst_cnnt": "선택지 중 첫 번째로 긴 길이는?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17233,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "300cm"
+              },
+              {
+                "anwr_idx": 17234,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "105in"
+              },
+              {
+                "anwr_idx": 17235,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "8.4ft"
+              },
+              {
+                "anwr_idx": 17236,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "2.5yd"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3005,
+            "test_qst_idx": 394866,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5392,
+            "qst_cnnt": "다음 중 물음표에 해당하는 입체도형으로 적절한 것은?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17758,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17758"
+              },
+              {
+                "anwr_idx": 17759,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17759"
+              },
+              {
+                "anwr_idx": 17760,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17760"
+              },
+              {
+                "anwr_idx": 17761,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17761"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3006,
+            "test_qst_idx": 394867,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5393,
+            "qst_cnnt": "다음 중 물음표에 해당하는 입체도형으로 적절한 것은?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17762,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17762"
+              },
+              {
+                "anwr_idx": 17763,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17763"
+              },
+              {
+                "anwr_idx": 17764,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17764"
+              },
+              {
+                "anwr_idx": 17765,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17765"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3007,
+            "test_qst_idx": 394868,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5394,
+            "qst_cnnt": "다음 중 물음표에 해당하는 입체도형으로 적절한 것은?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17766,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17766"
+              },
+              {
+                "anwr_idx": 17767,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17767"
+              },
+              {
+                "anwr_idx": 17768,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17768"
+              },
+              {
+                "anwr_idx": 17769,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17769"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3008,
+            "test_qst_idx": 394869,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5395,
+            "qst_cnnt": "아래 그림에서 나올 수 없는 도형은?(단, 도형은 회전하지 않는다)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17770,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17770"
+              },
+              {
+                "anwr_idx": 17771,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17771"
+              },
+              {
+                "anwr_idx": 17772,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17772"
+              },
+              {
+                "anwr_idx": 17773,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17773"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3009,
+            "test_qst_idx": 394870,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5396,
+            "qst_cnnt": "아래 그림에서 나올 수 없는 도형은?(단, 도형은 회전하지 않는다)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17774,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17774"
+              },
+              {
+                "anwr_idx": 17775,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17775"
+              },
+              {
+                "anwr_idx": 17776,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17776"
+              },
+              {
+                "anwr_idx": 17777,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17777"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3010,
+            "test_qst_idx": 394871,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5397,
+            "qst_cnnt": "아래 그림에서 나올 수 없는 도형은?(단, 도형은 회전하지 않는다)",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17778,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17778"
+              },
+              {
+                "anwr_idx": 17779,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17779"
+              },
+              {
+                "anwr_idx": 17780,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17780"
+              },
+              {
+                "anwr_idx": 17781,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17781"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3055,
+            "test_qst_idx": 394872,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5398,
+            "qst_cnnt": "왼쪽 지도가 오른쪽 지도처럼 돌아갔을 때, 탐사원이 별 표시를 지나 깃발에 도착하는 방법은 무엇인가요?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17782,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17782"
+              },
+              {
+                "anwr_idx": 17783,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17783"
+              },
+              {
+                "anwr_idx": 17784,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17784"
+              },
+              {
+                "anwr_idx": 17785,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17785"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3056,
+            "test_qst_idx": 394873,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5399,
+            "qst_cnnt": "왼쪽 지도가 오른쪽 지도처럼 돌아갔을 때, 탐사원이 별 표시를 지나 깃발에 도착하는 방법은 무엇인가요?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17786,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17786"
+              },
+              {
+                "anwr_idx": 17787,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17787"
+              },
+              {
+                "anwr_idx": 17788,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17788"
+              },
+              {
+                "anwr_idx": 17789,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17789"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3057,
+            "test_qst_idx": 394874,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5400,
+            "qst_cnnt": "왼쪽 지도가 오른쪽 지도처럼 돌아갔을 때, 탐사원이 별 표시를 지나 깃발에 도착하는 방법은 무엇인가요?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17790,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17790"
+              },
+              {
+                "anwr_idx": 17791,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17791"
+              },
+              {
+                "anwr_idx": 17792,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17792"
+              },
+              {
+                "anwr_idx": 17793,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17793"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3075,
+            "test_qst_idx": 394854,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5335,
+            "qst_cnnt": "아래의 그림은 여러가지 물체의 무게를 저울로 달았을 때 나타난 결과다. 다른 조건으로 무게를 달았을 때의 결과로 불가능한 것은?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17650,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17651,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17652,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17653,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3076,
+            "test_qst_idx": 394853,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5334,
+            "qst_cnnt": "아래의 그림은 여러가지 물체의 무게를 저울로 달았을 때 나타난 결과다. 다른 조건으로 무게를 달았을 때의 결과로 불가능한 것은?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17646,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17647,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17648,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17649,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3077,
+            "test_qst_idx": 394852,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5333,
+            "qst_cnnt": "아래의 그림은 여러가지 물체의 무게를 저울로 달았을 때 나타난 결과다. 다른 조건으로 무게를 달았을 때의 결과로 불가능한 것은?",
+            "qst_exos_cd": "FORM_B",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17642,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17643,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17644,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17645,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3078,
+            "test_qst_idx": 394851,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5332,
+            "qst_cnnt": "다섯 명의 달리기 선수(가, 나, 다, 라, 마)가 이어달리기 경주에 출전한다. 다음 중 출전 순서가 틀린 것은?",
+            "qst_exos_cd": "FORM_C",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17638,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "나 선수가 첫번째로 출전한다."
+              },
+              {
+                "anwr_idx": 17639,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "가 선수는 다 선수 바로 다음에 출전한다."
+              },
+              {
+                "anwr_idx": 17640,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "다 선수는 나 선수보다 나중에 출전한다."
+              },
+              {
+                "anwr_idx": 17641,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "라 선수는 세번째로 출전한다."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3079,
+            "test_qst_idx": 394855,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5336,
+            "qst_cnnt": "다섯 명의 달리기 선수(가, 나, 다, 라, 마)가 이어달리기 경주에 출전한다. 다음 중 출전 순서가 틀린 것은?",
+            "qst_exos_cd": "FORM_C",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17654,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "다 선수는 마지막에 출전한다."
+              },
+              {
+                "anwr_idx": 17655,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "라 선수는 나 선수 바로 다음 순서로 출전한다."
+              },
+              {
+                "anwr_idx": 17656,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "가 선수는 두번째로 출전한다."
+              },
+              {
+                "anwr_idx": 17657,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "마 선수는 라 선수보다 나중에 출전한다."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3080,
+            "test_qst_idx": 394858,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5340,
+            "qst_cnnt": "오늘 해야 할 일(빨래, 장보기, 방 청소, 설거지, 세차)의 순서를 정하려고 한다. 다음 중 할 일 순서가 틀린 것은?",
+            "qst_exos_cd": "FORM_C",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17670,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "빨래를 가장 먼저 해야 한다. "
+              },
+              {
+                "anwr_idx": 17671,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "장보기는 맨 마지막에 해야 한다."
+              },
+              {
+                "anwr_idx": 17672,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "설거지는 세차보다 먼저 해야 한다. "
+              },
+              {
+                "anwr_idx": 17673,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "방 청소는 세차 바로 다음에 해야 한다."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3081,
+            "test_qst_idx": 394856,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5338,
+            "qst_cnnt": "물음표(?) 칸에 들어갈 도형으로 알맞은 것은?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17662,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17662"
+              },
+              {
+                "anwr_idx": 17663,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17663"
+              },
+              {
+                "anwr_idx": 17664,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17664"
+              },
+              {
+                "anwr_idx": 17665,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17665"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3082,
+            "test_qst_idx": 394857,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5339,
+            "qst_cnnt": "물음표(?) 칸에 들어갈 도형으로 알맞은 것은?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17666,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17666"
+              },
+              {
+                "anwr_idx": 17667,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17667"
+              },
+              {
+                "anwr_idx": 17668,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17668"
+              },
+              {
+                "anwr_idx": 17669,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17669"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3083,
+            "test_qst_idx": 394859,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5341,
+            "qst_cnnt": "물음표(?) 칸에 들어갈 도형으로 알맞은 것은?",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17674,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17674"
+              },
+              {
+                "anwr_idx": 17675,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17675"
+              },
+              {
+                "anwr_idx": 17676,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17676"
+              },
+              {
+                "anwr_idx": 17677,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17677"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3084,
+            "test_qst_idx": 394860,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5342,
+            "qst_cnnt": "먹이사슬 관계에 있는 생물을 서로의 양옆에 배치할 경우, 잡아 먹(히)게 된다. 아무도 잡아 먹(히)지 않도록 카드를 배열할 때, 불가능한 배치는?",
+            "qst_exos_cd": "FORM_D",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17678,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17678"
+              },
+              {
+                "anwr_idx": 17679,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17679"
+              },
+              {
+                "anwr_idx": 17680,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17680"
+              },
+              {
+                "anwr_idx": 17681,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17681"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3085,
+            "test_qst_idx": 394861,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5344,
+            "qst_cnnt": "먹이사슬 관계에 있는 생물을 서로의 양옆에 배치할 경우, 잡아 먹(히)게 된다. 아무도 잡아 먹(히)지 않도록 카드를 배열할 때, 불가능한 배치는?",
+            "qst_exos_cd": "FORM_D",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17686,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17687,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17688,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              },
+              {
+                "anwr_idx": 17689,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3086,
+            "test_qst_idx": 394862,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5345,
+            "qst_cnnt": "먹이사슬 관계에 있는 생물을 서로의 양옆에 배치할 경우, 잡아 먹(히)게 된다. 아무도 잡아 먹(히)지 않도록 카드를 배열할 때, 불가능한 배치는?",
+            "qst_exos_cd": "FORM_D",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17690,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17690"
+              },
+              {
+                "anwr_idx": 17691,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17691"
+              },
+              {
+                "anwr_idx": 17692,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17692"
+              },
+              {
+                "anwr_idx": 17693,
+                "anwr_brws_cd": "IMG",
+                "anwr_cnnt": "/file/stream/answer/17693"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3087,
+            "test_qst_idx": 394863,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5346,
+            "qst_cnnt": "다음 중 보기에 제시된 단어들과 관계가 가장 비슷한 것은? ",
+            "qst_exos_cd": "FORM_C",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17694,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "물감 : 붓 : 그림"
+              },
+              {
+                "anwr_idx": 17695,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "엔진 : 바퀴 : 자동차"
+              },
+              {
+                "anwr_idx": 17696,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "배우 : 카메라 : 필름"
+              },
+              {
+                "anwr_idx": 17697,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "사람 : 집 : 가족"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3088,
+            "test_qst_idx": 394864,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5348,
+            "qst_cnnt": "다음 중 보기에 제시된 단어들과 관계가 가장 비슷한 것은? ",
+            "qst_exos_cd": "FORM_C",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17702,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "물 : 물고기 : 어항"
+              },
+              {
+                "anwr_idx": 17703,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "꽃 : 꿀벌 : 꿀"
+              },
+              {
+                "anwr_idx": 17704,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "광석 : 구리 : 동전"
+              },
+              {
+                "anwr_idx": 17705,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "풀 : 산양 : 섬유"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 3089,
+            "test_qst_idx": 394865,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 5349,
+            "qst_cnnt": "다음 중 보기에 제시된 단어들과 관계가 가장 비슷한 것은? ",
+            "qst_exos_cd": "FORM_C",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1,
+            "answers": [
+              {
+                "anwr_idx": 17706,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "사람 : 바이러스 : 위생"
+              },
+              {
+                "anwr_idx": 17707,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "강 : 홍수 : 댐"
+              },
+              {
+                "anwr_idx": 17708,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "작물 : 해충 : 살충제"
+              },
+              {
+                "anwr_idx": 17709,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "건물 : 산성비 : 보수공사"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

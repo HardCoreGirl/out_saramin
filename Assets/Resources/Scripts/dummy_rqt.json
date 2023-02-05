@@ -1,0 +1,383 @@
+{
+  "code": 200,
+  "message": "OK",
+  "body": {
+    "part_idx": 66975,
+    "exm_time": 1200,
+    "progress_time": 1200,
+    "prg_st_cd": "TAE",
+    "set_dir_tp_cd": "TEXT",
+    "set_dir_cnnt": "홈 / 자아 탐색을 위한 AI 상담",
+    "guide_idx": 0,
+    "qst_tp_cd": "RQT",
+    "last_qst_idx": 0,
+    "last_page_no": 0,
+    "sets": [
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2750,
+            "test_qst_idx": 365472,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 4827,
+            "qst_cnnt": "지금 내가 가지고 있는 것보다 더 많은 것을 가지고 싶다.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1.0000,
+            "answers": [
+              {
+                "anwr_idx": 15931,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 아니다"
+              },
+              {
+                "anwr_idx": 15932,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 아니다"
+              },
+              {
+                "anwr_idx": 15933,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 그렇다"
+              },
+              {
+                "anwr_idx": 15934,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 그렇다"
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2751,
+            "test_qst_idx": 365473,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 4828,
+            "qst_cnnt": "나는 나의 성공담을 다른 사람들에게 들려주는 것이 좋다.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1.0000,
+            "answers": [
+              {
+                "anwr_idx": 15935,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 아니다"
+              },
+              {
+                "anwr_idx": 15936,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 아니다"
+              },
+              {
+                "anwr_idx": 15937,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 그렇다"
+              },
+              {
+                "anwr_idx": 15938,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 그렇다"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2752,
+            "test_qst_idx": 365474,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 4829,
+            "qst_cnnt": "평소에 긴장하거나 불안해하는 모습을 거의 보이지 않는다.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1.0000,
+            "answers": [
+              {
+                "anwr_idx": 15939,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 아니다"
+              },
+              {
+                "anwr_idx": 15940,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 아니다"
+              },
+              {
+                "anwr_idx": 15941,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 그렇다"
+              },
+              {
+                "anwr_idx": 15942,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 그렇다"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2753,
+            "test_qst_idx": 365475,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 4830,
+            "qst_cnnt": "나는 어렸을 때부터 독립적이라는 이야기를 많이 들었다.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1.0000,
+            "answers": [
+              {
+                "anwr_idx": 15943,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 아니다"
+              },
+              {
+                "anwr_idx": 15944,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 아니다"
+              },
+              {
+                "anwr_idx": 15945,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 그렇다"
+              },
+              {
+                "anwr_idx": 15946,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 그렇다"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2754,
+            "test_qst_idx": 365476,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 4831,
+            "qst_cnnt": "나는 에너지를 발산할 수 있는 활동을 즐긴다.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1.0000,
+            "answers": [
+              {
+                "anwr_idx": 15947,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 아니다"
+              },
+              {
+                "anwr_idx": 15948,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 아니다"
+              },
+              {
+                "anwr_idx": 15949,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 그렇다"
+              },
+              {
+                "anwr_idx": 15950,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 그렇다"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2755,
+            "test_qst_idx": 365477,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 4832,
+            "qst_cnnt": "문서를 작성하거나 계산을 한 후에는 내용을 다시 확인한다.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1.0000,
+            "answers": [
+              {
+                "anwr_idx": 15951,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 아니다"
+              },
+              {
+                "anwr_idx": 15952,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 아니다"
+              },
+              {
+                "anwr_idx": 15953,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 그렇다"
+              },
+              {
+                "anwr_idx": 15954,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 그렇다"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "",
+        "questions": [
+          {
+            "set_dir_idx": 2756,
+            "test_qst_idx": 365478,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 4833,
+            "qst_cnnt": "여러 사람들을 이끌고 일을 추진해 나가는 것을 선호한다.",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1.0000,
+            "answers": [
+              {
+                "anwr_idx": 15955,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 아니다"
+              },
+              {
+                "anwr_idx": 15956,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 아니다"
+              },
+              {
+                "anwr_idx": 15957,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "약간 그렇다"
+              },
+              {
+                "anwr_idx": 15958,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "매우 그렇다"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "dir_tp_cd": "TEXT",
+        "dir_cnnt": "test",
+        "questions": [
+          {
+            "set_dir_idx": 2805,
+            "test_qst_idx": 365479,
+            "test_answers": [
+              {
+                "test_anwr_idx": 0,
+                "test_anwr_sbct": ""
+              }
+            ],
+            "test_prg_time": 0,
+            "qst_idx": 4925,
+            "qst_cnnt": "test",
+            "qst_exos_cd": "FORM_A",
+            "qst_ans_cd": "OBJ",
+            "qst_ans_cnt": 0,
+            "qst_dics": 0,
+            "qst_dfly": 1.0000,
+            "answers": [
+              {
+                "anwr_idx": 16210,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "아니다"
+              },
+              {
+                "anwr_idx": 16211,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "보통이다"
+              },
+              {
+                "anwr_idx": 16212,
+                "anwr_brws_cd": "TEXT",
+                "anwr_cnnt": "그렇다"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+
