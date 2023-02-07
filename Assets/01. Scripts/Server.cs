@@ -359,6 +359,55 @@ public class Server : MonoBehaviour
     #endregion
 
     #region 응시답안
+    public void RequestPUTAnswerObject(int nAnswerIndex, int[] listAnswer)
+    {
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
+
+        STPacketAnswerObject stPacketAnswerObject = new STPacketAnswerObject();
+        stPacketAnswerObject.answer_type = "object";
+        stPacketAnswerObject.answer_idx = nAnswerIndex;
+        stPacketAnswerObject.answers = listAnswer;
+
+        string jsonBody = JsonConvert.SerializeObject(stPacketAnswerObject);
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        string url = cur_server + "api/v1/answer";
+
+        header.Add("accept", "application/json");
+        header.Add("Authorization", "Bearer " + m_strToken);
+        header.Add("Content-Type", "application/json");
+
+        //POST(url, header, jsonBody, (string txt) =>
+        PUT(url, header, jsonBody, (string txt) =>
+        {
+            Debug.Log("txt : " + txt);
+        });
+    }
+
+    public void RequestPUTAnswerSubject(int nAnswerIndex, string[] listContent)
+    {
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
+
+        STPacketAnswerSubject stPacketAnswer = new STPacketAnswerSubject();
+        stPacketAnswer.answer_type = "subject";
+        stPacketAnswer.answer_idx = nAnswerIndex;
+        stPacketAnswer.answers = new int[] { };
+        stPacketAnswer.contents = listContent;
+
+        string jsonBody = JsonConvert.SerializeObject(stPacketAnswer);
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        string url = cur_server + "api/v1/answer";
+
+        header.Add("accept", "application/json");
+        header.Add("Authorization", "Bearer " + m_strToken);
+
+        //POST(url, header, jsonBody, (string txt) =>
+        PUT(url, header, jsonBody, (string txt) =>
+        {
+            Debug.Log("txt : " + txt);
+        });
+    }
     #endregion
 
     #region 정보안내

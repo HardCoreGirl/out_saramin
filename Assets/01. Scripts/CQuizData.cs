@@ -118,6 +118,23 @@ public class PacketQuizPart
     public Quiz body;
 }
 
+[Serializable]
+public class STPacketAnswerObject
+{
+    public string answer_type;
+    public int answer_idx;
+    public int[] answers;
+}
+
+[Serializable]
+public class STPacketAnswerSubject
+{
+    public string answer_type;
+    public int answer_idx;
+    public int[] answers;
+    public string[] contents;
+}
+
 public class CQuizData : MonoBehaviour
 {
     #region SingleTon

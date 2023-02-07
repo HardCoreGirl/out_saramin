@@ -66,6 +66,10 @@ public class CUIsAnswer : MonoBehaviour
         if (!CUIsSpaceScreenLeft.Instance.IsRQTTutorial())
         {
             Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
+
+            //m_listAnswer[nIndex].anwr_idx;
+            Server.Instance.RequestPUTAnswerObject(m_listAnswer[nIndex].anwr_idx, new int[] { 23, 434 });
+
             //if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
             //{
             //    //Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
