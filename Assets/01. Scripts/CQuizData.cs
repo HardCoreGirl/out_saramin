@@ -135,6 +135,60 @@ public class STPacketAnswerSubject
     public string[] contents;
 }
 
+[Serializable]
+public class STPacketAnswer
+{
+    public int row_no;
+    public string regr_id;
+    public string modr_id;
+    public string reg_dtm;
+    public string mod_dtm;
+    public string order_column;
+    public string order_asc;
+    public int page_size;
+    public int page_number;
+    public int page_offset;
+    public string search_type;
+    public int answer_seq_idx;
+    public int applier_idx;
+    public int part_idx;
+    public int question_idx;
+    public int answer_idx;
+    public string answer_type;
+    public int objective_answer;
+    public string subjective_answer;
+    public int[] answers;
+    public string[] contents;
+}
+
+//{
+//    "row_no": 0,
+//  "regr_id": "string",
+//  "modr_id": "string",
+//  "reg_dtm": "2023-02-08T04:18:41.528Z",
+//  "mod_dtm": "2023-02-08T04:18:41.528Z",
+//  "order_column": "string",
+//  "order_asc": "string",
+//  "page_size": 0,
+//  "page_number": 0,
+//  "page_offset": 0,
+//  "search_type": "string",
+//  "answer_seq_idx": 0,
+//  "applier_idx": 0,
+//  "part_idx": 0,
+//  "question_idx": 0,
+//  "answer_idx": 0,
+//  "answer_type": "QuestionAnswerType.OBJ(code=OBJ, desc=°´°ü½Ä)",
+//  "objective_answer": 0,
+//  "subjective_answer": "string",
+//  "answers": [
+//    0
+//  ],
+//  "contents": [
+//    "string"
+//  ]
+//}
+
 public class CQuizData : MonoBehaviour
 {
     #region SingleTon

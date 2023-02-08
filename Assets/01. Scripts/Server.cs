@@ -288,7 +288,7 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         GET(url, header, (string txt) =>
         {
-            Debug.Log("txt : " + txt);
+            //Debug.Log("txt : " + txt);
 
 
             stPacketQuiz = JsonUtility.FromJson<PacketQuizPart>(txt);
@@ -327,7 +327,7 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         POST(url, header, jsonBody, (string txt) =>
         {
-            Debug.Log("txt : " + txt);
+            //Debug.Log("txt : " + txt);
         });
     }
 
@@ -350,7 +350,7 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         PUT(url, header, jsonBody, (string txt) =>
         {
-            Debug.Log("txt : " + txt);
+            //Debug.Log("txt : " + txt);
         });
     }
     #endregion
@@ -359,16 +359,19 @@ public class Server : MonoBehaviour
     #endregion
 
     #region 응시답안
-    public void RequestPUTAnswerObject(int nAnswerIndex, int[] listAnswer)
+    public void RequestPUTAnswerObject(int nPartIndex, int nQuestIndex, int nAnswerIndex, int[] listAnswer)
     {
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
 
-        STPacketAnswerObject stPacketAnswerObject = new STPacketAnswerObject();
-        stPacketAnswerObject.answer_type = "object";
-        stPacketAnswerObject.answer_idx = nAnswerIndex;
-        stPacketAnswerObject.answers = listAnswer;
+        STPacketAnswerObject stPacketAnswer = new STPacketAnswerObject();
+        //stPacketAnswer.answer_idx = nAnswerIndex;
+        stPacketAnswer.answer_idx = nQuestIndex;
+        stPacketAnswer.answer_type = "OBJ";
+        //stPacketAnswer.answers = listAnswer;
+        stPacketAnswer.answers = new int[] {nAnswerIndex};
+        //stPacketAnswer.contents = new string[] { };
 
-        string jsonBody = JsonConvert.SerializeObject(stPacketAnswerObject);
+        string jsonBody = JsonConvert.SerializeObject(stPacketAnswer);
 
         Dictionary<string, string> header = new Dictionary<string, string>();
         string url = cur_server + "api/v1/answer";
@@ -380,7 +383,7 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         PUT(url, header, jsonBody, (string txt) =>
         {
-            Debug.Log("txt : " + txt);
+            //Debug.Log("txt : " + txt);
         });
     }
 
@@ -405,7 +408,7 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         PUT(url, header, jsonBody, (string txt) =>
         {
-            Debug.Log("txt : " + txt);
+            //Debug.Log("txt : " + txt);
         });
     }
     #endregion
@@ -445,7 +448,7 @@ public class Server : MonoBehaviour
         POST(url, header, jsonBody, (string txt) =>
         {
             RequestGETQuestions(nPartIdx);
-            Debug.Log("txt : " + txt);
+            //Debug.Log("txt : " + txt);
         });
     }
 
@@ -466,7 +469,7 @@ public class Server : MonoBehaviour
         {
             //RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
             
-            Debug.Log("txt : " + txt);
+            //Debug.Log("txt : " + txt);
         });
     }
 
