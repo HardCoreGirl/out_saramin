@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+
 public class CUIsLGTKTalkBoxManager : MonoBehaviour
 {
     #region SingleTon
@@ -39,6 +41,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
     public GameObject m_goScrollView;
     public GameObject m_goSBCTAnswer;
 
+    public Text m_txtAnswer;
+
     private int m_nStage = 0;
 
     private string[] m_listChat;
@@ -48,6 +52,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
     private GameObject[] m_listAnswerObject;
 
+    private int m_nAnswerIndex;
+    private string m_strAnswer;
     // Start is called before the first frame update
     void Start()
     {
@@ -81,17 +87,28 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
             if (m_nStage == 0)
             {
-                strChatMsg = "탐사원님, 안녕하세요. 긴 동면기간을 마치고 복귀하신 걸 환영합니다.\n저는 (주)딥스페이스 항해지원팀에 소속된 항해 파트너, 딘 자린입니다.\n파이어니어로부터 탐사원님이 동면에서 깨어나신 이후 알 수 없는 부작용을 겪고 계시다는 교신을 받았습니다.\n컨디션은 좀 괜찮으신가요 ?";
+                strChatMsg = "탐사원님, 안녕하세요. 긴 동면기간을 마치고 복귀하신 걸 환영합니다.\n저는 (주)딥스페이스 항해지원팀에 소속된 항해 파트너, 딘 자린입니다.\n파이어니어로부터 탐사원님이 동면에서 깨어나신 이후 알 수 없는 부작용을 겪고 계시다는 교신을 받았습니다.\n간혹 우주탐사원들에게 이런 부작용이 나타나기도 하니, 너무 걱정하지 마세요. 제가 탐사원님이 미션을 성공적으로 마칠 수 있도록 도와드리겠습니다.\n그럼 저와 함께 미션을 시작하실 준비가 되셨습니까?";
                 //m_strQuiz = "컨디션은 좀 괜찮으신가요 ?";
 
-                m_listAnswer[0] = "많이 좋아졌습니다. 감사합니다.";
-                m_listAnswer[1] = "열심히 적응해 나가고 있습니다.";
-                m_listAnswer[2] = "아직 잘 모르겠지만 차차 나아지겠죠.";
+                m_listAnswer[0] = "네, 준비됐습니다.";
+                m_listAnswer[1] = "좋습니다";
+                m_listAnswer[2] = "일단 시작해볼까요?";
+                m_listAnswer[3] = "미션을 시작하겠습니다.";
+
 
             }
             else if (m_nStage == 1)
             {
-                strChatMsg = "좋아요. 지금처럼 계속 저와 대화해주시면 됩니다.\n간혹 우주탐사원들에게 이런 부작용이 나타나기도 하니, 너무 걱정하지 마세요. 제가 탐사원님이 미션을 성공적으로 마칠 수 있도록 도와드리겠습니다.\n이번 미션을 성공적으로 완수하려면 저와 탐사원님에게 주어진 30분의 시간을 효율적으로 활용해야 합니다.\n메인 시스템 상단에 남은 시간이 표기될 겁니다. 제가 중간 중간에 ‘진행률’을 말씀드리겠습니다.\n이제 본격적으로 미션을 시작하실 준비가 되셨나요?";
+                strChatMsg = "탐사원님, 안녕하세요. 긴 동면기간을 마치고 복귀하신 걸 환영합니다.\n저는 (주)딥스페이스 항해지원팀에 소속된 항해 파트너, 딘 자린입니다.\n파이어니어로부터 탐사원님이 동면에서 깨어나신 이후 알 수 없는 부작용을 겪고 계시다는 교신을 받았습니다.\n컨디션은 좀 괜찮으신가요?";
+                //m_strQuiz = "이제 본격적으로 미션을 시작하실 준비가 되셨나요?";
+
+                m_listAnswer[0] = "많이 좋아졌습니다. 감사합니다.";
+                m_listAnswer[1] = "열심히 적응해 나가고 있습니다.";
+                m_listAnswer[2] = "아직 잘 모르겠지만 차차 나아지겠죠.";
+            }
+            else if (m_nStage == 2)
+            {
+                strChatMsg = "좋아요. 지금처럼 계속 저와 대화해주시면 됩니다. \n간혹 우주탐사원들에게 이런 부작용이 나타나기도 하니, 너무 걱정하지 마세요.\n제가 탐사원님이 미션을 성공적으로 마칠 수 있도록 도와드리겠습니다.\n이번 미션을 성공적으로 완수하려면 저와 탐사원님에게 주어진 30분의 시간을 효율적으로 활용해야 합니다.\n메인 시스템 상단에 남은 시간이 표기될 겁니다. 제가 중간 중간에 ‘진행률’을 말씀드리겠습니다.\n이제 본격적으로 미션을 시작하실 준비가 되셨나요?";
                 //m_strQuiz = "이제 본격적으로 미션을 시작하실 준비가 되셨나요?";
 
                 m_listAnswer[0] = "네, 준비됐습니다.";
@@ -165,7 +182,10 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             else
                 goChat.GetComponent<CObjecctLGTKTalkBoxChat>().UpdateChat(m_listChat[i]);
 
-            yield return new WaitForSeconds(2f);
+            float fWaitTime = 2.0f;
+            if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+                fWaitTime = 0.2f;
+            yield return new WaitForSeconds(fWaitTime);
         }
 
         //GameObject goQuiz = Instantiate(Resources.Load("Prefabs/LGTKTalkBoxChat") as GameObject);
@@ -182,7 +202,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             {
                 m_listAnswerObject[i] = Instantiate(Resources.Load("Prefabs/LGTKTalkBoxAnswer") as GameObject);
                 m_listAnswerObject[i].transform.parent = m_goContentAnswer.transform;
-                m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, m_listAnswer[i]);
+                m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, 0, m_listAnswer[i]);
             }
         } else
         {
@@ -203,7 +223,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                 {
                     m_listAnswerObject[i] = Instantiate(Resources.Load("Prefabs/LGTKTalkBoxAnswer") as GameObject);
                     m_listAnswerObject[i].transform.parent = m_goContentAnswer.transform;
-                    m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, m_listAnswer[i]);
+                    m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, quizLGTK.sets[m_nStage].questions[0].answers[i].anwr_idx, m_listAnswer[i]);
                 }
 
             }
@@ -278,10 +298,11 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
     {
         Debug.Log("OnclickTalkBoxSend");
         StopCoroutine("ProcessQuiz");
-        m_nStage++;
+        
         if( CUIsLGTKManager.Instance.IsTutorial() )
         {
-            if (m_nStage == 2)
+            m_nStage++;
+            if (m_nStage == 3)
             {
                 CUIsLGTKManager.Instance.SetTutorial(false);
                 m_nStage = 0;
@@ -292,6 +313,18 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         } else
         {
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
+            if( quizLGTK.sets[m_nStage].questions[0].qst_ans_cd.Equals("OBJ") ) // 객관식
+            {
+                Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, GetAnswerIndex());
+            }
+            else
+            {
+                SetSBCTAnswer();
+                Debug.Log("Send!!!!! Answer : " + GetSBCTAnswer());
+                Server.Instance.RequestPUTAnswerSubject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, GetSBCTAnswer());
+            }
+
+            m_nStage++;
             if (m_nStage >= quizLGTK.sets.Length)
             {
                 CUIsLGTKManager.Instance.HideAllPopup();
@@ -302,5 +335,25 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         
 
         InitLGTKTalkBoxMansger();
+    }
+
+    public void SetAnswerIndex(int nAnswerIndex)
+    {
+        m_nAnswerIndex = nAnswerIndex;
+    }
+
+    public int GetAnswerIndex()
+    {
+        return m_nAnswerIndex;
+    }
+
+    public void SetSBCTAnswer()
+    {
+        m_strAnswer = m_txtAnswer.text;
+    }
+
+    public string GetSBCTAnswer()
+    {
+        return m_strAnswer;
     }
 }

@@ -13,6 +13,8 @@ public class CObjectLGTKTalkBoxAnswer : MonoBehaviour
 
     private int m_nIndex;
 
+    private int m_nAnswerIndex;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,31 +27,39 @@ public class CObjectLGTKTalkBoxAnswer : MonoBehaviour
         
     }
 
-    public void InitLGTKTalkBoxAnswer(int nIndex, string strAnswer)
+    public void InitLGTKTalkBoxAnswer(int nIndex, int nAnswerIndex, string strAnswer)
     {
         m_nIndex = nIndex;
         m_txtAnswer.text = strAnswer;
+        m_nAnswerIndex = nAnswerIndex;
 
         Vector2 rectBG = m_goAnswer.GetComponent<RectTransform>().sizeDelta;
 
         rectBG.x = m_txtAnswer.preferredWidth + 40;
 
-        Debug.Log("Width : " + rectBG.x);
+        //Debug.Log("Width : " + rectBG.x);
 
         m_goAnswer.GetComponent<RectTransform>().sizeDelta = rectBG;
 
         m_goCheckBox.SetActive(false);
+        gameObject.GetComponent<Image>().color = new Color(0.937255f, 0.9647059f, 1f);
+        m_txtAnswer.color = new Color(0, 0.5215687f, 1);
     }
 
     public void ResetAnswer()
     {
         m_goCheckBox.SetActive(false);
+        gameObject.GetComponent<Image>().color = new Color(0.937255f, 0.9647059f, 1f);
+        m_txtAnswer.color = new Color(0, 0.5215687f, 1);
     }
 
     public void OnClickAnswer()
     {
+        CUIsLGTKTalkBoxManager.Instance.SetAnswerIndex(m_nAnswerIndex);
         CUIsLGTKTalkBoxManager.Instance.ResetAnswer();
         m_goCheckBox.SetActive(true);
+        gameObject.GetComponent<Image>().color = new Color(0, 0.5215687f, 1f);
+        m_txtAnswer.color = new Color(1, 1, 1);
         Debug.Log("OnClick Answer : " + m_nIndex);        
     }
 }

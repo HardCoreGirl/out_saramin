@@ -36,7 +36,7 @@ public class CObjecctLGTKTalkBoxChat : MonoBehaviour
         {
             
             nRow = (int)(rectSize.x / 540);
-            Debug.Log(rectSize.x + ", " + nRow);
+            //Debug.Log(rectSize.x + ", " + nRow);
 
             rectSize.x = 540;
         }

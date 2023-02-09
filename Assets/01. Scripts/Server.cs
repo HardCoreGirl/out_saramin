@@ -359,17 +359,19 @@ public class Server : MonoBehaviour
     #endregion
 
     #region 응시답안
-    public void RequestPUTAnswerObject(int nPartIndex, int nQuestIndex, int nAnswerIndex, int[] listAnswer)
+    public void RequestPUTAnswerObject(int nQuestIndex, int nAnswer)
+    {
+        RequestPUTAnswerObject(nQuestIndex, new int[] { nAnswer });
+    }
+
+    public void RequestPUTAnswerObject(int nQuestIndex, int[] listAnswer)
     {
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
 
         STPacketAnswerObject stPacketAnswer = new STPacketAnswerObject();
-        //stPacketAnswer.answer_idx = nAnswerIndex;
         stPacketAnswer.answer_idx = nQuestIndex;
         stPacketAnswer.answer_type = "OBJ";
-        //stPacketAnswer.answers = listAnswer;
-        stPacketAnswer.answers = new int[] {nAnswerIndex};
-        //stPacketAnswer.contents = new string[] { };
+        stPacketAnswer.answers = listAnswer;
 
         string jsonBody = JsonConvert.SerializeObject(stPacketAnswer);
 
@@ -380,11 +382,14 @@ public class Server : MonoBehaviour
         header.Add("Authorization", "Bearer " + m_strToken);
         header.Add("Content-Type", "application/json");
 
-        //POST(url, header, jsonBody, (string txt) =>
         PUT(url, header, jsonBody, (string txt) =>
         {
-            //Debug.Log("txt : " + txt);
         });
+    }
+
+    public void RequestPUTAnswerSubject(int nAnswerIndex, string strContent)
+    {
+        RequestPUTAnswerSubject(nAnswerIndex, new string[] { strContent });
     }
 
     public void RequestPUTAnswerSubject(int nAnswerIndex, string[] listContent)
@@ -392,10 +397,9 @@ public class Server : MonoBehaviour
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
 
         STPacketAnswerSubject stPacketAnswer = new STPacketAnswerSubject();
-        stPacketAnswer.answer_type = "subject";
+        stPacketAnswer.answer_type = "SBCT";
         stPacketAnswer.answer_idx = nAnswerIndex;
-        stPacketAnswer.answers = new int[] { };
-        stPacketAnswer.contents = listContent;
+        stPacketAnswer.answers = listContent;
 
         string jsonBody = JsonConvert.SerializeObject(stPacketAnswer);
 
