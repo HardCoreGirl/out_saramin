@@ -60,7 +60,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
     void Start()
     {
         HideTutorialMsg();
-        InitAPTPage2();
+        //InitAPTPage2();
 
     }
 
@@ -164,22 +164,24 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             if (quizAPT.sets[nRealIndex].questions[0].qst_exos_cd.Equals("FORM_A"))
             {
                 ShowQuizBoard(1);
-                m_listQuizBoard[1].GetComponent<CAPTQuizManager>().InitQuizType(0, nRealIndex, nIndex);
+                m_listQuizBoard[1].GetComponent<CAPTQuizManager>().InitQuizType(m_nQuizType, nRealIndex, nIndex);
             } else if (quizAPT.sets[nRealIndex].questions[0].qst_exos_cd.Equals("FORM_B"))
             {
                 ShowQuizBoard(2);
-                m_listQuizBoard[2].GetComponent<CAPTQuizManager>().InitQuizType(0, nRealIndex, nIndex);
+                m_listQuizBoard[2].GetComponent<CAPTQuizManager>().InitQuizType(m_nQuizType, nRealIndex, nIndex);
 
             } else if (quizAPT.sets[nRealIndex].questions[0].qst_exos_cd.Equals("FORM_C"))
             {
                 ShowQuizBoard(3);
-                m_listQuizBoard[3].GetComponent<CQuizType04>().InitQuizType(0, nRealIndex, nIndex);
+                m_listQuizBoard[3].GetComponent<CAPTQuizManager>().InitQuizType(m_nQuizType, nRealIndex, nIndex);
             } else if (quizAPT.sets[nRealIndex].questions[0].qst_exos_cd.Equals("FORM_D"))
             {
                 ShowQuizBoard(4);
+                m_listQuizBoard[4].GetComponent<CAPTQuizManager>().InitQuizType(m_nQuizType, nRealIndex, nIndex);
             } else if (quizAPT.sets[nRealIndex].questions[0].qst_exos_cd.Equals("FORM_E"))
             {
                 ShowQuizBoard(5);
+                m_listQuizBoard[5].GetComponent<CAPTQuizManager>().InitQuizType(m_nQuizType, nRealIndex, nIndex);
             } else {
                 Debug.Log("알수 없는 타입");
             }

@@ -113,4 +113,9 @@ public class CUIsCSTListAnswer : MonoBehaviour
         OnEndEditAnswer();
         m_ifAnswer.interactable = false;
     }
+
+    public string GetAnswerString()
+    {
+        return m_txtRealAnswer.text;
+    }
 }

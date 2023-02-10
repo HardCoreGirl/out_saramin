@@ -219,6 +219,9 @@ public class CUIsAPTManager : MonoBehaviour
 
     public void OnClickPopupSendAnswerAPTD2Send()
     {
+        
+        CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("APTD2").part_idx, 3);
+        CUIsSpaceManager.Instance.HideRightPage();
     }
 
 

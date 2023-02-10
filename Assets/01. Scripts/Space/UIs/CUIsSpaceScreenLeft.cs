@@ -37,6 +37,9 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
     public GameObject[] m_listPage = new GameObject[2];
     public GameObject[] m_listToturialPage = new GameObject[2];
+    public GameObject[] m_listMissionClear = new GameObject[2];
+
+    public Toggle[] m_toggleAgree = new Toggle[2];
 
     public GameObject m_goCSTPage;
     public GameObject m_goRATPage;
@@ -108,6 +111,12 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         HideAllPopup();
 
+        if (CSpaceAppEngine.Instance.IsFinishLeft01()) ShowMissionClear(0);
+        else HideMissionClear(0);
+
+        if (CSpaceAppEngine.Instance.IsFinishLeft02()) ShowMissionClear(1);
+        else HideMissionClear(1);
+
         SetCSTTutorial(true);
 
         ShowPage(0);
@@ -135,6 +144,9 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         string strKey = "RQT";
         if (nIndex == 1)
             strKey = "CST";
+
+        if (!m_toggleAgree[nIndex].isOn)
+            return;
 
         Quiz quizData = CQuizData.Instance.GetQuiz(strKey);
         Server.Instance.RequestPOSTQuestions(quizData.part_idx);
@@ -638,6 +650,16 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public bool IsHPTSTutorial()
     {
         return m_bIsHPTSTutorial;
+    }
+
+    public void ShowMissionClear(int nIndex)
+    {
+        m_listMissionClear[nIndex].SetActive(true);
+    }
+
+    public void HideMissionClear(int nIndex)
+    {
+        m_listMissionClear[nIndex].SetActive(false);
     }
 }
 

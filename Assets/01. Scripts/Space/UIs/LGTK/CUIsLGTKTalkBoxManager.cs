@@ -325,10 +325,13 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             }
 
             m_nStage++;
-            if (m_nStage >= quizLGTK.sets.Length)
+            if (m_nStage >= quizLGTK.sets.Length - 1)
             {
+                Debug.Log("Finish!!!!");
                 CUIsLGTKManager.Instance.HideAllPopup();
-                CUIsLGTKManager.Instance.ShowPopupFinish();
+                //CUIsLGTKManager.Instance.ShowPopupFinish();
+                CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("LGTK").part_idx, 2);
+                CUIsSpaceManager.Instance.HideCenterPage();
                 return;
             }
         }

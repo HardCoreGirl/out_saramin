@@ -63,10 +63,10 @@ public class CAPTQuizManager : MonoBehaviour
             m_listStrAnswerURL[3] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA5MjdfNDgg%2FMDAxNjY0MjczNTAyMzE3.VoXWovZzMJxX2O_lV3S6QQD66pefrOfYJgxmNCuICsEg.nkN2lw_cSEsFi3UNzPUJpYjsSnKXA5_FiKbyCoqThMAg.JPEG.spring19790%2F4.jpg&type=sc960_832";
         } else
         {
-            m_strQuizURL = m_quizInfo.sets[nIndex].questions[0].qst_cnnt;
+            m_strQuizURL = Server.Instance.GetCurURL() + m_quizInfo.sets[nIndex].questions[0].qst_cnnt;
             for (int i = 0; i < m_quizInfo.sets[nIndex].questions[0].answers.Length; i++)
             {
-                m_listStrAnswerURL[i] = m_quizInfo.sets[nIndex].questions[0].answers[i].anwr_cnnt;
+                m_listStrAnswerURL[i] = Server.Instance.GetCurURL() + m_quizInfo.sets[nIndex].questions[0].answers[i].anwr_cnnt;
             }
         }
 
@@ -130,11 +130,13 @@ public class CAPTQuizManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("APT OnClick : " + CUIsAPTPage2Manager.Instance.GetQuizIndex() + ", " + CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex));
+        //Debug.Log("APT OnClick : " + CUIsAPTPage2Manager.Instance.GetQuizIndex() + ", " + CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex));
 
         Server.Instance.RequestPUTAnswerObject(CUIsAPTPage2Manager.Instance.GetQuizIndex(), CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex));
         CUIsAPTManager.Instance.SetAnswerState(m_nQuizListIndex, 0);
         CUIsAPTPage2Manager.Instance.UpdateQuizList(m_nQuizListIndex);
+
+        Debug.Log("APT Quiz Index : " + m_nQuizListIndex);
 
         int nNextQuizIndex = m_nQuizListIndex + 1;
         CUIsAPTManager.Instance.SetAnswerState(nNextQuizIndex, 1);

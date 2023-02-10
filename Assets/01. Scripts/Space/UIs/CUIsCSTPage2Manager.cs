@@ -281,6 +281,25 @@ public class CUIsCSTPage2Manager : MonoBehaviour
 
     public void OnClickPopupSendAnswerNext()
     {
+        List<string> listLeftAnswer = new List<string>();
+        for (int i = 0; i < 25; i++)
+        {
+            if (m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString().Equals("")) break;
+
+            listLeftAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString());
+        }
+
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].test_qst_idx, listLeftAnswer.ToArray());
+
+        List<string> listRightAnswer = new List<string>();
+        for (int i = 0; i < 25; i++)
+        {
+            if (m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString().Equals("")) break;
+            listRightAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString());
+        }
+
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].test_qst_idx, listRightAnswer.ToArray());
+
         CUIsSpaceScreenLeft.Instance.HideAllPages();
         CUIsSpaceScreenLeft.Instance.ShowRATPage();
     }

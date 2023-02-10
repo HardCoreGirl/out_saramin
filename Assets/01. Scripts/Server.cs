@@ -166,6 +166,10 @@ public class Server : MonoBehaviour
         m_strToken = strToken;
     }
 
+    public string GetCurURL()
+    {
+        return cur_server;
+    }
 
     public void RequestNoticePopups()
     {
@@ -338,7 +342,7 @@ public class Server : MonoBehaviour
         string jsonBody = JsonConvert.SerializeObject(null);
 
         string strStatus = "TAE_FSH";
-        if (nStatus == 1) strStatus = "TAE";
+        if (nStatus == 0) strStatus = "TAE";
 
         Dictionary<string, string> header = new Dictionary<string, string>();
         string url = cur_server + "api/v1/questions/" + nPartIdx.ToString() + "/" + strStatus;
@@ -346,6 +350,7 @@ public class Server : MonoBehaviour
         //header.Add("Content-Type", "application/json");
         header.Add("accept", "application/json");
         header.Add("Authorization", "Bearer " + m_strToken);
+        header.Add("Content-Type", "application/json");
 
         //POST(url, header, jsonBody, (string txt) =>
         PUT(url, header, jsonBody, (string txt) =>
@@ -399,7 +404,7 @@ public class Server : MonoBehaviour
         STPacketAnswerSubject stPacketAnswer = new STPacketAnswerSubject();
         stPacketAnswer.answer_type = "SBCT";
         stPacketAnswer.answer_idx = nAnswerIndex;
-        stPacketAnswer.answers = listContent;
+        stPacketAnswer.contents = listContent;
 
         string jsonBody = JsonConvert.SerializeObject(stPacketAnswer);
 
@@ -408,6 +413,7 @@ public class Server : MonoBehaviour
 
         header.Add("accept", "application/json");
         header.Add("Authorization", "Bearer " + m_strToken);
+        header.Add("Content-Type", "application/json");
 
         //POST(url, header, jsonBody, (string txt) =>
         PUT(url, header, jsonBody, (string txt) =>

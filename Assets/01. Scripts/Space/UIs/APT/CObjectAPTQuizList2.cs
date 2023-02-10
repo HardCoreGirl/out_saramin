@@ -48,6 +48,8 @@ public class CObjectAPTQuizList2 : MonoBehaviour
     {
         m_nState = CUIsAPTManager.Instance.GetAnswerState(m_nIndex);
 
+        Debug.Log("UpdateAPTQuizList2 : " + m_nIndex + ", " + m_nState);
+
         ShowQuizList(m_nState);
     }
 

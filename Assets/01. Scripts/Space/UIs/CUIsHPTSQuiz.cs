@@ -12,6 +12,8 @@ public class CUIsHPTSQuiz : MonoBehaviour
 
     private Color m_clrDefalutClr;
 
+    private Questions m_qstInfo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +26,10 @@ public class CUIsHPTSQuiz : MonoBehaviour
         
     }
 
-    public void InitHPTSQuiz(string strQuiz01, string strQuiz02, string strQuiz03, string strQuiz04, string strQuiz05)
+    public void InitHPTSQuiz(Questions qstInfo, string strQuiz01, string strQuiz02, string strQuiz03, string strQuiz04, string strQuiz05)
     {
+        m_qstInfo = qstInfo;
+
         m_clrDefalutClr = m_listGoWord[1].GetComponent<Image>().color;
 
         m_listTxtWord[0].text = strQuiz01;
@@ -104,5 +108,8 @@ public class CUIsHPTSQuiz : MonoBehaviour
 
         m_listGoWord[nIndex].GetComponent<Image>().color = clrBlue;
         m_listTxtWord[nIndex].color = Color.white;
+
+        if (!CUIsSpaceScreenLeft.Instance.IsHPTSTutorial())
+            Server.Instance.RequestPUTAnswerObject(m_qstInfo.test_qst_idx, m_qstInfo.answers[nIndex].anwr_idx);
     }
 }

@@ -90,7 +90,7 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public void HideCenterPage()
     {
-        ScreenActive(false);
+        //ScreenActive(false);
         m_goCenterPage.SetActive(false);
     }
 
@@ -102,7 +102,7 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public void HideRightPage()
     {
-        ScreenActive(false);
+        //ScreenActive(false);
         m_goRightPage.SetActive(false);
     }
 
@@ -145,14 +145,20 @@ public class CUIsSpaceManager : MonoBehaviour
         HideCommonPopupsFinish();
     }
 
-    public void ShowCommonPopupsFinish(int nPartIndex)
+    public void ShowCommonPopupsFinish(int nPartIndex, int nType = 0)
     {
         m_goUICommonPopupsFinish.SetActive(true);
-        m_goUICommonPopupsFinish.GetComponent<CUIsCommonPopupFinish>().InitCommonPopupFinish(nPartIndex);
+        m_goUICommonPopupsFinish.GetComponent<CUIsCommonPopupFinish>().InitCommonPopupFinish(nPartIndex, nType);
     }
 
     public void HideCommonPopupsFinish()
     {
         m_goUICommonPopupsFinish.SetActive(false);
+    }
+
+    public void OnClickCommonPopupFinish()
+    {
+        HideCommonPopupsFinish();
+        ScreenActive(false);
     }
 }

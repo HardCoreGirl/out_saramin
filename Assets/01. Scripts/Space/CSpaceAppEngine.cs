@@ -40,6 +40,8 @@ public class CSpaceAppEngine : MonoBehaviour
 
     public Text m_txtDebug;
 
+    public GameObject[] m_goMissionClear = new GameObject[4];
+
     //private string m_strServerType = "LOCAL";
     private string m_strServerType = "DEV2";
 
@@ -50,11 +52,16 @@ public class CSpaceAppEngine : MonoBehaviour
 
     private bool m_bIsQuizLoaded = false;
 
+    private bool m_bIsFinishLeft01 = false;
+    private bool m_bIsFinishLeft02 = false;
+    private bool m_bIsFinishCenter = false;
+    private bool m_bIsFinishRight = false;
 
     
         // Start is called before the first frame update
     void Start()
     {
+        UpdateMissionClear();
         //HideAllObjectOutline();
         //Server.Instance.GetComponent()
         //Server.Instance.RequestTest();
@@ -84,7 +91,7 @@ public class CSpaceAppEngine : MonoBehaviour
             {
                 if( !CUIsSpaceManager.Instance.IsScreenActive() )
                 {
-                    Debug.Log("GetMouseButtonDown : " + hit.collider.name);
+                    //Debug.Log("GetMouseButtonDown : " + hit.collider.name);
                     if( !m_bIsQuizLoaded)
                     {
                         Debug.Log("GetMouseButtonDown Quiz Loaded");
@@ -108,6 +115,8 @@ public class CSpaceAppEngine : MonoBehaviour
                     }
                     if (hit.collider.name.Equals("screen_left"))
                     {
+                        if (m_bIsFinishLeft01 && m_bIsFinishLeft02)
+                            return;
                         CUIsSpaceManager.Instance.ScreenActive(true);
                         //if (GetServerType().Equals("LOCAL"))
                         //{
@@ -120,6 +129,9 @@ public class CSpaceAppEngine : MonoBehaviour
                     }
                     else if (hit.collider.name == "screen_main")
                     {
+                        if (m_bIsFinishCenter)
+                            return;                               
+                            
                         CUIsSpaceManager.Instance.ScreenActive(true);
                         if (GetServerType().Equals("LOCAL"))
                         {
@@ -132,6 +144,9 @@ public class CSpaceAppEngine : MonoBehaviour
                     }
                     else if (hit.collider.name == "screen_right")
                     {
+                        if (m_bIsFinishRight)
+                            return;
+
                         CUIsSpaceManager.Instance.ScreenActive(true);
                         if (GetServerType().Equals("LOCAL"))
                         {
@@ -214,4 +229,26 @@ public class CSpaceAppEngine : MonoBehaviour
     {
         return m_strServerType;
     }
+
+    public void UpdateMissionClear()
+    {
+        if (m_bIsFinishLeft01) m_goMissionClear[0].SetActive(true);
+        else if (!m_bIsFinishLeft01) m_goMissionClear[0].SetActive(false);
+
+        if (m_bIsFinishLeft02) m_goMissionClear[1].SetActive(true);
+        else if (!m_bIsFinishLeft02) m_goMissionClear[1].SetActive(false);
+
+        if (m_bIsFinishCenter) m_goMissionClear[2].SetActive(true);
+        else if (!m_bIsFinishCenter) m_goMissionClear[2].SetActive(false);
+
+        if (m_bIsFinishRight) m_goMissionClear[3].SetActive(true);
+        else if (!m_bIsFinishRight) m_goMissionClear[3].SetActive(false);
+    }
+
+    public void SetFinishLeft01(bool bIsFinish) { m_bIsFinishLeft01 = bIsFinish; }
+    public bool IsFinishLeft01() { return m_bIsFinishLeft01; }
+    public void SetFinishLeft02(bool bIsFinish) { m_bIsFinishLeft02 = bIsFinish; }
+    public bool IsFinishLeft02() { return m_bIsFinishLeft02; }
+    public void SetFinishCenter(bool bIsFinish) { m_bIsFinishCenter = bIsFinish; }
+    public void SetFinishRight(bool bIsFinish) { m_bIsFinishRight = bIsFinish; }
 }

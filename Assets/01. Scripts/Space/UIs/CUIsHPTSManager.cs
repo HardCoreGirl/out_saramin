@@ -53,19 +53,19 @@ public class CUIsHPTSManager : MonoBehaviour
 
             GameObject goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
             goQuiz.transform.parent = m_goContents.transform;
-            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz("평소 명상을 많이 하는 사람은 그렇지 않은 사람보다", "", "", "", "");
+            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(null, "평소 명상을 많이 하는 사람은 그렇지 않은 사람보다", "", "", "", "");
 
             goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
             goQuiz.transform.parent = m_goContents.transform;
-            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz("엔돌핀 수준이", "높음", "낮음", "", "것이다. 동일한 양의 초콜렛을 먹는다고 가정할 때,");
+            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(null, "엔돌핀 수준이", "높음", "낮음", "", "것이다. 동일한 양의 초콜렛을 먹는다고 가정할 때,");
 
             goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
             goQuiz.transform.parent = m_goContents.transform;
-            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz("초콜렛을 좋아하는 정도가 엔돌핀 양에 영향을", "줄 것이다", "주지 않을 것이다", "", ". 매우 슬픈 사람과");
+            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(null, "초콜렛을 좋아하는 정도가 엔돌핀 양에 영향을", "줄 것이다", "주지 않을 것이다", "", ". 매우 슬픈 사람과");
 
             goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
             goQuiz.transform.parent = m_goContents.transform;
-            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz("매우 기쁜 사람의 엔돌핀 수치를 비교했을 때, 그 결과를 예상할 수", "있다", "없다", "", "");
+            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(null, "매우 기쁜 사람의 엔돌핀 수치를 비교했을 때, 그 결과를 예상할 수", "있다", "없다", "", "");
         }
         else
         {
@@ -101,15 +101,15 @@ public class CUIsHPTSManager : MonoBehaviour
 
                                 if ( listAnswer.Length > 1 )
                                 {
-                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
                                 } else
                                 {
-                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], "", "", "", "");
+                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], "", "", "", "");
                                 }
                             }
                             else
                             {
-                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listQuiz[j], "", "", "", "");
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listQuiz[j], "", "", "", "");
                             }
                         }
                     } else
@@ -132,16 +132,16 @@ public class CUIsHPTSManager : MonoBehaviour
 
                             if (listAnswer.Length > 1)
                             {
-                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
                             }
                             else
                             {
-                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], "", "", "", "");
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], "", "", "", "");
                             }
                         }
                         else
                         {
-                            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listQuiz[0], "", "", "", "");
+                            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listQuiz[0], "", "", "", "");
                         }
                     }
                 }
@@ -174,16 +174,16 @@ public class CUIsHPTSManager : MonoBehaviour
 
                                 if (listAnswer.Length > 1)
                                 {
-                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
                                 }
                                 else
                                 {
-                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], "", "", "", "");
+                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], "", "", "", "");
                                 }
                             }
                             else
                             {
-                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listQuiz[j], "", "", "", "");
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listQuiz[j], "", "", "", "");
                             }
                         }
                     }
@@ -207,16 +207,16 @@ public class CUIsHPTSManager : MonoBehaviour
 
                             if (listAnswer.Length > 1)
                             {
-                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
                             }
                             else
                             {
-                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listAnswer[0], "", "", "", "");
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], "", "", "", "");
                             }
                         }
                         else
                         {
-                            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(listQuiz[0], "", "", "", "");
+                            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listQuiz[0], "", "", "", "");
                         }
                     }
                 }
@@ -356,10 +356,13 @@ public class CUIsHPTSManager : MonoBehaviour
 
     public void OnClickPopupSendAnswerNext()
     {
+        Debug.Log("OnClickPopupSendAnswerNext");
         StopCoroutine("ProcessPlayExam");
         HideAllPopup();
+
+        CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("HPTS").part_idx, 1);
         CUIsSpaceScreenLeft.Instance.HideRightAllPage();
-        CUIsSpaceManager.Instance.ScreenActive(false);
+        //CUIsSpaceManager.Instance.ScreenActive(false);
     }
 
     public void OnClickPopupSendAnswerContinue()
