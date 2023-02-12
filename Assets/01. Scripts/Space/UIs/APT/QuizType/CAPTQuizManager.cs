@@ -64,6 +64,8 @@ public class CAPTQuizManager : MonoBehaviour
         } else
         {
             m_strQuizURL = Server.Instance.GetCurURL() + m_quizInfo.sets[nIndex].questions[0].qst_cnnt;
+
+            
             for (int i = 0; i < m_quizInfo.sets[nIndex].questions[0].answers.Length; i++)
             {
                 m_listStrAnswerURL[i] = Server.Instance.GetCurURL() + m_quizInfo.sets[nIndex].questions[0].answers[i].anwr_cnnt;

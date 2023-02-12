@@ -44,6 +44,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     public GameObject m_goRightContent;
 
     public Text m_txtMission;
+    public Text m_txtMissionContent;
     public Text m_txtLeftContent;
     public Text m_txtRightContent;
 
@@ -72,7 +73,13 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Tab))
+        {
+            Debug.Log("Key Down - Shift + Tab");
+        } else if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Debug.Log("Key Down - Tab");
+        }
     }
 
     public void InitCSTPage2()
@@ -89,6 +96,8 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             m_txtMission.text = CQuizData.Instance.GetUserName() + "님,  플레이샵에 오신 것을 환영합니다! 첫 번째 라운드는 사고 유연성 테스트입니다. 안내문 내용을 참고하시어 아래 빈 칸에 알맞은 단어를 작성해 주세요.본 퀴즈는 연습이오니 부담 갖지 마시고 충분히 작성하셔도 됩니다.";
             m_txtLeftContent.text = "음식";
             m_txtRightContent.text = "사무용품";
+
+            m_txtMissionContent.text = "‘음식’ 범주에는 일반적으로 사람이 먹거나 마실 수 있는 모든 것(김치, 사과 등)을 작성해 주세요.\n-\n사무용품 범주에는 문구류, 사무기기, 종이류 등을 포함한 물품(연필, 스테인플러 등)을 작성해 주세요.입니다.\n-\n각 범주에 속하는 단어를 번갈아가며 순서대로 입력해 주세요.\n-\n최대한 빠르고 오탈자 없이 입력해 주세요.\n-\n부정 행위를 하실 경우 불이익이 생길 수 있습니다.";
         } else
         {
             m_txtSendAnswer.text = "답변 제출하기";
@@ -96,8 +105,8 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             //m_txtMission.text = "과일, 가구에 속하는 단어를 번갈아 가며 최대한 많이 작성해 주시기 바랍니다.";
             Quiz quizData = CQuizData.Instance.GetQuiz("CST");
             m_txtMission.text = quizData.sets[0].dir_cnnt;
+            m_txtMissionContent.text = quizData.sets[0].dir_cnnt;
             m_nRemainTime = quizData.exm_time;
-            //m_nRemainTime = 60;
             m_txtLeftContent.text = quizData.sets[0].questions[0].qst_cnnt;
             m_txtRightContent.text = quizData.sets[0].questions[1].qst_cnnt;
 
@@ -160,7 +169,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().DisableInputField();
 
         }
-        //ShowPopupTimeOver();
+        ShowPopupTimeOver();
     }
 
     public void OnClickSendAnswer()
@@ -327,6 +336,9 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         StopCoroutine("ProcessPlayExam");
         HideAllPopup();
         CUIsSpaceScreenLeft.Instance.HideRightAllPage();
-        CUIsSpaceManager.Instance.ScreenActive(false);
+        //CUIsSpaceManager.Instance.ScreenActive(false);
+
+        CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("CST").part_idx, 1);
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
     }
 }

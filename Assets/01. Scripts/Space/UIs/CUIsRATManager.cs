@@ -118,6 +118,7 @@ public class CUIsRATManager : MonoBehaviour
             Quiz quizData = CQuizData.Instance.GetQuiz("RAT");
             if (m_nQuizIndex == 0)
             {
+                //m_nRemainTime = 60;
                 m_nRemainTime = quizData.exm_time;
                 StartCoroutine("ProcessPlayExam");
 
@@ -311,6 +312,9 @@ public class CUIsRATManager : MonoBehaviour
         StopCoroutine("ProcessPlayExam");
         HideAllPopup();
         CUIsSpaceScreenLeft.Instance.HideRightAllPage();
-        CUIsSpaceManager.Instance.ScreenActive(false);
+        //CUIsSpaceManager.Instance.ScreenActive(false);
+
+        CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("RAT").part_idx, 1);
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
     }
 }

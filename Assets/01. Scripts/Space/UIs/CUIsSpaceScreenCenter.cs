@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CUIsSpaceScreenCenter : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
     public GameObject m_goLGTKMain;
     public GameObject m_goLGTKTalkBox;
 
+    public GameObject m_goAgree;
+    public Toggle m_toggleAgree;
+    public GameObject m_goBtnPlay;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +30,9 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
     public void InitLGTKManager()
     {
         m_goLGTKMain.SetActive(true);
-        m_goLGTKMain.GetComponent<CUIsLGTKManager>().InitLGTK();
+        m_goAgree.SetActive(true);
+        UpdateButtonPlay();
+        //m_goLGTKMain.GetComponent<CUIsLGTKManager>().InitLGTK();
     }
 
     public void OnClickExit()
@@ -51,6 +58,31 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
     public void HideDetail()
     {
         m_goDetail.SetActive(false);
+    }
+
+    public void OnChangeToggle()
+    {
+        UpdateButtonPlay();
+    }
+
+    public void UpdateButtonPlay()
+    {
+        if (m_toggleAgree.isOn)
+        {
+            m_goBtnPlay.GetComponent<Button>().enabled = true;
+            m_goBtnPlay.GetComponent<Image>().color = new Color(0, 0.5215687f, 1f);
+        }
+        else
+        {
+            m_goBtnPlay.GetComponent<Button>().enabled = false;
+            m_goBtnPlay.GetComponent<Image>().color = new Color(0.7372549f, 0.8431373f, 1f);
+        }
+    }
+
+    public void OnClickPlay()
+    {
+        m_goAgree.SetActive(false);
+        m_goLGTKMain.GetComponent<CUIsLGTKManager>().InitLGTK();
     }
 
 }

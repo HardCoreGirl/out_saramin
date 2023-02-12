@@ -73,6 +73,7 @@ public class CUIsHPTSManager : MonoBehaviour
             if (m_nQuizIndex == 0)
             {
                 m_txtBtnSendAnswer.text = "다음문제 (1/2)";
+                //m_nRemainTime = 60;
                 m_nRemainTime = quizData.exm_time;
                 StartCoroutine("ProcessPlayExam");
 
@@ -388,6 +389,9 @@ public class CUIsHPTSManager : MonoBehaviour
         StopCoroutine("ProcessPlayExam");
         HideAllPopup();
         CUIsSpaceScreenLeft.Instance.HideRightAllPage();
-        CUIsSpaceManager.Instance.ScreenActive(false);
+        //CUIsSpaceManager.Instance.ScreenActive(false);
+
+        CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("HPTS").part_idx, 1);
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
     }
 }

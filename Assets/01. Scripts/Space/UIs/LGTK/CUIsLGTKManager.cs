@@ -71,8 +71,8 @@ public class CUIsLGTKManager : MonoBehaviour
         {
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
             m_nRemainTime = quizLGTK.exm_time;
-            Debug.Log("LGTK Remain Time : " + m_nRemainTime);
             //m_nRemainTime = 30;
+            Debug.Log("LGTK Remain Time : " + m_nRemainTime);
 
             // TODO : Set_Gudes
             //for(int i= 0; i < quizLGTK.set_gudes.Length; i++)
@@ -145,10 +145,8 @@ public class CUIsLGTKManager : MonoBehaviour
     {
         StopCoroutine("ProcessPlayExam");
         HideAllPopup();
-        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
         CUIsSpaceManager.Instance.ScreenActive(false);
-
-        gameObject.SetActive(false);
     }
 
     public void ShowPopupTimeOver()
@@ -166,9 +164,15 @@ public class CUIsLGTKManager : MonoBehaviour
         StopCoroutine("ProcessPlayExam");
         HideAllPopup();
         //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
-        CUIsSpaceManager.Instance.ScreenActive(false);
+        //CUIsSpaceManager.Instance.ScreenActive(false);
 
         gameObject.SetActive(false);
+
+        Debug.Log("OnClickPopupFinishOK");
+        CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("LGTK").part_idx, 2);
+        CUIsSpaceManager.Instance.HideCenterPage();
+
+
     }
 
     public void OnClickTalkBox()

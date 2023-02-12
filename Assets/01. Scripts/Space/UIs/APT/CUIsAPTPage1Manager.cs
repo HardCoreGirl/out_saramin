@@ -13,6 +13,9 @@ public class CUIsAPTPage1Manager : MonoBehaviour
 
     public GameObject m_goAnswerContent;
 
+    public Toggle m_toggleAgree;
+    public GameObject m_goBtnPlay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,8 @@ public class CUIsAPTPage1Manager : MonoBehaviour
 
     public void InitAPTPage()
     {
+        UpdateButtonPlay();
+
         Quiz quizAPT = CQuizData.Instance.GetQuiz("APTD1");
         m_txtAPTD1Cnt.text = quizAPT.sets.Length.ToString() + " ¹®Ç×";
         int nMin = quizAPT.exm_time / 60;
@@ -78,5 +83,24 @@ public class CUIsAPTPage1Manager : MonoBehaviour
         CUIsSpaceManager.Instance.ScreenActive(false);
 
         gameObject.SetActive(false);
+    }
+
+    public void OnChangeToggle()
+    {
+        UpdateButtonPlay();
+    }
+
+    public void UpdateButtonPlay()
+    {
+        if (m_toggleAgree.isOn)
+        {
+            m_goBtnPlay.GetComponent<Button>().enabled = true;
+            m_goBtnPlay.GetComponent<Image>().color = new Color(0, 0.5215687f, 1f);
+        }
+        else
+        {
+            m_goBtnPlay.GetComponent<Button>().enabled = false;
+            m_goBtnPlay.GetComponent<Image>().color = new Color(0.7372549f, 0.8431373f, 1f);
+        }
     }
 }

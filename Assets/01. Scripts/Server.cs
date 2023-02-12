@@ -168,7 +168,7 @@ public class Server : MonoBehaviour
 
     public string GetCurURL()
     {
-        return cur_server;
+        return cur_server.Substring(0, cur_server.Length - 1);
     }
 
     public void RequestNoticePopups()

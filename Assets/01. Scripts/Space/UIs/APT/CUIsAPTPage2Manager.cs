@@ -89,9 +89,10 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         SetTutorial(true);
         SetTutorialWait(false);
 
+        m_nQuizType = 0;
         m_txtRemainTime.text = "Ω√¿€ ¿¸";
         m_nRemainTime = CQuizData.Instance.GetQuiz("APTD1").exm_time;
-        //m_nRemainTime = 60;
+        //m_nRemainTime = 10;
         //+ CQuizData.Instance.GetQuiz("APTD2").exm_time;
     }
 
@@ -99,6 +100,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
     {
         m_nQuizType = 1;
         m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").exm_time;
+        //m_nRemainTime = 10;
         DelQuizList();
 
         for (int i = 0; i < 21; i++)
@@ -266,9 +268,11 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
         if( m_nQuizType == 0 )
         {
+            Debug.Log("TimOver 00 QuizType : " + m_nQuizType);
             CUIsAPTManager.Instance.ShowPopupTimeOverAPTD1();
         } else
         {
+            Debug.Log("TimOver 01 QuizType : " + m_nQuizType);
             CUIsAPTManager.Instance.ShowPopupTimeOverAPTD2();
         }
     }

@@ -40,6 +40,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public GameObject[] m_listMissionClear = new GameObject[2];
 
     public Toggle[] m_toggleAgree = new Toggle[2];
+    public GameObject[] m_listBtnPlay = new GameObject[2];
 
     public GameObject m_goCSTPage;
     public GameObject m_goRATPage;
@@ -111,6 +112,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         HideAllPopup();
 
+        UpdateButtonPlay();
+
         if (CSpaceAppEngine.Instance.IsFinishLeft01()) ShowMissionClear(0);
         else HideMissionClear(0);
 
@@ -159,6 +162,28 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         //ShowQuiz(nIndex);
 
         //InitQuiz();
+    }
+
+    public void OnChangeToggle(int nIndex)
+    {
+        UpdateButtonPlay();
+    }
+
+    public void UpdateButtonPlay()
+    {
+        for(int i = 0; i < m_listBtnPlay.Length; i++)
+        {
+            if (m_toggleAgree[i].isOn)
+            {
+                m_listBtnPlay[i].GetComponent<Button>().enabled = true;
+                m_listBtnPlay[i].GetComponent<Image>().color = new Color(0, 0.5215687f, 1f);
+            }
+            else
+            {
+                m_listBtnPlay[i].GetComponent<Button>().enabled = false;
+                m_listBtnPlay[i].GetComponent<Image>().color = new Color(0.7372549f, 0.8431373f, 1f);
+            }
+        }        
     }
 
     public void InitQuiz()
@@ -385,6 +410,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
             {
                 Quiz quizData = CQuizData.Instance.GetQuiz("RQT");
                 m_nRemainTime = quizData.exm_time;
+                //m_nRemainTime = 60;
             } else
             {
                 Quiz quizRQT = CQuizData.Instance.GetRQT().body;
@@ -494,6 +520,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     // Popup Time Out -------------------------------------------
     public void ShowPopupTimeover()
     {
+        Debug.Log("ShowPopupTimeover");
         m_goPopupTimeover.SetActive(true);
     }
 
@@ -507,7 +534,10 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         StopCoroutine("ProcessRQTQuiz");
         HideAllPopup();
         HideAllPages();
-        CUIsSpaceManager.Instance.ScreenActive(false);
+        //CUIsSpaceManager.Instance.ScreenActive(false);
+
+        CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("RQT").part_idx, 0);
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
     }
     // -------------------------------------------------------------
 
@@ -651,6 +681,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         return m_bIsHPTSTutorial;
     }
+
+    // ------------------------------------------------------
 
     public void ShowMissionClear(int nIndex)
     {

@@ -152,6 +152,7 @@ public class CUIsAPTManager : MonoBehaviour
 
     public void OnClickPopupTimeOverAPTD1Next()
     {
+        Debug.Log("OnClickPopupTimeoverAPTD1Next");
         FinishAPTD1();
         HidePopupTimeOverAPTD1();
     }
@@ -200,6 +201,8 @@ public class CUIsAPTManager : MonoBehaviour
 
     public void OnClickPopupTimeOverAPTD2Finish()
     {
+        CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("APTD2").part_idx, 3);
+        CUIsSpaceManager.Instance.HideRightPage();
     }
 
     public void ShowPopupSendAnswerAPTD2()
