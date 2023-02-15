@@ -64,6 +64,9 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     private int m_nTutorialStep = 0;
     private int m_nRemainTime = 0;
 
+    private List<InputField> m_listInputField;
+    private int m_nCurPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,11 +78,54 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Tab))
         {
-            Debug.Log("Key Down - Shift + Tab");
+            MovePrev();
         } else if (Input.GetKeyDown(KeyCode.Tab))
         {
-            Debug.Log("Key Down - Tab");
+            MoveNext();
+        } else if (Input.GetKeyDown(KeyCode.Return))
+        {
+            MoveNext();
         }
+    }
+
+    public void MovePrev()
+    {
+        GetCurrentPos();
+        //Debug.Log("Move Prev : " + GetCurrentPos());
+        if( m_nCurPos > 0 )
+        {
+            --m_nCurPos;
+
+            m_listInputField[m_nCurPos].Select();
+        }
+    }
+
+    public void MoveNext()
+    {
+        GetCurrentPos();
+        //Debug.Log("Move Prev : " + GetCurrentPos());
+        if (m_nCurPos < m_listInputField.Count - 1)
+        {
+            if (!m_listInputField[m_nCurPos + 1].IsInteractable())
+                return;
+            ++m_nCurPos;
+
+            m_listInputField[m_nCurPos].Select();
+        }
+    }
+
+    private int GetCurrentPos()
+    {
+        for (int i = 0; i < m_listInputField.Count; ++i)
+        {
+            if(m_listInputField[i].isFocused == true)
+            {
+                m_nCurPos = i;
+                break;
+            }
+        }
+
+        return m_nCurPos;
     }
 
     public void InitCSTPage2()
@@ -113,28 +159,48 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             StartCoroutine("ProcessPlayExam");
         }
 
+        //int nSelectableIdx = 0;
+        //selectables = new Selectable[50];
+
+        m_listInputField = new List<InputField>();
+        m_listInputField.Clear();
+        m_nCurPos = 0;
+        
         for(int i = 0; i < 25; i++)
         {
             m_listLeftContents[i] = Instantiate(Resources.Load("Prefabs/cstListAnswer") as GameObject);
             m_listLeftContents[i].transform.parent = m_goLeftContent.transform;
             m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().InitListAnswer(0, i);
+            m_listInputField.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().m_ifAnswer);
             //goTalk.GetComponent<CUIsRQTTalkChat>().InitObject(i, quizRQT.sets[i].dir_cnnt, true);
+            //selectables[nSelectableIdx] = m_listLeftContents[i].GetComponent<Selectable>();
+            //nSelectableIdx++;
+
+            m_listRightContents[i] = Instantiate(Resources.Load("Prefabs/cstListAnswer") as GameObject);
+            m_listRightContents[i].transform.parent = m_goRightContent.transform;
+            m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().InitListAnswer(1, i);
+            m_listInputField.Add(m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().m_ifAnswer);
+
+            //selectables[nSelectableIdx] = m_listRightContents[i].GetComponent<Selectable>();
+            //nSelectableIdx++;
         }
 
         m_listLeftContents[0].GetComponent<CUIsCSTListAnswer>().ActiveInputField();
+
+        m_listInputField[0].Select();
 
         Vector2 vecSize = m_goLeftContent.GetComponent<RectTransform>().sizeDelta;
         vecSize.y = 1120;
         m_goLeftContent.GetComponent<RectTransform>().sizeDelta = vecSize;
 
 
-        for (int i = 0; i < 25; i++)
-        {
-            m_listRightContents[i] = Instantiate(Resources.Load("Prefabs/cstListAnswer") as GameObject);
-            m_listRightContents[i].transform.parent = m_goRightContent.transform;
-            m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().InitListAnswer(1, i);
-            //goTalk.GetComponent<CUIsRQTTalkChat>().InitObject(i, quizRQT.sets[i].dir_cnnt, true);
-        }
+        //for (int i = 0; i < 25; i++)
+        //{
+        //    m_listRightContents[i] = Instantiate(Resources.Load("Prefabs/cstListAnswer") as GameObject);
+        //    m_listRightContents[i].transform.parent = m_goRightContent.transform;
+        //    m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().InitListAnswer(1, i);
+        //    //goTalk.GetComponent<CUIsRQTTalkChat>().InitObject(i, quizRQT.sets[i].dir_cnnt, true);
+        //}
 
         vecSize = m_goRightContent.GetComponent<RectTransform>().sizeDelta;
         vecSize.y = 1120;
@@ -298,7 +364,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             listLeftAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString());
         }
 
-        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].test_qst_idx, listLeftAnswer.ToArray());
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].answers[0].anwr_idx, listLeftAnswer.ToArray());
 
         List<string> listRightAnswer = new List<string>();
         for (int i = 0; i < 25; i++)
@@ -307,7 +373,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             listRightAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString());
         }
 
-        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].test_qst_idx, listRightAnswer.ToArray());
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].answers[0].anwr_idx, listRightAnswer.ToArray());
 
         CUIsSpaceScreenLeft.Instance.HideAllPages();
         CUIsSpaceScreenLeft.Instance.ShowRATPage();

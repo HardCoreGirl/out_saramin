@@ -56,6 +56,9 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
     private int m_nRemainTime;
 
+    private int[] m_listSelectIdx = new int[30];
+    private int m_nTutorialSelectIndex = -1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +75,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
     public void InitAPTPage2()
     {
+        InitSelectIdx();
 
         ShowQuizBoard(0);
 
@@ -98,6 +102,8 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
     public void InitAPTD2()
     {
+        InitSelectIdx();
+
         m_nQuizType = 1;
         m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").exm_time;
         //m_nRemainTime = 10;
@@ -116,6 +122,22 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         HideExQuizList();
 
         StartQuiz();
+    }
+
+    public void InitSelectIdx()
+    {
+        for (int i = 0; i < m_listSelectIdx.Length; i++)
+            m_listSelectIdx[i] = -1;
+    }
+
+    public void SetSelectIndex(int nQuizIndex, int nSelectIndex)
+    {
+        m_listSelectIdx[nQuizIndex] = nSelectIndex;
+    }
+
+    public int GetSelectIndex(int nQuizIndex)
+    {
+        return m_listSelectIdx[nQuizIndex];
     }
 
     public void DelQuizList()
@@ -141,6 +163,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             // 연습문제
             Debug.Log("연습문제");
             ShowQuizBoard(1);
+            m_listQuizBoard[1].GetComponent<CAPTQuizManager>().InitQuizType(-1, 0, 0);
             return;
         }
         nRealIndex--;
@@ -154,13 +177,12 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             //m_nQuizType = 0;
             m_nQuizIndex = quizAPT.sets[nRealIndex].questions[0].test_qst_idx;
 
-            for(int i = 0; i < quizAPT.sets[nRealIndex].questions[0].answers.Length; i++)
+            for (int i = 0; i < quizAPT.sets[nRealIndex].questions[0].answers.Length; i++)
             {
+                Debug.Log("Show Quiz 003 AnswerIndex : " + quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx);
                 m_listAnswerIndex[i] = quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx;
             }
 
-            Debug.Log("APTD1 문제 Type : " + quizAPT.sets[nRealIndex].questions[0].qst_exos_cd);
-            //m_txtQuizTitle.text = quizAPT.sets[nRealIndex].dir_cnnt;
             m_txtQuizTitle.text = quizAPT.sets[nRealIndex].questions[0].qst_cnnt;
             // APTD1 문제
             if (quizAPT.sets[nRealIndex].questions[0].qst_exos_cd.Equals("FORM_A"))

@@ -222,7 +222,7 @@ public class CUIsRATManager : MonoBehaviour
             return;
         }
 
-        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, m_ifAnswer.text);
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswer.text);
 
         if ( m_nQuizIndex < 1 )
         {

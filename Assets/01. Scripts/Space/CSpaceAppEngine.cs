@@ -61,6 +61,7 @@ public class CSpaceAppEngine : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("CSpaceAppEngine 01");
         UpdateMissionClear();
         //HideAllObjectOutline();
         //Server.Instance.GetComponent()
@@ -77,7 +78,7 @@ public class CSpaceAppEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_txtDebug.text = "Width : " + Screen.width.ToString() + ", Hight : " + Screen.height.ToString();
+        m_txtDebug.text = "Width : " + Screen.width.ToString() + ", Height : " + Screen.height.ToString();
 
         m_vecMouseDownPos = Input.mousePosition;
 

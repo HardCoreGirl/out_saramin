@@ -41,7 +41,11 @@ public class CObjecctLGTKTalkBoxChat : MonoBehaviour
             rectSize.x = 540;
         }
 
-        rectSize.y = (nRow * 24) + 40;
+        m_rectBG.sizeDelta = rectSize;
+
+        //rectSize.y = (nRow * 24) + 40;
+
+        rectSize.y = m_txtChat.preferredHeight + 20;
 
         m_rectBG.sizeDelta = rectSize;
 

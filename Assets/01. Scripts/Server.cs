@@ -392,18 +392,19 @@ public class Server : MonoBehaviour
         });
     }
 
-    public void RequestPUTAnswerSubject(int nAnswerIndex, string strContent)
+    public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string strContent)
     {
-        RequestPUTAnswerSubject(nAnswerIndex, new string[] { strContent });
+        RequestPUTAnswerSubject(nQuestIndex, nAnswerIndex, new string[] { strContent });
     }
 
-    public void RequestPUTAnswerSubject(int nAnswerIndex, string[] listContent)
+    public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string[] listContent)
     {
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
 
         STPacketAnswerSubject stPacketAnswer = new STPacketAnswerSubject();
         stPacketAnswer.answer_type = "SBCT";
-        stPacketAnswer.answer_idx = nAnswerIndex;
+        stPacketAnswer.answer_idx = nQuestIndex;
+        stPacketAnswer.answers = new int[] { nAnswerIndex };
         stPacketAnswer.contents = listContent;
 
         string jsonBody = JsonConvert.SerializeObject(stPacketAnswer);
@@ -424,6 +425,47 @@ public class Server : MonoBehaviour
     #endregion
 
     #region 정보안내
+    public void RequestGETInfoExams()
+    {
+        string jsonBody = JsonConvert.SerializeObject(null);
+
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        string url = cur_server + "api/v1/info/exams";
+
+        //header.Add("Content-Type", "application/json");
+        header.Add("accept", "application/json");
+        header.Add("Authorization", "Bearer " + m_strToken);
+
+        //POST(url, header, jsonBody, (string txt) =>
+        GET(url, header, (string txt) =>
+        {
+            //RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
+
+            //Debug.Log("txt : " + txt);
+        });
+    }
+
+    public void ReuquestGETInfoMissions()
+    {
+        string jsonBody = JsonConvert.SerializeObject(null);
+
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        string url = cur_server + "api/v1/info/missions";
+
+        //header.Add("Content-Type", "application/json");
+        header.Add("accept", "application/json");
+        header.Add("Authorization", "Bearer " + m_strToken);
+
+        //POST(url, header, jsonBody, (string txt) =>
+        GET(url, header, (string txt) =>
+        {
+            //RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
+
+            //Debug.Log("txt : " + txt);
+        });
+    }
     #endregion
 
     #region 활동 이력
@@ -526,6 +568,7 @@ public class Server : MonoBehaviour
                 for(int i = 0; i < stTestCheck.body.part_list.Length; i++)
                 {
                     RequestGetPartJoin(stTestCheck.body.part_list[i].part_idx);
+                    // TODO 230215 : RequestPOSTPartJoin
                     RequestPOSTPartJoin(stTestCheck.body.part_list[i].part_idx);
                     //RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
                 }

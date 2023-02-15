@@ -131,6 +131,7 @@ public class STPacketAnswerSubject
 {
     public string answer_type;
     public int answer_idx;
+    public int[] answers;
     public string[] contents;
 }
 

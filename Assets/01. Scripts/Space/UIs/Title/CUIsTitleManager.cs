@@ -70,6 +70,9 @@ public class CUIsTitleManager : MonoBehaviour
 
         Server.Instance.SetToken(strToken);
         Server.Instance.RequestTestCheck();
+        Server.Instance.RequestTestInvest();
+        Server.Instance.RequestGETInfoExams();
+        Server.Instance.ReuquestGETInfoMissions();
         CUIsSpaceManager.Instance.HideTitle();
         CUIsSpaceManager.Instance.ScreenActive(false, true);
     }

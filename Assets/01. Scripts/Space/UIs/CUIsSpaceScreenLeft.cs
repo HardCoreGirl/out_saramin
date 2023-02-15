@@ -153,7 +153,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
         Quiz quizData = CQuizData.Instance.GetQuiz(strKey);
         Server.Instance.RequestPOSTQuestions(quizData.part_idx);
-
+        //Server.Instance.RequestPOSTPartJoin(quizData.part_idx);
         //ShowPopupFinish();
         ShowPage(1, true);
         HideAllQuiz();
