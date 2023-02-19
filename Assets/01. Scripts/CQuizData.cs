@@ -50,11 +50,19 @@ public class QSTDics
 }
 
 [Serializable]
+public class STTestAnswer
+{
+    public int test_anwr_idx;
+    public string test_anwr_sbct;
+}
+
+[Serializable]
 public class Questions
 {
     public int test_qst_idx;
-    public int[] test_anwr_idx;
-    public int[] test_anwr_sbct;
+    //public int[] test_anwr_idx;
+    //public int[] test_anwr_sbct;
+    public STTestAnswer[] test_answers;
     public int test_prg_time;
     public int qst_idx;
     public string qst_exos_cd;
@@ -161,33 +169,81 @@ public class STPacketAnswer
     public string[] contents;
 }
 
-//{
-//    "row_no": 0,
-//  "regr_id": "string",
-//  "modr_id": "string",
-//  "reg_dtm": "2023-02-08T04:18:41.528Z",
-//  "mod_dtm": "2023-02-08T04:18:41.528Z",
-//  "order_column": "string",
-//  "order_asc": "string",
-//  "page_size": 0,
-//  "page_number": 0,
-//  "page_offset": 0,
-//  "search_type": "string",
-//  "answer_seq_idx": 0,
-//  "applier_idx": 0,
-//  "part_idx": 0,
-//  "question_idx": 0,
-//  "answer_idx": 0,
-//  "answer_type": "QuestionAnswerType.OBJ(code=OBJ, desc=°´°ü½Ä)",
-//  "objective_answer": 0,
-//  "subjective_answer": "string",
-//  "answers": [
-//    0
-//  ],
-//  "contents": [
-//    "string"
-//  ]
-//}
+// Test Invest ---------------------------------
+public class STPacketTestInvest
+{
+    public int code;
+    public string message;
+    public STPacketTestInvestBody body;
+}
+
+[Serializable]
+public class STPacketTestInvestBody
+{
+    public STPacketTestInvestBodyApplier applier;
+}
+
+[Serializable]
+public class STPacketTestInvestBodyApplier
+{
+    public int row_no;
+    public int idx;
+    public string applier_id;
+    public string applier_no;
+    public int exam_idx;
+    public string username;
+    public string password;
+    public string status;
+    public string email;
+    public string phone_no;
+
+    public int apply_count;
+    public int login_count;
+}
+
+// Exam Info ----------------------------------
+
+public class STPacketExamInfo
+{
+    public int code;
+    public string message;
+    public STPacketExamInfoBody[] body;
+}
+
+[Serializable]
+public class STPacketExamInfoBody
+{
+    public int idx;
+    public int applierIdx;
+    public int examIdx;
+    public int qstSetIdx;
+    public int progressingTime;
+    public int examTime;
+    public int lastQstIdx;
+    public int lastPageNo;
+    public int sortSeq;
+    public string status;
+    public int iatSetIdx;
+    public string qstTpCd;
+    public string setDirTpCd;
+    public string setCnnt;
+    public string setCnntImg;
+}
+// --------------------------------------------------
+
+public class STPacketBasic
+{
+    public int code;
+    public string message;
+}
+
+public class STPacketActionExit
+{
+    public int code;
+    public string message;
+    public int body;
+}
+
 
 public class CQuizData : MonoBehaviour
 {
@@ -292,8 +348,12 @@ public class CQuizData : MonoBehaviour
 
     private STTestCheck m_stTestCheck;
 
-    private string m_strUserName;
+    public STPacketExamInfo m_packetExamInfo;
 
+    private string m_strUserName;
+    private int m_nExitCnt;
+
+    private int m_nMaxExitCnt = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -308,7 +368,7 @@ public class CQuizData : MonoBehaviour
         TextAsset textAssetRQTTutorial = Resources.Load<TextAsset>("Scripts/rqt_tutorial");
         m_packetRQTTutorial = JsonUtility.FromJson<PacketQuiz>(textAssetRQTTutorial.text);
 
-        Debug.Log(JsonUtility.ToJson(m_packetRQTTutorial));
+        //Debug.Log(JsonUtility.ToJson(m_packetRQTTutorial));
 
         m_strUserName = "TestUser";
         //GetQuiz("RQT");
@@ -398,6 +458,26 @@ public class CQuizData : MonoBehaviour
         return m_strUserName;
     }
 
+    public void SetExitCount(int nCount)
+    {
+        m_nExitCnt = nCount;
+    }
+
+    public int GetExitCount()
+    {
+        return m_nExitCnt;
+    }
+
+    public void SetMaxExitCount(int nMaxCount)
+    {
+        m_nMaxExitCnt = nMaxCount;
+    }
+
+    public int GetMaxExitCount()
+    {
+        return m_nMaxExitCnt;
+    }
+
     //public PacketQuizPart m_packetAPTD1;
     //public PacketQuizPart m_packetAPTD2;
     //public PacketQuizPart m_packetCST;
@@ -421,6 +501,29 @@ public class CQuizData : MonoBehaviour
     public PacketQuizPart GetPCTR() { return m_packetPCTR; }
     public void SetRAT(PacketQuizPart packetQuiz) { m_packetRAT = packetQuiz; }
     public PacketQuizPart GetRAT() { return m_packetRAT; }
+
+    public void SetExamInfo(STPacketExamInfo packetExamInfo)
+    {
+        m_packetExamInfo = packetExamInfo;
+    }
+
+    public STPacketExamInfo GetExamInfo()
+    {
+        return m_packetExamInfo;
+    }
+
+    public STPacketExamInfoBody GetExamInfoDetail(string strTpCd)
+    {
+        for(int i = 0; i < m_packetExamInfo.body.Length; i++)
+        {
+            if(m_packetExamInfo.body[i].qstTpCd.Equals(strTpCd))
+            {
+                return m_packetExamInfo.body[i];
+            }
+        }
+
+        return null;
+    }
 
 }
 

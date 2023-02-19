@@ -69,20 +69,6 @@ public class CUIsAnswer : MonoBehaviour
             
             Server.Instance.RequestPUTAnswerObject(quizRQT.sets[m_nQuizIndex].questions[0].test_qst_idx, m_listAnswer[nIndex].anwr_idx);
 
-            //if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
-            //{
-            //    //Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
-            //    Debug.Log("Exam Cnt : " + quizRQT.sets[0].questions.Length + ", QuizIndex : " + m_nQuizIndex);
-
-            //    if (m_nQuizIndex >= quizRQT.sets[0].questions.Length - 1)
-            //    {
-            //        // TODO : 시험 종료
-            //        Debug.Log("Finish Exam");
-            //        return;
-            //    }
-            //} else
-            //{
-            //Quiz quizRQT = CQuizData.Instance.GetRQT().body;
             Debug.Log("Exam Cnt : " + quizRQT.sets.Length + ", QuizIndex : " + m_nQuizIndex);
 
             if (m_nQuizIndex >= quizRQT.sets.Length - 1)

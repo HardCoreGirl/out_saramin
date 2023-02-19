@@ -77,6 +77,25 @@ public class CUIsAPTPage2Manager : MonoBehaviour
     {
         InitSelectIdx();
 
+        // TODO SELECT
+        if( !CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            for (int i = 0; i < CQuizData.Instance.GetQuiz("APTD1").sets.Length; i++)
+            {
+                if (CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx != 0)
+                {
+                    for(int j = 0; j < 4; j++)
+                    {
+                        if(CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].answers[j].anwr_idx == CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx)
+                        {
+                            SetSelectIndex(i, j);
+                        }
+                        //CQuizData.Instance.GetQuiz("APTD1").sets[0].questions[i].answers[j].anwr_idx
+                    }
+                }
+            }
+        }
+
         ShowQuizBoard(0);
 
         for (int i = 0; i < 29; i++)
@@ -86,7 +105,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             if( i == 0 )
                 m_listQuizList[i].GetComponent<CObjectAPTQuizList2>().InitAPTQuizList2(i, 1);
             else
-                m_listQuizList[i].GetComponent<CObjectAPTQuizList2>().InitAPTQuizList2(i);
+                m_listQuizList[i].GetComponent<CObjectAPTQuizList2>().InitAPTQuizList2(i, CUIsAPTManager.Instance.GetAnswerState(i-1));
         }
 
         ShowQuiz(0);
@@ -103,6 +122,25 @@ public class CUIsAPTPage2Manager : MonoBehaviour
     public void InitAPTD2()
     {
         InitSelectIdx();
+
+        // TODO SELECT
+        if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            for (int i = 0; i < CQuizData.Instance.GetQuiz("APTD2").sets.Length; i++)
+            {
+                if (CQuizData.Instance.GetQuiz("APTD2").sets[i].questions[0].test_answers[0].test_anwr_idx != 0)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        if (CQuizData.Instance.GetQuiz("APTD2").sets[i].questions[0].answers[j].anwr_idx == CQuizData.Instance.GetQuiz("APTD2").sets[i].questions[0].test_answers[0].test_anwr_idx)
+                        {
+                            SetSelectIndex(i, j);
+                        }
+                        //CQuizData.Instance.GetQuiz("APTD1").sets[0].questions[i].answers[j].anwr_idx
+                    }
+                }
+            }
+        }
 
         m_nQuizType = 1;
         m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").exm_time;
@@ -272,6 +310,8 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         int nMin = (int)(m_nRemainTime / 60);
         int nSec = (int)(m_nRemainTime % 60);
 
+        int nRequestTimer = 0;
+
         m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         while (true)
         {
@@ -283,6 +323,15 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             nSec = (int)(m_nRemainTime % 60);
 
             m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+            
+            if( (nRequestTimer % 5) == 0 )
+            {
+                string strKey = "APTD1";
+                if (m_nQuizType != 0) strKey = "APTD2";
+                Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz(strKey).part_idx);
+            }
+            nRequestTimer++;
 
             if (m_nRemainTime == 0)
                 break;

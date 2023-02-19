@@ -91,6 +91,8 @@ public class CUIsLGTKManager : MonoBehaviour
         int nMin = (int)(m_nRemainTime / 60);
         int nSec = (int)(m_nRemainTime % 60);
 
+        int nRequestTimer = 0;
+
         m_txtRemain.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         while (true)
         {
@@ -102,6 +104,12 @@ public class CUIsLGTKManager : MonoBehaviour
             nSec = (int)(m_nRemainTime % 60);
 
             m_txtRemain.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+            if ((nRequestTimer % 5) == 0)
+            {
+                Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz("LGTK").part_idx);
+            }
+            nRequestTimer++;
+
 
             if (m_nRemainTime == 0)
                 break;

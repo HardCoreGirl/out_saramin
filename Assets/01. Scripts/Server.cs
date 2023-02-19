@@ -366,6 +366,7 @@ public class Server : MonoBehaviour
     #region 응시답안
     public void RequestPUTAnswerObject(int nQuestIndex, int nAnswer)
     {
+        Debug.Log("RequestPUTAnswerObject Single - QuestIdx : " + nQuestIndex + ", Answer : " + nAnswer);
         RequestPUTAnswerObject(nQuestIndex, new int[] { nAnswer });
     }
 
@@ -440,9 +441,9 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         GET(url, header, (string txt) =>
         {
-            //RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
-
-            //Debug.Log("txt : " + txt);
+            STPacketExamInfo packetExamInfo = new STPacketExamInfo();
+            packetExamInfo = JsonUtility.FromJson<STPacketExamInfo>(txt);
+            CQuizData.Instance.SetExamInfo(packetExamInfo);
         });
     }
 
@@ -469,6 +470,62 @@ public class Server : MonoBehaviour
     #endregion
 
     #region 활동 이력
+    public void RequestGETActionExit()
+    {
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
+
+        string jsonBody = JsonConvert.SerializeObject(null);
+
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        string url = cur_server + "api/v1/action/exit";
+
+        //header.Add("Content-Type", "application/json");
+        header.Add("accept", "application/json");
+        header.Add("Authorization", "Bearer " + m_strToken);
+
+        //POST(url, header, jsonBody, (string txt) =>
+        GET(url, header, (string txt) =>
+        {
+            STPacketActionExit packetActionExit = new STPacketActionExit();
+            packetActionExit = JsonUtility.FromJson<STPacketActionExit>(txt);
+            CQuizData.Instance.SetExitCount(packetActionExit.body);
+            //RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
+
+            //Debug.Log("txt : " + txt);
+        });
+    }
+
+    public void RequestPUTActionExit()
+    {
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
+
+        string jsonBody = JsonConvert.SerializeObject(null);
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        string url = cur_server + "api/v1/action/exit";
+
+        header.Add("accept", "application/json");
+        header.Add("Authorization", "Bearer " + m_strToken);
+
+        //POST(url, header, jsonBody, (string txt) =>
+        PUT(url, header, jsonBody, (string txt) =>
+        {
+            STPacketActionExit packetActionExit = new STPacketActionExit();
+            packetActionExit = JsonUtility.FromJson<STPacketActionExit>(txt);
+
+            if(packetActionExit.code == 200)
+            {
+                CQuizData.Instance.SetExitCount(packetActionExit.body);
+                // TODO : 나가기 기능
+            } else if (packetActionExit.code == 400)
+            {
+                // TODO : 나가기 실패
+            }
+            
+            //Debug.Log("txt : " + txt);
+        });
+    }
     #endregion
 
     #region FAQ
@@ -499,7 +556,7 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         POST(url, header, jsonBody, (string txt) =>
         {
-            RequestGETQuestions(nPartIdx);
+
             //Debug.Log("txt : " + txt);
         });
     }
@@ -520,8 +577,12 @@ public class Server : MonoBehaviour
         GET(url, header, (string txt) =>
         {
             //RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
-            
-            //Debug.Log("txt : " + txt);
+            STPacketBasic stPacket = new STPacketBasic();
+            stPacket = JsonUtility.FromJson<STPacketBasic>(txt);
+            if (stPacket.code == 200)
+            {
+                //RequestPOSTPartJoin(nPartIdx);
+            }
         });
     }
 
@@ -564,14 +625,24 @@ public class Server : MonoBehaviour
 
             if( stTestCheck.code == 200)
             {
-                CQuizData.Instance.SetTestCheck(stTestCheck);
-                for(int i = 0; i < stTestCheck.body.part_list.Length; i++)
-                {
-                    RequestGetPartJoin(stTestCheck.body.part_list[i].part_idx);
-                    // TODO 230215 : RequestPOSTPartJoin
-                    RequestPOSTPartJoin(stTestCheck.body.part_list[i].part_idx);
-                    //RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
-                }
+                Server.Instance.RequestTestInvest();
+                // TODO 230216
+                //RequestGetPartJoin(stTestCheck.body.part_idx);
+
+                //for (int i = 0; i < stTestCheck.body.part_list.Length; i++)
+                //{
+                //    RequestGetPartJoin(stTestCheck.body.part_list[i].part_idx);
+                //    //RequestPOSTPartJoin(stTestCheck.body.part_list[i].part_idx);
+                //}
+
+                //CQuizData.Instance.SetTestCheck(stTestCheck);
+                //for (int i = 0; i < stTestCheck.body.part_list.Length; i++)
+                //{
+                //    RequestGetPartJoin(stTestCheck.body.part_list[i].part_idx);
+                //    // TODO 230215 : RequestPOSTPartJoin
+                //    RequestPOSTPartJoin(stTestCheck.body.part_list[i].part_idx);
+                //    RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
+                //}
             } else
             {
                 Debug.Log("ReqeustTestCheck Err : " + stTestCheck.code);
@@ -591,7 +662,11 @@ public class Server : MonoBehaviour
 
         GET(url, header, (string txt) =>
         {
-            Debug.Log("txt : " + txt);
+            STPacketTestInvest stPacketTestInvest = new STPacketTestInvest();
+            stPacketTestInvest = JsonUtility.FromJson<STPacketTestInvest>(txt);
+            CQuizData.Instance.SetUserName(stPacketTestInvest.body.applier.username);
+
+            RequestGETActionExit();
         });
     }
 
@@ -612,6 +687,28 @@ public class Server : MonoBehaviour
         POST(url, header, jsonBody, (string txt) =>
         {
             Debug.Log("txt : " + txt);
+        });
+    }
+    #endregion
+
+    #region 검사 응시
+    public void RequestPOSTPartTimer(int nPartIndex)
+    {
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
+
+        string jsonBody = JsonConvert.SerializeObject(null);
+
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        string url = cur_server + "api/v1/test/part/" + nPartIndex.ToString() + "/timer";
+
+        //header.Add("Content-Type", "application/json");
+        header.Add("accept", "application/json");
+        header.Add("Authorization", "Bearer " + m_strToken);
+
+        //POST(url, header, jsonBody, (string txt) =>
+        POST(url, header, jsonBody, (string txt) =>
+        {
         });
     }
     #endregion

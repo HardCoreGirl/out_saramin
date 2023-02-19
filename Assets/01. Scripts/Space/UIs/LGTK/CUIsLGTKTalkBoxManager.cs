@@ -74,6 +74,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         m_goSBCTAnswer.SetActive(false);
         m_goScrollView.SetActive(false);
 
+        m_listAnswer = new string[30];
+
         string strChatMsg = "";
         if( CUIsLGTKManager.Instance.IsTutorial() )
         {
@@ -81,8 +83,6 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                 m_nAnswerCnt = 3;
             else if (m_nStage == 1)
                 m_nAnswerCnt = 4;
-
-            m_listAnswer = new string[30];
 
             m_listAnswerObject = new GameObject[m_nAnswerCnt];
 
@@ -122,12 +122,29 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             }
         } else
         {
+
+
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
+
+            if( !CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+            {
+                if (m_nStage == 0)
+                {
+                    for (int i = 0; i < quizLGTK.sets.Length; i++)
+                    {
+                        if( quizLGTK.sets[i].questions[0].test_answers[0].test_anwr_idx == 0)
+                        {
+                            break;
+                        } else
+                        {
+                            m_nStage = i;
+                        }
+                    }
+                }
+            }
+
             m_nAnswerCnt = quizLGTK.sets[m_nStage].questions[0].answers.Length;
-
             m_listAnswerObject = new GameObject[m_nAnswerCnt];
-
-            Debug.Log("Count : " + m_listAnswerObject.Length);
 
             //if( !quizLGTK.sets[m_nStage].dir_cnnt.Equals("") )
             //{
@@ -137,7 +154,6 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             //strChatMsg = quizLGTK.sets[m_nStage].questions[0].qst_cnnt;
             strChatMsg = quizLGTK.sets[m_nStage].dir_cnnt;
             m_strQuizMsg = quizLGTK.sets[m_nStage].questions[0].qst_cnnt;
-
             for (int i = 0; i < m_nAnswerCnt; i++)
             {
                 m_listAnswer[i] = quizLGTK.sets[m_nStage].questions[0].answers[i].anwr_cnnt;
@@ -170,9 +186,9 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
         //m_listChat = listTotalMsg.ToArray();
         //m_listChat = strChatMsg.Split("\n");
+
         if (strChatMsg.Equals("")) m_listChat = new string[] { };
         else m_listChat = strChatMsg.Split("<br />");
-
         StartCoroutine("ProcessQuiz");
 
         //for (int i = 0; i < m_listChat.Length; i++)

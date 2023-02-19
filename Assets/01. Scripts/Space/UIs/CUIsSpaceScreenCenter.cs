@@ -81,6 +81,18 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
 
     public void OnClickPlay()
     {
+        if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            if (CQuizData.Instance.GetExamInfoDetail("LGTK").status.Equals("WAITING"))
+            {
+                Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("LGTK").idx);
+            }
+
+            if( CQuizData.Instance.GetQuiz("LGTK").sets[0].questions[0].test_answers[0].test_anwr_idx != 0 )
+            {
+                m_goLGTKMain.GetComponent<CUIsLGTKManager>().SetTutorial(false);
+            }
+        }
         m_goAgree.SetActive(false);
         m_goLGTKMain.GetComponent<CUIsLGTKManager>().InitLGTK();
     }

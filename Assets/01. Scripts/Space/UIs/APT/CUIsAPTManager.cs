@@ -69,12 +69,18 @@ public class CUIsAPTManager : MonoBehaviour
     {
         HideAllPopup();
 
-        ShowAPTPage(0);
-
-        for(int i = 0; i < m_listAnswerState.Length; i++)
+        for (int i = 0; i < m_listAnswerState.Length; i++)
         {
             m_listAnswerState[i] = 2;
         }
+
+        if( CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            ShowAPTPage(0);
+            return;
+        }
+
+        ShowAPTPage(0);
     }
 
     public void SetAnswerState(int nIndex, int nState)
@@ -153,12 +159,21 @@ public class CUIsAPTManager : MonoBehaviour
     public void OnClickPopupTimeOverAPTD1Next()
     {
         Debug.Log("OnClickPopupTimeoverAPTD1Next");
+
         FinishAPTD1();
         HidePopupTimeOverAPTD1();
     }
 
     public void FinishAPTD1()
     {
+        if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            if (CQuizData.Instance.GetExamInfoDetail("APTD2").status.Equals("WAITING"))
+            {
+                Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
+            }
+        }
+
         m_listAPTPage[1].GetComponent<CUIsAPTPage2Manager>().StopQuiz();
         m_listAPTPage[1].GetComponent<CUIsAPTPage2Manager>().InitAPTD2();
     }

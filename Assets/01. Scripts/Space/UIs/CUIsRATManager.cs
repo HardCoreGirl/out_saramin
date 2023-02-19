@@ -163,6 +163,8 @@ public class CUIsRATManager : MonoBehaviour
         int nMin = (int)(m_nRemainTime / 60);
         int nSec = (int)(m_nRemainTime % 60);
 
+        int nRequestTimer = 0;
+
         m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         while (true)
         {
@@ -174,6 +176,12 @@ public class CUIsRATManager : MonoBehaviour
             nSec = (int)(m_nRemainTime % 60);
 
             m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+            if ((nRequestTimer % 5) == 0)
+            {
+                Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz("RAT").part_idx);
+            }
+            nRequestTimer++;
 
             if (m_nRemainTime == 0)
                 break;
@@ -222,7 +230,17 @@ public class CUIsRATManager : MonoBehaviour
             return;
         }
 
+        // 상태값 API 호출 -----------------------------
         Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswer.text);
+        Server.Instance.RequestPUTQuestionsStatus(CQuizData.Instance.GetQuiz("RAT").part_idx, 1);
+
+        if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING"))
+            {
+                Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+            }
+        }
 
         if ( m_nQuizIndex < 1 )
         {

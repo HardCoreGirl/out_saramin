@@ -34,8 +34,24 @@ public class CUIsRQTTalkChat : MonoBehaviour
     public void OnClickTalk()
     {
         Debug.Log("OnClickTalk : " + m_nIndex);
+        if (CQuizData.Instance.GetQuiz("RQT").sets[0].questions[0].test_answers[0].test_anwr_idx != 0)
+        {
+            CUIsSpaceScreenLeft.Instance.SetRQTTutorial(false);
 
-        CUIsSpaceScreenLeft.Instance.ShowQuiz(0, 0, CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
+            int nLastQuizIndex = 0;
+            for(int i = 0; i < CQuizData.Instance.GetQuiz("RQT").sets.Length; i++)
+            {
+                if(CQuizData.Instance.GetQuiz("RQT").sets[i].questions[0].test_answers[0].test_anwr_idx == 0)
+                {
+                    nLastQuizIndex = i;
+                    break;
+                }
+            }
 
+            CUIsSpaceScreenLeft.Instance.ShowQuiz(0, nLastQuizIndex, CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
+        } else
+        {
+            CUIsSpaceScreenLeft.Instance.ShowQuiz(0, 0, CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
+        }
     }
 }

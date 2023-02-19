@@ -72,7 +72,7 @@ public class CUIsCSTListAnswer : MonoBehaviour
 
     public void OnChangeAnswer()
     {
-        Debug.Log("OnChangeAnswer");
+        //Debug.Log("OnChangeAnswer");
         //gameObject.GetComponent<Image>().color = new Color(0.8588236f, 0.9215687f, 1);
 
         if ( m_nSession == 0 )

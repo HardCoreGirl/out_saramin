@@ -120,6 +120,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         if (CSpaceAppEngine.Instance.IsFinishLeft02()) ShowMissionClear(1);
         else HideMissionClear(1);
 
+
+
         SetCSTTutorial(true);
 
         ShowPage(0);
@@ -155,10 +157,69 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         Server.Instance.RequestPOSTQuestions(quizData.part_idx);
         //Server.Instance.RequestPOSTPartJoin(quizData.part_idx);
         //ShowPopupFinish();
-        ShowPage(1, true);
-        HideAllQuiz();
 
-        
+        // 상태값 API 호출 -----------------------------
+        if (nIndex == 0)
+        {
+            if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+            {
+                if (CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("WAITING"))
+                {
+                    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("RQT").idx);
+                }
+            }
+            ShowPage(1, true);
+            HideAllQuiz();
+        }
+        else
+        {
+            if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+            {
+                if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING"))
+                {
+                    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                }
+                //if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING"))
+                //{
+                //    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                //}
+                //if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING"))
+                //{
+                //    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                //}
+
+                HideAllPages();
+                if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("TAE") || CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING"))
+                {
+                    ShowCSTPage();
+                } else if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("TAE") || CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING"))
+                {
+                    ShowRATPage();
+                } else
+                {
+                    ShowHPTSPage();
+                }
+            } else
+            {
+                HideAllPages();
+                ShowCSTPage();
+            }
+
+            // TODO 230216
+
+            //if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING"))
+            //{
+            //    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+            //}
+
+            //if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING"))
+            //{
+            //    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+            //}
+
+        }
+
+
         //ShowQuiz(nIndex);
 
         //InitQuiz();
@@ -195,6 +256,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
     IEnumerator ProcessQuiz()
     {
+        int nRequestTimer = 0;
         m_txtRemain.text = "00:" + m_nRemainTime.ToString("00");
         while(true)
         {
@@ -202,6 +264,12 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
             m_nRemainTime--;
             m_txtRemain.text = "00:" + m_nRemainTime.ToString("00");
+
+            if ((nRequestTimer % 5) == 0)
+            {
+                Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz("CST").part_idx);
+            }
+            nRequestTimer++;
 
             if (m_nRemainTime == 0)
                 break;
@@ -429,6 +497,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         m_txtRemain.color = new Color(0, 0.5215687f, 1f);
         int m_nRemainTimeState = 0;
 
+        int nRequestTimer = 0;
+       
         while (true)
         {
             yield return new WaitForSeconds(1f);
@@ -455,6 +525,12 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
             nSec = (int)(m_nRemainTime % 60);
 
             m_txtRemain.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+            if ((nRequestTimer % 5) == 0)
+            {
+                Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz("RQT").part_idx);
+            }
+            nRequestTimer++;
 
             if (m_nRemainTime == 0)
                 break;

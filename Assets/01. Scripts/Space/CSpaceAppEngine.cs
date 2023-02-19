@@ -61,7 +61,7 @@ public class CSpaceAppEngine : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("CSpaceAppEngine 01");
+        //Debug.Log("CSpaceAppEngine 01");
         UpdateMissionClear();
         //HideAllObjectOutline();
         //Server.Instance.GetComponent()
@@ -93,27 +93,27 @@ public class CSpaceAppEngine : MonoBehaviour
                 if( !CUIsSpaceManager.Instance.IsScreenActive() )
                 {
                     //Debug.Log("GetMouseButtonDown : " + hit.collider.name);
-                    if( !m_bIsQuizLoaded)
-                    {
-                        Debug.Log("GetMouseButtonDown Quiz Loaded");
-                        m_bIsQuizLoaded = true;
-                        CUIsSpaceManager.Instance.ScreenActive(true);
+                    //if( !m_bIsQuizLoaded)
+                    //{
+                    //    Debug.Log("GetMouseButtonDown Quiz Loaded");
+                    //    m_bIsQuizLoaded = true;
+                    //    CUIsSpaceManager.Instance.ScreenActive(true);
 
-                        if (GetServerType().Equals("LOCAL"))
-                        {
-                            //Debug.Log("Screen Left - LOCAL LOADED");
-                            Server.Instance.RequestGETQuestions(0);
-                            //CUIsSpaceManager.Instance.ShowLeftPage();
-                            //return;
-                        } else
-                        {
-                            STTestCheck stTestCheck = CQuizData.Instance.GetTestCheck();
-                            for (int i = 0; i < stTestCheck.body.part_list.Length; i++)
-                            {
-                                Server.Instance.RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
-                            }
-                        }
-                    }
+                    //    if (GetServerType().Equals("LOCAL"))
+                    //    {
+                    //        //Debug.Log("Screen Left - LOCAL LOADED");
+                    //        Server.Instance.RequestGETQuestions(0);
+                    //        //CUIsSpaceManager.Instance.ShowLeftPage();
+                    //        //return;
+                    //    } else
+                    //    {
+                    //        STTestCheck stTestCheck = CQuizData.Instance.GetTestCheck();
+                    //        for (int i = 0; i < stTestCheck.body.part_list.Length; i++)
+                    //        {
+                    //            Server.Instance.RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
+                    //        }
+                    //    }
+                    //}
                     if (hit.collider.name.Equals("screen_left"))
                     {
                         if (m_bIsFinishLeft01 && m_bIsFinishLeft02)
@@ -124,6 +124,33 @@ public class CSpaceAppEngine : MonoBehaviour
                         //    //Debug.Log("Screen Left - LOCAL LOADED");
                         //    //Server.Instance.RequestGETQuestions(0);
                         //}
+
+                        if (!GetServerType().Equals("LOCAL"))
+                        {
+                            if(CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("TAE"))
+                            {
+                                Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RQT").idx);
+                            }
+                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RQT").idx);
+
+                            if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("TAE"))
+                            {
+                                Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                            }
+                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+
+                            if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("TAE"))
+                            {
+                                Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                            }
+                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+
+                            if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("TAE"))
+                            {
+                                Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                            }
+                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                        }
 
                         CUIsSpaceManager.Instance.ShowLeftPage();
                         //CUIsSpaceManager.Instance.ShowLeftPage();
@@ -139,6 +166,9 @@ public class CSpaceAppEngine : MonoBehaviour
                             //Server.Instance.RequestGETQuestions(0);
                             CUIsSpaceManager.Instance.ShowCenterPage();
                             return;
+                        } else
+                        {
+                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("LGTK").idx);
                         }
 
                         CUIsSpaceManager.Instance.ShowCenterPage();
@@ -152,6 +182,10 @@ public class CSpaceAppEngine : MonoBehaviour
                         if (GetServerType().Equals("LOCAL"))
                         {
                             Server.Instance.RequestGETQuestions(0);
+                        } else
+                        {
+                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD1").idx);
+                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
                         }
 
                         CUIsSpaceManager.Instance.ShowRightPage();

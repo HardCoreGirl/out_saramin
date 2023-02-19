@@ -57,6 +57,8 @@ public class CUIsAPTPage1Manager : MonoBehaviour
                 strQuizName = i.ToString() + "번 문제";
             }
 
+            Debug.Log("InitAPTPage - Index : " + i + ", State : " + CUIsAPTManager.Instance.GetAnswerState(i));
+
             if (CUIsAPTManager.Instance.GetAnswerState(i) == 0)
             {
                 strQuizState = "확인 요망";
@@ -75,6 +77,36 @@ public class CUIsAPTPage1Manager : MonoBehaviour
 
     public void OnClickPlayQuiz()
     {
+        if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            if (CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("WAITING"))
+            {
+                Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("APTD1").idx);
+            }
+
+            if (CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("TAE"))
+            {
+                //Debug.Log("OnClickPlayQuiz Index : " + i + ", Answer : " + CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx);
+                for (int i = 0; i < CQuizData.Instance.GetQuiz("APTD1").sets.Length; i++)
+                {
+                    if (CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx != 0)
+                    {
+                        CUIsAPTManager.Instance.SetAnswerState(i, 0);
+                    }
+                }
+            }
+            else if (CQuizData.Instance.GetExamInfoDetail("APTD2").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("APTD2").status.Equals("TAE"))
+            {
+                for (int i = 0; i < CQuizData.Instance.GetQuiz("APTD2").sets.Length; i++)
+                {
+                    if (CQuizData.Instance.GetQuiz("APTD2").sets[i].questions[0].test_answers[0].test_anwr_idx != 0)
+                    {
+                        CUIsAPTManager.Instance.SetAnswerState(i, 0);
+                    }
+                }
+            }
+        }
+
         CUIsAPTManager.Instance.ShowAPTPage(1);
     }
 
