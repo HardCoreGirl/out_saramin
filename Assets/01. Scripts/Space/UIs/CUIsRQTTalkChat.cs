@@ -48,6 +48,7 @@ public class CUIsRQTTalkChat : MonoBehaviour
                 }
             }
 
+            CUIsSpaceScreenLeft.Instance.InitRQTQuiz(false);
             CUIsSpaceScreenLeft.Instance.ShowQuiz(0, nLastQuizIndex, CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
         } else
         {

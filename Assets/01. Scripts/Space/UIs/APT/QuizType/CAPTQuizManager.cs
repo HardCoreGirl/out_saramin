@@ -78,7 +78,7 @@ public class CAPTQuizManager : MonoBehaviour
 
         for (int i = 0; i < m_quizInfo.sets[nIndex].questions[0].answers.Length; i++)
         {
-            Debug.Log("URL : " + CQuizData.Instance.GetQuiz(strKey).sets[nIndex].questions[0].answers[i].anwr_cnnt);
+            //Debug.Log("URL : " + CQuizData.Instance.GetQuiz(strKey).sets[nIndex].questions[0].answers[i].anwr_cnnt);
             if (m_quizInfo.sets[nIndex].questions[0].answers[i].anwr_brws_cd.Equals("IMG") && CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
             {
                 m_listStrAnswerURL[0] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEwMDlfMjA4%2FMDAxNjY1Mjg5NjkwNDcw.PU1zLsWkwUFVqasfKdg3isaQrWZWu6tKRbxYcgvtKJ0g.oXT70SvfyeTxN1y_bY2__QQF8tciooCjZMGuzjouCjYg.JPEG.dedoeoh%2FFejY9GNaAAEvJSc.jpeg&type=sc960_832";
@@ -181,6 +181,8 @@ public class CAPTQuizManager : MonoBehaviour
         CUIsAPTManager.Instance.SetAnswerState(nNextQuizIndex, 1);
         CUIsAPTPage2Manager.Instance.UpdateQuizList(nNextQuizIndex);
         CUIsAPTPage2Manager.Instance.ShowQuiz(nNextQuizIndex);
+
+        CUIsAPTPage2Manager.Instance.UpdateFinishAnswer();
     }
 
     public void UpdateSelect()

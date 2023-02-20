@@ -182,13 +182,14 @@ public class CSpaceAppEngine : MonoBehaviour
                         if (GetServerType().Equals("LOCAL"))
                         {
                             Server.Instance.RequestGETQuestions(0);
+                            CUIsSpaceManager.Instance.ShowRightPage();
                         } else
                         {
                             Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD1").idx);
                             Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
                         }
 
-                        CUIsSpaceManager.Instance.ShowRightPage();
+                        //CUIsSpaceManager.Instance.ShowRightPage();
                     }
                 }
                 //else if (hit.collider.name == "Screen_spaceship")

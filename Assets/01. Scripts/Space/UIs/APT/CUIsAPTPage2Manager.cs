@@ -45,6 +45,8 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
     public Text m_txtQuizTitle;
 
+    public Text m_txtFinishAnswer;
+
     public Text m_txtRemainTime;
 
     private bool m_bIsTutorial;
@@ -78,12 +80,14 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         InitSelectIdx();
 
         // TODO SELECT
+        bool bIsTutorial = true;
         if( !CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
             for (int i = 0; i < CQuizData.Instance.GetQuiz("APTD1").sets.Length; i++)
             {
                 if (CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx != 0)
                 {
+                    bIsTutorial = false;
                     for(int j = 0; j < 4; j++)
                     {
                         if(CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].answers[j].anwr_idx == CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx)
@@ -108,13 +112,19 @@ public class CUIsAPTPage2Manager : MonoBehaviour
                 m_listQuizList[i].GetComponent<CObjectAPTQuizList2>().InitAPTQuizList2(i, CUIsAPTManager.Instance.GetAnswerState(i-1));
         }
 
+        
+
         ShowQuiz(0);
+        //SetTutorial(true);
         SetTutorial(true);
         SetTutorialWait(false);
 
         m_nQuizType = 0;
         m_txtRemainTime.text = "시작 전";
-        m_nRemainTime = CQuizData.Instance.GetQuiz("APTD1").exm_time;
+        //m_nRemainTime = CQuizData.Instance.GetQuiz("APTD1").exm_time;
+        m_nRemainTime = CQuizData.Instance.GetQuiz("APTD1").progress_time;
+        UpdateFinishAnswer();
+
         //m_nRemainTime = 10;
         //+ CQuizData.Instance.GetQuiz("APTD2").exm_time;
     }
@@ -143,7 +153,9 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         }
 
         m_nQuizType = 1;
-        m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").exm_time;
+        //m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").exm_time;
+        m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").progress_time;
+        UpdateFinishAnswer();
         //m_nRemainTime = 10;
         DelQuizList();
 
@@ -160,6 +172,18 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         HideExQuizList();
 
         StartQuiz();
+    }
+
+    public void UpdateFinishAnswer()
+    {
+        //Debug.Log("UpdateFinishAnswer : " + CUIsAPTManager.Instance.GetFinishAnswerCount());
+        int nTotalCnt = 0;
+        if (m_nQuizType == 0)
+            nTotalCnt = 28;
+        else
+            nTotalCnt = 20;
+        m_txtFinishAnswer.text = "적응\n테스트\n" + CUIsAPTManager.Instance.GetFinishAnswerCount().ToString() + "/" + nTotalCnt.ToString();
+        //m_txtQuizTitle.text = "적응\n테스트\n" + CUIsAPTManager.Instance.GetFinishAnswerCount().ToString() + "/" + nTotalCnt.ToString();
     }
 
     public void InitSelectIdx()
@@ -333,7 +357,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             }
             nRequestTimer++;
 
-            if (m_nRemainTime == 0)
+            if (m_nRemainTime <= 0)
                 break;
         }
 
@@ -350,7 +374,8 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
     public void OnClickExit()
     {
-        CUIsAPTManager.Instance.ShowPopup(2);
+        CUIsAPTManager.Instance.ShowPopupToLobby();
+        //CUIsAPTManager.Instance.ShowPopup(2);
         //CUIsSpaceManager.Instance.ScreenActive(false);
         //gameObject.SetActive(false);
     }
@@ -430,5 +455,10 @@ public class CUIsAPTPage2Manager : MonoBehaviour
     public void HideTutorialMsg()
     {
         m_goTutorialMsg.SetActive(false);
+    }
+
+    public int GetRemainTime()
+    {
+        return m_nRemainTime;
     }
 }

@@ -25,9 +25,12 @@ public class CUIsRATManager : MonoBehaviour
     public GameObject m_goPopupTimeover;
 
     public GameObject m_goPopupToLobby;
+    public Text m_txtToLobbyMsg;
     public Text m_txtToLobbyRemainTime;
 
     public GameObject m_goPopupToLobbyOver;
+    public Text m_txtToLobbyOverMsg;
+    public Text m_txtToLobbyOverRemainTime;
 
     private int m_nTutorialStep = 0;
     private int m_nRemainTime = 0;
@@ -119,7 +122,8 @@ public class CUIsRATManager : MonoBehaviour
             if (m_nQuizIndex == 0)
             {
                 //m_nRemainTime = 60;
-                m_nRemainTime = quizData.exm_time;
+                //m_nRemainTime = quizData.exm_time;
+                m_nRemainTime = quizData.progress_time;
                 StartCoroutine("ProcessPlayExam");
 
                 for (int i = 0; i < 5; i++)
@@ -183,7 +187,7 @@ public class CUIsRATManager : MonoBehaviour
             }
             nRequestTimer++;
 
-            if (m_nRemainTime == 0)
+            if (m_nRemainTime <= 0)
                 break;
         }
 
@@ -288,13 +292,41 @@ public class CUIsRATManager : MonoBehaviour
 
     public void ShowPopupToLobby()
     {
-        m_goPopupToLobby.SetActive(true);
+        if (CQuizData.Instance.GetEnableExitCount() > 0)
+        {
+            m_goPopupToLobby.SetActive(true);
+            m_txtToLobbyMsg.text = "아직 시간이 남아있습니다. 메인 로비로 이동한 후 다시 본 미션을 수행하려면 총 <color=#FF0000>" + CQuizData.Instance.GetEnableExitCount().ToString() + "</color>번의 메인로비 이동 기회 중 1회 차감됨니다.<color=#FF0000>(" + CQuizData.Instance.GetEnableExitCount().ToString() + "/" + CQuizData.Instance.GetMaxExitCount().ToString() + ")</color>";
 
-        int nMin = (int)(m_nRemainTime / 60);
-        int nSec = (int)(m_nRemainTime % 60);
+            int nMin = (int)(m_nRemainTime / 60);
+            int nSec = (int)(m_nRemainTime % 60);
 
-        m_txtToLobbyRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+            m_txtToLobbyRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+        }
+        else
+        {
+            m_goPopupToLobbyOver.SetActive(true);
+            m_txtToLobbyOverMsg.text = "메인 로비 이동횟수를 모두 사용하셨습니다 <color=#FF0000>(0/" + CQuizData.Instance.GetMaxExitCount().ToString() + ")</color>.본 미션을 완료한 후에 이동할 수 있습니다.";
+        }
+
+        StartCoroutine("ProcessToLobbyRemainTime");
     }
+
+    IEnumerator ProcessToLobbyRemainTime()
+    {
+        while (true)
+        {
+            int nRemainTime = m_nRemainTime;
+            int nMin = (int)(nRemainTime / 60);
+            int nSec = (int)(nRemainTime % 60);
+
+            if (m_goPopupToLobby.activeSelf)
+                m_txtToLobbyRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+            if (m_goPopupToLobbyOver.activeSelf)
+                m_txtToLobbyOverRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
 
     public void ShowPopupToLobbyOver()
     {
@@ -314,6 +346,8 @@ public class CUIsRATManager : MonoBehaviour
 
     public void OnClickPopupToLobby()
     {
+        StopCoroutine("ProcessToLobbyRemainTime");
+        Server.Instance.RequestPUTActionExit();
         StopCoroutine("ProcessPlayExam");
         HideAllPopup();
         CUIsSpaceScreenLeft.Instance.HideRightAllPage();

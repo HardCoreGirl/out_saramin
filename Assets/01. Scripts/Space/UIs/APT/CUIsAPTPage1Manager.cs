@@ -11,6 +11,8 @@ public class CUIsAPTPage1Manager : MonoBehaviour
     public Text m_txtAPTD2Cnt;
     public Text m_txtAPTD2Time;
 
+    public Text m_txtAnswerCnt;
+
     public GameObject m_goAnswerContent;
 
     public Toggle m_toggleAgree;
@@ -42,6 +44,26 @@ public class CUIsAPTPage1Manager : MonoBehaviour
         nMin = quizAPT.exm_time / 60;
         m_txtAPTD2Time.text = nMin.ToString() + " 분";
 
+        int nFinishAnswerCnt = 0;
+
+        if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            if (CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("TAE"))
+            {
+                //Debug.Log("OnClickPlayQuiz Index : " + i + ", Answer : " + CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx);
+                for (int i = 0; i < CQuizData.Instance.GetQuiz("APTD1").sets.Length; i++)
+                {
+                    if (CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx != 0)
+                    {
+                        CUIsAPTManager.Instance.SetAnswerState(i, 0);
+                        nFinishAnswerCnt++;
+                    }
+                }
+            }
+        }
+
+        m_txtAnswerCnt.text = "적응\n테스트\n" + nFinishAnswerCnt.ToString() + "/28";
+
         for (int i = 0; i < 29; i++)
         {
             GameObject goList = Instantiate(Resources.Load("Prefabs/APTQuizList01") as GameObject);
@@ -51,25 +73,26 @@ public class CUIsAPTPage1Manager : MonoBehaviour
             if (i == 0)
             {
                 strQuizName = "연습 문제";
+                strQuizState = "확인 요망";
             }
             else
             {
                 strQuizName = i.ToString() + "번 문제";
+
+                if (CUIsAPTManager.Instance.GetAnswerState(i - 1) == 0)
+                {
+                    strQuizState = "완료";
+                }
+                else if (CUIsAPTManager.Instance.GetAnswerState(i - 1) == 1)
+                {
+                    strQuizState = "진행중";
+                }
+                else
+                {
+                    strQuizState = "확인요망";
+                }
             }
 
-            Debug.Log("InitAPTPage - Index : " + i + ", State : " + CUIsAPTManager.Instance.GetAnswerState(i));
-
-            if (CUIsAPTManager.Instance.GetAnswerState(i) == 0)
-            {
-                strQuizState = "확인 요망";
-            } else if (CUIsAPTManager.Instance.GetAnswerState(i) == 1)
-            {
-                strQuizState = "진행중";
-            }
-            else
-            {
-                strQuizState = "완료";
-            }
             goList.GetComponent<CObjectAPTQuizList>().InitAPTQuizList(i, strQuizName, strQuizState);
         }
         

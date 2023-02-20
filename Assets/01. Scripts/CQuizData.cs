@@ -229,7 +229,25 @@ public class STPacketExamInfoBody
     public string setCnnt;
     public string setCnntImg;
 }
-// --------------------------------------------------
+// -------------------------------------------------
+
+// TODO --------------------------------------------
+public class STPacketInfoMission
+{
+    public int code;
+    public string message;
+    public STPacketInfoMissionBody[] body;
+}
+
+[Serializable]
+public class STPacketInfoMissionBody
+{
+    public int idx;
+    public string title;
+    public string content;
+    public int sortSeq;
+}
+// -------------------------------------------------
 
 public class STPacketBasic
 {
@@ -350,6 +368,8 @@ public class CQuizData : MonoBehaviour
 
     public STPacketExamInfo m_packetExamInfo;
 
+    public STPacketInfoMission m_packetInfoMission;
+
     private string m_strUserName;
     private int m_nExitCnt;
 
@@ -468,6 +488,11 @@ public class CQuizData : MonoBehaviour
         return m_nExitCnt;
     }
 
+    public int GetEnableExitCount()
+    {
+        return GetMaxExitCount() - GetExitCount();
+    }
+
     public void SetMaxExitCount(int nMaxCount)
     {
         m_nMaxExitCnt = nMaxCount;
@@ -525,6 +550,15 @@ public class CQuizData : MonoBehaviour
         return null;
     }
 
+    public void SetInfoMission(STPacketInfoMission packetInfoMission)
+    {
+        m_packetInfoMission = packetInfoMission;
+    }
+
+    public STPacketInfoMission GetInfoMission()
+    {
+        return m_packetInfoMission;
+    }
 }
 
 //public class CQuizQuestion

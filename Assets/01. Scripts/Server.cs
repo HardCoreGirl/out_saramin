@@ -299,8 +299,12 @@ public class Server : MonoBehaviour
 
             if (stPacketQuiz.code == 200)
             {
-                if ( stPacketQuiz.body.qst_tp_cd.Equals("RQT") ) CQuizData.Instance.SetRQT(stPacketQuiz);
-                else if (stPacketQuiz.body.qst_tp_cd.Equals("APTD1")) CQuizData.Instance.SetAPTD1(stPacketQuiz);
+                if (stPacketQuiz.body.qst_tp_cd.Equals("RQT")) CQuizData.Instance.SetRQT(stPacketQuiz);
+                else if (stPacketQuiz.body.qst_tp_cd.Equals("APTD1"))
+                {
+                    CQuizData.Instance.SetAPTD1(stPacketQuiz);
+                    CUIsSpaceManager.Instance.ShowRightPage();
+                }
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("APTD2")) CQuizData.Instance.SetAPTD2(stPacketQuiz);
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("CST")) CQuizData.Instance.SetCST(stPacketQuiz);
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("RAT")) CQuizData.Instance.SetRAT(stPacketQuiz);
@@ -444,11 +448,34 @@ public class Server : MonoBehaviour
             STPacketExamInfo packetExamInfo = new STPacketExamInfo();
             packetExamInfo = JsonUtility.FromJson<STPacketExamInfo>(txt);
             CQuizData.Instance.SetExamInfo(packetExamInfo);
+
+            for(int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
+            {
+                if( CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("RQT") )
+                {
+                    if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishLeft01(true);
+                } else if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("HPTS"))
+                {
+                    if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishLeft02(true);
+                }
+                else if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("LGTK"))
+                {
+                    if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishCenter(true);
+                }
+                else if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("APTD2"))
+                {
+                    if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishRight(true);
+                }
+            }
+
+            CSpaceAppEngine.Instance.UpdateMissionClear();
         });
     }
 
     public void ReuquestGETInfoMissions()
     {
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
+
         string jsonBody = JsonConvert.SerializeObject(null);
 
 
@@ -462,6 +489,11 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         GET(url, header, (string txt) =>
         {
+            STPacketInfoMission packetInfoMission = new STPacketInfoMission();
+            packetInfoMission = JsonUtility.FromJson<STPacketInfoMission>(txt);
+            CQuizData.Instance.SetInfoMission(packetInfoMission);
+
+            CUIsTodoManager.Instance.UpdateDummyTodo();
             //RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
 
             //Debug.Log("txt : " + txt);

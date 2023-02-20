@@ -138,7 +138,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
             return;
         }
 
-        if (m_nRQTExitCount > 0)
+        if (CQuizData.Instance.GetEnableExitCount() > 0)
             ShowPopupToLobby();
         else
             ShowPopupToLobbyOver();
@@ -271,7 +271,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
             }
             nRequestTimer++;
 
-            if (m_nRemainTime == 0)
+            if (m_nRemainTime <= 0)
                 break;
         }
 
@@ -347,8 +347,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         else if (nPage == 1)
         {
             //Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", bTutorial);
-            Quiz quizRQT = CQuizData.Instance.GetRQT().body;
-            Debug.Log("Quiz RQT Set Cnt : " + quizRQT.sets.Length);
+            //Quiz quizRQT = CQuizData.Instance.GetRQT().body;
             if(bTutorial)
             {
                 m_txtRemain.text = "시작 전";
@@ -482,7 +481,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
             } else
             {
                 Quiz quizRQT = CQuizData.Instance.GetRQT().body;
-                m_nRemainTime = quizRQT.exm_time;               
+                //m_nRemainTime = quizRQT.exm_time;               
+                m_nRemainTime = quizRQT.progress_time;
             }
             StartCoroutine("ProcessRQTQuiz");
         } 
@@ -492,6 +492,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         int nMin = (int)(m_nRemainTime / 60);
         int nSec = (int)(m_nRemainTime % 60);
+
+        //Debug.Log("ProcessRQTQuiz 01 ReaminTime : " + m_nRemainTime);
 
         m_txtRemain.text = nMin.ToString("00") + ":" +  nSec.ToString("00");
         m_txtRemain.color = new Color(0, 0.5215687f, 1f);
@@ -505,7 +507,9 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
             m_nRemainTime--;
 
-            if(m_nRemainTimeState == 0)
+            //Debug.Log("ProcessRQTQuiz 02 ReaminTime : " + m_nRemainTime);
+
+            if (m_nRemainTimeState == 0)
             {
                 if( m_nRemainTime <= 60 * 5 )
                 {
@@ -532,7 +536,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
             }
             nRequestTimer++;
 
-            if (m_nRemainTime == 0)
+            if (m_nRemainTime <= 0)
                 break;
         }
 
@@ -622,22 +626,34 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         m_goPopupToLobby.SetActive(true);
 
-        int nMin = (int)(m_nRemainTime / 60);
-        int nSec = (int)(m_nRemainTime % 60);
+        m_txtToLobbyRemainCnt.text = "아직 시간이 남아있습니다. 메인 로비로 이동한 후 다시 본 미션을 수행하려면 총 <color=#FF0000>" + CQuizData.Instance.GetEnableExitCount().ToString() + "</color>번의 메인로비 이동 기회 중 1회 차감됨니다.<color=#FF0000>(" + CQuizData.Instance.GetEnableExitCount().ToString() + "/" + CQuizData.Instance.GetMaxExitCount().ToString() + ")</color>";
 
-        //m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
-        m_txtToLobbyRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+        StartCoroutine("ProcessToLobbyRemainTime");
+    }
 
-        m_txtToLobbyRemainCnt.text = "아직 시간이 남아있습니다. 메인 로비로 이동한 후 다시 본 미션을 수행하려면 총 <color=#FF0000>" + m_nRQTMaxExitCount.ToString() + "</color>번의 메인로비 이동 기회 중 1회 차감됨니다.<color=#FF0000>(" + m_nRQTExitCount.ToString() + "/" + m_nRQTMaxExitCount.ToString() + ")</color>";
+    IEnumerator ProcessToLobbyRemainTime()
+    {
+        while(true)
+        {
+            int nMin = (int)(m_nRemainTime / 60);
+            int nSec = (int)(m_nRemainTime % 60);
+
+            //m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+            m_txtToLobbyRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void HidePopupToLobby()
     {
+        StopCoroutine("ProcessToLobbyRemainTime");
         m_goPopupToLobby.SetActive(false);
     }
 
     public void OnClickToLobby()
     {
+        Server.Instance.RequestPUTActionExit();
         StopCoroutine("ProcessRQTQuiz");
         HideAllPopup();
         HideAllPages();
@@ -662,12 +678,29 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         //m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         m_txtToLobbyOverRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
 
-        m_txtToLobbyOverRemainCnt.text = "메인 로비 이동횟수를 모두 사용하셨습니다<color=#FF0000>(0/" + m_nRQTMaxExitCount.ToString() + ")</color>.\n본 미션을 완료한 후에 이동할 수 있습니다.";
+        m_txtToLobbyOverRemainCnt.text = "메인 로비 이동횟수를 모두 사용하셨습니다 <color=#FF0000>(0/" + CQuizData.Instance.GetMaxExitCount().ToString() + ")</color>.본 미션을 완료한 후에 이동할 수 있습니다.";
 
+        StartCoroutine("ProcessToLobbyOverRemainTime");
+
+    }
+
+    IEnumerator ProcessToLobbyOverRemainTime()
+    {
+        while (true)
+        {
+            int nMin = (int)(m_nRemainTime / 60);
+            int nSec = (int)(m_nRemainTime % 60);
+
+            //m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+            m_txtToLobbyOverRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void HidePopupToLobbyOver()
     {
+        StopCoroutine("ProcessToLobbyOverRemainTime");
         m_goPopupToLobbyOver.SetActive(false);
     }
 
