@@ -37,6 +37,10 @@ public class CAPTQuizManager : MonoBehaviour
 
     public void InitQuizType(int nType, int nIndex, int nQuizListIndex)
     {
+        InitAnswer();
+
+
+
         m_nSelectIndex = -1;
         if( nType != -1 )   // 연습문제가 아니라면
         {
@@ -65,15 +69,17 @@ public class CAPTQuizManager : MonoBehaviour
         //    {
         //        // 정답 URL
         //        //quizAPT.sets[nIndex].questions[0].answers[i].anwr_cnnt
-        //        m_listStrAnswerURL[i] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEwMDlfMjA4%2FMDAxNjY1Mjg5NjkwNDcw.PU1zLsWkwUFVqasfKdg3isaQrWZWu6tKRbxYcgvtKJ0g.oXT70SvfyeTxN1y_bY2__QQF8tciooCjZMGuzjouCjYg.JPEG.dedoeoh%2FFejY9GNaAAEvJSc.jpeg&type=sc960_832";
+        //        //m_listStrAnswerURL[i] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEwMDlfMjA4%2FMDAxNjY1Mjg5NjkwNDcw.PU1zLsWkwUFVqasfKdg3isaQrWZWu6tKRbxYcgvtKJ0g.oXT70SvfyeTxN1y_bY2__QQF8tciooCjZMGuzjouCjYg.JPEG.dedoeoh%2FFejY9GNaAAEvJSc.jpeg&type=sc960_832";
+        //        m_listStrAnswerURL[i] = "https://rrrrrrrrr.com";
         //    }
 
         //    m_listStrAnswerURL[1] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMDZfMjQw%2FMDAxNjY3NzM3OTA1NjYx.e-Rfc1datklaiYBsOU1pPULpt0RXbzYR_42gjBwX6FUg.JEviHd3VQ7U3mblZ2UlIy2KqyoyXGVbxigWGPE3ib4Qg.JPEG.kjky021%2F%25B4%25D9%25BF%25EE%25B7%25CE%25B5%25E5%25C6%25C4%25C0%25CF%25A3%25DF20221106%25A3%25DF213020.jpg&type=sc960_832";
         //    m_listStrAnswerURL[2] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEyMTRfMTc3%2FMDAxNjcxMDA1MTQ4NDg1.y8B8R8ELubZ25SN8AcfYZU33KvXn0pQ7PLN0UdZ4o9kg.4gwbh0z1GplmuJU-Yph6dL1eBPN_krk6DjbE37fKEWMg.JPEG.pje4476%2F1._%25B4%25BA%25C1%25F8%25BD%25BA_%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5_%25282%2529.JPG&type=sc960_832";
         //    m_listStrAnswerURL[3] = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA5MjdfNDgg%2FMDAxNjY0MjczNTAyMzE3.VoXWovZzMJxX2O_lV3S6QQD66pefrOfYJgxmNCuICsEg.nkN2lw_cSEsFi3UNzPUJpYjsSnKXA5_FiKbyCoqThMAg.JPEG.spring19790%2F4.jpg&type=sc960_832";
-        //} else
+        //}
+        //else
         //{
-        m_strQuizURL = Server.Instance.GetCurURL() + m_quizInfo.sets[nIndex].questions[0].qst_cnnt;
+        //    m_strQuizURL = Server.Instance.GetCurURL() + m_quizInfo.sets[nIndex].questions[0].qst_cnnt;
 
 
         for (int i = 0; i < m_quizInfo.sets[nIndex].questions[0].answers.Length; i++)
@@ -89,7 +95,7 @@ public class CAPTQuizManager : MonoBehaviour
             }
             else
             {
-                m_listStrAnswerURL[i] = Server.Instance.GetCurURL() + m_quizInfo.sets[nIndex].questions[0].answers[i].anwr_cnnt;
+                m_listStrAnswerURL[3 - i] = Server.Instance.GetCurURL() + m_quizInfo.sets[nIndex].questions[0].answers[i].anwr_cnnt;
             }
             
         }
@@ -97,6 +103,17 @@ public class CAPTQuizManager : MonoBehaviour
 
         StartCoroutine("ProcessQuiz");
         // CUIsRATManager 스프라이트 참조
+    }
+
+    public void InitAnswer()
+    {
+        StopCoroutine("ProcessQuiz");
+
+        for (int i = 0; i < 4; i++)
+        {
+            m_listImgAnswer[i].sprite = null;
+            m_listTxtAnswer[i].text = "";
+        }
     }
 
     IEnumerator ProcessQuiz()
@@ -125,39 +142,68 @@ public class CAPTQuizManager : MonoBehaviour
             //}
         }
 
-        if(m_quizInfo.sets[m_nIndex].questions[0].qst_exos_cd.Equals("FORM_C"))
-        {
-            
-        } else
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                if(m_quizInfo.sets[m_nIndex].questions[0].answers[i].anwr_brws_cd.Equals("IMG"))
-                {
-                    m_listTxtAnswer[i].text = "";
-                    UnityWebRequest www = UnityWebRequestTexture.GetTexture(m_listStrAnswerURL[i]);
-                    yield return www.SendWebRequest();
+        //if(m_quizInfo.sets[m_nIndex].questions[0].qst_exos_cd.Equals("FORM_C"))
+        //{
 
-                    if (www.result != UnityWebRequest.Result.Success)
-                    {
-                        Debug.Log(www.error);
-                    }
-                    else
-                    {
-                        Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
-                        Rect rect = new Rect(0, 0, myTexture.width, myTexture.height);
-                        m_listImgAnswer[i].sprite = Sprite.Create(myTexture, rect, new Vector2(150, 150));
-                    }
-                } else
+        //} else
+        //{
+        //    for (int i = 0; i < 4; i++)
+        //    {
+        //        if(m_quizInfo.sets[m_nIndex].questions[0].answers[i].anwr_brws_cd.Equals("IMG"))
+        //        {
+        //            m_listTxtAnswer[i].text = "";
+        //            Debug.Log("Image URL : " + m_listStrAnswerURL[i]);
+        //            UnityWebRequest www = UnityWebRequestTexture.GetTexture(m_listStrAnswerURL[i]);
+        //            yield return www.SendWebRequest();
+
+        //            if (www.result != UnityWebRequest.Result.Success)
+        //            {
+        //                Debug.Log(www.error);
+        //            }
+        //            else
+        //            {
+        //                Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+        //                Rect rect = new Rect(0, 0, myTexture.width, myTexture.height);
+        //                m_listImgAnswer[i].sprite = Sprite.Create(myTexture, rect, new Vector2(150, 150));
+        //                //m_listImgAnswer[i].color = new Color(0, 0, 0, 1);
+        //            }
+        //        } else
+        //        {
+        //            m_listTxtAnswer[i].text = m_quizInfo.sets[m_nIndex].questions[0].answers[i].anwr_cnnt;
+        //        }
+        //    }
+        //}
+        for (int i = 0; i < 4; i++)
+        {
+            if (m_quizInfo.sets[m_nIndex].questions[0].answers[i].anwr_brws_cd.Equals("IMG"))
+            {
+                m_listTxtAnswer[i].text = "";
+                Debug.Log("Image URL : " + m_listStrAnswerURL[i]);
+                UnityWebRequest www = UnityWebRequestTexture.GetTexture(m_listStrAnswerURL[i]);
+                yield return www.SendWebRequest();
+
+                if (www.result != UnityWebRequest.Result.Success)
                 {
-                    m_listTxtAnswer[i].text = m_quizInfo.sets[m_nIndex].questions[0].answers[i].anwr_cnnt;
+                    Debug.Log(www.error);
                 }
+                else
+                {
+                    Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                    Rect rect = new Rect(0, 0, myTexture.width, myTexture.height);
+                    m_listImgAnswer[i].sprite = Sprite.Create(myTexture, rect, new Vector2(150, 150));
+                    //m_listImgAnswer[i].color = new Color(0, 0, 0, 1);
+                }
+            }
+            else
+            {
+                m_listTxtAnswer[3-i].text = m_quizInfo.sets[m_nIndex].questions[0].answers[i].anwr_cnnt;
             }
         }
     }
 
     public void OnClickAnswer(int nIndex)
     {
+        StopCoroutine("ProcessQuiz");
         m_nSelectIndex = nIndex;
         if (m_nType != -1) CUIsAPTPage2Manager.Instance.SetSelectIndex(m_nIndex, nIndex);
         UpdateSelect();
@@ -175,14 +221,24 @@ public class CAPTQuizManager : MonoBehaviour
         CUIsAPTManager.Instance.SetAnswerState(m_nQuizListIndex, 0);
         CUIsAPTPage2Manager.Instance.UpdateQuizList(m_nQuizListIndex);
 
+        CUIsAPTPage2Manager.Instance.UpdateFinishAnswer();
+
+        if (m_nType == 0)
+        {
+            Debug.Log("SendAnswer 01 : " + m_nQuizListIndex);
+            if (m_nQuizListIndex >= 28) return;
+        } else if (m_nType == 1)
+        {
+            Debug.Log("SendAnswer 02 : " + m_nQuizListIndex);
+            if (m_nQuizListIndex >= 20) return;
+        }
+           
         Debug.Log("APT Quiz Index : " + m_nQuizListIndex);
 
         int nNextQuizIndex = m_nQuizListIndex + 1;
         CUIsAPTManager.Instance.SetAnswerState(nNextQuizIndex, 1);
         CUIsAPTPage2Manager.Instance.UpdateQuizList(nNextQuizIndex);
         CUIsAPTPage2Manager.Instance.ShowQuiz(nNextQuizIndex);
-
-        CUIsAPTPage2Manager.Instance.UpdateFinishAnswer();
     }
 
     public void UpdateSelect()

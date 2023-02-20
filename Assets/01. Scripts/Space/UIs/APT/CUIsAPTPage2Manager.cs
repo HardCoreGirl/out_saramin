@@ -242,7 +242,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             for (int i = 0; i < quizAPT.sets[nRealIndex].questions[0].answers.Length; i++)
             {
                 Debug.Log("Show Quiz 003 AnswerIndex : " + quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx);
-                m_listAnswerIndex[i] = quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx;
+                m_listAnswerIndex[3 -i] = quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx;
             }
 
             m_txtQuizTitle.text = quizAPT.sets[nRealIndex].questions[0].qst_cnnt;
