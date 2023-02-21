@@ -72,7 +72,6 @@ public class CSpaceAppEngine : MonoBehaviour
         //{
         //    Debug.Log(s);
         //}
-
     }
 
     // Update is called once per frame
@@ -185,8 +184,16 @@ public class CSpaceAppEngine : MonoBehaviour
                             CUIsSpaceManager.Instance.ShowRightPage();
                         } else
                         {
-                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD1").idx);
-                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
+                            if (CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("WAITING"))
+                            {
+                                Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("APTD1").idx);
+                                Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
+                            } else
+                            {
+                                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD1").idx);
+                                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
+                            }
+
                         }
 
                         //CUIsSpaceManager.Instance.ShowRightPage();

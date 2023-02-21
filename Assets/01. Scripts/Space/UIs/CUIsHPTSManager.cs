@@ -83,15 +83,85 @@ public class CUIsHPTSManager : MonoBehaviour
 
                 for(int i = 0; i < quizData.sets[0].questions.Length; i++)
                 {
+                    //if( i == 0 )
+                    //{
+                    //    string[] listQuiz = quizData.sets[0].questions[i].qst_cnnt.Split(',');
+                    //    if (listQuiz.Length > 1)
+                    //    {
+                    //        for (int j = 0; j < listQuiz.Length; j++)
+                    //        {
+                    //            GameObject goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
+                    //            goQuiz.transform.parent = m_goContents.transform;
+
+                    //            if (listQuiz[j].Contains("{{answers}}"))
+                    //            {
+                    //                string[] listAnswer = listQuiz[j].Split("{{answers}}");
+                    //                string[] listSelector = new string[3];
+                    //                for (int k = 0; k < listSelector.Length; k++)
+                    //                {
+                    //                    listSelector[k] = "";
+                    //                }
+                    //                for (int k = 0; k < quizData.sets[0].questions[i].answers.Length; k++)
+                    //                {
+                    //                    listSelector[k] = quizData.sets[0].questions[i].answers[k].anwr_cnnt;
+                    //                }
+
+                    //                if (listAnswer.Length > 1)
+                    //                {
+                    //                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                    //                }
+                    //                else
+                    //                {
+                    //                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], "", "", "", "");
+                    //                }
+                    //            }
+                    //            else
+                    //            {
+                    //                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listQuiz[j], "", "", "", "");
+                    //            }
+                    //        }
+                    //    }
+                    //} else
+                    //{
+                    //    GameObject goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
+                    //    goQuiz.transform.parent = m_goContents.transform;
+
+                    //    if (quizData.sets[0].questions[i].qst_cnnt.Contains("{{answers}}"))
+                    //    {
+                    //        string[] listAnswer = quizData.sets[0].questions[i].qst_cnnt.Split("{{answers}}");
+                    //        string[] listSelector = new string[3];
+                    //        for (int k = 0; k < listSelector.Length; k++)
+                    //        {
+                    //            listSelector[k] = "";
+                    //        }
+                    //        for (int k = 0; k < quizData.sets[0].questions[i].answers.Length; k++)
+                    //        {
+                    //            listSelector[k] = quizData.sets[0].questions[i].answers[k].anwr_cnnt;
+                    //        }
+
+                    //        if (listAnswer.Length > 1)
+                    //        {
+                    //            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                    //        }
+                    //        else
+                    //        {
+                    //            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], "", "", "", "");
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], quizData.sets[0].questions[i].qst_cnnt, "", "", "", "");
+                    //    }
+                    //}
                     string[] listQuiz = quizData.sets[0].questions[i].qst_cnnt.Split('\n');
-                    if( listQuiz.Length > 1 )
+                    if (listQuiz.Length > 1)
                     {
-                        for(int j = 0; j < listQuiz.Length; j++)
+                        for (int j = 0; j < listQuiz.Length; j++)
                         {
                             GameObject goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
                             goQuiz.transform.parent = m_goContents.transform;
 
-                            if ( listQuiz[j].Contains("{{answers}}") )
+                            if (listQuiz[j].Contains("{{answers}}"))
                             {
                                 string[] listAnswer = listQuiz[j].Split("{{answers}}");
                                 string[] listSelector = new string[3];
@@ -104,10 +174,11 @@ public class CUIsHPTSManager : MonoBehaviour
                                     listSelector[k] = quizData.sets[0].questions[i].answers[k].anwr_cnnt;
                                 }
 
-                                if ( listAnswer.Length > 1 )
+                                if (listAnswer.Length > 1)
                                 {
                                     goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
-                                } else
+                                }
+                                else
                                 {
                                     goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], "", "", "", "");
                                 }
@@ -117,7 +188,8 @@ public class CUIsHPTSManager : MonoBehaviour
                                 goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listQuiz[j], "", "", "", "");
                             }
                         }
-                    } else
+                    }
+                    else
                     {
                         GameObject goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
                         goQuiz.transform.parent = m_goContents.transform;

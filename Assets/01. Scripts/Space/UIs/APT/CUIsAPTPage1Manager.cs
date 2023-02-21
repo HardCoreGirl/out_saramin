@@ -64,26 +64,26 @@ public class CUIsAPTPage1Manager : MonoBehaviour
 
         m_txtAnswerCnt.text = "적응\n테스트\n" + nFinishAnswerCnt.ToString() + "/28";
 
-        for (int i = 0; i < 29; i++)
+        for (int i = 0; i < 28; i++)
         {
             GameObject goList = Instantiate(Resources.Load("Prefabs/APTQuizList01") as GameObject);
             goList.transform.parent = m_goAnswerContent.transform;
             string strQuizName = "";
             string strQuizState = "";
-            if (i == 0)
-            {
-                strQuizName = "연습 문제";
-                strQuizState = "확인 요망";
-            }
-            else
-            {
-                strQuizName = i.ToString() + "번 문제";
+            //if (i == 0)
+            //{
+            //    strQuizName = "연습 문제";
+            //    strQuizState = "확인 요망";
+            //}
+            //else
+            //{
+                strQuizName = (i + 1).ToString() + "번 문제";
 
-                if (CUIsAPTManager.Instance.GetAnswerState(i - 1) == 0)
+                if (CUIsAPTManager.Instance.GetAnswerState(i) == 0)
                 {
                     strQuizState = "완료";
                 }
-                else if (CUIsAPTManager.Instance.GetAnswerState(i - 1) == 1)
+                else if (CUIsAPTManager.Instance.GetAnswerState(i) == 1)
                 {
                     strQuizState = "진행중";
                 }
@@ -91,7 +91,7 @@ public class CUIsAPTPage1Manager : MonoBehaviour
                 {
                     strQuizState = "확인요망";
                 }
-            }
+            //}
 
             goList.GetComponent<CObjectAPTQuizList>().InitAPTQuizList(i, strQuizName, strQuizState);
         }
@@ -109,6 +109,7 @@ public class CUIsAPTPage1Manager : MonoBehaviour
 
             if (CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("TAE"))
             {
+                Debug.Log("APTD1 Active");
                 //Debug.Log("OnClickPlayQuiz Index : " + i + ", Answer : " + CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx);
                 for (int i = 0; i < CQuizData.Instance.GetQuiz("APTD1").sets.Length; i++)
                 {
@@ -120,6 +121,7 @@ public class CUIsAPTPage1Manager : MonoBehaviour
             }
             else if (CQuizData.Instance.GetExamInfoDetail("APTD2").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("APTD2").status.Equals("TAE"))
             {
+                Debug.Log("APTD2 Active");
                 for (int i = 0; i < CQuizData.Instance.GetQuiz("APTD2").sets.Length; i++)
                 {
                     if (CQuizData.Instance.GetQuiz("APTD2").sets[i].questions[0].test_answers[0].test_anwr_idx != 0)

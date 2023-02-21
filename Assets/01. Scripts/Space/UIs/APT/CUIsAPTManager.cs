@@ -120,7 +120,20 @@ public class CUIsAPTManager : MonoBehaviour
             m_listAPTPage[nIndex].GetComponent<CUIsAPTPage1Manager>().InitAPTPage();
         } else if (nIndex == 1)
         {
-            m_listAPTPage[nIndex].GetComponent<CUIsAPTPage2Manager>().InitAPTPage2();
+            if(!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+            {
+                if (CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("TAE"))
+                {
+                    m_listAPTPage[nIndex].GetComponent<CUIsAPTPage2Manager>().InitAPTPage2();
+                }
+                else
+                {
+                    m_listAPTPage[nIndex].GetComponent<CUIsAPTPage2Manager>().InitAPTD2();
+                }
+            } else
+            {
+                m_listAPTPage[nIndex].GetComponent<CUIsAPTPage2Manager>().InitAPTPage2();
+            }
         }
     }
 
@@ -185,6 +198,7 @@ public class CUIsAPTManager : MonoBehaviour
     {
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
+            Server.Instance.RequestPUTQuestionsStatus(CQuizData.Instance.GetExamInfoDetail("APTD1").idx, 1);
             if (CQuizData.Instance.GetExamInfoDetail("APTD2").status.Equals("WAITING"))
             {
                 Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
@@ -199,10 +213,26 @@ public class CUIsAPTManager : MonoBehaviour
     public void ShowPopupSendAnswerAPTD1()
     {
         m_goPopupSendAnswerAPTD1.SetActive(true);
+
+        StartCoroutine("ProcessSendAnswerAPTD1RemainTime");
+    }
+
+    IEnumerator ProcessSendAnswerAPTD1RemainTime()
+    {
+        while (true)
+        {
+            int nRemainTime = CUIsAPTPage2Manager.Instance.GetRemainTime();
+            int nMin = (int)(nRemainTime / 60);
+            int nSec = (int)(nRemainTime % 60);
+
+            m_txtPopupSendAnswerAPTD1RemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void HidePopupSendAnswerAPTD1()
     {
+        StopCoroutine("ProcessSendAnswerAPTD1RemainTime");
         m_goPopupSendAnswerAPTD1.SetActive(false);
     }
 
@@ -240,10 +270,25 @@ public class CUIsAPTManager : MonoBehaviour
     public void ShowPopupSendAnswerAPTD2()
     {
         m_goPopupSendAnswerAPTD2.SetActive(true);
+        StartCoroutine("ProcessSendAnswerAPTD2RemainTime");
+    }
+
+    IEnumerator ProcessSendAnswerAPTD2RemainTime()
+    {
+        while (true)
+        {
+            int nRemainTime = CUIsAPTPage2Manager.Instance.GetRemainTime();
+            int nMin = (int)(nRemainTime / 60);
+            int nSec = (int)(nRemainTime % 60);
+
+            m_txtPopupSendAnswerAPTD2RemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void HidePopupSendAnswerAPTD2()
     {
+        StopCoroutine("ProcessSendAnswerAPTD2RemainTime");
         m_goPopupSendAnswerAPTD2.SetActive(false);
     }
 

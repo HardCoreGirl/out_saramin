@@ -43,9 +43,11 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
     private GameObject[] m_listQuizList = new GameObject[29];
 
+    public Text m_txtMainTitle;
     public Text m_txtQuizTitle;
 
     public Text m_txtFinishAnswer;
+    public Image m_imgFinishAnswerBG;
 
     public Text m_txtRemainTime;
 
@@ -81,6 +83,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
         // TODO SELECT
         bool bIsTutorial = true;
+        int nLastQuizIndex = -1;
         if( !CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
             for (int i = 0; i < CQuizData.Instance.GetQuiz("APTD1").sets.Length; i++)
@@ -92,10 +95,12 @@ public class CUIsAPTPage2Manager : MonoBehaviour
                     {
                         if(CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].answers[j].anwr_idx == CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx)
                         {
-                            SetSelectIndex(i, j);
+                            SetSelectIndex(i, 3 - j);
                         }
                         //CQuizData.Instance.GetQuiz("APTD1").sets[0].questions[i].answers[j].anwr_idx
                     }
+
+                    nLastQuizIndex = i;
                 }
             }
         }
@@ -112,17 +117,46 @@ public class CUIsAPTPage2Manager : MonoBehaviour
                 m_listQuizList[i].GetComponent<CObjectAPTQuizList2>().InitAPTQuizList2(i, CUIsAPTManager.Instance.GetAnswerState(i-1));
         }
 
-        
+        //nLastQuizIndex = 10;
 
-        ShowQuiz(0);
-        //SetTutorial(true);
-        SetTutorial(true);
-        SetTutorialWait(false);
+        //if(GetTu)
+        // TODO -------------
+        m_nRemainTime = CQuizData.Instance.GetQuiz("APTD1").progress_time;
+        if ( nLastQuizIndex != -1)
+        {
+            
+            SetTutorial(false);
+            SetTutorialWait(false);
+
+            if (nLastQuizIndex >= 27)
+            {
+                CUIsAPTManager.Instance.SetAnswerState(28, 1);
+                ShowQuiz(28);
+            }
+            else
+            {
+                CUIsAPTManager.Instance.SetAnswerState(nLastQuizIndex + 2, 1);
+                ShowQuiz(nLastQuizIndex + 2);
+            }
+
+            for (int i = 0; i <= 28; i++)
+                CUIsAPTPage2Manager.Instance.UpdateQuizList(i);
+
+            HideExQuizList();
+
+            StartQuiz();
+        }
+        else
+        {
+            SetTutorial(true);
+            SetTutorialWait(false);
+            m_txtRemainTime.text = "시작 전";
+            ShowQuiz(0);
+        }
 
         m_nQuizType = 0;
-        m_txtRemainTime.text = "시작 전";
-        //m_nRemainTime = CQuizData.Instance.GetQuiz("APTD1").exm_time;
-        m_nRemainTime = CQuizData.Instance.GetQuiz("APTD1").progress_time;
+
+
         UpdateFinishAnswer();
 
         //m_nRemainTime = 10;
@@ -134,6 +168,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         InitSelectIdx();
 
         // TODO SELECT
+        int nLastQuizIndex = -1;
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
             for (int i = 0; i < CQuizData.Instance.GetQuiz("APTD2").sets.Length; i++)
@@ -144,10 +179,12 @@ public class CUIsAPTPage2Manager : MonoBehaviour
                     {
                         if (CQuizData.Instance.GetQuiz("APTD2").sets[i].questions[0].answers[j].anwr_idx == CQuizData.Instance.GetQuiz("APTD2").sets[i].questions[0].test_answers[0].test_anwr_idx)
                         {
-                            SetSelectIndex(i, j);
+                            SetSelectIndex(i, 3 - j);
                         }
                         //CQuizData.Instance.GetQuiz("APTD1").sets[0].questions[i].answers[j].anwr_idx
+                        
                     }
+                    nLastQuizIndex = i;
                 }
             }
         }
@@ -156,6 +193,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         //m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").exm_time;
         m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").progress_time;
         UpdateFinishAnswer();
+
         //m_nRemainTime = 10;
         DelQuizList();
 
@@ -167,6 +205,29 @@ public class CUIsAPTPage2Manager : MonoBehaviour
                 m_listQuizList[i].GetComponent<CObjectAPTQuizList2>().InitAPTQuizList2(i, 1);
             else
                 m_listQuizList[i].GetComponent<CObjectAPTQuizList2>().InitAPTQuizList2(i);
+        }
+
+        if (nLastQuizIndex != -1)
+        {
+            if (nLastQuizIndex >= 19)
+            {
+                CUIsAPTManager.Instance.SetAnswerState(20, 1);
+                ShowQuiz(20);
+            }
+            else
+            {
+                CUIsAPTManager.Instance.SetAnswerState(nLastQuizIndex + 2, 1);
+                ShowQuiz(nLastQuizIndex + 2);
+            }
+
+            for (int i = 0; i <= 20; i++)
+                CUIsAPTPage2Manager.Instance.UpdateQuizList(i);
+
+        } else
+        {
+            CUIsAPTManager.Instance.SetAnswerState(0, 1);
+            CUIsAPTPage2Manager.Instance.UpdateQuizList(1);
+            ShowQuiz(1);
         }
 
         HideExQuizList();
@@ -184,6 +245,17 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             nTotalCnt = 20;
         m_txtFinishAnswer.text = "적응\n테스트\n" + CUIsAPTManager.Instance.GetFinishAnswerCount().ToString() + "/" + nTotalCnt.ToString();
         //m_txtQuizTitle.text = "적응\n테스트\n" + CUIsAPTManager.Instance.GetFinishAnswerCount().ToString() + "/" + nTotalCnt.ToString();
+
+        if (CUIsAPTManager.Instance.GetFinishAnswerCount() == 0 )
+        {
+            m_imgFinishAnswerBG.color = new Color(0.9215686f, 0.3411765f, 0.3411765f);
+        } else if (CUIsAPTManager.Instance.GetFinishAnswerCount() >= nTotalCnt)
+        {
+            m_imgFinishAnswerBG.color = new Color(0, 0.5215687f, 1);
+        } else
+        {
+            m_imgFinishAnswerBG.color = new Color(0.3098039f, 0.3098039f, 0.3098039f);
+        }
     }
 
     public void InitSelectIdx()
@@ -245,6 +317,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
                 m_listAnswerIndex[3 -i] = quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx;
             }
 
+            m_txtMainTitle.text = (nRealIndex + 1).ToString() + "번 문항";
             m_txtQuizTitle.text = quizAPT.sets[nRealIndex].questions[0].qst_cnnt;
             // APTD1 문제
             if (quizAPT.sets[nRealIndex].questions[0].qst_exos_cd.Equals("FORM_A"))

@@ -28,7 +28,7 @@
             ],
             "test_prg_time": 0,
             "qst_idx": 5278,
-            "qst_cnnt": "쇼펜하우어는 종의 성공과 개체의 성공은 서로 갈등적이라고 주장했는데, 농업혁명은 이 주장에 {{answers}}  예시이다.",
+            "qst_cnnt": "쇼펜하우어는 종의 성공과 개체의 성공은 서로 갈등적이라고 주장했는데,\n농업혁명은 이 주장에 {{answers}}  예시이다.",
             "qst_exos_cd": "FORM_A",
             "qst_ans_cd": "OBJ",
             "qst_ans_cnt": 0,

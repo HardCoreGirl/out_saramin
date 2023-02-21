@@ -39,8 +39,6 @@ public class CAPTQuizManager : MonoBehaviour
     {
         InitAnswer();
 
-
-
         m_nSelectIndex = -1;
         if( nType != -1 )   // 연습문제가 아니라면
         {
