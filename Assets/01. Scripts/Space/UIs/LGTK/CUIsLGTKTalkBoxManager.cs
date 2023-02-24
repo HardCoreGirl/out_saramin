@@ -41,7 +41,9 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
     public GameObject m_goScrollView;
     public GameObject m_goSBCTAnswer;
 
-    public Text m_txtAnswer;
+    public GameObject m_goBtnSendAnswer;
+
+    public InputField m_ifAnswer;
 
     private int m_nStage = 0;
 
@@ -55,6 +57,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
     private int m_nAnswerIndex;
     private string m_strAnswer;
     private string m_strQuizMsg;
+
+    private int m_nMultiAnswer;
     // Start is called before the first frame update
     void Start()
     {
@@ -212,7 +216,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         //    goAnswer.GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, listAnswer[i]);
         //}
 
-
+        DisableBtnSendAnswer();
     }
 
     IEnumerator ProcessQuiz()
@@ -269,6 +273,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             }
             else
             {
+                SetMultiAnswer(quizLGTK.sets[m_nStage].questions[0].qst_ans_cnt);
                 m_goSBCTAnswer.SetActive(false);
                 m_goScrollView.SetActive(true);
                 m_goContentAnswer.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 60 + (m_nAnswerCnt * 40) + ((m_nAnswerCnt - 1) * 10));
@@ -344,7 +349,9 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             // TODO : 튜토리얼에서 닫기 버튼을 누를때
             return;
         }
-        CUIsLGTKManager.Instance.HideTalkBox();
+        //CUIsLGTKManager.Instance.HideTalkBox();
+
+        gameObject.GetComponent<RectTransform>().localPosition = new Vector3(-999f, -999f, 0);
     }
 
     public void OnClickTalkBoxSend()
@@ -368,7 +375,30 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
             if( quizLGTK.sets[m_nStage].questions[0].qst_ans_cd.Equals("OBJ") ) // 객관식
             {
-                Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, GetAnswerIndex());
+                if( GetMultiAnswer() > 1 )  // 멀티
+                {
+                    int nMultiAnswerCnt = 0;
+                    for (int i = 0; i < m_listAnswerObject.Length; i++)
+                    {
+                        if(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().IsSelected()) nMultiAnswerCnt++;
+                    }
+
+                    int[] listAnswer = new int[nMultiAnswerCnt];
+                    int nAnswerIndex = 0;
+                    for (int i = 0; i < m_listAnswerObject.Length; i++)
+                    {
+                        if (m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().IsSelected())
+                        {
+                            listAnswer[nAnswerIndex] = m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswerIndex();
+                            Debug.Log("ListAnswer [" + i + "] : " + listAnswer[nAnswerIndex]);
+                            nAnswerIndex++;
+                        }
+                    }
+                    Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, listAnswer);
+                } else
+                {
+                    Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, GetAnswerIndex());
+                }
             }
             else
             {
@@ -405,11 +435,54 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
     public void SetSBCTAnswer()
     {
-        m_strAnswer = m_txtAnswer.text;
+        m_strAnswer = m_ifAnswer.text;
     }
 
     public string GetSBCTAnswer()
     {
         return m_strAnswer;
+    }
+
+    public void SetMultiAnswer(int nAnswerCnt)
+    {
+        m_nMultiAnswer = nAnswerCnt;
+    }
+
+    public int GetMultiAnswer()
+    {
+        return m_nMultiAnswer;
+    }
+
+    public void EnableBtnSendAnswer()
+    {
+        m_goBtnSendAnswer.GetComponent<Button>().interactable = true;
+    }
+
+    public void DisableBtnSendAnswer()
+    {
+        m_goBtnSendAnswer.GetComponent<Button>().interactable = false;
+    }
+
+    public void UpdateBtnSendAnswer()
+    {
+        bool bIsSelected = false;
+        for (int i = 0; i < m_listAnswerObject.Length; i++)
+        {
+            if (m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().IsSelected())
+            {
+                bIsSelected = true;
+                break;
+            }
+        }
+
+        if (bIsSelected) EnableBtnSendAnswer();
+        else DisableBtnSendAnswer(); 
+    }
+
+    public void OnChangeSBCTAnswer()
+    {
+        Debug.Log("OnChangeSBCTAnswer : " + m_ifAnswer.text);
+        if (m_ifAnswer.text.Equals("")) DisableBtnSendAnswer();
+        else EnableBtnSendAnswer();
     }
 }

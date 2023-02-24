@@ -105,6 +105,7 @@ public class Quiz
     public string prg_st_cd;
     public string set_dir_tp_cd;
     public string set_dir_cnnt;
+    public int guide_idx;
     public SetGudes[] set_gudes;
     public string qst_tp_cd;
     public int last_qst_idx;
@@ -249,6 +250,54 @@ public class STPacketInfoMissionBody
 }
 // -------------------------------------------------
 
+// Guide Info --------------------------------------
+public class STGuides
+{
+    public int code;
+    public string message;
+
+    public STGuidesBody body;
+}
+
+[Serializable]
+public class STGuidesBody
+{
+    public int idx;
+    public string title;
+    public string code;
+    public string lang;
+
+    public STGuidesBodyContents[] contents;
+}
+
+[Serializable]
+public class STGuidesBodyContents
+{
+    public int idx;
+    public int depth;
+    public string title;
+    public string image_path;
+    public string security_grade;
+    public string reg_date;
+
+    public STGuidesBodyContentsChildren[] children;
+}
+
+[Serializable]
+public class STGuidesBodyContentsChildren
+{
+    public int idx;
+    public int parent_idx;
+    public int depth;
+    public string title;
+    public string image_path;
+    public string security_grade;
+    public string reg_date;
+}
+
+
+// -------------------------------------------------
+
 public class STPacketBasic
 {
     public int code;
@@ -370,6 +419,8 @@ public class CQuizData : MonoBehaviour
 
     public STPacketInfoMission m_packetInfoMission;
 
+    public STGuides m_stGuides;
+
     private string m_strUserName;
     private int m_nExitCnt;
 
@@ -391,6 +442,7 @@ public class CQuizData : MonoBehaviour
         //Debug.Log(JsonUtility.ToJson(m_packetRQTTutorial));
 
         m_strUserName = "TestUser";
+
         //GetQuiz("RQT");
         //Debug.Log(GetQuiz("RQT").qst_tp_cd);
     }
@@ -558,6 +610,16 @@ public class CQuizData : MonoBehaviour
     public STPacketInfoMission GetInfoMission()
     {
         return m_packetInfoMission;
+    }
+
+    public void SetGuides(STGuides stGuides)
+    {
+        m_stGuides = stGuides;
+    }
+
+    public STGuides GetGuides()
+    {
+        return m_stGuides;
     }
 }
 

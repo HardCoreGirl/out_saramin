@@ -153,7 +153,7 @@ public class CUIsHPTSManager : MonoBehaviour
                     //        goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], quizData.sets[0].questions[i].qst_cnnt, "", "", "", "");
                     //    }
                     //}
-                    string[] listQuiz = quizData.sets[0].questions[i].qst_cnnt.Split('\n');
+                    string[] listQuiz = quizData.sets[0].questions[i].qst_cnnt.Split("<br />");
                     if (listQuiz.Length > 1)
                     {
                         for (int j = 0; j < listQuiz.Length; j++)
@@ -228,7 +228,7 @@ public class CUIsHPTSManager : MonoBehaviour
                 m_txtBtnSendAnswer.text = "답변 제출하기";
                 for (int i = 0; i < quizData.sets[1].questions.Length; i++)
                 {
-                    string[] listQuiz = quizData.sets[0].questions[i].qst_cnnt.Split('\n');
+                    string[] listQuiz = quizData.sets[0].questions[i].qst_cnnt.Split("<br />");
                     if (listQuiz.Length > 1)
                     {
                         for (int j = 0; j < listQuiz.Length; j++)

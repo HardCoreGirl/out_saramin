@@ -77,7 +77,7 @@ public class CSpaceAppEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_txtDebug.text = "Width : " + Screen.width.ToString() + ", Height : " + Screen.height.ToString();
+        //m_txtDebug.text = "Width : " + Screen.width.ToString() + ", Height : " + Screen.height.ToString();
 
         m_vecMouseDownPos = Input.mousePosition;
 

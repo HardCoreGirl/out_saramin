@@ -4,6 +4,8 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
+using UnityEngine.Networking;
+
 public class CUIsLGTKManager : MonoBehaviour
 {
     #region SingleTon
@@ -48,10 +50,26 @@ public class CUIsLGTKManager : MonoBehaviour
 
     public Text m_txtRemain;
 
-    public GameObject m_goDropdownContent;
+    public GameObject m_goDatabaseContent;
+
+    public Text m_txtDatabaseDetailTitle;
+    public GameObject m_goDatabaseDetail;
+    public Image m_imgDatabaseDetail;
 
     private bool m_bIsTutorial = true;
     private int m_nRemainTime;
+
+    private bool m_bIsFirstOpen = true;
+
+    private Vector3 m_vecTalkBoxPoz;
+
+    private bool m_bIsLoadDatabases = false;
+
+    private List<GameObject> m_listDatabase;
+
+    private string m_strDatabaseDetailURL;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -67,12 +85,50 @@ public class CUIsLGTKManager : MonoBehaviour
 
     public void InitLGTK()
     {
-        HideTalkBox();
+        //StartCoroutine("ProcessTestImage");
 
-        if( m_bIsTutorial)
+        HideTalkBox();
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+            if (!m_bIsLoadDatabases)
+            {
+                m_bIsLoadDatabases = true;
+                InitDatabase();
+            }
+
+        //if (!m_bIsLoadDatabases)
+        //{
+        //    m_bIsLoadDatabases = true;
+
+        //    m_listDatabase = new List<GameObject>();
+
+        //    for (int i = 0; i < CQuizData.Instance.GetGuides().body.contents.Length; i++)
+        //    {
+        //        GameObject goDatabase = Instantiate(Resources.Load("Prefabs/LGTKDatabase") as GameObject);
+        //        goDatabase.transform.parent = m_goDatabaseContent.transform;
+        //        goDatabase.GetComponent<CObjectLGTKDatabase>().InitLGTkDatabase(i, -1);
+        //        m_listDatabase.Add(goDatabase);
+
+
+
+        //        for(int j = 0; j < CQuizData.Instance.GetGuides().body.contents[i].children.Length; j++)
+        //        {
+        //            GameObject goDatabaseChildren = Instantiate(Resources.Load("Prefabs/LGTKDatabase") as GameObject);
+        //            goDatabaseChildren.transform.parent = m_goDatabaseContent.transform;
+        //            goDatabaseChildren.GetComponent<CObjectLGTKDatabase>().InitLGTkDatabase(i, j);
+        //            m_listDatabase.Add(goDatabaseChildren);
+        //        }
+        //        //goDropdown.GetComponent<CObjectLGTKDropdown>().InitLGTKDropdown(quizLGTK.set_gudes[i].gude_nm, quizLGTK.set_gudes[i].gude_seur_grd, quizLGTK.set_gudes[i].gude_reg_dtm);
+        //    }
+
+        //    UpdateDatabase();
+        //}
+
+
+        if ( m_bIsTutorial)
         {
             m_txtRemain.text = "Ω√¿€¿¸";
-            OnClickTalkBox();
+            if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+                OnClickTalkBox();
         } else
         {
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
@@ -90,6 +146,104 @@ public class CUIsLGTKManager : MonoBehaviour
             //}
 
             StartCoroutine("ProcessPlayExam");
+        }
+    }
+
+    public void InitDatabase()
+    {
+        m_bIsLoadDatabases = true;
+
+        m_listDatabase = new List<GameObject>();
+
+        for (int i = 0; i < CQuizData.Instance.GetGuides().body.contents.Length; i++)
+        {
+            GameObject goDatabase = Instantiate(Resources.Load("Prefabs/LGTKDatabase") as GameObject);
+            goDatabase.transform.parent = m_goDatabaseContent.transform;
+            goDatabase.GetComponent<CObjectLGTKDatabase>().InitLGTkDatabase(i, -1);
+            m_listDatabase.Add(goDatabase);
+
+
+
+            for (int j = 0; j < CQuizData.Instance.GetGuides().body.contents[i].children.Length; j++)
+            {
+                GameObject goDatabaseChildren = Instantiate(Resources.Load("Prefabs/LGTKDatabase") as GameObject);
+                goDatabaseChildren.transform.parent = m_goDatabaseContent.transform;
+                goDatabaseChildren.GetComponent<CObjectLGTKDatabase>().InitLGTkDatabase(i, j);
+                m_listDatabase.Add(goDatabaseChildren);
+            }
+            //goDropdown.GetComponent<CObjectLGTKDropdown>().InitLGTKDropdown(quizLGTK.set_gudes[i].gude_nm, quizLGTK.set_gudes[i].gude_seur_grd, quizLGTK.set_gudes[i].gude_reg_dtm);
+        }
+
+        UpdateDatabase();
+    }
+
+    public void UpdateDatabase()
+    {
+        int nRealSize = 0;
+        for(int i =0; i < m_listDatabase.Count; i++)
+        {
+            //Debug.Log("UpdateDataBase : " + m_listDatabase[i].GetComponent<CObjectLGTKDatabase>().GetRegData());
+
+            if( m_listDatabase[i].activeSelf )
+            {
+                nRealSize++;
+            } 
+        }
+
+        m_goDatabaseContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, nRealSize * 40);
+    }
+
+    public void UpdateDatabaseChildren(int nParentIndx)
+    {
+        for (int i = 0; i < m_listDatabase.Count; i++)
+        {
+            Debug.Log("ShowDatabaseChildren!!");
+            m_listDatabase[i].GetComponent<CObjectLGTKDatabase>().UpdateDatabase(nParentIndx);
+        }
+
+        UpdateDatabase();
+
+    }
+
+    public void UpdateDatabaseDetail(string strTitle, string strImageURL)
+    {
+        StopCoroutine("ProcessDatabaseDetail");
+        Debug.Log("UpdateDatabaseDetail URL : " + strImageURL);
+        m_txtDatabaseDetailTitle.text = strTitle;
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            m_strDatabaseDetailURL = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjEwMDlfMjA4%2FMDAxNjY1Mjg5NjkwNDcw.PU1zLsWkwUFVqasfKdg3isaQrWZWu6tKRbxYcgvtKJ0g.oXT70SvfyeTxN1y_bY2__QQF8tciooCjZMGuzjouCjYg.JPEG.dedoeoh%2FFejY9GNaAAEvJSc.jpeg&type=sc960_832";
+            m_strDatabaseDetailURL = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MTdfNTMg%2FMDAxNjU4MDY2Njc4OTcz.OYw-Tbuc6c-0r1NqzEfLfA7tLURKm8W1-miahUnJNw4g.-KAfdfOpX7gPZBeD6LRJkqFKX6uCs2XOK5WBRXJinTog.JPEG.dltpdud03%2Fd147c230d461afdebf293d31ca8928150c6db88e%25A3%25DFs2%25A3%25DFn2.jpg&type=sc960_832";
+        }
+        else
+            m_strDatabaseDetailURL = Server.Instance.GetCurURL() + strImageURL;
+        StartCoroutine("ProcessDatabaseDetail");
+    }
+
+    IEnumerator ProcessDatabaseDetail()
+    {
+        m_imgDatabaseDetail.color = new Color(1, 1, 1, 0);
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(m_strDatabaseDetailURL);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+            //Debug.Log("Width : " + myTexture.width + ", Height : " + myTexture.height);
+            
+            // Width : 760
+            float fRate = (float)760 / (float)myTexture.width;
+            //Debug.Log("Database Rate : " + fRate);
+            m_imgDatabaseDetail.GetComponent<RectTransform>().sizeDelta = new Vector2(760, myTexture.height * fRate);
+            Rect rect = new Rect(0, 0, myTexture.width, myTexture.height);
+            //Rect rect = new Rect(0, 0, 760, myTexture.height * fRate);
+            m_imgDatabaseDetail.sprite = Sprite.Create(myTexture, rect, new Vector2(760, myTexture.height * fRate));
+            m_goDatabaseDetail.GetComponent<RectTransform>().sizeDelta = new Vector2(0, myTexture.height * fRate);
+            m_imgDatabaseDetail.color = new Color(1, 1, 1, 1);
         }
     }
 
@@ -129,6 +283,11 @@ public class CUIsLGTKManager : MonoBehaviour
     //{
 
     //}
+    public void OnClickAgreeExit()
+    {
+        CUIsSpaceManager.Instance.ScreenActive(false, true);
+        CUIsSpaceManager.Instance.HideCenterPage();
+    }
 
     public void OnClickExit()
     {
@@ -198,12 +357,12 @@ public class CUIsLGTKManager : MonoBehaviour
     // Popup To Lobby -------------------------------
     public void ShowPopupToLobby()
     {
-        if( m_bIsTutorial )
-        {
-            CUIsSpaceManager.Instance.ScreenActive(false, true);
-            CUIsSpaceManager.Instance.HideCenterPage();
-            return;
-        }
+        //if( m_bIsTutorial )
+        //{
+        //    CUIsSpaceManager.Instance.ScreenActive(false, true);
+        //    CUIsSpaceManager.Instance.HideCenterPage();
+        //    return;
+        //}
 
         if (CQuizData.Instance.GetEnableExitCount() > 0)
         {
@@ -258,9 +417,22 @@ public class CUIsLGTKManager : MonoBehaviour
 
     public void OnClickTalkBox()
     {
-        ShowTalkBox();
+        
+        if (m_bIsFirstOpen)
+        {
+            ShowTalkBox();
 
-        m_goTalkBox.GetComponent<CUIsLGTKTalkBoxManager>().InitLGTKTalkBoxMansger();
+            m_goTalkBox.GetComponent<CUIsLGTKTalkBoxManager>().InitLGTKTalkBoxMansger();
+
+            m_vecTalkBoxPoz = m_goTalkBox.GetComponent<RectTransform>().localPosition;
+
+            if( !m_bIsTutorial)
+                m_bIsFirstOpen = false;
+        } else
+        {
+            m_goTalkBox.GetComponent<RectTransform>().localPosition = m_vecTalkBoxPoz;
+        }
+        
     }
 
     public void SetTutorial(bool bIsTutorial)

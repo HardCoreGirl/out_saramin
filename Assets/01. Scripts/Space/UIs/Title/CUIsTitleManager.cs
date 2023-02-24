@@ -26,6 +26,8 @@ public class CUIsTitleManager : MonoBehaviour
 
     public TMPro.TMP_InputField m_ifToken;
     // Start is called before the first frame update
+
+    public TMPro.TMP_InputField m_ifTest;
     void Start()
     {
         //m_ifToken.text = "DEV2";
@@ -48,6 +50,7 @@ public class CUIsTitleManager : MonoBehaviour
         if(CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
             Server.Instance.RequestGETQuestions(0);
+            Server.Instance.RequestGETGuides(0);
             CUIsSpaceManager.Instance.HideTitle();
             CUIsSpaceManager.Instance.ScreenActive(false);
             return;
@@ -104,4 +107,10 @@ public class CUIsTitleManager : MonoBehaviour
         Debug.Log("Get Token : " + getToken("testToken"));
         //getTokenTest("testToken");
     }
+
+    //public void OnChangeInputFieldTest()
+    //{
+    //    if(m_ifTest.text != null)
+    //        Debug.Log("OnChangeInputFieldTest Test Input Field : " + m_ifTest.text);
+    //}
 }

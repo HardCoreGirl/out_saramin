@@ -12,6 +12,7 @@ public class CUIsAPTPage1Manager : MonoBehaviour
     public Text m_txtAPTD2Time;
 
     public Text m_txtAnswerCnt;
+    public Image m_imgAnswerCntBG;
 
     public GameObject m_goAnswerContent;
 
@@ -63,6 +64,19 @@ public class CUIsAPTPage1Manager : MonoBehaviour
         }
 
         m_txtAnswerCnt.text = "적응\n테스트\n" + nFinishAnswerCnt.ToString() + "/28";
+
+        if (nFinishAnswerCnt == 0)
+        {
+            m_imgAnswerCntBG.color = new Color(0.9215686f, 0.3411765f, 0.3411765f);
+        }
+        else if (nFinishAnswerCnt >= 28)
+        {
+            m_imgAnswerCntBG.color = new Color(0, 0.5215687f, 1);
+        }
+        else
+        {
+            m_imgAnswerCntBG.color = new Color(0.3098039f, 0.3098039f, 0.3098039f);
+        }
 
         for (int i = 0; i < 28; i++)
         {

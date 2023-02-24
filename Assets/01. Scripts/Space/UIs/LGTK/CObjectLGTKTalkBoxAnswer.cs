@@ -53,13 +53,40 @@ public class CObjectLGTKTalkBoxAnswer : MonoBehaviour
         m_txtAnswer.color = new Color(0, 0.5215687f, 1);
     }
 
+    public bool IsSelected()
+    {
+        return m_goCheckBox.activeSelf;
+    }
+
+    public int GetAnswerIndex()
+    {
+        return m_nAnswerIndex;
+    }
+
     public void OnClickAnswer()
     {
-        CUIsLGTKTalkBoxManager.Instance.SetAnswerIndex(m_nAnswerIndex);
-        CUIsLGTKTalkBoxManager.Instance.ResetAnswer();
-        m_goCheckBox.SetActive(true);
-        gameObject.GetComponent<Image>().color = new Color(0, 0.5215687f, 1f);
-        m_txtAnswer.color = new Color(1, 1, 1);
-        Debug.Log("OnClick Answer : " + m_nIndex);        
+        if( CUIsLGTKTalkBoxManager.Instance.GetMultiAnswer() > 1 )  // 멀티 선택
+        {
+            if( m_goCheckBox.activeSelf )
+            {
+                ResetAnswer();
+                CUIsLGTKTalkBoxManager.Instance.UpdateBtnSendAnswer();
+            } else
+            {
+                CUIsLGTKTalkBoxManager.Instance.EnableBtnSendAnswer();
+                m_goCheckBox.SetActive(true);
+                gameObject.GetComponent<Image>().color = new Color(0, 0.5215687f, 1f);
+                m_txtAnswer.color = new Color(1, 1, 1);
+            }
+        }
+        else
+        {
+            CUIsLGTKTalkBoxManager.Instance.SetAnswerIndex(m_nAnswerIndex);
+            CUIsLGTKTalkBoxManager.Instance.ResetAnswer();
+            CUIsLGTKTalkBoxManager.Instance.EnableBtnSendAnswer();
+            m_goCheckBox.SetActive(true);
+            gameObject.GetComponent<Image>().color = new Color(0, 0.5215687f, 1f);
+            m_txtAnswer.color = new Color(1, 1, 1);
+        }
     }
 }

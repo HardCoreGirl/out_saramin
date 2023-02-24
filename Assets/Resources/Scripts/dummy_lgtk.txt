@@ -62,7 +62,7 @@
             "qst_cnnt": "탐사원님의 미션은 우주에서 무엇을 탐사하는 미션인가요?\r\n적절한 것을 모두 선택하세요.\r\n(추천 소요시간: 30초 / 현재 미션 진행률: 17%)",
             "qst_exos_cd": "FORM_A",
             "qst_ans_cd": "OBJ",
-            "qst_ans_cnt": 0,
+            "qst_ans_cnt": 2,
             "qst_dics": 0,
             "qst_dfly": 1,
             "answers": [
@@ -118,7 +118,7 @@
             "qst_cnnt": "목표 탐사 지점은 어디인가요?\r\n(추천 소요시간: 30초 / 현재 미션 진행률: 18.5%)",
             "qst_exos_cd": "FORM_A",
             "qst_ans_cd": "OBJ",
-            "qst_ans_cnt": 0,
+            "qst_ans_cnt": 1,
             "qst_dics": 0,
             "qst_dfly": 1,
             "answers": [
@@ -286,7 +286,7 @@
             "qst_cnnt": "목표 탐사 지점에서 발견된 천체는 무엇인가요?\r\n최소 세 가지 이상 선택하세요.\r\n(추천 소요시간: 1분 / 현재 미션 진행률: 26%)",
             "qst_exos_cd": "FORM_A",
             "qst_ans_cd": "OBJ",
-            "qst_ans_cnt": 0,
+            "qst_ans_cnt": 2,
             "qst_dics": 0,
             "qst_dfly": 0,
             "answers": [

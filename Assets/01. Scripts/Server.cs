@@ -135,7 +135,7 @@ public class Server : MonoBehaviour
 
     private IEnumerator WaitForRequest(UnityWebRequest www, UnityAction<string> del)
     {
-        www.timeout = 5;
+        www.timeout = 50000;
 
         yield return www.SendWebRequest();
 
@@ -216,6 +216,44 @@ public class Server : MonoBehaviour
             //}
         });
     }
+
+    #region 가이드
+    public void RequestGETGuides(int nGuideIdx)
+    {
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            TextAsset textAsset = Resources.Load<TextAsset>("Scripts/dummy_guides");
+            Debug.Log("LOCAL Guides : " + textAsset.text);
+            STGuides stGuides= JsonUtility.FromJson<STGuides>(textAsset.text);
+            CQuizData.Instance.SetGuides(stGuides);
+            return;
+        }
+
+        string jsonBody = JsonConvert.SerializeObject(null);
+
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        string url = cur_server + "api/v1/guides/" + nGuideIdx.ToString();
+
+        //header.Add("Content-Type", "application/json");
+        header.Add("accept", "application/json");
+        header.Add("Authorization", "Bearer " + m_strToken);
+
+        //POST(url, header, jsonBody, (string txt) =>
+        GET(url, header, (string txt) =>
+        {
+            STGuides stGuides = new STGuides();
+            stGuides = JsonUtility.FromJson<STGuides>(txt);
+
+            if (stGuides.code == 200)
+            {
+                //RequestPOSTPartJoin(nPartIdx);
+                CQuizData.Instance.SetGuides(stGuides);
+                CUIsLGTKManager.Instance.InitDatabase();
+            }
+        });
+    }
+    #endregion
 
     #region 문항
     public void RequestGETQuestions(int nPartIdx)
@@ -311,7 +349,11 @@ public class Server : MonoBehaviour
                 }
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("CST")) CQuizData.Instance.SetCST(stPacketQuiz);
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("RAT")) CQuizData.Instance.SetRAT(stPacketQuiz);
-                else if (stPacketQuiz.body.qst_tp_cd.Equals("LGTK")) CQuizData.Instance.SetLGTK(stPacketQuiz);
+                else if (stPacketQuiz.body.qst_tp_cd.Equals("LGTK"))
+                {
+                    CQuizData.Instance.SetLGTK(stPacketQuiz);
+                    Server.Instance.RequestGETGuides(CQuizData.Instance.GetLGTK().body.guide_idx);
+                }                 
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("HPTS")) CQuizData.Instance.SetHPTS(stPacketQuiz);
             }
             else
