@@ -61,13 +61,14 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     public Text m_txtToLobbyOverMsg;
     public Text m_txtToLobbyOverRemainTime;
 
-    private GameObject[] m_listLeftContents = new GameObject[25];
-    private GameObject[] m_listRightContents = new GameObject[25];
+    public GameObject[] m_listLeftContents = new GameObject[25];
+    public GameObject[] m_listRightContents = new GameObject[25];
 
     private int m_nTutorialStep = 0;
     private int m_nRemainTime = 0;
 
-    private List<InputField> m_listInputField;
+    //private List<InputField> m_listInputField;
+    private List<TMPro.TMP_InputField> m_listInputFieldTmp;
     private int m_nCurPos;
 
     // Start is called before the first frame update
@@ -99,7 +100,9 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         {
             --m_nCurPos;
 
-            m_listInputField[m_nCurPos].Select();
+            //m_listInputField[m_nCurPos].Select();
+
+            m_listInputFieldTmp[m_nCurPos].Select();
         }
     }
 
@@ -107,21 +110,39 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     {
         GetCurrentPos();
         //Debug.Log("Move Prev : " + GetCurrentPos());
-        if (m_nCurPos < m_listInputField.Count - 1)
+        //if (m_nCurPos < m_listInputField.Count - 1)
+        //{
+        //    if (!m_listInputField[m_nCurPos + 1].IsInteractable())
+        //        return;
+        //    ++m_nCurPos;
+
+        //    m_listInputField[m_nCurPos].Select();
+        //}
+        if (m_nCurPos < m_listInputFieldTmp.Count - 1)
         {
-            if (!m_listInputField[m_nCurPos + 1].IsInteractable())
+            if (!m_listInputFieldTmp[m_nCurPos + 1].IsInteractable())
                 return;
             ++m_nCurPos;
 
-            m_listInputField[m_nCurPos].Select();
+            m_listInputFieldTmp[m_nCurPos].Select();
         }
+
     }
 
     private int GetCurrentPos()
     {
-        for (int i = 0; i < m_listInputField.Count; ++i)
+        //for (int i = 0; i < m_listInputField.Count; ++i)
+        //{
+        //    if(m_listInputField[i].isFocused == true)
+        //    {
+        //        m_nCurPos = i;
+        //        break;
+        //    }
+        //}
+
+        for (int i = 0; i < m_listInputFieldTmp.Count; ++i)
         {
-            if(m_listInputField[i].isFocused == true)
+            if (m_listInputFieldTmp[i].isFocused == true)
             {
                 m_nCurPos = i;
                 break;
@@ -135,11 +156,34 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     {
         m_goTutorialMsg.SetActive(false);
 
+        m_nCurPos = 0;
+
+        m_listInputFieldTmp = new List<TMPro.TMP_InputField>();
+        m_listInputFieldTmp.Clear();
+
+        if ( m_listInputFieldTmp.Count == 0 )
+        {
+            Debug.Log("InitCSTPage2 InputFiled Init");
+            for(int i = 0; i < 25; i++)
+            {
+                m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().InitListAnswer(0, i);
+                m_listInputFieldTmp.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().m_ifAnswer);
+
+                m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().InitListAnswer(1, i);
+                m_listInputFieldTmp.Add(m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().m_ifAnswer);
+            }
+            m_listLeftContents[0].GetComponent<CUIsCSTListAnswerTmp>().ActiveInputField();
+            m_listInputFieldTmp[0].Select();
+        }
+
         DelListAnswers();
         HideAllPopup();
 
+        Debug.Log("InitCSTPage2 01");
+
         if( CUIsSpaceScreenLeft.Instance.IsCSTTutorial() )
         {
+            Debug.Log("InitCSTPage2 02");
             m_txtSendAnswer.text = "본 퀴즈 시작하기";
             m_txtRemainTime.text = "시작전";
             m_txtMission.text = CQuizData.Instance.GetUserName() + "님,  플레이샵에 오신 것을 환영합니다! 첫 번째 라운드는 사고 유연성 테스트입니다. 안내문 내용을 참고하시어 아래 빈 칸에 알맞은 단어를 작성해 주세요.본 퀴즈는 연습이오니 부담 갖지 마시고 충분히 작성하셔도 됩니다.";
@@ -149,6 +193,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             m_txtMissionContent.text = "‘음식’ 범주에는 일반적으로 사람이 먹거나 마실 수 있는 모든 것(김치, 사과 등)을 작성해 주세요.\n-\n사무용품 범주에는 문구류, 사무기기, 종이류 등을 포함한 물품(연필, 스테인플러 등)을 작성해 주세요.입니다.\n-\n각 범주에 속하는 단어를 번갈아가며 순서대로 입력해 주세요.\n-\n최대한 빠르고 오탈자 없이 입력해 주세요.\n-\n부정 행위를 하실 경우 불이익이 생길 수 있습니다.";
         } else
         {
+            Debug.Log("InitCSTPage2 03");
             m_txtSendAnswer.text = "답변 제출하기";
             
             //m_txtMission.text = "과일, 가구에 속하는 단어를 번갈아 가며 최대한 많이 작성해 주시기 바랍니다.";
@@ -163,40 +208,68 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             StartCoroutine("ProcessPlayExam");
         }
 
+        Debug.Log("InitCSTPage2 04");
+
+        /*
+
         //int nSelectableIdx = 0;
         //selectables = new Selectable[50];
 
-        m_listInputField = new List<InputField>();
-        m_listInputField.Clear();
+        //m_listInputField = new List<InputField>();
+        //m_listInputField.Clear();
+        m_listInputFieldTmp = new List<TMPro.TMP_InputField>();
+        m_listInputFieldTmp.Clear();
         m_nCurPos = 0;
-        
-        for(int i = 0; i < 25; i++)
+
+        Debug.Log("InitCSTPage2 05");
+
+        for (int i = 0; i < 25; i++)
         {
-            m_listLeftContents[i] = Instantiate(Resources.Load("Prefabs/cstListAnswer") as GameObject);
-            m_listLeftContents[i].transform.parent = m_goLeftContent.transform;
-            m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().InitListAnswer(0, i);
-            m_listInputField.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().m_ifAnswer);
+            //m_listLeftContents[i] = Instantiate(Resources.Load("Prefabs/cstListAnswer") as GameObject);
+            //m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().InitListAnswer(0, i);
+            //m_listInputField.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().m_ifAnswer);
             //goTalk.GetComponent<CUIsRQTTalkChat>().InitObject(i, quizRQT.sets[i].dir_cnnt, true);
-            //selectables[nSelectableIdx] = m_listLeftContents[i].GetComponent<Selectable>();
-            //nSelectableIdx++;
 
-            m_listRightContents[i] = Instantiate(Resources.Load("Prefabs/cstListAnswer") as GameObject);
+            //m_listRightContents[i] = Instantiate(Resources.Load("Prefabs/cstListAnswer") as GameObject);
+            //m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().InitListAnswer(1, i);
+            //m_listInputField.Add(m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().m_ifAnswer);
+
+
+            m_listLeftContents[i] = Instantiate(Resources.Load("Prefabs/cstListAnswerTmp") as GameObject);
+            Debug.Log("InitCSTPage2 06 - 02");
+            m_listLeftContents[i].transform.parent = m_goLeftContent.transform;
+            Debug.Log("InitCSTPage2 06 - 03");
+            m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().InitListAnswer(0, i);
+            Debug.Log("InitCSTPage2 06 - 04");
+            m_listInputFieldTmp.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().m_ifAnswer);
+            Debug.Log("InitCSTPage2 06 - 05");
+
+            m_listRightContents[i] = Instantiate(Resources.Load("Prefabs/cstListAnswerTmp") as GameObject);
+            Debug.Log("InitCSTPage2 06 - 06");
             m_listRightContents[i].transform.parent = m_goRightContent.transform;
-            m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().InitListAnswer(1, i);
-            m_listInputField.Add(m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().m_ifAnswer);
-
-            //selectables[nSelectableIdx] = m_listRightContents[i].GetComponent<Selectable>();
-            //nSelectableIdx++;
+            Debug.Log("InitCSTPage2 06 - 07");
+            m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().InitListAnswer(1, i);
+            Debug.Log("InitCSTPage2 06 - 08");
+            m_listInputFieldTmp.Add(m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().m_ifAnswer);
+            Debug.Log("InitCSTPage2 06 - 09");
         }
 
-        m_listLeftContents[0].GetComponent<CUIsCSTListAnswer>().ActiveInputField();
+        Debug.Log("InitCSTPage2 07");
 
-        m_listInputField[0].Select();
+        //m_listLeftContents[0].GetComponent<CUIsCSTListAnswer>().ActiveInputField();
+        m_listLeftContents[0].GetComponent<CUIsCSTListAnswerTmp>().ActiveInputField();
+
+        Debug.Log("InitCSTPage2 08");
+        //m_listInputField[0].Select();
+        m_listInputFieldTmp[0].Select();
+
+        Debug.Log("InitCSTPage2 09");
 
         Vector2 vecSize = m_goLeftContent.GetComponent<RectTransform>().sizeDelta;
         vecSize.y = 1120;
         m_goLeftContent.GetComponent<RectTransform>().sizeDelta = vecSize;
 
+        Debug.Log("InitCSTPage2 10");
 
         //for (int i = 0; i < 25; i++)
         //{
@@ -210,6 +283,8 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         vecSize.y = 1120;
         m_goRightContent.GetComponent<RectTransform>().sizeDelta = vecSize;
 
+        Debug.Log("InitCSTPage2 11");
+        */
     }
 
     IEnumerator ProcessPlayExam()
@@ -244,8 +319,11 @@ public class CUIsCSTPage2Manager : MonoBehaviour
 
         for (int i = 0; i < 25; i++)
         {
-            m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().DisableInputField();
-            m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().DisableInputField();
+            //m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().DisableInputField();
+            //m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().DisableInputField();
+
+            m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().DisableInputField();
+            m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().DisableInputField();
 
         }
         ShowPopupTimeOver();
@@ -290,25 +368,25 @@ public class CUIsCSTPage2Manager : MonoBehaviour
 
     public void DelListAnswers()
     {
-        Component[] listChilds = m_goLeftContent.GetComponentsInChildren<Component>();
+        //Component[] listChilds = m_goLeftContent.GetComponentsInChildren<Component>();
 
-        foreach (Component iter in listChilds)
-        {
-            if (iter.transform != m_goLeftContent.transform)
-            {
-                Destroy(iter.gameObject);
-            }
-        }
+        //foreach (Component iter in listChilds)
+        //{
+        //    if (iter.transform != m_goLeftContent.transform)
+        //    {
+        //        Destroy(iter.gameObject);
+        //    }
+        //}
 
-        listChilds = m_goRightContent.GetComponentsInChildren<Component>();
+        //listChilds = m_goRightContent.GetComponentsInChildren<Component>();
 
-        foreach (Component iter in listChilds)
-        {
-            if (iter.transform != m_goRightContent.transform)
-            {
-                Destroy(iter.gameObject);
-            }
-        }
+        //foreach (Component iter in listChilds)
+        //{
+        //    if (iter.transform != m_goRightContent.transform)
+        //    {
+        //        Destroy(iter.gameObject);
+        //    }
+        //}
     }
 
     public void ActiveInputField(int nSession, int nIndex)
@@ -318,10 +396,12 @@ public class CUIsCSTPage2Manager : MonoBehaviour
 
         if( nSession == 0 )
         {
-            m_listLeftContents[nIndex].GetComponent<CUIsCSTListAnswer>().ActiveInputField();
+            //m_listLeftContents[nIndex].GetComponent<CUIsCSTListAnswer>().ActiveInputField();
+            m_listLeftContents[nIndex].GetComponent<CUIsCSTListAnswerTmp>().ActiveInputField();
         } else
         {
-            m_listRightContents[nIndex].GetComponent<CUIsCSTListAnswer>().ActiveInputField();
+            //m_listRightContents[nIndex].GetComponent<CUIsCSTListAnswer>().ActiveInputField();
+            m_listRightContents[nIndex].GetComponent<CUIsCSTListAnswerTmp>().ActiveInputField();
         }
     }
 
@@ -398,9 +478,11 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         List<string> listLeftAnswer = new List<string>();
         for (int i = 0; i < 25; i++)
         {
-            if (m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString().Equals("")) break;
+            //if (m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString().Equals("")) break;
+            if (m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString().Equals("")) break;
 
-            listLeftAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString());
+            //listLeftAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString());
+            listLeftAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
         }
 
         Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].answers[0].anwr_idx, listLeftAnswer.ToArray());
@@ -408,8 +490,12 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         List<string> listRightAnswer = new List<string>();
         for (int i = 0; i < 25; i++)
         {
-            if (m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString().Equals("")) break;
-            listRightAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString());
+            //if (m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString().Equals("")) break;
+            //listRightAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString());
+
+            if (m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString().Equals("")) break;
+            listRightAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
+
         }
 
         // 상태값 API 호출 -----------------------------

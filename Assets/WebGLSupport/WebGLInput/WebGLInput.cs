@@ -337,7 +337,7 @@ namespace WebGLSupport
         [MonoPInvokeCallback(typeof(Action<int, int>))]
         static void OnTab(int id, int value)
         {
-            WebGLInputTabFocus.OnTab(instances[id], value);
+            //WebGLInputTabFocus.OnTab(instances[id], value);
         }
 
         void Update()

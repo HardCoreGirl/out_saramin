@@ -18,6 +18,7 @@ public class CUIsRATManager : MonoBehaviour
     public GameObject[] m_listImageHintTutorial = new GameObject[5];
 
     public InputField m_ifAnswer;
+    public TMPro.TMP_InputField m_ifAnswerTmp;
 
     public GameObject m_goPopupSendAnswer;
     public Text m_txtSendAnswerRemainTime;
@@ -76,7 +77,9 @@ public class CUIsRATManager : MonoBehaviour
         m_goTutorialMsg.SetActive(false);
         HideAllPopup();
 
-        m_ifAnswer.text = "";
+        //m_ifAnswer.text = "";
+
+        m_ifAnswerTmp.text = "";
 
         for (int i = 0; i < m_listImageHintTutorial.Length; i++)
         {
@@ -235,7 +238,8 @@ public class CUIsRATManager : MonoBehaviour
         }
 
         // 상태값 API 호출 -----------------------------
-        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswer.text);
+        //Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswer.text);
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text);
         Server.Instance.RequestPUTQuestionsStatus(CQuizData.Instance.GetQuiz("RAT").part_idx, 1);
 
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))

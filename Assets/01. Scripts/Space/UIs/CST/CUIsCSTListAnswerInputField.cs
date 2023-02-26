@@ -22,6 +22,7 @@ public class CUIsCSTListAnswerInputField : MonoBehaviour, ISelectHandler
 
     void ISelectHandler.OnSelect(BaseEventData eventData)
     {
-        m_goSelectTarget.GetComponent<CUIsCSTListAnswer>().OnSelectAnswer();
+        //m_goSelectTarget.GetComponent<CUIsCSTListAnswer>().OnSelectAnswer();
+        m_goSelectTarget.GetComponent<CUIsCSTListAnswerTmp>().OnSelectAnswer();
     }
 }
