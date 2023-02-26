@@ -45,6 +45,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
     public InputField m_ifAnswer;
 
+    public TMPro.TMP_InputField m_ifAnswerTMP;
+
     private int m_nStage = 0;
 
     private string[] m_listChat;
@@ -268,7 +270,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             if (strQuizType.Equals("SBCT"))
             {
                 m_goSBCTAnswer.SetActive(true);
-                m_goSBCTAnswer.GetComponentInChildren<InputField>().text = "";
+                //m_goSBCTAnswer.GetComponentInChildren<InputField>().text = "";
+                m_goSBCTAnswer.GetComponent<TMPro.TMP_InputField>().text = "";
                 m_goScrollView.SetActive(false);
             }
             else
@@ -435,7 +438,9 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
     public void SetSBCTAnswer()
     {
-        m_strAnswer = m_ifAnswer.text;
+        //m_strAnswer = m_ifAnswer.text;
+
+        m_strAnswer = m_ifAnswerTMP.text;
     }
 
     public string GetSBCTAnswer()
@@ -481,8 +486,12 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
     public void OnChangeSBCTAnswer()
     {
-        Debug.Log("OnChangeSBCTAnswer : " + m_ifAnswer.text);
-        if (m_ifAnswer.text.Equals("")) DisableBtnSendAnswer();
+        //Debug.Log("OnChangeSBCTAnswer : " + m_ifAnswer.text);
+        //if (m_ifAnswer.text.Equals("")) DisableBtnSendAnswer();
+        //else EnableBtnSendAnswer();
+
+        Debug.Log("OnChangeSBCTAnswer : " + m_ifAnswerTMP.text);
+        if ( m_ifAnswerTMP.text.Equals("")) DisableBtnSendAnswer();
         else EnableBtnSendAnswer();
     }
 }
