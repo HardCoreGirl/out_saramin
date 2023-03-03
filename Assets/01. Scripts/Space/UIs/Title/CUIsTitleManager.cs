@@ -47,12 +47,24 @@ public class CUIsTitleManager : MonoBehaviour
             CSpaceAppEngine.Instance.SetServerType("DEV2");
         }
 
-        if(CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        
+        if(PlayerPrefs.GetInt("FinishIntro", 0) == 1)
+        {
+            CSpaceAppEngine.Instance.SetIsIntro(false);
+        }
+
+        Debug.Log("FinishIntro : " + PlayerPrefs.GetInt("FinishIntro", 0));
+
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
             Server.Instance.RequestGETQuestions(0);
             Server.Instance.RequestGETGuides(0);
             CUIsSpaceManager.Instance.HideTitle();
-            CUIsSpaceManager.Instance.ScreenActive(false);
+
+            if (CSpaceAppEngine.Instance.IsIntro())
+                CUIsSpaceManager.Instance.ShowIntro();
+            else
+                CUIsSpaceManager.Instance.ScreenActive(false, true);
             return;
         }
 
@@ -76,8 +88,12 @@ public class CUIsTitleManager : MonoBehaviour
         //Server.Instance.RequestTestInvest();
         Server.Instance.RequestGETInfoExams();
         Server.Instance.ReuquestGETInfoMissions();
-        CUIsSpaceManager.Instance.HideTitle();
-        CUIsSpaceManager.Instance.ScreenActive(false, true);
+        //CUIsSpaceManager.Instance.HideTitle();
+
+        //if (CSpaceAppEngine.Instance.IsIntro())
+        //    CUIsSpaceManager.Instance.ShowIntro();
+        //else
+        //    CUIsSpaceManager.Instance.ScreenActive(false, true);
     }
 
     public void OnClickServer(int nIndex)

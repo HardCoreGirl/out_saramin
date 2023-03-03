@@ -341,6 +341,7 @@ public class Server : MonoBehaviour
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("APTD1"))
                 {
                     CQuizData.Instance.SetAPTD1(stPacketQuiz);
+                    
                 }
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("APTD2"))
                 {
@@ -494,7 +495,27 @@ public class Server : MonoBehaviour
             packetExamInfo = JsonUtility.FromJson<STPacketExamInfo>(txt);
             CQuizData.Instance.SetExamInfo(packetExamInfo);
 
-            for(int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
+            bool bIsFirst = true;
+            for (int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
+            {
+                if (!CQuizData.Instance.GetExamInfo().body[i].status.Equals("WAITING"))
+                {
+                    bIsFirst = false;
+                    break;
+                }
+            }
+
+            CUIsSpaceManager.Instance.HideTitle();
+            if (bIsFirst)
+            {
+                CUIsSpaceManager.Instance.ShowIntro();
+            }
+            else {
+                CUIsSpaceManager.Instance.ScreenActive(false, true);
+            }
+        
+
+            for (int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
             {
                 if( CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("RQT") )
                 {
@@ -538,7 +559,8 @@ public class Server : MonoBehaviour
             packetInfoMission = JsonUtility.FromJson<STPacketInfoMission>(txt);
             CQuizData.Instance.SetInfoMission(packetInfoMission);
 
-            CUIsTodoManager.Instance.UpdateDummyTodo();
+            //CUIsTodoManager.Instance.UpdateDummyTodo();
+            CUIsTodoManager.Instance.UpdateTodo();
             //RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
 
             //Debug.Log("txt : " + txt);

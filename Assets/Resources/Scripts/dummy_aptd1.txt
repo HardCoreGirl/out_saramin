@@ -16,6 +16,8 @@
       {
         "dir_tp_cd": "TEXT",
         "dir_cnnt": "",
+        "qst_brws_cd":"TEXT",
+        "qst_brws_cnnt":"fdsafdsafdddddddddddddddddddddddddddddddddddddddddddddddddddddddfdsgfdsgfdsgfdsdddddddddd",
         "questions": [
           {
             "set_dir_idx": 2956,
@@ -29,7 +31,7 @@
             "test_prg_time": 0,
             "qst_idx": 5148,
             "qst_cnnt": "A, B 두 개의 주사위를 던질 때, 주사위 A는 짝수, 주사위 B는 4의 약수가 나오는 경우의 수는?",
-            "qst_exos_cd": "FORM_E",
+            "qst_exos_cd": "FORM_B",
             "qst_ans_cd": "OBJ",
             "qst_ans_cnt": 0,
             "qst_dics": 0,
@@ -62,6 +64,8 @@
       {
         "dir_tp_cd": "TEXT",
         "dir_cnnt": "",
+        "qst_brws_cd":"IMG",
+        "qst_brws_cnnt":"dfdsafdsaf",
         "questions": [
           {
             "set_dir_idx": 2957,
@@ -108,6 +112,8 @@
       {
         "dir_tp_cd": "TEXT",
         "dir_cnnt": "",
+        "qst_brws_cd":"TEXT",
+        "qst_brws_cnnt":"fdsafdsafdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadfafsdf",
         "questions": [
           {
             "set_dir_idx": 2958,

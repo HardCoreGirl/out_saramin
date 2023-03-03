@@ -35,6 +35,8 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public GameObject m_goUITitle;
 
+    public GameObject m_goIntro;
+
     public GameObject m_goLeftPage;
     public GameObject m_goCenterPage;
     public GameObject m_goRightPage;
@@ -65,6 +67,7 @@ public class CUIsSpaceManager : MonoBehaviour
         HideLeftPage();
         HideCenterPage();
         HideRightPage();
+        HideIntro();
     }
 
     public void ShowLeftPage()
@@ -160,5 +163,16 @@ public class CUIsSpaceManager : MonoBehaviour
     {
         HideCommonPopupsFinish();
         ScreenActive(false);
+    }
+
+    public void ShowIntro()
+    {
+        m_goIntro.SetActive(true);
+        m_goIntro.GetComponent<CUIsIntroManager>().InitIntro();
+    }
+
+    public void HideIntro()
+    {
+        m_goIntro.SetActive(false);
     }
 }

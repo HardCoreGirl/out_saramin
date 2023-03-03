@@ -199,11 +199,12 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             //m_txtMission.text = "과일, 가구에 속하는 단어를 번갈아 가며 최대한 많이 작성해 주시기 바랍니다.";
             Quiz quizData = CQuizData.Instance.GetQuiz("CST");
             m_txtMission.text = quizData.sets[0].dir_cnnt;
-            m_txtMissionContent.text = quizData.sets[0].dir_cnnt;
+            //m_txtMissionContent.text = quizData.sets[0].dir_cnnt;
+            m_txtMissionContent.text = quizData.sets[0].qst_brws_cnnt;
             //m_nRemainTime = quizData.exm_time;
             m_nRemainTime = quizData.progress_time;
             m_txtLeftContent.text = quizData.sets[0].questions[0].qst_cnnt;
-            m_txtRightContent.text = quizData.sets[0].questions[1].qst_cnnt;
+            m_txtRightContent.text = quizData.sets[1].questions[0].qst_cnnt;
 
             StartCoroutine("ProcessPlayExam");
         }
@@ -499,7 +500,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         }
 
         // 상태값 API 호출 -----------------------------
-        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].answers[0].anwr_idx, listRightAnswer.ToArray());
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[1].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[1].questions[0].answers[0].anwr_idx, listRightAnswer.ToArray());
 
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {

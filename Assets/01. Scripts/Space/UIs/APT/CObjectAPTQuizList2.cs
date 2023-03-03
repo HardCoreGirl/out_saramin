@@ -41,12 +41,16 @@ public class CObjectAPTQuizList2 : MonoBehaviour
             m_listName[i].text = strName;
         }
 
-        ShowQuizList(m_nState);
+        //ShowQuizList(m_nState);
+        UpdateAPTQuizList2();
     }
 
     public void UpdateAPTQuizList2()
     {
-        m_nState = CUIsAPTManager.Instance.GetAnswerState(m_nIndex);
+        if (m_nIndex == 0)
+            return;
+
+        m_nState = CUIsAPTManager.Instance.GetAnswerState(m_nIndex - 1);
 
         Debug.Log("UpdateAPTQuizList2 : " + m_nIndex + ", " + m_nState);
 
@@ -71,8 +75,9 @@ public class CObjectAPTQuizList2 : MonoBehaviour
         } 
             
 
-        if (m_nState == 2)
-            CUIsAPTManager.Instance.SetAnswerState(m_nIndex, 1);
+        //if (m_nState == 2)
+        if(CUIsAPTManager.Instance.GetAnswerState(m_nIndex -1) == 2)
+            CUIsAPTManager.Instance.SetAnswerState(m_nIndex  - 1, 1);
 
         UpdateAPTQuizList2();
 

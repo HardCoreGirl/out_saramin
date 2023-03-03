@@ -12,6 +12,7 @@ public class CUIsRATManager : MonoBehaviour
     public Text m_txtBtnSendAnswer;
     public Text m_txtRemainTime;
 
+    public Text m_txtQuizTitle;
     public Image[] m_listImageHint = new Image[5];
     public Text[] m_listTxtHintWord = new Text[16];
 
@@ -122,6 +123,19 @@ public class CUIsRATManager : MonoBehaviour
         else
         {
             Quiz quizData = CQuizData.Instance.GetQuiz("RAT");
+
+            m_txtQuizTitle.text = quizData.sets[m_nQuizIndex].questions[0].qst_cnnt;
+
+            string[] listHintWord = quizData.sets[m_nQuizIndex].qst_brws_cnnt.Split(", ");
+
+            for(int i = 0; i < m_listTxtHintWord.Length; i++)
+            {
+                if (i >= listHintWord.Length)
+                    break;
+
+                m_listTxtHintWord[i].text = listHintWord[i];
+            }
+
             if (m_nQuizIndex == 0)
             {
                 //m_nRemainTime = 60;

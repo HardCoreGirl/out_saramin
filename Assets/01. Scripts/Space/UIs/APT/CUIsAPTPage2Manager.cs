@@ -167,6 +167,8 @@ public class CUIsAPTPage2Manager : MonoBehaviour
     {
         InitSelectIdx();
 
+        CUIsAPTManager.Instance.InitAnswerState();
+
         // TODO SELECT
         int nLastQuizIndex = -1;
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
@@ -175,6 +177,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             {
                 if (CQuizData.Instance.GetQuiz("APTD2").sets[i].questions[0].test_answers[0].test_anwr_idx != 0)
                 {
+                    CUIsAPTManager.Instance.SetAnswerState(i, 0);
                     for (int j = 0; j < 4; j++)
                     {
                         if (CQuizData.Instance.GetQuiz("APTD2").sets[i].questions[0].answers[j].anwr_idx == CQuizData.Instance.GetQuiz("APTD2").sets[i].questions[0].test_answers[0].test_anwr_idx)
@@ -192,7 +195,6 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         m_nQuizType = 1;
         //m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").exm_time;
         m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").progress_time;
-        UpdateFinishAnswer();
 
         //m_nRemainTime = 10;
         DelQuizList();
@@ -204,7 +206,10 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             if (i == 0)
                 m_listQuizList[i].GetComponent<CObjectAPTQuizList2>().InitAPTQuizList2(i, 1);
             else
-                m_listQuizList[i].GetComponent<CObjectAPTQuizList2>().InitAPTQuizList2(i);
+            {
+                Debug.Log("InitAPTD2 " + i + " : " + CUIsAPTManager.Instance.GetAnswerState(i - 1));
+                m_listQuizList[i].GetComponent<CObjectAPTQuizList2>().InitAPTQuizList2(i, CUIsAPTManager.Instance.GetAnswerState(i-1));
+            }
         }
 
         if (nLastQuizIndex != -1)
@@ -216,7 +221,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             }
             else
             {
-                CUIsAPTManager.Instance.SetAnswerState(nLastQuizIndex + 2, 1);
+                CUIsAPTManager.Instance.SetAnswerState(nLastQuizIndex + 1, 1);
                 ShowQuiz(nLastQuizIndex + 2);
             }
 
@@ -232,6 +237,8 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
         HideExQuizList();
 
+        UpdateFinishAnswer();
+
         StartQuiz();
     }
 
@@ -243,7 +250,12 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             nTotalCnt = 28;
         else
             nTotalCnt = 20;
-        m_txtFinishAnswer.text = "적응\n테스트\n" + CUIsAPTManager.Instance.GetFinishAnswerCount().ToString() + "/" + nTotalCnt.ToString();
+
+        string strTestName = "적응\n테스트\n";
+        if (m_nQuizType != 0)
+            strTestName = "기체\n결함 수리\n";
+        
+            m_txtFinishAnswer.text = strTestName + CUIsAPTManager.Instance.GetFinishAnswerCount().ToString() + "/" + nTotalCnt.ToString();
         //m_txtQuizTitle.text = "적응\n테스트\n" + CUIsAPTManager.Instance.GetFinishAnswerCount().ToString() + "/" + nTotalCnt.ToString();
 
         if (CUIsAPTManager.Instance.GetFinishAnswerCount() == 0 )
@@ -289,7 +301,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
     public void ShowQuiz(int nIndex)
     {
-        Debug.Log("Show Quiz : " + nIndex);
+        Debug.Log("Show Quiz 00 : " + nIndex);
 
         int nRealIndex = nIndex;
         if(nIndex == 0)
@@ -313,12 +325,13 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
             for (int i = 0; i < quizAPT.sets[nRealIndex].questions[0].answers.Length; i++)
             {
-                Debug.Log("Show Quiz 003 AnswerIndex : " + quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx);
+                //Debug.Log("Show Quiz 003 AnswerIndex : " + quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx);
                 m_listAnswerIndex[3 -i] = quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx;
             }
 
             m_txtMainTitle.text = (nRealIndex + 1).ToString() + "번 문항";
             m_txtQuizTitle.text = quizAPT.sets[nRealIndex].questions[0].qst_cnnt;
+
             // APTD1 문제
             if (quizAPT.sets[nRealIndex].questions[0].qst_exos_cd.Equals("FORM_A"))
             {
@@ -342,6 +355,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
                 ShowQuizBoard(5);
                 m_listQuizBoard[5].GetComponent<CAPTQuizManager>().InitQuizType(m_nQuizType, nRealIndex, nIndex);
             } else {
+                Debug.Log("Show Quiz 10 : " + strKey);
                 Debug.Log("알수 없는 타입");
             }
             return;

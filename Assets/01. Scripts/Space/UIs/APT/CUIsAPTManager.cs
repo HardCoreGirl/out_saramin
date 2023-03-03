@@ -89,6 +89,14 @@ public class CUIsAPTManager : MonoBehaviour
         ShowAPTPage(0);
     }
 
+    public void InitAnswerState()
+    {
+        for (int i = 0; i < m_listAnswerState.Length; i++)
+        {
+            m_listAnswerState[i] = 2;
+        }
+    }
+
     public void SetAnswerState(int nIndex, int nState)
     {
         m_listAnswerState[nIndex] = nState;

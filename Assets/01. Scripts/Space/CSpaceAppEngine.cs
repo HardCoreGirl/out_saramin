@@ -49,6 +49,8 @@ public class CSpaceAppEngine : MonoBehaviour
 
     Vector3 m_vecMouseDownPos;
 
+    public Animator m_aniRobo;
+
 
     private bool m_bIsQuizLoaded = false;
 
@@ -57,8 +59,11 @@ public class CSpaceAppEngine : MonoBehaviour
     private bool m_bIsFinishCenter = false;
     private bool m_bIsFinishRight = false;
 
-    
-        // Start is called before the first frame update
+    //private bool m_bIsIntro = true;
+    private bool m_bIsIntro = false;
+
+
+    // Start is called before the first frame update
     void Start()
     {
         //Debug.Log("CSpaceAppEngine 01");
@@ -294,4 +299,17 @@ public class CSpaceAppEngine : MonoBehaviour
     public bool IsFinishLeft02() { return m_bIsFinishLeft02; }
     public void SetFinishCenter(bool bIsFinish) { m_bIsFinishCenter = bIsFinish; }
     public void SetFinishRight(bool bIsFinish) { m_bIsFinishRight = bIsFinish; }
+
+    public void SetIsIntro(bool bIsIntro) { m_bIsIntro = bIsIntro; }
+    public bool IsIntro() { return m_bIsIntro; }
+
+    public void PlayAniRobo()
+    {
+        m_aniRobo.Play("Robot00");
+    }
+
+    public void PlayFinishRobo()
+    {
+        m_aniRobo.Play("Robot03");
+    }
 }

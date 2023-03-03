@@ -37,10 +37,15 @@ public class CUIsTodoManager : MonoBehaviour
 
     public Text m_txtDummy;
 
+    public Text m_txtTodoCnt;
+    public GameObject[] m_listTodoContent = new GameObject[4];
+    public Text[] m_txtTodoTitle = new Text[4];
+    public Text[] m_txtTodoContent = new Text[4];
     // Start is called before the first frame update
     void Start()
     {
-        m_txtDummy.text = "111111\n22222\n33333";
+        //m_txtDummy.text = "111111\n22222\n33333";
+        m_txtDummy.text = "";
     }
 
     // Update is called once per frame
@@ -58,5 +63,26 @@ public class CUIsTodoManager : MonoBehaviour
         }
 
         m_txtDummy.text = strMsg;   
+    }
+
+    public void UpdateTodo()
+    {
+        m_txtTodoCnt.text = "(1/" + CQuizData.Instance.GetInfoMission().body.Length.ToString()+ ")";
+
+        for(int i = 0; i < m_listTodoContent.Length; i++)
+        {
+            m_listTodoContent[i].SetActive(false);
+        }
+
+        for(int i=0; i < m_txtTodoTitle.Length; i++)
+        {
+            if (i >= CQuizData.Instance.GetInfoMission().body.Length)
+                break;
+
+            m_listTodoContent[i].SetActive(true);
+
+            m_txtTodoTitle[i].text = CQuizData.Instance.GetInfoMission().body[i].title;
+            m_txtTodoContent[i].text = CQuizData.Instance.GetInfoMission().body[i].content;
+        }
     }
 }

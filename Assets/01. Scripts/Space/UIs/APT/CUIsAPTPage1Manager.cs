@@ -40,22 +40,31 @@ public class CUIsAPTPage1Manager : MonoBehaviour
         int nMin = quizAPT.exm_time / 60;
         m_txtAPTD1Time.text = nMin.ToString() + " 분";
 
+        m_txtAPTD1Cnt.text = "28 문항";
+        m_txtAPTD1Time.text = "18 분";
+
         quizAPT = CQuizData.Instance.GetQuiz("APTD2");
         m_txtAPTD2Cnt.text = quizAPT.sets.Length.ToString() + " 문항";
         nMin = quizAPT.exm_time / 60;
         m_txtAPTD2Time.text = nMin.ToString() + " 분";
 
+        m_txtAPTD2Cnt.text = "20 문항";
+        m_txtAPTD2Time.text = "12 분";
+
         int nFinishAnswerCnt = 0;
 
+        Debug.Log("InitAPTPage 00");
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
-            if (CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("TAE"))
+            //if (CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("TAE"))
             {
                 //Debug.Log("OnClickPlayQuiz Index : " + i + ", Answer : " + CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx);
                 for (int i = 0; i < CQuizData.Instance.GetQuiz("APTD1").sets.Length; i++)
                 {
+                    Debug.Log("InitAPTPage 01 : " + i);
                     if (CQuizData.Instance.GetQuiz("APTD1").sets[i].questions[0].test_answers[0].test_anwr_idx != 0)
                     {
+                        Debug.Log("InitAPTPage 02 : " + i);
                         CUIsAPTManager.Instance.SetAnswerState(i, 0);
                         nFinishAnswerCnt++;
                     }

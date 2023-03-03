@@ -8,6 +8,7 @@ using UnityEngine.Networking;
 public class CAPTQuizManager : MonoBehaviour
 {
     public Image m_imgQuiz;
+    public Text m_txtQuiz;
     public Image[] m_listImgAnswer = new Image[4];
     public Text[] m_listTxtAnswer = new Text[4];
     public GameObject[] m_listSelect = new GameObject[4];
@@ -37,15 +38,6 @@ public class CAPTQuizManager : MonoBehaviour
 
     public void InitQuizType(int nType, int nIndex, int nQuizListIndex)
     {
-        InitAnswer();
-
-        m_nSelectIndex = -1;
-        if( nType != -1 )   // 연습문제가 아니라면
-        {
-            m_nSelectIndex = CUIsAPTPage2Manager.Instance.GetSelectIndex(nIndex);
-        }
-        UpdateSelect();
-
         m_nType = nType;
         m_nIndex = nIndex;
         m_nQuizListIndex = nQuizListIndex;
@@ -58,6 +50,18 @@ public class CAPTQuizManager : MonoBehaviour
             strKey = "APTD2";
 
         m_quizInfo = CQuizData.Instance.GetQuiz(strKey);
+
+
+        InitAnswer();
+
+        m_nSelectIndex = -1;
+        if( nType != -1 )   // 연습문제가 아니라면
+        {
+            m_nSelectIndex = CUIsAPTPage2Manager.Instance.GetSelectIndex(nIndex);
+        }
+        UpdateSelect();
+
+
         //quizAPT.sets[nIndex].questions[0].qst_ans_cnt  // 문제 URL
 
         //if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
@@ -105,12 +109,32 @@ public class CAPTQuizManager : MonoBehaviour
 
     public void InitAnswer()
     {
+        if (CUIsAPTPage2Manager.Instance.IsTutorial())
+            return;
+
         StopCoroutine("ProcessQuiz");
+
+        if (!m_quizInfo.sets[m_nIndex].questions[0].qst_exos_cd.Equals("FORM_E"))
+        {
+            m_imgQuiz.color = new Color(0.8627451f, 0.9176471f, 1);
+            m_imgQuiz.sprite = null;
+            m_txtQuiz.text = "";
+        }
 
         for (int i = 0; i < 4; i++)
         {
             m_listImgAnswer[i].sprite = null;
             m_listTxtAnswer[i].text = "";
+        }
+
+        Button[] listBtn = gameObject.GetComponentsInChildren<Button>();
+        for (int i = 0; i < listBtn.Length; i++)
+        {
+            //listBtn[i].spriteState = new SpriteState;
+            listBtn[i].interactable = false;
+            listBtn[i].interactable = true;
+            //Debug.Log("Button !!!!!!!!!!!!!!!!!!!!!!!!");
+
         }
     }
 
@@ -118,26 +142,41 @@ public class CAPTQuizManager : MonoBehaviour
     {
         if (m_quizInfo.sets[m_nIndex].questions[0].qst_exos_cd.Equals("FORM_E"))
         {
-
+            Debug.Log("ProcessQuiz 01 !!!!");
         }
         else
         {
-            //if(CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
-            //{
-            //    UnityWebRequest www = UnityWebRequestTexture.GetTexture(m_strQuizURL);
-            //    yield return www.SendWebRequest();
+            if (m_quizInfo.sets[m_nIndex].qst_brws_cd != null)
+            {
+                if (m_quizInfo.sets[m_nIndex].qst_brws_cd.Equals("IMG"))
+                {
+                    m_txtQuiz.text = "";
 
-            //    if (www.result != UnityWebRequest.Result.Success)
-            //    {
-            //        Debug.Log(www.error);
-            //    }
-            //    else
-            //    {
-            //        Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
-            //        Rect rect = new Rect(0, 0, myTexture.width, myTexture.height);
-            //        m_imgQuiz.sprite = Sprite.Create(myTexture, rect, new Vector2(150, 150));
-            //    }
-            //}
+                    string strURL = Server.Instance.GetCurURL() + m_quizInfo.sets[m_nIndex].qst_brws_cnnt;
+                    if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+                        strURL = "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA5MjdfNDgg%2FMDAxNjY0MjczNTAyMzE3.VoXWovZzMJxX2O_lV3S6QQD66pefrOfYJgxmNCuICsEg.nkN2lw_cSEsFi3UNzPUJpYjsSnKXA5_FiKbyCoqThMAg.JPEG.spring19790%2F4.jpg&type=sc960_832";
+
+                    UnityWebRequest www = UnityWebRequestTexture.GetTexture(strURL);
+                    yield return www.SendWebRequest();
+
+                    if (www.result != UnityWebRequest.Result.Success)
+                    {
+                        Debug.Log(www.error);
+                    }
+                    else
+                    {
+                        Texture2D myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                        Rect rect = new Rect(0, 0, myTexture.width, myTexture.height);
+                        m_imgQuiz.sprite = Sprite.Create(myTexture, rect, new Vector2(150, 150));
+                        m_imgQuiz.color = Color.white;
+                    }
+                }
+                else
+                {
+                    m_txtQuiz.text = m_quizInfo.sets[m_nIndex].qst_brws_cnnt;
+                    //m_listTxtAnswer[3 - i].text = m_quizInfo.sets[m_nIndex].questions[0].answers[i].anwr_cnnt;
+                }
+            }
         }
 
         //if(m_quizInfo.sets[m_nIndex].questions[0].qst_exos_cd.Equals("FORM_C"))
@@ -216,7 +255,10 @@ public class CAPTQuizManager : MonoBehaviour
         //Debug.Log("APT OnClick : " + CUIsAPTPage2Manager.Instance.GetQuizIndex() + ", " + CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex));
 
         Server.Instance.RequestPUTAnswerObject(CUIsAPTPage2Manager.Instance.GetQuizIndex(), CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex));
-        CUIsAPTManager.Instance.SetAnswerState(m_nQuizListIndex, 0);
+
+        Debug.Log("OnClickAnswer " + m_nIndex + ", " + m_nQuizListIndex);
+        CUIsAPTManager.Instance.SetAnswerState(m_nIndex, 0);
+        //CUIsAPTManager.Instance.SetAnswerState(m_nQuizListIndex, 0);
         CUIsAPTPage2Manager.Instance.UpdateQuizList(m_nQuizListIndex);
 
         CUIsAPTPage2Manager.Instance.UpdateFinishAnswer();
@@ -234,7 +276,12 @@ public class CAPTQuizManager : MonoBehaviour
         Debug.Log("APT Quiz Index : " + m_nQuizListIndex);
 
         int nNextQuizIndex = m_nQuizListIndex + 1;
-        CUIsAPTManager.Instance.SetAnswerState(nNextQuizIndex, 1);
+        //if( CUIsAPTManager.Instance.GetAnswerState(nNextQuizIndex - 1) == 2 )
+        //    CUIsAPTManager.Instance.SetAnswerState(nNextQuizIndex - 1, 1);
+        //CUIsAPTPage2Manager.Instance.UpdateQuizList(nNextQuizIndex + 1);
+        //CUIsAPTPage2Manager.Instance.ShowQuiz(nNextQuizIndex);
+        if (CUIsAPTManager.Instance.GetAnswerState(m_nIndex + 1) == 2)
+            CUIsAPTManager.Instance.SetAnswerState(m_nIndex + 1, 1);
         CUIsAPTPage2Manager.Instance.UpdateQuizList(nNextQuizIndex);
         CUIsAPTPage2Manager.Instance.ShowQuiz(nNextQuizIndex);
     }

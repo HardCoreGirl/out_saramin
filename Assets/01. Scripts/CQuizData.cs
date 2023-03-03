@@ -81,6 +81,8 @@ public class Sets
 {
     public string dir_tp_cd;
     public string dir_cnnt;
+    public string qst_brws_cnnt;
+    public string qst_brws_cd;
     public Questions[] questions;
 }
 
