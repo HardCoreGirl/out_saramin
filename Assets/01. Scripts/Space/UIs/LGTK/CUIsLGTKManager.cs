@@ -69,6 +69,8 @@ public class CUIsLGTKManager : MonoBehaviour
 
     private string m_strDatabaseDetailURL;
 
+    private List<string> m_listAnswers;
+
 
 
     // Start is called before the first frame update
@@ -88,12 +90,20 @@ public class CUIsLGTKManager : MonoBehaviour
         //StartCoroutine("ProcessTestImage");
 
         HideTalkBox();
+
+        m_listAnswers = new List<string>();
+
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            Debug.Log("InitLGTK 01");
             if (!m_bIsLoadDatabases)
             {
-                m_bIsLoadDatabases = true;
+                Debug.Log("InitLGTK 02");
+                //m_bIsLoadDatabases = true;
                 InitDatabase();
             }
+        }
+
 
         //if (!m_bIsLoadDatabases)
         //{
@@ -151,6 +161,9 @@ public class CUIsLGTKManager : MonoBehaviour
 
     public void InitDatabase()
     {
+        if (m_bIsLoadDatabases)
+            return;
+
         m_bIsLoadDatabases = true;
 
         m_listDatabase = new List<GameObject>();
@@ -184,7 +197,7 @@ public class CUIsLGTKManager : MonoBehaviour
         {
             //Debug.Log("UpdateDataBase : " + m_listDatabase[i].GetComponent<CObjectLGTKDatabase>().GetRegData());
 
-            if( m_listDatabase[i].activeSelf )
+            if ( m_listDatabase[i].activeSelf )
             {
                 nRealSize++;
             } 
@@ -203,6 +216,16 @@ public class CUIsLGTKManager : MonoBehaviour
 
         UpdateDatabase();
 
+    }
+
+    public void UpdateDatabaseDynamic()
+    {
+        for (int i = 0; i < m_listDatabase.Count; i++)
+        {
+            m_listDatabase[i].GetComponent<CObjectLGTKDatabase>().UpdateDatabaseDynamic();
+        }
+
+        UpdateDatabase();
     }
 
     public void UpdateDatabaseDetail(string strTitle, string strImageURL)
@@ -443,5 +466,15 @@ public class CUIsLGTKManager : MonoBehaviour
     public bool IsTutorial()
     {
         return m_bIsTutorial;
+    }
+
+    public void AddListAnswers(string strAnswer)
+    {
+        m_listAnswers.Add(strAnswer);
+    }
+
+    public List<string> GetListAnswers()
+    {
+        return m_listAnswers;
     }
 }

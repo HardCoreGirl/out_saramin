@@ -36,6 +36,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
     #endregion
 
     public GameObject m_goContentChat;
+    public ScrollRect m_srContentChat;
     public GameObject m_goContentAnswer;
 
     public GameObject m_goScrollView;
@@ -60,7 +61,11 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
     private string m_strAnswer;
     private string m_strQuizMsg;
 
+    private string m_strObjAnswer;
+
     private int m_nMultiAnswer;
+
+    private float m_fChatHeight = 15f;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +80,9 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
     public void InitLGTKTalkBoxMansger()
     {
-        DelContent();
+        //DelContent();
+
+        DelContentAnswer();
 
         m_goSBCTAnswer.SetActive(false);
         m_goScrollView.SetActive(false);
@@ -94,19 +101,14 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
             if (m_nStage == 0)
             {
-                strChatMsg = "탐사원님, 안녕하세요. 긴 동면기간을 마치고 복귀하신 걸 환영합니다.<br />저는 (주)딥스페이스 항해지원팀에 소속된 항해 파트너, 딘 자린입니다.<br />파이어니어로부터 탐사원님이 동면에서 깨어나신 이후 알 수 없는 부작용을 겪고 계시다는 교신을 받았습니다.<br />간혹 우주탐사원들에게 이런 부작용이 나타나기도 하니, 너무 걱정하지 마세요. 제가 탐사원님이 미션을 성공적으로 마칠 수 있도록 도와드리겠습니다.";
-                m_strQuizMsg = "그럼 저와 함께 미션을 시작하실 준비가 되셨습니까?";
-                //m_strQuiz = "컨디션은 좀 괜찮으신가요 ?";
+                //strChatMsg = "탐사원님, 안녕하세요. 긴 동면기간을 마치고 복귀하신 걸 환영합니다.<br />저는 (주)딥스페이스 항해지원팀에 소속된 항해 파트너, 딘 자린입니다.<br />파이어니어로부터 탐사원님이 동면에서 깨어나신 이후 알 수 없는 부작용을 겪고 계시다는 교신을 받았습니다.<br />간혹 우주탐사원들에게 이런 부작용이 나타나기도 하니, 너무 걱정하지 마세요. 제가 탐사원님이 미션을 성공적으로 마칠 수 있도록 도와드리겠습니다.";
+                //m_strQuizMsg = "그럼 저와 함께 미션을 시작하실 준비가 되셨습니까?";
+                ////m_strQuiz = "컨디션은 좀 괜찮으신가요 ?";
 
-                m_listAnswer[0] = "네, 준비됐습니다.";
-                m_listAnswer[1] = "좋습니다";
-                m_listAnswer[2] = "일단 시작해볼까요?";
-                m_listAnswer[3] = "미션을 시작하겠습니다.";
-
-
-            }
-            else if (m_nStage == 1)
-            {
+                //m_listAnswer[0] = "네, 준비됐습니다.";
+                //m_listAnswer[1] = "좋습니다";
+                //m_listAnswer[2] = "일단 시작해볼까요?";
+                //m_listAnswer[3] = "미션을 시작하겠습니다.";
                 strChatMsg = "탐사원님, 안녕하세요. 긴 동면기간을 마치고 복귀하신 걸 환영합니다.<br />저는 (주)딥스페이스 항해지원팀에 소속된 항해 파트너, 딘 자린입니다.<br />파이어니어로부터 탐사원님이 동면에서 깨어나신 이후 알 수 없는 부작용을 겪고 계시다는 교신을 받았습니다.";
                 m_strQuizMsg = "컨디션은 좀 괜찮으신가요?";
                 //m_strQuiz = "이제 본격적으로 미션을 시작하실 준비가 되셨나요?";
@@ -114,6 +116,25 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                 m_listAnswer[0] = "많이 좋아졌습니다. 감사합니다.";
                 m_listAnswer[1] = "열심히 적응해 나가고 있습니다.";
                 m_listAnswer[2] = "아직 잘 모르겠지만 차차 나아지겠죠.";
+
+            }
+            else if (m_nStage == 1)
+            {
+                //strChatMsg = "탐사원님, 안녕하세요. 긴 동면기간을 마치고 복귀하신 걸 환영합니다.<br />저는 (주)딥스페이스 항해지원팀에 소속된 항해 파트너, 딘 자린입니다.<br />파이어니어로부터 탐사원님이 동면에서 깨어나신 이후 알 수 없는 부작용을 겪고 계시다는 교신을 받았습니다.";
+                //m_strQuizMsg = "컨디션은 좀 괜찮으신가요?";
+                ////m_strQuiz = "이제 본격적으로 미션을 시작하실 준비가 되셨나요?";
+
+                //m_listAnswer[0] = "많이 좋아졌습니다. 감사합니다.";
+                //m_listAnswer[1] = "열심히 적응해 나가고 있습니다.";
+                //m_listAnswer[2] = "아직 잘 모르겠지만 차차 나아지겠죠.";
+                strChatMsg = "좋아요. 지금처럼 계속 저와 대화해주시면 됩니다.<br />간혹 우주탐사원들에게 이런 부작용이 나타나기도 하니, 너무 걱정하지 마세요.<br />제가 탐사원님이 미션을 성공적으로 마칠 수 있도록 도와드리겠습니다.<br />이번 미션을 성공적으로 완수하려면 저와 탐사원님에게 주어진 30분의 시간을 효율적으로 활용해야 합니다.<br />메인 시스템 상단에 남은 시간이 표기될 겁니다. 제가 중간 중간에 ‘진행률’을 말씀드리겠습니다.";
+                m_strQuizMsg = "이제 본격적으로 미션을 시작하실 준비가 되셨나요?";
+                //m_strQuiz = "이제 본격적으로 미션을 시작하실 준비가 되셨나요?";
+
+                m_listAnswer[0] = "네, 준비됐습니다.";
+                m_listAnswer[1] = "좋습니다";
+                m_listAnswer[2] = "일단 시작해볼까요?";
+                m_listAnswer[3] = "미션을 시작하겠습니다.";
             }
             else if (m_nStage == 2)
             {
@@ -235,6 +256,11 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             //else
             goChat.GetComponent<CObjecctLGTKTalkBoxChat>().UpdateChat(m_listChat[i]);
 
+            Debug.Log("ProcessQuiz 00 : " + goChat.GetComponent<RectTransform>().sizeDelta.y);
+            m_fChatHeight += (goChat.GetComponent<RectTransform>().sizeDelta.y + 5f);
+
+            UpdateChatContentSize();
+
             if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
                 fWaitTime = 0.2f;
             yield return new WaitForSeconds(fWaitTime);
@@ -243,6 +269,9 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         GameObject goChatQuiz = Instantiate(Resources.Load("Prefabs/LGTKTalkBoxChat") as GameObject);
         goChatQuiz.transform.parent = m_goContentChat.transform;
         goChatQuiz.GetComponent<CObjecctLGTKTalkBoxChat>().UpdateChat(m_strQuizMsg, true);
+
+        m_fChatHeight += (goChatQuiz.GetComponent<RectTransform>().sizeDelta.y + 5f);
+        UpdateChatContentSize();
 
         yield return new WaitForSeconds(fWaitTime);
 
@@ -271,7 +300,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             {
                 m_goSBCTAnswer.SetActive(true);
                 //m_goSBCTAnswer.GetComponentInChildren<InputField>().text = "";
-                m_goSBCTAnswer.GetComponent<TMPro.TMP_InputField>().text = "";
+                //m_goSBCTAnswer.GetComponent<TMPro.TMP_InputField>().text = "";
+                m_goSBCTAnswer.GetComponentInChildren<TMPro.TMP_InputField>().text = "";
                 m_goScrollView.SetActive(false);
             }
             else
@@ -291,8 +321,31 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         }
     }
 
+    public void AddChatAnswer(string strAnswer)
+    {
+        GameObject goChatAnswer = Instantiate(Resources.Load("Prefabs/LGTKTalkBoxChatAnswer") as GameObject);
+        goChatAnswer.transform.parent = m_goContentChat.transform;
+        goChatAnswer.GetComponent<CObjectLGTKTalkBoxChatAnswer>().UpdateChat(strAnswer);
+
+        m_fChatHeight += (goChatAnswer.GetComponent<RectTransform>().sizeDelta.y + 5f);
+
+        UpdateChatContentSize();
+    }
+
+    public void UpdateChatContentSize()
+    {
+        m_goContentChat.GetComponent<RectTransform>().sizeDelta = new Vector2(m_goContentChat.GetComponent<RectTransform>().sizeDelta.x, m_fChatHeight);
+        //Vector3 vecPoz = m_goContentChat.GetComponent<RectTransform>().localPosition;
+        //vecPoz.y = m_fChatHeight;
+        //m_goContentChat.GetComponent<RectTransform>().localPosition = vecPoz;
+        m_srContentChat.verticalNormalizedPosition = 0f;
+
+    }
+
     public void DelContent()
     {
+        m_fChatHeight = 15f;
+
         Component[] listChilds = m_goContentChat.GetComponentsInChildren<Component>();
 
         foreach (Component iter in listChilds)
@@ -303,7 +356,22 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             }
         }
 
-        listChilds = m_goContentAnswer.GetComponentsInChildren<Component>();
+        DelContentAnswer();
+
+        //listChilds = m_goContentAnswer.GetComponentsInChildren<Component>();
+
+        //foreach (Component iter in listChilds)
+        //{
+        //    if (iter.transform != m_goContentAnswer.transform)
+        //    {
+        //        Destroy(iter.gameObject);
+        //    }
+        //}
+    }
+
+    public void DelContentAnswer()
+    {
+        Component[] listChilds = m_goContentAnswer.GetComponentsInChildren<Component>();
 
         foreach (Component iter in listChilds)
         {
@@ -364,9 +432,11 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         
         if( CUIsLGTKManager.Instance.IsTutorial() )
         {
+            AddChatAnswer(GetObjAnswwer());
             m_nStage++;
-            if (m_nStage == 3)
+            if (m_nStage == 2)
             {
+                //DelContent();
                 CUIsLGTKManager.Instance.SetTutorial(false);
                 m_nStage = 0;
                 CUIsLGTKManager.Instance.InitLGTK();
@@ -393,6 +463,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                         if (m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().IsSelected())
                         {
                             listAnswer[nAnswerIndex] = m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswerIndex();
+                            CUIsLGTKManager.Instance.AddListAnswers(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
+                            AddChatAnswer(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
                             Debug.Log("ListAnswer [" + i + "] : " + listAnswer[nAnswerIndex]);
                             nAnswerIndex++;
                         }
@@ -400,6 +472,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                     Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, listAnswer);
                 } else
                 {
+                    CUIsLGTKManager.Instance.AddListAnswers(GetObjAnswwer());
+                    AddChatAnswer(GetObjAnswwer());
                     Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, GetAnswerIndex());
                 }
             }
@@ -407,8 +481,12 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             {
                 SetSBCTAnswer();
                 Debug.Log("Send!!!!! Answer : " + GetSBCTAnswer());
+                CUIsLGTKManager.Instance.AddListAnswers(GetSBCTAnswer());
+                AddChatAnswer(GetSBCTAnswer());
                 Server.Instance.RequestPUTAnswerSubject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, quizLGTK.sets[m_nStage].questions[0].answers[0].anwr_idx, GetSBCTAnswer());
             }
+
+            CUIsLGTKManager.Instance.UpdateDatabaseDynamic();
 
             m_nStage++;
             if (m_nStage >= quizLGTK.sets.Length - 1)
@@ -434,6 +512,16 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
     public int GetAnswerIndex()
     {
         return m_nAnswerIndex;
+    }
+
+    public void SetObjAnswer(string strAnswer)
+    {
+       m_strObjAnswer = strAnswer;
+    }
+
+    public string GetObjAnswwer()
+    {
+        return m_strObjAnswer;
     }
 
     public void SetSBCTAnswer()

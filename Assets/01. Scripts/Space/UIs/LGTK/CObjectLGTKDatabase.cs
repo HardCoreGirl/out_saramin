@@ -22,6 +22,8 @@ public class CObjectLGTKDatabase : MonoBehaviour
 
     private string m_strTitle;
     private string m_strImageURL;
+
+    private bool m_bIsDynamic = false;
     //private STGuidesBodyContents m_stGuideContent;
     //private STGuidesBodyContents m_stGuideContentChirend;
     // Start is called before the first frame update
@@ -78,8 +80,33 @@ public class CObjectLGTKDatabase : MonoBehaviour
 
             m_listMainType[m_nType].SetActive(true);
 
-            m_txtMainTitle.text = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
-            m_strTitle = m_txtMainTitle.text;
+            if(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
+            {
+                //m_txtMainTitle.text = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
+                m_txtMainTitle.text = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(1, CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Length - 1);
+
+                m_strTitle = m_txtMainTitle.text;
+
+                bool bIsExist = false;
+                for(int i = 0; i < CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children.Length; i++)
+                {
+                    for(int j = 0; j < CUIsLGTKManager.Instance.GetListAnswers().Count; j++)
+                    {
+                        if(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListAnswers()[j]))
+                        {
+                            bIsExist = true;
+                            break;
+                        }
+                    }
+                }
+
+                gameObject.SetActive(bIsExist);
+            }    
+            else
+            {
+                m_txtMainTitle.text = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
+                m_strTitle = m_txtMainTitle.text;
+            }
         } else
         {
             m_listDepthContent[0].SetActive(false);
@@ -89,6 +116,11 @@ public class CObjectLGTKDatabase : MonoBehaviour
             m_strTitle = m_txtSubTitle.text;
 
             m_strImageURL = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].image_path;
+
+            if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
+            {
+                m_bIsDynamic = true;
+            }
 
             gameObject.SetActive(false);
         }
@@ -132,7 +164,46 @@ public class CObjectLGTKDatabase : MonoBehaviour
             if (gameObject.activeSelf)
                 gameObject.SetActive(false);
             else
+            {
+                if( m_bIsDynamic )
+                {
+                    for (int i = 0; i < CUIsLGTKManager.Instance.GetListAnswers().Count; i++)
+                    {
+                        if ( CUIsLGTKManager.Instance.GetListAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                        {
+                            gameObject.SetActive(true);
+                            break;
+                        }
+                    }
+                    return;
+                }
+
                 gameObject.SetActive(true);
+            }
         }
+    }
+
+    public void UpdateDatabaseDynamic()
+    {
+        if (m_nDepth != 1)
+            return;
+        
+        if (!CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
+            return;
+
+        bool bIsExist = false;
+        for (int i = 0; i < CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children.Length; i++)
+        {
+            for (int j = 0; j < CUIsLGTKManager.Instance.GetListAnswers().Count; j++)
+            {
+                if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListAnswers()[j]))
+                {
+                    bIsExist = true;
+                    break;
+                }
+            }
+        }
+
+        gameObject.SetActive(bIsExist);
     }
 }

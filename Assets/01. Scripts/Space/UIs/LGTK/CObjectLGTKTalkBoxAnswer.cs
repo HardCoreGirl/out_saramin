@@ -63,6 +63,11 @@ public class CObjectLGTKTalkBoxAnswer : MonoBehaviour
         return m_nAnswerIndex;
     }
 
+    public string GetAnswer()
+    {
+        return m_txtAnswer.text;
+    }
+
     public void OnClickAnswer()
     {
         if( CUIsLGTKTalkBoxManager.Instance.GetMultiAnswer() > 1 )  // 멀티 선택
@@ -82,6 +87,7 @@ public class CObjectLGTKTalkBoxAnswer : MonoBehaviour
         else
         {
             CUIsLGTKTalkBoxManager.Instance.SetAnswerIndex(m_nAnswerIndex);
+            CUIsLGTKTalkBoxManager.Instance.SetObjAnswer(m_txtAnswer.text);
             CUIsLGTKTalkBoxManager.Instance.ResetAnswer();
             CUIsLGTKTalkBoxManager.Instance.EnableBtnSendAnswer();
             m_goCheckBox.SetActive(true);

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2586563825794346228}
   - component: {fileID: 955053887835229442}
   - component: {fileID: 1790751120730340041}
+  - component: {fileID: 5629153406190455002}
   m_Layer: 5
   m_Name: LGTKTalkBoxChat
   m_TagString: Untagged
@@ -92,6 +93,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_txtChat: {fileID: 7763764865870446600}
   m_rectBG: {fileID: 7717115633530377675}
+--- !u!114 &5629153406190455002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417551335033721852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.52156866, b: 1, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &3353839940039461777
 GameObject:
   m_ObjectHideFlags: 0

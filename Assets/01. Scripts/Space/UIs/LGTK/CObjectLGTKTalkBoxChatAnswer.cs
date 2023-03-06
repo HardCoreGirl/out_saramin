@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
-public class CObjecctLGTKTalkBoxChat : MonoBehaviour
+public class CObjectLGTKTalkBoxChatAnswer : MonoBehaviour
 {
     public Text m_txtChat;
 
@@ -22,30 +22,16 @@ public class CObjecctLGTKTalkBoxChat : MonoBehaviour
         
     }
 
-    public void UpdateChat(string strChat, bool bIsQuiz = false)
+    public void UpdateChat(string strChat)
     {
         m_txtChat.text = strChat;
-
-        Color clrOutline = gameObject.GetComponent<Outline>().effectColor;
-        clrOutline.a = 0f;
-
-        //gameObject.GetComponent<Outline>().gameObject.SetActive(false);
-        if (bIsQuiz)
-        {
-            m_txtChat.fontStyle = FontStyle.Bold;
-            //gameObject.GetComponent<Outline>().gameObject.SetActive(true);
-            
-            clrOutline.a = 1f;
-        }
-
-        gameObject.GetComponent<Outline>().effectColor = clrOutline;
 
         var rectSize = m_rectBG.sizeDelta;
         rectSize.x = m_txtChat.preferredWidth + 46;
         int nRow = 0;
         if (rectSize.x >= 540)
         {
-            
+
             nRow = (int)(rectSize.x / 540);
             //Debug.Log(rectSize.x + ", " + nRow);
 
@@ -60,5 +46,6 @@ public class CObjecctLGTKTalkBoxChat : MonoBehaviour
 
         m_rectBG.sizeDelta = rectSize;
 
+        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(gameObject.GetComponent<RectTransform>().sizeDelta.x, rectSize.y);
     }
 }
