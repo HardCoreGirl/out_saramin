@@ -71,6 +71,8 @@ public class CUIsLGTKManager : MonoBehaviour
 
     private List<string> m_listAnswers;
 
+    private List<string> m_listSBCTAnswer;
+
 
 
     // Start is called before the first frame update
@@ -92,6 +94,7 @@ public class CUIsLGTKManager : MonoBehaviour
         HideTalkBox();
 
         m_listAnswers = new List<string>();
+        m_listSBCTAnswer = new List<string>();
 
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
@@ -476,5 +479,15 @@ public class CUIsLGTKManager : MonoBehaviour
     public List<string> GetListAnswers()
     {
         return m_listAnswers;
+    }
+
+    public void AddListSBCTAnswer(string strAnswer)
+    {
+        m_listSBCTAnswer.Add(strAnswer);
+    }
+
+    public List<string> GetListSBCTAnswer()
+    {
+        return m_listSBCTAnswer;
     }
 }

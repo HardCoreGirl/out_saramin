@@ -24,6 +24,7 @@ public class CObjectLGTKDatabase : MonoBehaviour
     private string m_strImageURL;
 
     private bool m_bIsDynamic = false;
+    private int m_nDynamicState = 0;
     //private STGuidesBodyContents m_stGuideContent;
     //private STGuidesBodyContents m_stGuideContentChirend;
     // Start is called before the first frame update
@@ -87,6 +88,12 @@ public class CObjectLGTKDatabase : MonoBehaviour
 
                 m_strTitle = m_txtMainTitle.text;
 
+                string strTitle = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
+                if (strTitle.Substring(strTitle.Length - 2, 2).Equals("자료"))
+                    m_nDynamicState = 0;
+                else
+                    m_nDynamicState = 1;
+
                 bool bIsExist = false;
                 for(int i = 0; i < CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children.Length; i++)
                 {
@@ -120,6 +127,13 @@ public class CObjectLGTKDatabase : MonoBehaviour
             if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
             {
                 m_bIsDynamic = true;
+                string strTitle = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
+                if (strTitle.Substring(strTitle.Length - 2, 2).Equals("자료"))
+                    m_nDynamicState = 0;
+                else
+                    m_nDynamicState = 1;
+                //Debug.Log("다이나믹 : " + strTitle.Length);
+                //Debug.Log("다이나믹 텍스트!!! : " + strTitle.Substring(strTitle.Length - 2, 2));
             }
 
             gameObject.SetActive(false);
@@ -167,15 +181,29 @@ public class CObjectLGTKDatabase : MonoBehaviour
             {
                 if( m_bIsDynamic )
                 {
-                    for (int i = 0; i < CUIsLGTKManager.Instance.GetListAnswers().Count; i++)
+                    if( m_nDynamicState == 0 )
                     {
-                        if ( CUIsLGTKManager.Instance.GetListAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                        for (int i = 0; i < CUIsLGTKManager.Instance.GetListAnswers().Count; i++)
                         {
-                            gameObject.SetActive(true);
-                            break;
+                            if (CUIsLGTKManager.Instance.GetListAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                            {
+                                gameObject.SetActive(true);
+                                break;
+                            }
                         }
+                        return;
+                    } else
+                    {
+                        for (int i = 0; i < CUIsLGTKManager.Instance.GetListSBCTAnswer().Count; i++)
+                        {
+                            if (CUIsLGTKManager.Instance.GetListSBCTAnswer()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                            {
+                                gameObject.SetActive(true);
+                                break;
+                            }
+                        }
+                        return;
                     }
-                    return;
                 }
 
                 gameObject.SetActive(true);
@@ -194,12 +222,25 @@ public class CObjectLGTKDatabase : MonoBehaviour
         bool bIsExist = false;
         for (int i = 0; i < CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children.Length; i++)
         {
-            for (int j = 0; j < CUIsLGTKManager.Instance.GetListAnswers().Count; j++)
+            if( m_nDynamicState == 0 )
             {
-                if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListAnswers()[j]))
+                for (int j = 0; j < CUIsLGTKManager.Instance.GetListAnswers().Count; j++)
                 {
-                    bIsExist = true;
-                    break;
+                    if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListAnswers()[j]))
+                    {
+                        bIsExist = true;
+                        break;
+                    }
+                }
+            } else
+            {
+                for (int j = 0; j < CUIsLGTKManager.Instance.GetListSBCTAnswer().Count; j++)
+                {
+                    if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListSBCTAnswer()[j]))
+                    {
+                        bIsExist = true;
+                        break;
+                    }
                 }
             }
         }

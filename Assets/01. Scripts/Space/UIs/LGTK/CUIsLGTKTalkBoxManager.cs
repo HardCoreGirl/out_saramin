@@ -481,7 +481,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             {
                 SetSBCTAnswer();
                 Debug.Log("Send!!!!! Answer : " + GetSBCTAnswer());
-                CUIsLGTKManager.Instance.AddListAnswers(GetSBCTAnswer());
+                //CUIsLGTKManager.Instance.AddListAnswers(GetSBCTAnswer());
+                CUIsLGTKManager.Instance.AddListSBCTAnswer(GetSBCTAnswer());
                 AddChatAnswer(GetSBCTAnswer());
                 Server.Instance.RequestPUTAnswerSubject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, quizLGTK.sets[m_nStage].questions[0].answers[0].anwr_idx, GetSBCTAnswer());
             }
@@ -489,7 +490,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             CUIsLGTKManager.Instance.UpdateDatabaseDynamic();
 
             m_nStage++;
-            if (m_nStage >= quizLGTK.sets.Length - 1)
+            if (m_nStage >= quizLGTK.sets.Length)
             {
                 Debug.Log("Finish!!!!");
                 CUIsLGTKManager.Instance.HideAllPopup();
