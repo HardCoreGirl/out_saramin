@@ -69,7 +69,8 @@ public class Questions
     public string qst_sove_cd;
     public string qst_ans_cd;
     public int qst_ans_cnt;
-    public QSTDics[] qst_dics;
+    //public QSTDics[] qst_dics;
+    public int qst_dics;
     public string qst_brws_cnnt;
     public string qst_brws_cd;
     public string qst_cnnt;
@@ -297,6 +298,25 @@ public class STGuidesBodyContentsChildren
     public string reg_date;
 }
 
+// Answer Dictionaries ---------------------------
+public class STPacketAnswerDictionaries
+{
+    public int code;
+    public string message;
+    public STPacketAnswerDictionariesBody[] body;
+}
+
+[Serializable]
+public class STPacketAnswerDictionariesBody
+{
+    public int dic_word_no;
+    public string browse_code;
+    public string word_name;
+    public int score;
+    public int parent_dic_word_no;
+    public int dic_cate_no;
+}
+
 
 // -------------------------------------------------
 
@@ -423,6 +443,10 @@ public class CQuizData : MonoBehaviour
 
     public STGuides m_stGuides;
 
+    public STPacketAnswerDictionaries m_packetAnswerDictionaries;
+
+    public List<STPacketAnswerDictionaries> m_listAnswerDictionaries;
+
     private string m_strUserName;
     private int m_nExitCnt;
 
@@ -444,6 +468,8 @@ public class CQuizData : MonoBehaviour
         //Debug.Log(JsonUtility.ToJson(m_packetRQTTutorial));
 
         m_strUserName = "TestUser";
+
+        m_listAnswerDictionaries = new List<STPacketAnswerDictionaries>();
 
         //GetQuiz("RQT");
         //Debug.Log(GetQuiz("RQT").qst_tp_cd);
@@ -623,6 +649,35 @@ public class CQuizData : MonoBehaviour
     {
         return m_stGuides;
     }
+
+    public void SetAnswerDictionaries(STPacketAnswerDictionaries packetAnswerDictionaries)
+    {
+        m_packetAnswerDictionaries = packetAnswerDictionaries;
+    }
+
+    public STPacketAnswerDictionaries GetAnswerDictionaries()
+    {
+        return m_packetAnswerDictionaries;
+    }
+
+    public void AddAnswerDictionaries(STPacketAnswerDictionaries packetAnswerDictionaries)
+    {
+        m_listAnswerDictionaries.Add(packetAnswerDictionaries);
+    }
+
+    public STPacketAnswerDictionaries GetAnswerDictionaries(int nDicCateNo)
+    {
+        for(int i = 0; i < m_listAnswerDictionaries.Count; i++)
+        {
+            if( m_listAnswerDictionaries[i].body[0].dic_cate_no == nDicCateNo)
+            {
+                return m_listAnswerDictionaries[i];
+            }
+        }
+
+        return null;
+    }
+   
 }
 
 //public class CQuizQuestion

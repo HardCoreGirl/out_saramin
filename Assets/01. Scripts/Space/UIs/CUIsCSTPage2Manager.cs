@@ -181,7 +181,15 @@ public class CUIsCSTPage2Manager : MonoBehaviour
 
         Debug.Log("InitCSTPage2 01");
 
-        if( CUIsSpaceScreenLeft.Instance.IsCSTTutorial() )
+        Quiz quizData = CQuizData.Instance.GetQuiz("CST");
+
+        if( quizData.exm_time != quizData.progress_time)
+        {
+            CUIsSpaceScreenLeft.Instance.SetCSTTutorial(false);
+        }
+
+
+        if ( CUIsSpaceScreenLeft.Instance.IsCSTTutorial() )
         {
             Debug.Log("InitCSTPage2 02");
             m_txtSendAnswer.text = "본 퀴즈 시작하기";
@@ -195,9 +203,15 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         {
             Debug.Log("InitCSTPage2 03");
             m_txtSendAnswer.text = "답변 제출하기";
+
+
             
             //m_txtMission.text = "과일, 가구에 속하는 단어를 번갈아 가며 최대한 많이 작성해 주시기 바랍니다.";
-            Quiz quizData = CQuizData.Instance.GetQuiz("CST");
+            //Quiz quizData = CQuizData.Instance.GetQuiz("CST");
+
+            Debug.Log("InitCSTPage2 03 - 01 : " + quizData.sets[0].dir_cnnt);
+            Debug.Log("InitCSTPage2 03 - 00 : " + quizData.progress_time);
+
             m_txtMission.text = quizData.sets[0].dir_cnnt;
             //m_txtMissionContent.text = quizData.sets[0].dir_cnnt;
             m_txtMissionContent.text = quizData.sets[0].qst_brws_cnnt;

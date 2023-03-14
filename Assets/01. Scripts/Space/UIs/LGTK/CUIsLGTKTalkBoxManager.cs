@@ -159,16 +159,19 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                 {
                     for (int i = 0; i < quizLGTK.sets.Length; i++)
                     {
-                        if( quizLGTK.sets[i].questions[0].test_answers[0].test_anwr_idx == 0)
+                        Debug.Log("InitLGTKTalkBoxMansger Answer Index : " + quizLGTK.sets[i].questions[0].test_answers[0].test_anwr_idx);
+                        if ( quizLGTK.sets[i].questions[0].test_answers[0].test_anwr_idx == 0)
                         {
                             break;
                         } else
                         {
-                            m_nStage = i;
+                            m_nStage = i + 1;
                         }
                     }
                 }
             }
+
+            Debug.Log("InitLGTKTalkBoxMansger Stage : " + m_nStage);
 
             m_nAnswerCnt = quizLGTK.sets[m_nStage].questions[0].answers.Length;
             m_listAnswerObject = new GameObject[m_nAnswerCnt];
@@ -291,6 +294,10 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                 m_listAnswerObject[i].transform.parent = m_goContentAnswer.transform;
                 m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, 0, m_listAnswer[i]);
             }
+
+            m_goScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
+           
+            //m_goContentAnswer.
         } else
         {
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
@@ -310,12 +317,50 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                 m_goSBCTAnswer.SetActive(false);
                 m_goScrollView.SetActive(true);
                 m_goContentAnswer.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 60 + (m_nAnswerCnt * 40) + ((m_nAnswerCnt - 1) * 10));
+
+                int[] listAnswerSort = new int[m_nAnswerCnt];
+                for(int i = 0; i < listAnswerSort.Length; i++)
+                {
+                    listAnswerSort[i] = quizLGTK.sets[m_nStage].questions[0].answers[i].anwr_idx;
+
+                    //Debug.Log("ListAnswerSort : " + listAnswerSort[i]);
+                }
+
+                System.Array.Reverse(listAnswerSort);
+
+                int[] listSortIndex = new int[m_nAnswerCnt];
+
+                for (int i = 0; i < listAnswerSort.Length; i++)
+                {
+                    //Debug.Log("ListAnswerSort After : " + listAnswerSort[i]);
+                    for(int j = 0; j < listSortIndex.Length; j++)
+                    {
+                        if(listAnswerSort[i] == quizLGTK.sets[m_nStage].questions[0].answers[j].anwr_idx)
+                        {
+                            listSortIndex[i] = j;
+                            break;
+                        }
+                    }
+                }
+
+                //for(int i = 0; i < listSortIndex.Length; i++)
+                //{
+                //    Debug.Log("Sort Index : " + listSortIndex[i]);
+                //}
+
+
                 for (int i = 0; i < m_nAnswerCnt; i++)
                 {
+                    int nConvAnswerIndex = listSortIndex[i];
                     m_listAnswerObject[i] = Instantiate(Resources.Load("Prefabs/LGTKTalkBoxAnswer") as GameObject);
                     m_listAnswerObject[i].transform.parent = m_goContentAnswer.transform;
-                    m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, quizLGTK.sets[m_nStage].questions[0].answers[i].anwr_idx, m_listAnswer[i]);
+                    //m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, quizLGTK.sets[m_nStage].questions[0].answers[i].anwr_idx, m_listAnswer[i]);
+                    m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, quizLGTK.sets[m_nStage].questions[0].answers[nConvAnswerIndex].anwr_idx, quizLGTK.sets[m_nStage].questions[0].answers[nConvAnswerIndex].anwr_cnnt);
+
+
                 }
+
+                m_goScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
 
             }
         }
@@ -418,6 +463,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         if(CUIsLGTKManager.Instance.IsTutorial())
         {
             // TODO : 튜토리얼에서 닫기 버튼을 누를때
+            CUIsLGTKManager.Instance.ShowPopupToLobbyTutorial();
             return;
         }
         //CUIsLGTKManager.Instance.HideTalkBox();
@@ -440,6 +486,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                 CUIsLGTKManager.Instance.SetTutorial(false);
                 m_nStage = 0;
                 CUIsLGTKManager.Instance.InitLGTK();
+                InitLGTKTalkBoxMansger();
                 //CUIsLGTKManager.Instance.HideTalkBox();
                 return;
             }

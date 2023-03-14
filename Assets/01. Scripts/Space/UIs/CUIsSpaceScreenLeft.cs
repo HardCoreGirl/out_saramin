@@ -154,7 +154,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
             return;
 
         Quiz quizData = CQuizData.Instance.GetQuiz(strKey);
-        Server.Instance.RequestPOSTQuestions(quizData.part_idx);
+        //Server.Instance.RequestPOSTQuestions(quizData.part_idx);
         //Server.Instance.RequestPOSTPartJoin(quizData.part_idx);
         //ShowPopupFinish();
 
@@ -175,10 +175,10 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         {
             if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
             {
-                if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING"))
-                {
-                    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
-                }
+                //if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING"))
+                //{
+                //    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                //}
                 //if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING"))
                 //{
                 //    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);

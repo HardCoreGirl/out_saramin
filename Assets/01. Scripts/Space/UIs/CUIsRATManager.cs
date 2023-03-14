@@ -87,6 +87,13 @@ public class CUIsRATManager : MonoBehaviour
             m_listImageHintTutorial[i].SetActive(false);
         }
 
+        Quiz quizData = CQuizData.Instance.GetQuiz("RAT");
+
+        if (quizData.exm_time != quizData.progress_time)
+        {
+            CUIsSpaceScreenLeft.Instance.SetRATTutorial(false);
+        }
+
         if ( CUIsSpaceScreenLeft.Instance.IsRATTutorial() )
         {
             m_txtBtnSendAnswer.text = "본 퀴즈 시작하기";
@@ -122,7 +129,7 @@ public class CUIsRATManager : MonoBehaviour
         }
         else
         {
-            Quiz quizData = CQuizData.Instance.GetQuiz("RAT");
+            //Quiz quizData = CQuizData.Instance.GetQuiz("RAT");
 
             m_txtQuizTitle.text = quizData.sets[m_nQuizIndex].questions[0].qst_cnnt;
 
@@ -143,11 +150,20 @@ public class CUIsRATManager : MonoBehaviour
                 m_nRemainTime = quizData.progress_time;
                 StartCoroutine("ProcessPlayExam");
 
+                STPacketAnswerDictionaries stPacketAnswerDictonaries = CQuizData.Instance.GetAnswerDictionaries(quizData.sets[m_nQuizIndex].questions[0].qst_dics);
+
                 for (int i = 0; i < 5; i++)
                 {
-                    // TODO
+                    // TODO 230312
                     //m_listHintURL[i] = quizData.sets[0].questions[0].qst_dics[i].dic_wrd_nm;
-                    Debug.Log("RAT Quiz : " + m_listHintURL[i]);
+                    //m_listHintURL[i] = quizData.sets[0].questions[0].qst_dics;
+
+                    if (stPacketAnswerDictonaries.body[i] == null)
+                        break;
+
+                    m_listHintURL[i] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[i].word_name;
+
+                    Debug.Log("RAT Quiz 01 : " + m_listHintURL[i]);
                 }
                 // TODO
                 //string strWordHind = quizData.sets[0].questions[0].qst_brws_cnnt;
@@ -159,6 +175,21 @@ public class CUIsRATManager : MonoBehaviour
 
             } else
             {
+                STPacketAnswerDictionaries stPacketAnswerDictonaries = CQuizData.Instance.GetAnswerDictionaries(quizData.sets[m_nQuizIndex].questions[0].qst_dics);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    // TODO 230312
+                    //m_listHintURL[i] = quizData.sets[0].questions[0].qst_dics[i].dic_wrd_nm;
+                    //m_listHintURL[i] = quizData.sets[0].questions[0].qst_dics;
+
+                    if (stPacketAnswerDictonaries.body[i] == null)
+                        break;
+
+                    m_listHintURL[i] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[i].word_name;
+
+                    Debug.Log("RAT Quiz 02 : " + m_listHintURL[i]);
+                }
                 // TODO
                 //for (int i = 0; i < 5; i++)
                 //{

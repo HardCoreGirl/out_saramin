@@ -137,23 +137,32 @@ public class CSpaceAppEngine : MonoBehaviour
                             }
                             Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RQT").idx);
 
-                            if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("TAE"))
+                            if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING"))
                             {
                                 Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                            } else if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("TAE"))
+                            {
+                                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
                             }
-                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                            //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
 
-                            if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("TAE"))
+                            if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING"))
                             {
                                 Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                            } else if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("TAE"))
+                            {
+                                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
                             }
-                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                            //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
 
-                            if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("TAE"))
+                            if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING"))
                             {
                                 Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                            } else if(CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("TAE"))
+                            {
+                                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
                             }
-                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                            //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
                         }
 
                         CUIsSpaceManager.Instance.ShowLeftPage();

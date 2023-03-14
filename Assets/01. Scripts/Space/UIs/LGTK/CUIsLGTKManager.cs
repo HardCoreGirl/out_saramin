@@ -47,6 +47,7 @@ public class CUIsLGTKManager : MonoBehaviour
     public GameObject m_goPopupToLobbyOver;
     public Text m_txtPopupToLobbyOverMsg;
     public Text m_txtPopupToLobbyOverRemainTime;
+    public GameObject m_goPopupToLobbyTutorial;
 
     public Text m_txtRemain;
 
@@ -91,7 +92,8 @@ public class CUIsLGTKManager : MonoBehaviour
     {
         //StartCoroutine("ProcessTestImage");
 
-        HideTalkBox();
+        //if(CUIsLGTKManager.Instance.IsTutorial())
+            HideTalkBox();
 
         m_listAnswers = new List<string>();
         m_listSBCTAnswer = new List<string>();
@@ -334,6 +336,7 @@ public class CUIsLGTKManager : MonoBehaviour
     {
         HidePopupFinish();
         HidePopupTimeOver();
+        HidePopupToLobbyTutorial();
     }
 
     public void ShowPopupFinish()
@@ -441,6 +444,30 @@ public class CUIsLGTKManager : MonoBehaviour
     }
     // -----------------------------------------------------------
 
+    // Popup ToLobby Tutorail ------------------------------------
+    public void ShowPopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(true);
+    }
+
+    public void HidePopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(false);
+    }
+
+    public void OnClickPopupToLobbyTutorialToLobby()
+    {
+        HidePopupToLobbyTutorial();
+        CUIsSpaceManager.Instance.ScreenActive(false, true);
+        CUIsSpaceManager.Instance.HideCenterPage();
+    }
+
+    public void OnClickPopupToLobbyTutorialClose()
+    {
+        HidePopupToLobbyTutorial();
+    }
+    // -----------------------------------------------------------
+
     public void OnClickTalkBox()
     {
         
@@ -452,7 +479,7 @@ public class CUIsLGTKManager : MonoBehaviour
 
             m_vecTalkBoxPoz = m_goTalkBox.GetComponent<RectTransform>().localPosition;
 
-            if( !m_bIsTutorial)
+            //if( !m_bIsTutorial)
                 m_bIsFirstOpen = false;
         } else
         {

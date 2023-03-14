@@ -49,6 +49,13 @@ public class CUIsHPTSManager : MonoBehaviour
 
         DelListAnswers();
 
+        Quiz quizData = CQuizData.Instance.GetQuiz("HPTS");
+
+        if (quizData.exm_time != quizData.progress_time)
+        {
+            CUIsSpaceScreenLeft.Instance.SetHPTSTutorial(false);
+        }
+
         if (CUIsSpaceScreenLeft.Instance.IsHPTSTutorial())
         {
             m_txtBtnSendAnswer.text = "본 퀴즈 시작하기";
@@ -72,7 +79,7 @@ public class CUIsHPTSManager : MonoBehaviour
         }
         else
         {
-            Quiz quizData = CQuizData.Instance.GetQuiz("HPTS");
+            //Quiz quizData = CQuizData.Instance.GetQuiz("HPTS");
             if (m_nQuizIndex == 0)
             {
                 m_txtBtnSendAnswer.text = "다음문제 (1/2)";
