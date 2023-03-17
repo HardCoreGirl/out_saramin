@@ -40,6 +40,9 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     public Text m_txtSendAnswer;
     public Text m_txtRemainTime;
 
+    public ScrollRect m_srLeft;
+    public ScrollRect m_srRight;
+
     public GameObject m_goLeftContent;
     public GameObject m_goRightContent;
 
@@ -124,6 +127,21 @@ public class CUIsCSTPage2Manager : MonoBehaviour
                 return;
             ++m_nCurPos;
 
+            Debug.Log("Move Next : " + m_nCurPos);
+
+            if( (m_nCurPos % 2) == 0 )
+            {
+                // Left
+                //m_srLeft.verticalNormalizedPosition = 1 - (m_nCurPos * 0.1f);
+                int nPosIndex = (int)(m_nCurPos / 2);
+                m_srLeft.verticalNormalizedPosition = (float)1 - ((float)nPosIndex / (float)25);
+            } else
+            {
+                // Right
+                int nPosIndex = (int)(m_nCurPos / 2);
+                m_srRight.verticalNormalizedPosition = (float)1 - ((float)nPosIndex / (float)25);
+            }
+
             m_listInputFieldTmp[m_nCurPos].Select();
         }
 
@@ -176,6 +194,9 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             m_listInputFieldTmp[0].Select();
         }
 
+        m_srLeft.verticalNormalizedPosition = 1f;
+        m_srRight.verticalNormalizedPosition = 1f;
+
         DelListAnswers();
         HideAllPopup();
 
@@ -217,8 +238,17 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             m_txtMissionContent.text = quizData.sets[0].qst_brws_cnnt;
             //m_nRemainTime = quizData.exm_time;
             m_nRemainTime = quizData.progress_time;
-            m_txtLeftContent.text = quizData.sets[0].questions[0].qst_cnnt;
-            m_txtRightContent.text = quizData.sets[1].questions[0].qst_cnnt;
+
+            if( CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL") )
+            {
+                m_txtLeftContent.text = quizData.sets[0].questions[0].qst_cnnt;
+                m_txtRightContent.text = quizData.sets[1].questions[0].qst_cnnt;
+            } else
+            {
+                m_txtLeftContent.text = quizData.sets[0].questions[0].qst_cnnt;
+                m_txtRightContent.text = quizData.sets[0].questions[1].qst_cnnt;
+            }
+            
 
             StartCoroutine("ProcessPlayExam");
         }
@@ -496,8 +526,10 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             //if (m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString().Equals("")) break;
             if (m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString().Equals("")) break;
 
-            //listLeftAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString());
+            //listLeftAnswer.Add(m_listLeftContents[i].GetCompo1nent<CUIsCSTListAnswer>().GetAnswerString());
             listLeftAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
+
+            Debug.Log("Left Answer [" + i + "] : " + m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
         }
 
         Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].answers[0].anwr_idx, listLeftAnswer.ToArray());
@@ -507,17 +539,17 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         {
             //if (m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString().Equals("")) break;
             //listRightAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString());
-
+            Debug.Log("Right Answer [" + i + "] : " + m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
             if (m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString().Equals("")) break;
-            listRightAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
+            listRightAnswer.Add(m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
 
         }
 
         // 상태값 API 호출 -----------------------------
-        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[1].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[1].questions[0].answers[0].anwr_idx, listRightAnswer.ToArray());
-
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
+            Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].answers[0].anwr_idx, listRightAnswer.ToArray());
+
             if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING"))
             {
                 Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);

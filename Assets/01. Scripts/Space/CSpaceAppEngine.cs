@@ -62,6 +62,9 @@ public class CSpaceAppEngine : MonoBehaviour
     //private bool m_bIsIntro = true;
     private bool m_bIsIntro = false;
 
+    private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
+    private bool m_bIsSkipIntro = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -311,6 +314,9 @@ public class CSpaceAppEngine : MonoBehaviour
 
     public void SetIsIntro(bool bIsIntro) { m_bIsIntro = bIsIntro; }
     public bool IsIntro() { return m_bIsIntro; }
+
+    public int GetBuildType() { return m_nBuildType; }
+    public bool IsSkipIntro() { return m_bIsSkipIntro; }
 
     public void PlayAniRobo()
     {

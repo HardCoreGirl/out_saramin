@@ -28,10 +28,18 @@ public class CUIsTitleManager : MonoBehaviour
     // Start is called before the first frame update
 
     public TMPro.TMP_InputField m_ifTest;
+
+    public GameObject m_goDebug;
+
     void Start()
     {
         //m_ifToken.text = "DEV2";
         //CSpaceAppEngine.Instance.SetServerType(m_ifToken.text);
+
+        if( CSpaceAppEngine.Instance.GetBuildType() != 0 )
+        {
+            m_goDebug.GetComponent<RectTransform>().localPosition = new Vector3(9999f, 9999f, 1f);
+        }
     }
 
     // Update is called once per frame
@@ -52,6 +60,8 @@ public class CUIsTitleManager : MonoBehaviour
         {
             CSpaceAppEngine.Instance.SetIsIntro(false);
         }
+
+        Debug.Log("OnClickPlayTest : " + CSpaceAppEngine.Instance.GetServerType());
 
         Debug.Log("FinishIntro : " + PlayerPrefs.GetInt("FinishIntro", 0));
 

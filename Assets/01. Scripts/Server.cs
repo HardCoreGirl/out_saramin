@@ -541,14 +541,21 @@ public class Server : MonoBehaviour
             }
 
             CUIsSpaceManager.Instance.HideTitle();
-            if (bIsFirst)
+            if(CSpaceAppEngine.Instance.IsSkipIntro())
             {
-                CUIsSpaceManager.Instance.ShowIntro();
-            }
-            else {
                 CUIsSpaceManager.Instance.ScreenActive(false, true);
+            } else
+            {
+                if (bIsFirst)
+                {
+                    CUIsSpaceManager.Instance.ShowIntro();
+                }
+                else
+                {
+                    CUIsSpaceManager.Instance.ScreenActive(false, true);
+                }
             }
-        
+
 
             for (int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
             {

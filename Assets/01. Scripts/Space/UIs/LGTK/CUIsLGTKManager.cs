@@ -92,7 +92,7 @@ public class CUIsLGTKManager : MonoBehaviour
     {
         //StartCoroutine("ProcessTestImage");
 
-        //if(CUIsLGTKManager.Instance.IsTutorial())
+        if (CUIsLGTKManager.Instance.IsTutorial())
             HideTalkBox();
 
         m_listAnswers = new List<string>();
@@ -100,10 +100,10 @@ public class CUIsLGTKManager : MonoBehaviour
 
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
-            Debug.Log("InitLGTK 01");
+            //Debug.Log("InitLGTK 01");
             if (!m_bIsLoadDatabases)
             {
-                Debug.Log("InitLGTK 02");
+                //Debug.Log("InitLGTK 02");
                 //m_bIsLoadDatabases = true;
                 InitDatabase();
             }
