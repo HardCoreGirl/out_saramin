@@ -92,6 +92,9 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
             {
                 m_goLGTKMain.GetComponent<CUIsLGTKManager>().SetTutorial(false);
             }
+        } else
+        {
+            //m_goLGTKMain.GetComponent<CUIsLGTKManager>().SetTutorial(false);
         }
         m_goAgree.SetActive(false);
         m_goLGTKMain.GetComponent<CUIsLGTKManager>().InitLGTK();

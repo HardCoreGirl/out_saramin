@@ -153,8 +153,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
 
-            if( !CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
-            {
+            //if( !CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+            //{
                 if (m_nStage == 0)
                 {
                     for (int i = 0; i < quizLGTK.sets.Length; i++)
@@ -169,7 +169,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                         }
                     }
                 }
-            }
+            //}
 
             Debug.Log("InitLGTKTalkBoxMansger Stage : " + m_nStage);
 

@@ -19,10 +19,9 @@
         "questions": [
           {
             "set_dir_idx": 3043,
-            "test_qst_idx": 394793,
             "test_answers": [
               {
-                "test_anwr_idx": 0,
+                "test_anwr_idx": 11,
                 "test_anwr_sbct": ""
               }
             ],
@@ -53,7 +52,7 @@
             "test_qst_idx": 394785,
             "test_answers": [
               {
-                "test_anwr_idx": 0,
+                "test_anwr_idx": 11,
                 "test_anwr_sbct": ""
               }
             ],

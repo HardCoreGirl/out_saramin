@@ -62,7 +62,7 @@ public class CSpaceAppEngine : MonoBehaviour
     //private bool m_bIsIntro = true;
     private bool m_bIsIntro = false;
 
-    private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
+    private int m_nBuildType = 0;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
 

@@ -139,6 +139,8 @@ public class CUIsLGTKManager : MonoBehaviour
         //}
 
 
+        OnClickTalkBox();
+
         if ( m_bIsTutorial)
         {
             m_txtRemain.text = "Ω√¿€¿¸";
