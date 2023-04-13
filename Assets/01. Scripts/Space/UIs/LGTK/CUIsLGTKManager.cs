@@ -57,6 +57,8 @@ public class CUIsLGTKManager : MonoBehaviour
     public GameObject m_goDatabaseDetail;
     public Image m_imgDatabaseDetail;
 
+    public GameObject m_goBlur;
+
     private bool m_bIsTutorial = true;
     private int m_nRemainTime;
 
@@ -74,6 +76,12 @@ public class CUIsLGTKManager : MonoBehaviour
 
     private List<string> m_listSBCTAnswer;
 
+    private bool m_bIsFirstQuiz = true;
+
+    private bool m_bIsActive = true;
+
+    private int m_nQuizPlanetIndex = 0;
+    private int m_nQuizFairwayIndex = 0;
 
 
     // Start is called before the first frame update
@@ -91,6 +99,10 @@ public class CUIsLGTKManager : MonoBehaviour
     public void InitLGTK()
     {
         //StartCoroutine("ProcessTestImage");
+        if (!m_bIsFirstQuiz)
+            return;
+
+        m_bIsFirstQuiz = false;
 
         if (CUIsLGTKManager.Instance.IsTutorial())
             HideTalkBox();
@@ -154,6 +166,8 @@ public class CUIsLGTKManager : MonoBehaviour
             //m_nRemainTime = 30;
             Debug.Log("LGTK Remain Time : " + m_nRemainTime);
 
+
+
             // TODO : Set_Gudes
             //for(int i= 0; i < quizLGTK.set_gudes.Length; i++)
             //{
@@ -164,6 +178,46 @@ public class CUIsLGTKManager : MonoBehaviour
 
             StartCoroutine("ProcessPlayExam");
         }
+    }
+
+    public void PlayQuiz()
+    {
+        Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
+        //m_nRemainTime = quizLGTK.exm_time;
+        m_nRemainTime = quizLGTK.progress_time;
+        //m_nRemainTime = 30;
+        //Debug.Log("LGTK Remain Time : " + m_nRemainTime);
+
+        for (int i = 0; i < quizLGTK.sets.Length; i++)
+        {
+            if (quizLGTK.sets[i].questions[0].qst_cnnt.Contains("$$$"))
+            {
+                m_nQuizPlanetIndex = quizLGTK.sets[i].questions[0].set_dir_idx;
+                Debug.Log("PlayQuiz 02 : " + quizLGTK.sets[i].questions[0].set_dir_idx);
+            }
+
+            if (quizLGTK.sets[i].questions[0].qst_cnnt.Contains("###"))
+            {
+                m_nQuizFairwayIndex = quizLGTK.sets[i].questions[0].set_dir_idx;
+                Debug.Log("PlayQuiz 03 : " + quizLGTK.sets[i].questions[0].set_dir_idx);
+            }
+        }
+
+        // TODO : Set_Gudes
+        //for(int i= 0; i < quizLGTK.set_gudes.Length; i++)
+        //{
+        //    GameObject goDropdown = Instantiate(Resources.Load("Prefabs/LGTKDropdown") as GameObject);
+        //    goDropdown.transform.parent = m_goDropdownContent.transform;
+        //    goDropdown.GetComponent<CObjectLGTKDropdown>().InitLGTKDropdown(quizLGTK.set_gudes[i].gude_nm, quizLGTK.set_gudes[i].gude_seur_grd, quizLGTK.set_gudes[i].gude_reg_dtm);
+        //}
+
+        StartCoroutine("ProcessPlayExam");
+    }
+
+    public void ReplayQuiz()
+    {
+        m_bIsActive = true;
+        //StartCoroutine("ProcessPlayExam");
     }
 
     public void InitDatabase()
@@ -287,6 +341,12 @@ public class CUIsLGTKManager : MonoBehaviour
         m_txtRemain.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         while (true)
         {
+            if( !m_bIsActive )
+            {
+                yield return new WaitForSeconds(0.2f);
+                continue;
+            }
+            
             yield return new WaitForSeconds(1f);
 
             m_nRemainTime--;
@@ -308,6 +368,11 @@ public class CUIsLGTKManager : MonoBehaviour
 
         HideAllPopup();
         ShowPopupTimeOver();
+    }
+
+    public bool IsQuizActive()
+    {
+        return m_bIsActive;
     }
     //IEnumerator ProcessQuiz()
     //{
@@ -434,10 +499,14 @@ public class CUIsLGTKManager : MonoBehaviour
 
     public void OnClickPopupToLobbyToLobby()
     {
+        Debug.Log("OnClickPopupToLobbyToLobby !!!");
+        m_bIsActive = false;
         Server.Instance.RequestPUTActionExit();
         HidePopupToLobby();
+
+        gameObject.GetComponent<RectTransform>().localPosition = new Vector3(9999f, 9999f, 0);
         CUIsSpaceManager.Instance.ScreenActive(false, true);
-        CUIsSpaceManager.Instance.HideCenterPage();
+        //CUIsSpaceManager.Instance.HideCenterPage();
     }
 
     public void OnClickPopupToLobbyExit()
@@ -450,18 +519,22 @@ public class CUIsLGTKManager : MonoBehaviour
     public void ShowPopupToLobbyTutorial()
     {
         m_goPopupToLobbyTutorial.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void HidePopupToLobbyTutorial()
     {
+        Time.timeScale = 1f;
         m_goPopupToLobbyTutorial.SetActive(false);
     }
 
     public void OnClickPopupToLobbyTutorialToLobby()
     {
+        m_bIsActive = false;
         HidePopupToLobbyTutorial();
+        gameObject.GetComponent<RectTransform>().localPosition = new Vector3(9999f, 9999f, 0);
         CUIsSpaceManager.Instance.ScreenActive(false, true);
-        CUIsSpaceManager.Instance.HideCenterPage();
+        //CUIsSpaceManager.Instance.HideCenterPage();
     }
 
     public void OnClickPopupToLobbyTutorialClose()
@@ -518,5 +591,15 @@ public class CUIsLGTKManager : MonoBehaviour
     public List<string> GetListSBCTAnswer()
     {
         return m_listSBCTAnswer;
+    }
+
+    public void ShowBlur()
+    {
+        m_goBlur.SetActive(true);
+    }
+
+    public void HideBlur()
+    {
+        m_goBlur.SetActive(false);
     }
 }

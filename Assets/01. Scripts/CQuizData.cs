@@ -59,6 +59,7 @@ public class STTestAnswer
 [Serializable]
 public class Questions
 {
+    public int set_dir_idx;
     public int test_qst_idx;
     //public int[] test_anwr_idx;
     //public int[] test_anwr_sbct;
@@ -145,6 +146,7 @@ public class STPacketAnswerSubject
     public int answer_idx;
     public int[] answers;
     public string[] contents;
+    public float demerit_score;
 }
 
 [Serializable]
@@ -312,7 +314,7 @@ public class STPacketAnswerDictionariesBody
     public int dic_word_no;
     public string browse_code;
     public string word_name;
-    public int score;
+    public float score;
     public int parent_dic_word_no;
     public int dic_cate_no;
 }
@@ -492,8 +494,6 @@ public class CQuizData : MonoBehaviour
             }
         }
 
-        //Debug.Log(strTPCD);
-
         //if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         //{
         //    for (int i = 0; i < m_packetQuiz.body.Length; i++)
@@ -506,7 +506,9 @@ public class CQuizData : MonoBehaviour
         if (strTPCD.Equals("RQT"))
             return GetRQT().body;
         else if (strTPCD.Equals("CST"))
+        {
             return GetCST().body;
+        }
         else if (strTPCD.Equals("RAT"))
             return GetRAT().body;
         else if (strTPCD.Equals("LGTK"))

@@ -37,7 +37,7 @@ public class CUIsCSTListAnswerTmp : MonoBehaviour
     {
         m_nSession = nSesstion;
         m_nIndex = nIndex;
-        string strAnswer = m_nIndex.ToString() + ". 답변을 입력해 주세요";
+        string strAnswer = (m_nIndex + 1).ToString() + ". 답변을 입력해 주세요";
         UpdateAnswer(strAnswer);
 
         Color clrAnswer = m_txtAnswer.color;
@@ -97,7 +97,7 @@ public class CUIsCSTListAnswerTmp : MonoBehaviour
 
     public void OnEndEditAnswer()
     {
-        Debug.Log("OnEndEdit");
+        //Debug.Log("OnEndEdit");
         Color clrAnswer = m_txtRealAnswer.color;
         clrAnswer.a = 0.5f;
         m_txtRealAnswer.color = clrAnswer;

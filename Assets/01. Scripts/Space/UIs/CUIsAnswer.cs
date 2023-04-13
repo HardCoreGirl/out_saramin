@@ -40,10 +40,38 @@ public class CUIsAnswer : MonoBehaviour
         m_goSelected.SetActive(false);
         m_goSelector.SetActive(true);
 
-        if( bTutorial)
+        if (bTutorial)
             m_listAnswer = quizRQT.sets[nSetIndex].questions[nQuizIndex].answers;
         else
-            m_listAnswer = quizRQT.sets[nQuizIndex].questions[0].answers;
+        {
+            //m_listAnswer = quizRQT.sets[nQuizIndex].questions[0].answers;
+
+            int[] listAnswerIndex = new int[quizRQT.sets[nQuizIndex].questions[0].answers.Length];
+
+            for (int i = 0; i < listAnswerIndex.Length; i++)
+            {
+                listAnswerIndex[i] = quizRQT.sets[nQuizIndex].questions[0].answers[i].anwr_idx;
+            }
+
+            m_listAnswer = new Answers[listAnswerIndex.Length];
+
+            System.Array.Sort(listAnswerIndex);
+            System.Array.Reverse(listAnswerIndex);
+
+            for (int i = 0; i < listAnswerIndex.Length; i++)
+            {
+                Debug.Log("RQT Init Answer : " + listAnswerIndex[i]);
+                for(int j = 0; j < listAnswerIndex.Length; j++)
+                {
+                    if(listAnswerIndex[i] == quizRQT.sets[nQuizIndex].questions[0].answers[j].anwr_idx)
+                    {
+                        m_listAnswer[i] = quizRQT.sets[nQuizIndex].questions[0].answers[j];
+                        break;
+                    }
+                }
+            }
+        }
+
 
         for (int i = 0; i < m_listBtnSelector.Length; i++)
         {

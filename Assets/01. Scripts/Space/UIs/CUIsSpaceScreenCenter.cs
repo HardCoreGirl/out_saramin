@@ -14,6 +14,8 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
     public GameObject m_goAgree;
     public Toggle m_toggleAgree;
     public GameObject m_goBtnPlay;
+
+    private bool m_bIsFirst = true;
     
     // Start is called before the first frame update
     void Start()
@@ -29,9 +31,17 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
 
     public void InitLGTKManager()
     {
-        m_goLGTKMain.SetActive(true);
-        m_goAgree.SetActive(true);
-        UpdateButtonPlay();
+        if (m_bIsFirst)
+        {
+            m_bIsFirst = false;
+            m_goLGTKMain.SetActive(true);
+            m_goAgree.SetActive(true);
+            UpdateButtonPlay();
+        } else
+        {
+            m_goLGTKMain.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+            m_goLGTKMain.GetComponent<CUIsLGTKManager>().ReplayQuiz();
+        }
         //m_goLGTKMain.GetComponent<CUIsLGTKManager>().InitLGTK();
     }
 
@@ -81,23 +91,21 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
 
     public void OnClickPlay()
     {
+
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
             if (CQuizData.Instance.GetExamInfoDetail("LGTK").status.Equals("WAITING"))
             {
                 Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("LGTK").idx);
-            }
-
-            if( CQuizData.Instance.GetQuiz("LGTK").sets[0].questions[0].test_answers[0].test_anwr_idx != 0 )
+            } else
             {
-                m_goLGTKMain.GetComponent<CUIsLGTKManager>().SetTutorial(false);
+                if (CQuizData.Instance.GetQuiz("LGTK").sets[0].questions[0].test_answers[0].test_anwr_idx != 0)
+                {
+                    m_goLGTKMain.GetComponent<CUIsLGTKManager>().SetTutorial(false);
+                }
             }
-        } else
-        {
-            //m_goLGTKMain.GetComponent<CUIsLGTKManager>().SetTutorial(false);
         }
         m_goAgree.SetActive(false);
         m_goLGTKMain.GetComponent<CUIsLGTKManager>().InitLGTK();
     }
-
 }

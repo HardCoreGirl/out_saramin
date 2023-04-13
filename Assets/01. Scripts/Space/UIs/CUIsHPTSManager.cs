@@ -11,6 +11,9 @@ public class CUIsHPTSManager : MonoBehaviour
     public Text m_txtBtnSendAnswer;
     public Text m_txtRemainTime;
 
+    public Text m_txtTitleMsg;
+    public Text m_txtContentMsg;
+
     public GameObject m_goContents;
 
     private int m_nTutorialStep = 0;
@@ -67,7 +70,7 @@ public class CUIsHPTSManager : MonoBehaviour
 
             goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
             goQuiz.transform.parent = m_goContents.transform;
-            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(null, "엔돌핀 수준이", "높음", "낮음", "", "것이다. 동일한 양의 초콜렛을 먹는다고 가정할 때,");
+            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(null, "엔돌핀 수준이", "높을", "낮을", "", "것이다. 동일한 양의 초콜렛을 먹는다고 가정할 때,");
 
             goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
             goQuiz.transform.parent = m_goContents.transform;
@@ -75,7 +78,7 @@ public class CUIsHPTSManager : MonoBehaviour
 
             goQuiz = Instantiate(Resources.Load("Prefabs/quizHPTS") as GameObject);
             goQuiz.transform.parent = m_goContents.transform;
-            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(null, "매우 기쁜 사람의 엔돌핀 수치를 비교했을 때, 그 결과를 예상할 수", "있다", "없다", "", "");
+            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(null, "매우 기쁜 사람의 엔돌핀 수치를 비교했을 때, 그 결과를 예상할 수", "있다", "없다", "", ".");
         }
         else
         {
@@ -88,7 +91,10 @@ public class CUIsHPTSManager : MonoBehaviour
                 m_nRemainTime = quizData.progress_time;
                 StartCoroutine("ProcessPlayExam");
 
-                for(int i = 0; i < quizData.sets[0].questions.Length; i++)
+                m_txtTitleMsg.text = quizData.sets[0].dir_cnnt;
+                m_txtContentMsg.text = quizData.sets[0].qst_brws_cnnt;
+
+                for (int i = 0; i < quizData.sets[0].questions.Length; i++)
                 {
                     //if( i == 0 )
                     //{
@@ -233,9 +239,13 @@ public class CUIsHPTSManager : MonoBehaviour
             else
             {
                 m_txtBtnSendAnswer.text = "답변 제출하기";
-                for (int i = 0; i < quizData.sets[1].questions.Length; i++)
+
+                m_txtTitleMsg.text = quizData.sets[m_nQuizIndex].dir_cnnt;
+                m_txtContentMsg.text = quizData.sets[m_nQuizIndex].qst_brws_cnnt;
+
+                for (int i = 0; i < quizData.sets[m_nQuizIndex].questions.Length; i++)
                 {
-                    string[] listQuiz = quizData.sets[0].questions[i].qst_cnnt.Split("<br />");
+                    string[] listQuiz = quizData.sets[m_nQuizIndex].questions[i].qst_cnnt.Split("<br />");
                     if (listQuiz.Length > 1)
                     {
                         for (int j = 0; j < listQuiz.Length; j++)
@@ -251,23 +261,23 @@ public class CUIsHPTSManager : MonoBehaviour
                                 {
                                     listSelector[k] = "";
                                 }
-                                for (int k = 0; k < quizData.sets[0].questions[i].answers.Length; k++)
+                                for (int k = 0; k < quizData.sets[m_nQuizIndex].questions[i].answers.Length; k++)
                                 {
-                                    listSelector[k] = quizData.sets[0].questions[i].answers[k].anwr_cnnt;
+                                    listSelector[k] = quizData.sets[m_nQuizIndex].questions[i].answers[k].anwr_cnnt;
                                 }
 
                                 if (listAnswer.Length > 1)
                                 {
-                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[m_nQuizIndex].questions[i], listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
                                 }
                                 else
                                 {
-                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], "", "", "", "");
+                                    goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[m_nQuizIndex].questions[i], listAnswer[0], "", "", "", "");
                                 }
                             }
                             else
                             {
-                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listQuiz[j], "", "", "", "");
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[m_nQuizIndex].questions[i], listQuiz[j], "", "", "", "");
                             }
                         }
                     }
@@ -284,23 +294,23 @@ public class CUIsHPTSManager : MonoBehaviour
                             {
                                 listSelector[k] = "";
                             }
-                            for (int k = 0; k < quizData.sets[0].questions[i].answers.Length; k++)
+                            for (int k = 0; k < quizData.sets[m_nQuizIndex].questions[i].answers.Length; k++)
                             {
-                                listSelector[k] = quizData.sets[0].questions[i].answers[k].anwr_cnnt;
+                                listSelector[k] = quizData.sets[m_nQuizIndex].questions[i].answers[k].anwr_cnnt;
                             }
 
                             if (listAnswer.Length > 1)
                             {
-                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[m_nQuizIndex].questions[i], listAnswer[0], listSelector[0], listSelector[1], listSelector[2], listAnswer[1]);
                             }
                             else
                             {
-                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listAnswer[0], "", "", "", "");
+                                goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[m_nQuizIndex].questions[i], listAnswer[0], "", "", "", "");
                             }
                         }
                         else
                         {
-                            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[0].questions[i], listQuiz[0], "", "", "", "");
+                            goQuiz.GetComponent<CUIsHPTSQuiz>().InitHPTSQuiz(quizData.sets[m_nQuizIndex].questions[i], listQuiz[0], "", "", "", "");
                         }
                     }
                 }
@@ -406,7 +416,8 @@ public class CUIsHPTSManager : MonoBehaviour
             return;
         }
 
-        ShowPopupSendAnswer();
+        OnClickPopupSendAnswerNext();
+        //ShowPopupSendAnswer();
     }
 
     public void HideAllPopup()
@@ -424,6 +435,21 @@ public class CUIsHPTSManager : MonoBehaviour
         int nSec = (int)(m_nRemainTime % 60);
 
         m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+        StartCoroutine("ProcessToLobbySendAnswer");
+    }
+
+    IEnumerator ProcessToLobbySendAnswer()
+    {
+        while (true)
+        {
+            int nRemainTime = m_nRemainTime;
+            int nMin = (int)(nRemainTime / 60);
+            int nSec = (int)(nRemainTime % 60);
+
+            m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void ShowPopupTimeOver()
@@ -476,8 +502,8 @@ public class CUIsHPTSManager : MonoBehaviour
 
     public void OnClickPopupSendAnswerNext()
     {
-        Debug.Log("OnClickPopupSendAnswerNext");
         StopCoroutine("ProcessPlayExam");
+        StopCoroutine("ProcessToLobbySendAnswer");
         HideAllPopup();
 
         CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("HPTS").part_idx, 1);

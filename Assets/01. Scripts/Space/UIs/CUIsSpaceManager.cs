@@ -122,6 +122,7 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public void ScreenActive(bool bActive, bool bDeley = false)
     {
+        Debug.Log("ScreenActive : " + bActive);
         if( bActive == false && bDeley == true )
         {
             StartCoroutine("ProcessScreenActiveFalse");

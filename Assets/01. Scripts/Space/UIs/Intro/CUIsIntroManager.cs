@@ -77,6 +77,8 @@ public class CUIsIntroManager : MonoBehaviour
     {
         HideAllPage();
         m_nPage++;
+        if (m_nPage == 1)
+            m_nPage = 2;
         ShowPage(m_nPage);
     }
 }

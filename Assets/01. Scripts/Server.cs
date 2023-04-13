@@ -56,6 +56,8 @@ public class Server : MonoBehaviour
 
     private bool m_bIsLoadDummy = false;
 
+    private int m_nRetryCnt = 0;
+
     [HideInInspector]
     public string cur_server = "";
 
@@ -144,13 +146,14 @@ public class Server : MonoBehaviour
             Debug.Log(www.error);
 
             Debug.Log("error : " + www.error + " url : " + www.url);
-
+            string text = www.downloadHandler.text;
+            Debug.Log("ERROR : [" + www.url + "] " + www.method + "MSG : " + www.error + " Text : " + text);
         }
         else
         {
             string text = www.downloadHandler.text;
-            Debug.Log("Handler : " + www.downloadHandler.data);
-            Debug.Log("Text : " + text);
+            //Debug.Log("Handler : " + www.downloadHandler.data);
+            Debug.Log("[" + www.url + "] " + www.method + " Text : " + text);
             if (del != null) del(text);
         }
     }
@@ -189,8 +192,6 @@ public class Server : MonoBehaviour
 
         GET(url, header, (string txt) =>
         {
-            Debug.Log("txt : " + txt);
-
             //Aws_Rp_VersionCheck output = JsonConvert.DeserializeObject<Aws_Rp_VersionCheck>(txt);
 
 
@@ -256,7 +257,7 @@ public class Server : MonoBehaviour
     #endregion
 
     #region 문항
-    public void RequestGETQuestions(int nPartIdx)
+    public void RequestGETQuestions(int nPartIdx, bool bIsShowPage = false)
     {
         PacketQuizPart stPacketQuiz = new PacketQuizPart();
         if ( CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
@@ -330,14 +331,20 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         GET(url, header, (string txt) =>
         {
-            //Debug.Log("txt : " + txt);
-
+            //RequestGETQuestionsRetry(nPartIdx);
 
             stPacketQuiz = JsonUtility.FromJson<PacketQuizPart>(txt);
 
             if (stPacketQuiz.code == 200)
             {
-                if (stPacketQuiz.body.qst_tp_cd.Equals("RQT")) CQuizData.Instance.SetRQT(stPacketQuiz);
+                m_nRetryCnt = 0;
+
+                if (stPacketQuiz.body.qst_tp_cd.Equals("RQT"))
+                {
+                    CQuizData.Instance.SetRQT(stPacketQuiz);
+                    if (bIsShowPage)
+                        CUIsSpaceScreenLeft.Instance.InitRQTQuiz();
+                }
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("APTD1"))
                 {
                     CQuizData.Instance.SetAPTD1(stPacketQuiz);
@@ -348,12 +355,18 @@ public class Server : MonoBehaviour
                     CQuizData.Instance.SetAPTD2(stPacketQuiz);
                     CUIsSpaceManager.Instance.ShowRightPage();
                 }
-                else if (stPacketQuiz.body.qst_tp_cd.Equals("CST")) CQuizData.Instance.SetCST(stPacketQuiz);
+                else if (stPacketQuiz.body.qst_tp_cd.Equals("CST"))
+                {
+                    CQuizData.Instance.SetCST(stPacketQuiz);
+                    if(bIsShowPage)
+                        CUIsSpaceScreenLeft.Instance.InitCSTQuiz();
+                }
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("RAT"))
                 {
                     CQuizData.Instance.SetRAT(stPacketQuiz);
-
-                    for(int i = 0; i < stPacketQuiz.body.sets.Length; i++)
+                    if (bIsShowPage)
+                        CUIsSpaceScreenLeft.Instance.InitRATQuiz();
+                    for (int i = 0; i < stPacketQuiz.body.sets.Length; i++)
                     {
                         for (int j = 0; j < stPacketQuiz.body.sets[i].questions.Length; j++)
                         {
@@ -361,18 +374,41 @@ public class Server : MonoBehaviour
                         }
                     }
                 }
+                else if (stPacketQuiz.body.qst_tp_cd.Equals("HPTS"))
+                {
+                    CQuizData.Instance.SetHPTS(stPacketQuiz);
+                    if (bIsShowPage)
+                        CUIsSpaceScreenLeft.Instance.InitHPTSQuiz();
+                }
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("LGTK"))
                 {
                     CQuizData.Instance.SetLGTK(stPacketQuiz);
                     Server.Instance.RequestGETGuides(CQuizData.Instance.GetLGTK().body.guide_idx);
                 }
-                else if (stPacketQuiz.body.qst_tp_cd.Equals("HPTS")) CQuizData.Instance.SetHPTS(stPacketQuiz);
+                
             }
             else
             {
-                Debug.Log("ReqeustTestCheck Err : " + stPacketQuiz.code);
+                Debug.Log("ReqeustTestCheck Err : " + stPacketQuiz.code + ", " + stPacketQuiz.message);
+                //m_nRetryCnt++;
+
+                //if (m_nRetryCnt < 10)
+                //{
+                //    RequestGETQuestionsRetry(nPartIdx);
+                //}
             }
         });
+    }
+
+    public void RequestGETQuestionsRetry(int nPartIdx)
+    {
+        StartCoroutine(ProcessRequestGETQuestionsRetry(nPartIdx));
+    }
+
+    IEnumerator ProcessRequestGETQuestionsRetry(int nPartIdx)
+    {
+        yield return new WaitForSeconds(0.3f);
+        RequestGETQuestions(nPartIdx);
     }
 
     public void RequestPOSTQuestions(int nPartIdx)
@@ -416,6 +452,7 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         PUT(url, header, jsonBody, (string txt) =>
         {
+
             //Debug.Log("txt : " + txt);
         });
     }
@@ -478,12 +515,12 @@ public class Server : MonoBehaviour
         });
     }
 
-    public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string strContent)
+    public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string strContent, float fScore = 0f)
     {
-        RequestPUTAnswerSubject(nQuestIndex, nAnswerIndex, new string[] { strContent });
+        RequestPUTAnswerSubject(nQuestIndex, nAnswerIndex, new string[] { strContent }, fScore);
     }
 
-    public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string[] listContent)
+    public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string[] listContent, float fSocre = 0f)
     {
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
 
@@ -492,6 +529,7 @@ public class Server : MonoBehaviour
         stPacketAnswer.answer_idx = nQuestIndex;
         stPacketAnswer.answers = new int[] { nAnswerIndex };
         stPacketAnswer.contents = listContent;
+        stPacketAnswer.demerit_score = fSocre;
 
         string jsonBody = JsonConvert.SerializeObject(stPacketAnswer);
 
@@ -511,8 +549,10 @@ public class Server : MonoBehaviour
     #endregion
 
     #region 정보안내
-    public void RequestGETInfoExams()
+    public void RequestGETInfoExams(bool bIsFirstRequest = false)
     {
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
+
         string jsonBody = JsonConvert.SerializeObject(null);
 
 
@@ -530,53 +570,58 @@ public class Server : MonoBehaviour
             packetExamInfo = JsonUtility.FromJson<STPacketExamInfo>(txt);
             CQuizData.Instance.SetExamInfo(packetExamInfo);
 
-            bool bIsFirst = true;
-            for (int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
+            if(bIsFirstRequest)
             {
-                if (!CQuizData.Instance.GetExamInfo().body[i].status.Equals("WAITING"))
+                bool bIsFirst = true;
+                for (int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
                 {
-                    bIsFirst = false;
-                    break;
+                    if (!CQuizData.Instance.GetExamInfo().body[i].status.Equals("WAITING"))
+                    {
+                        bIsFirst = false;
+                        break;
+                    }
                 }
-            }
 
-            CUIsSpaceManager.Instance.HideTitle();
-            if(CSpaceAppEngine.Instance.IsSkipIntro())
-            {
-                CUIsSpaceManager.Instance.ScreenActive(false, true);
-            } else
-            {
-                if (bIsFirst)
-                {
-                    CUIsSpaceManager.Instance.ShowIntro();
-                }
-                else
+                CUIsSpaceManager.Instance.HideTitle();
+                if (CSpaceAppEngine.Instance.IsSkipIntro())
                 {
                     CUIsSpaceManager.Instance.ScreenActive(false, true);
                 }
+                else
+                {
+                    if (bIsFirst)
+                    {
+                        CUIsSpaceManager.Instance.ShowIntro();
+                    }
+                    else
+                    {
+                        CUIsSpaceManager.Instance.ScreenActive(false, true);
+                    }
+                }
+
+
+                for (int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
+                {
+                    if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("RQT"))
+                    {
+                        if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishLeft01(true);
+                    }
+                    else if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("HPTS"))
+                    {
+                        if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishLeft02(true);
+                    }
+                    else if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("LGTK"))
+                    {
+                        if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishCenter(true);
+                    }
+                    else if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("APTD2"))
+                    {
+                        if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishRight(true);
+                    }
+                }
+
+                CSpaceAppEngine.Instance.UpdateMissionClear();
             }
-
-
-            for (int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
-            {
-                if( CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("RQT") )
-                {
-                    if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishLeft01(true);
-                } else if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("HPTS"))
-                {
-                    if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishLeft02(true);
-                }
-                else if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("LGTK"))
-                {
-                    if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishCenter(true);
-                }
-                else if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("APTD2"))
-                {
-                    if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishRight(true);
-                }
-            }
-
-            CSpaceAppEngine.Instance.UpdateMissionClear();
         });
     }
 
@@ -699,26 +744,38 @@ public class Server : MonoBehaviour
         {
             if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("CST").idx)
             {
-                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                //Debug.Log("RequestPOSTPartJoin RequestQuestion CST");
+                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx, true);
+                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
                 //Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
             }
-            if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("RAT").idx)
+            //if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("RAT").idx)
+            //{
+            //    Debug.Log("RequestPOSTPartJoin RequestQuestion RAT");
+            //    Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+            //    //Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+            //}
+            //if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("HPTS").idx)
+            //{
+            //    Debug.Log("RequestPOSTPartJoin RequestQuestion HPTS");
+            //    Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+            //    //Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+            //}
+
+            if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("LGTK").idx)
             {
-                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
-                //Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
-            }
-            if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("HPTS").idx)
-            {
-                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
-                //Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("LGTK").idx);
             }
 
-            if ( nPartIdx == CQuizData.Instance.GetExamInfoDetail("APTD1").idx)
+            if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("APTD1").idx)
                 RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD1").idx);
 
             if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("APTD2").idx)
                 RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
             //Debug.Log("txt : " + txt);
+
+            RequestGETInfoExams();
         });
     }
 
@@ -743,20 +800,37 @@ public class Server : MonoBehaviour
             if (stPacket.code == 200)
             {
                 //RequestPOSTPartJoin(nPartIdx);
-                if(nPartIdx == CQuizData.Instance.GetExamInfoDetail("CST").idx)
-                {
-                    //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
-                    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
-                } else if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("RAT").idx)
-                {
-                    //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
-                    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
-                }
-                else if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("HPTS").idx)
-                {
-                    //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
-                    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
-                }
+                //if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("CST").idx)
+                //{
+                //    //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                //    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                //}
+                //else if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("RAT").idx)
+                //{
+                //    //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                //    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                //}
+                //else if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("HPTS").idx)
+                //{
+                //    //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                //    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                //}
+                //if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("CST").idx)
+                //{
+                //    Debug.Log("RequestGETPartJoin RequestQuestion CST");
+                //    Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                //    //Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                //}
+                //if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("RAT").idx)
+                //{
+                //    Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                //    //Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                //}
+                //if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("HPTS").idx)
+                //{
+                //    Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                //    //Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                //}
             }
         });
     }
@@ -861,7 +935,6 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         POST(url, header, jsonBody, (string txt) =>
         {
-            Debug.Log("txt : " + txt);
         });
     }
     #endregion

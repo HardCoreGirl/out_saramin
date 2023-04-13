@@ -92,6 +92,8 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         string strChatMsg = "";
         if( CUIsLGTKManager.Instance.IsTutorial() )
         {
+            CUIsLGTKManager.Instance.ShowBlur();
+
             if (m_nStage == 0)
                 m_nAnswerCnt = 3;
             else if (m_nStage == 1)
@@ -149,7 +151,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             }
         } else
         {
-
+            CUIsLGTKManager.Instance.HideBlur();
 
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
 
@@ -159,7 +161,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                 {
                     for (int i = 0; i < quizLGTK.sets.Length; i++)
                     {
-                        Debug.Log("InitLGTKTalkBoxMansger Answer Index : " + quizLGTK.sets[i].questions[0].test_answers[0].test_anwr_idx);
+                        //Debug.Log("InitLGTKTalkBoxMansger Answer Index : " + quizLGTK.sets[i].questions[0].test_answers[0].test_anwr_idx);
                         if ( quizLGTK.sets[i].questions[0].test_answers[0].test_anwr_idx == 0)
                         {
                             break;
@@ -250,6 +252,17 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         float fWaitTime = 2.0f;
         for (int i = 0; i < m_listChat.Length; i++)
         {
+            if( !CUIsLGTKManager.Instance.IsQuizActive() )
+            {
+                while(true)
+                {
+                    if (CUIsLGTKManager.Instance.IsQuizActive())
+                        break;
+
+                    yield return new WaitForSeconds(0.2f);
+                }
+            }
+
             GameObject goChat = Instantiate(Resources.Load("Prefabs/LGTKTalkBoxChat") as GameObject);
 
             goChat.transform.parent = m_goContentChat.transform;
@@ -259,16 +272,29 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             //else
             goChat.GetComponent<CObjecctLGTKTalkBoxChat>().UpdateChat(m_listChat[i]);
 
-            Debug.Log("ProcessQuiz 00 : " + goChat.GetComponent<RectTransform>().sizeDelta.y);
+            //Debug.Log("ProcessQuiz 00 : " + goChat.GetComponent<RectTransform>().sizeDelta.y);
             m_fChatHeight += (goChat.GetComponent<RectTransform>().sizeDelta.y + 5f);
 
             UpdateChatContentSize();
 
-            if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
-                fWaitTime = 0.2f;
+            //if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+            //    fWaitTime = 0.2f;
             yield return new WaitForSeconds(fWaitTime);
         }
 
+        if (!CUIsLGTKManager.Instance.IsQuizActive())
+        {
+            while (true)
+            {
+                if (CUIsLGTKManager.Instance.IsQuizActive())
+                    break;
+
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
+
+
+        Debug.Log("ProcessQuiz 01");
         GameObject goChatQuiz = Instantiate(Resources.Load("Prefabs/LGTKTalkBoxChat") as GameObject);
         goChatQuiz.transform.parent = m_goContentChat.transform;
         goChatQuiz.GetComponent<CObjecctLGTKTalkBoxChat>().UpdateChat(m_strQuizMsg, true);
@@ -285,6 +311,18 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         // Answer   
         if (CUIsLGTKManager.Instance.IsTutorial())
         {
+            if (!CUIsLGTKManager.Instance.IsQuizActive())
+            {
+                while (true)
+                {
+                    if (CUIsLGTKManager.Instance.IsQuizActive())
+                        break;
+
+                    yield return new WaitForSeconds(0.2f);
+                }
+            }
+
+
             m_goSBCTAnswer.SetActive(false);
             m_goScrollView.SetActive(true);
             m_goContentAnswer.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 60 + (m_nAnswerCnt * 40) + ((m_nAnswerCnt - 1) * 10));
@@ -300,6 +338,18 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             //m_goContentAnswer.
         } else
         {
+            if (!CUIsLGTKManager.Instance.IsQuizActive())
+            {
+                while (true)
+                {
+                    if (CUIsLGTKManager.Instance.IsQuizActive())
+                        break;
+
+                    yield return new WaitForSeconds(0.2f);
+                }
+            }
+
+
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
             string strQuizType = quizLGTK.sets[m_nStage].questions[0].qst_ans_cd;
 
@@ -473,7 +523,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
     public void OnClickTalkBoxSend()
     {
-        Debug.Log("OnclickTalkBoxSend");
+        //Debug.Log("OnclickTalkBoxSend");
         StopCoroutine("ProcessQuiz");
         
         if( CUIsLGTKManager.Instance.IsTutorial() )
@@ -485,9 +535,11 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                 //DelContent();
                 CUIsLGTKManager.Instance.SetTutorial(false);
                 m_nStage = 0;
-                CUIsLGTKManager.Instance.InitLGTK();
+                //CUIsLGTKManager.Instance.InitLGTK();
+                CUIsLGTKManager.Instance.PlayQuiz();
                 InitLGTKTalkBoxMansger();
                 //CUIsLGTKManager.Instance.HideTalkBox();
+                CUIsLGTKManager.Instance.HideBlur();
                 return;
             }
         } else

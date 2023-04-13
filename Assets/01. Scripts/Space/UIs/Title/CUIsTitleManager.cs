@@ -50,16 +50,16 @@ public class CUIsTitleManager : MonoBehaviour
 
     public void OnClickPlayTest()
     {
-        if (m_ifToken.text.Equals(""))
-        {
-            CSpaceAppEngine.Instance.SetServerType("DEV2");
-        }
+        //if (m_ifToken.text.Equals(""))
+        //{
+        //    CSpaceAppEngine.Instance.SetServerType("DEV2");
+        //}
 
         
-        if(PlayerPrefs.GetInt("FinishIntro", 0) == 1)
-        {
-            CSpaceAppEngine.Instance.SetIsIntro(false);
-        }
+        //if(PlayerPrefs.GetInt("FinishIntro", 0) == 1)
+        //{
+        //    CSpaceAppEngine.Instance.SetIsIntro(false);
+        //}
 
         Debug.Log("OnClickPlayTest : " + CSpaceAppEngine.Instance.GetServerType());
 
@@ -80,23 +80,27 @@ public class CUIsTitleManager : MonoBehaviour
 
         //string strURL = Application.absoluteURL;
         //string[] listURL = strURL.Split("?token=");
+
+#if UNITY_EDITOR
+        string strToken = CSpaceAppEngine.Instance.GetToken();
+#else
         string strToken = getToken("accessToken");
         if( strToken.Equals("") )
         {
             string strURL = Application.absoluteURL;
             string[] listURL = strURL.Split("?token=");
-            if(listURL.Length > 1)
+            if (listURL.Length > 1)
             {
                 setToken("accessToken", listURL[1]);
             }
             showAlert("Auth Fail..");
             return;
         }
-
+#endif
         Server.Instance.SetToken(strToken);
         Server.Instance.RequestTestCheck();
         //Server.Instance.RequestTestInvest();
-        Server.Instance.RequestGETInfoExams();
+        Server.Instance.RequestGETInfoExams(true);
         Server.Instance.ReuquestGETInfoMissions();
         //CUIsSpaceManager.Instance.HideTitle();
 

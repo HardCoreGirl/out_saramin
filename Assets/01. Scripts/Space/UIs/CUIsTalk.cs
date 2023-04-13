@@ -42,12 +42,12 @@ public class CUIsTalk : MonoBehaviour
         m_nSetIndex = nSetIndex;
         m_nQuizIndex = nQuizIndex;
         m_bIsTutorial = bTutorial;
-        Debug.Log("00000 SetIndex : " + nSetIndex + ", QuizIndex : " + nQuizIndex);
+        //Debug.Log("00000 SetIndex : " + nSetIndex + ", QuizIndex : " + nQuizIndex);
         Quiz quizRQT = CQuizData.Instance.GetRQT().body;
 
         if (bTutorial)
         {
-            Debug.Log("1111 Tutorial : " + bTutorial);
+            //Debug.Log("1111 Tutorial : " + bTutorial);
             quizRQT = CQuizData.Instance.GetQuiz("RQT", bTutorial);
         }
         //Debug.Log("22222 Question Cnt : " + quizRQT.sets[nSetIndex].questions.Length);
@@ -105,7 +105,18 @@ public class CUIsTalk : MonoBehaviour
         float fTotalHeight = 20;
         for (int i = 0; i < m_listQuiz.Length; i++)
         {
-            Debug.Log("List Quiz : [" + i.ToString() + "]" + m_listQuiz[i]);
+            if( i != 0)
+                yield return new WaitForSeconds(2f);
+            //Debug.Log("List Quiz : [" + i.ToString() + "]" + m_listQuiz[i]);
+            //yield return new WaitForSeconds(2f);
+            //if( i != 0 )
+            //{
+            //    if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+            //        yield return new WaitForSeconds(0.2f);
+            //    else
+            //        yield return new WaitForSeconds(2f);
+            //}
+
             GameObject goTalk = Instantiate(Resources.Load("Prefabs/quizTalk") as GameObject);
             goTalk.transform.parent = transform;
             Vector2 vecPoz2 = goTalk.GetComponent<RectTransform>().anchoredPosition;
@@ -119,17 +130,15 @@ public class CUIsTalk : MonoBehaviour
             float fHeight = goTalk.GetComponent<CUIsTalkBubble>().InitUIs(m_listQuiz[i]);
             //vecPoz2.y = (-8 * i) - fTotalHeight + 16;
             vecPoz2.y = (-26 * i) - fTotalHeight + 16;
-            Debug.Log("Height : " + vecPoz2.y);
+            //Debug.Log("Height : " + vecPoz2.y);
             //Debug.Log("Height : " + fHeight);
 
             fTotalHeight += (fHeight + 10);
 
             goTalk.GetComponent<RectTransform>().anchoredPosition = vecPoz2;
 
-            if( CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL") )
-                yield return new WaitForSeconds(0.2f);
-            else
-                yield return new WaitForSeconds(2f);
+
+            
         }
 
         //Vector2 vecSelector = m_goSelector.GetComponent<RectTransform>().anchoredPosition;

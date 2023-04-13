@@ -42,8 +42,8 @@ public class CSpaceAppEngine : MonoBehaviour
 
     public GameObject[] m_goMissionClear = new GameObject[4];
 
-    //private string m_strServerType = "LOCAL";
-    private string m_strServerType = "DEV2";
+    private string m_strServerType = "LOCAL";
+    //private string m_strServerType = "DEV2";
 
     //public GameObject[] m_listObjectOutline = new GameObject[3];
 
@@ -59,11 +59,13 @@ public class CSpaceAppEngine : MonoBehaviour
     private bool m_bIsFinishCenter = false;
     private bool m_bIsFinishRight = false;
 
-    //private bool m_bIsIntro = true;
-    private bool m_bIsIntro = false;
+    private bool m_bIsIntro = true;
+    //private bool m_bIsIntro = false;
 
-    private int m_nBuildType = 0;   // 0 : Debug, 1 : DEV2
+    private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
+
+    private string m_strToken = "f34667ff-fca0-4b64-bab9-7b4e1183c5d8";
 
 
     // Start is called before the first frame update
@@ -125,51 +127,75 @@ public class CSpaceAppEngine : MonoBehaviour
                     {
                         if (m_bIsFinishLeft01 && m_bIsFinishLeft02)
                             return;
+
                         CUIsSpaceManager.Instance.ScreenActive(true);
-                        //if (GetServerType().Equals("LOCAL"))
-                        //{
-                        //    //Debug.Log("Screen Left - LOCAL LOADED");
-                        //    //Server.Instance.RequestGETQuestions(0);
-                        //}
 
                         if (!GetServerType().Equals("LOCAL"))
                         {
-                            if(CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("TAE"))
-                            {
+                            if (CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("WAITING"))
                                 Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RQT").idx);
-                            }
-                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RQT").idx);
-
                             if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING"))
-                            {
                                 Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
-                            } else if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("TAE"))
-                            {
-                                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
-                            }
-                            //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
-
                             if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING"))
-                            {
                                 Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
-                            } else if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("TAE"))
-                            {
-                                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
-                            }
-                            //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
-
                             if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING"))
-                            {
                                 Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
-                            } else if(CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("TAE"))
-                            {
-                                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
-                            }
+
+                            Server.Instance.RequestGETInfoExams();
+                            //if (CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("WAITING") || CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("TAE"))
+                            //{
+                            //    Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RQT").idx);
+                            //    Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                            //    Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                            //    Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+
+                            //    if (CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("TAE"))
+                            //    {
+                            //        Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RQT").idx);
+                            //        Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                            //        Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                            //        Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                            //    }
+                            //}
+
+
+                            //if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING"))
+                            //{
+                            //    Debug.Log("Screen Left CST WAITING");
+                            //    Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                            //} else if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("TAE"))
+                            //{
+                            //    Debug.Log("Screen Left CST TAE");
+                            //    Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+                            //    //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                            //    //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                            //}
+                            ////Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+
+                            //if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING"))
+                            //{
+                            //    Debug.Log("Screen Left RAT WAITING");
+                            //    Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                            //} else if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("TAE"))
+                            //{
+                            //    Debug.Log("Screen Left RAT TAE");
+                            //    Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+                            //}
+                            ////Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+
+                            //if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING"))
+                            //{
+                            //    Debug.Log("Screen Left HPTS WAITING");
+                            //    Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                            //} else if(CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("TAE"))
+                            //{
+                            //    Debug.Log("Screen Left HPTS TAE");
+                            //    Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+                            //}
                             //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
                         }
 
                         CUIsSpaceManager.Instance.ShowLeftPage();
-                        //CUIsSpaceManager.Instance.ShowLeftPage();
                     }
                     else if (hit.collider.name == "screen_main")
                     {
@@ -184,8 +210,11 @@ public class CSpaceAppEngine : MonoBehaviour
                             return;
                         } else
                         {
-                            Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("LGTK").idx);
+                            if (!CQuizData.Instance.GetExamInfoDetail("LGTK").status.Equals("WAITING"))
+                                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("LGTK").idx);
                         }
+
+                        Server.Instance.RequestGETInfoExams();
 
                         CUIsSpaceManager.Instance.ShowCenterPage();
                     }
@@ -326,5 +355,10 @@ public class CSpaceAppEngine : MonoBehaviour
     public void PlayFinishRobo()
     {
         m_aniRobo.Play("Robot03");
+    }
+
+    public string GetToken()
+    {
+        return m_strToken;
     }
 }

@@ -99,7 +99,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     {
         GetCurrentPos();
         //Debug.Log("Move Prev : " + GetCurrentPos());
-        if( m_nCurPos > 0 )
+        if (m_nCurPos > 0)
         {
             --m_nCurPos;
 
@@ -129,7 +129,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
 
             Debug.Log("Move Next : " + m_nCurPos);
 
-            if( (m_nCurPos % 2) == 0 )
+            if ((m_nCurPos % 2) == 0)
             {
                 // Left
                 //m_srLeft.verticalNormalizedPosition = 1 - (m_nCurPos * 0.1f);
@@ -179,10 +179,10 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         m_listInputFieldTmp = new List<TMPro.TMP_InputField>();
         m_listInputFieldTmp.Clear();
 
-        if ( m_listInputFieldTmp.Count == 0 )
+        if (m_listInputFieldTmp.Count == 0)
         {
-            Debug.Log("InitCSTPage2 InputFiled Init");
-            for(int i = 0; i < 25; i++)
+            //Debug.Log("InitCSTPage2 InputFiled Init");
+            for (int i = 0; i < 25; i++)
             {
                 m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().InitListAnswer(0, i);
                 m_listInputFieldTmp.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().m_ifAnswer);
@@ -200,19 +200,23 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         DelListAnswers();
         HideAllPopup();
 
-        Debug.Log("InitCSTPage2 01");
+        //Debug.Log("InitCSTPage2 01");
+
+
+        //if(!CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING"))
+        //{
+        //    CUIsSpaceScreenLeft.Instance.SetCSTTutorial(false);
+        //}
 
         Quiz quizData = CQuizData.Instance.GetQuiz("CST");
-
-        if( quizData.exm_time != quizData.progress_time)
+        if( quizData.progress_time != quizData.exm_time )
         {
             CUIsSpaceScreenLeft.Instance.SetCSTTutorial(false);
         }
 
-
-        if ( CUIsSpaceScreenLeft.Instance.IsCSTTutorial() )
+        if (CUIsSpaceScreenLeft.Instance.IsCSTTutorial())
         {
-            Debug.Log("InitCSTPage2 02");
+            //Debug.Log("InitCSTPage2 02");
             m_txtSendAnswer.text = "본 퀴즈 시작하기";
             m_txtRemainTime.text = "시작전";
             m_txtMission.text = CQuizData.Instance.GetUserName() + "님,  플레이샵에 오신 것을 환영합니다! 첫 번째 라운드는 사고 유연성 테스트입니다. 안내문 내용을 참고하시어 아래 빈 칸에 알맞은 단어를 작성해 주세요.본 퀴즈는 연습이오니 부담 갖지 마시고 충분히 작성하셔도 됩니다.";
@@ -222,16 +226,18 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             m_txtMissionContent.text = "‘음식’ 범주에는 일반적으로 사람이 먹거나 마실 수 있는 모든 것(김치, 사과 등)을 작성해 주세요.\n-\n사무용품 범주에는 문구류, 사무기기, 종이류 등을 포함한 물품(연필, 스테인플러 등)을 작성해 주세요.입니다.\n-\n각 범주에 속하는 단어를 번갈아가며 순서대로 입력해 주세요.\n-\n최대한 빠르고 오탈자 없이 입력해 주세요.\n-\n부정 행위를 하실 경우 불이익이 생길 수 있습니다.";
         } else
         {
-            Debug.Log("InitCSTPage2 03");
+            //Debug.Log("InitCSTPage2 03");
+            //Quiz quizData = CQuizData.Instance.GetQuiz("CST");
+
             m_txtSendAnswer.text = "답변 제출하기";
 
 
-            
+
             //m_txtMission.text = "과일, 가구에 속하는 단어를 번갈아 가며 최대한 많이 작성해 주시기 바랍니다.";
             //Quiz quizData = CQuizData.Instance.GetQuiz("CST");
 
-            Debug.Log("InitCSTPage2 03 - 01 : " + quizData.sets[0].dir_cnnt);
-            Debug.Log("InitCSTPage2 03 - 00 : " + quizData.progress_time);
+            //Debug.Log("InitCSTPage2 03 - 01 : " + quizData.sets[0].dir_cnnt);
+            //Debug.Log("InitCSTPage2 03 - 00 : " + quizData.progress_time);
 
             m_txtMission.text = quizData.sets[0].dir_cnnt;
             //m_txtMissionContent.text = quizData.sets[0].dir_cnnt;
@@ -239,7 +245,9 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             //m_nRemainTime = quizData.exm_time;
             m_nRemainTime = quizData.progress_time;
 
-            if( CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL") )
+            //m_nRemainTime = 60;
+
+            if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
             {
                 m_txtLeftContent.text = quizData.sets[0].questions[0].qst_cnnt;
                 m_txtRightContent.text = quizData.sets[1].questions[0].qst_cnnt;
@@ -248,12 +256,12 @@ public class CUIsCSTPage2Manager : MonoBehaviour
                 m_txtLeftContent.text = quizData.sets[0].questions[0].qst_cnnt;
                 m_txtRightContent.text = quizData.sets[0].questions[1].qst_cnnt;
             }
-            
+
 
             StartCoroutine("ProcessPlayExam");
         }
 
-        Debug.Log("InitCSTPage2 04");
+        //Debug.Log("InitCSTPage2 04");
 
         /*
 
@@ -376,9 +384,9 @@ public class CUIsCSTPage2Manager : MonoBehaviour
 
     public void OnClickSendAnswer()
     {
-        if(CUIsSpaceScreenLeft.Instance.IsCSTTutorial())
+        if (CUIsSpaceScreenLeft.Instance.IsCSTTutorial())
         {
-            if( m_nTutorialStep == 0)
+            if (m_nTutorialStep == 0)
             {
                 m_nTutorialStep++;
                 ShowTutorialMsg();
@@ -389,6 +397,8 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             }
             return;
         }
+
+        StopCoroutine("ProcessPlayExam");
 
         ShowPopupSendAnswer();
     }
@@ -439,7 +449,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         if (nIndex >= 25)
             return;
 
-        if( nSession == 0 )
+        if (nSession == 0)
         {
             //m_listLeftContents[nIndex].GetComponent<CUIsCSTListAnswer>().ActiveInputField();
             m_listLeftContents[nIndex].GetComponent<CUIsCSTListAnswerTmp>().ActiveInputField();
@@ -466,11 +476,26 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     public void ShowPopupSendAnswer()
     {
         m_goPopupSendAnswer.SetActive(true);
-        int nMin = (int)(m_nRemainTime / 60);
-        int nSec = (int)(m_nRemainTime % 60);
+        //int nMin = (int)(m_nRemainTime / 60);
+        //int nSec = (int)(m_nRemainTime % 60);
 
-        m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+        //m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+        //StartCoroutine("ProcessToLobbySendAnswer");
     }
+
+    //IEnumerator ProcessToLobbySendAnswer()
+    //{
+    //    while (true)
+    //    {
+    //        int nRemainTime = m_nRemainTime;
+    //        int nMin = (int)(nRemainTime / 60);
+    //        int nSec = (int)(nRemainTime % 60);
+
+    //        m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //}
 
     public void ShowPopupTimeOver()
     {
@@ -520,6 +545,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
 
     public void OnClickPopupSendAnswerNext()
     {
+        StopCoroutine("ProcessToLobbySendAnswer");
         List<string> listLeftAnswer = new List<string>();
         for (int i = 0; i < 25; i++)
         {
@@ -529,7 +555,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             //listLeftAnswer.Add(m_listLeftContents[i].GetCompo1nent<CUIsCSTListAnswer>().GetAnswerString());
             listLeftAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
 
-            Debug.Log("Left Answer [" + i + "] : " + m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
+            //Debug.Log("Left Answer [" + i + "] : " + m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
         }
 
         Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].answers[0].anwr_idx, listLeftAnswer.ToArray());
@@ -539,13 +565,14 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         {
             //if (m_listRightContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString().Equals("")) break;
             //listRightAnswer.Add(m_listLeftContents[i].GetComponent<CUIsCSTListAnswer>().GetAnswerString());
-            Debug.Log("Right Answer [" + i + "] : " + m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
+            //Debug.Log("Right Answer [" + i + "] : " + m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
             if (m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString().Equals("")) break;
             listRightAnswer.Add(m_listRightContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
 
         }
 
         // 상태값 API 호출 -----------------------------
+        Debug.Log("OnClickPopupSendAnswerNext");
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
             Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].answers[0].anwr_idx, listRightAnswer.ToArray());
@@ -584,12 +611,14 @@ public class CUIsCSTPage2Manager : MonoBehaviour
 
     public void OnClickPopupTimeover()
     {
-        StopCoroutine("ProcessPlayExam");
-        HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        //StopCoroutine("ProcessPlayExam");
+        //HideAllPopup();
+        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
         //CUIsSpaceManager.Instance.ScreenActive(false);
 
-        CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("CST").part_idx, 1);
-        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        //CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("CST").part_idx, 1);
+        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+
+        OnClickPopupSendAnswerNext();
     }
 }

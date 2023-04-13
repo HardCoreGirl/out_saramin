@@ -41,6 +41,11 @@ public class CUIsRATManager : MonoBehaviour
 
     private string[] m_listHintURL = new string[5];
 
+    private int m_nOpenHint = 0;
+    private float m_fScore = 0f;
+
+    private bool m_bIsPlayExam = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +55,7 @@ public class CUIsRATManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     IEnumerator GetTexture()
@@ -73,6 +78,61 @@ public class CUIsRATManager : MonoBehaviour
         }
     }
 
+    IEnumerator ProcessDisplayHintImage()
+    {
+        Quiz quizData = CQuizData.Instance.GetQuiz("RAT");
+        STPacketAnswerDictionaries stPacketAnswerDictonaries = CQuizData.Instance.GetAnswerDictionaries(quizData.sets[m_nQuizIndex].questions[0].qst_dics);
+
+        while (true)
+        {
+            if (stPacketAnswerDictonaries != null)
+                break;
+
+            yield return new WaitForSeconds(0.2f);
+
+            stPacketAnswerDictonaries = CQuizData.Instance.GetAnswerDictionaries(quizData.sets[m_nQuizIndex].questions[0].qst_dics);
+        }
+
+
+        int[] listDicIndex = new int[stPacketAnswerDictonaries.body.Length];
+
+        for (int i = 0; i < listDicIndex.Length; i++)
+        {
+            listDicIndex[i] = stPacketAnswerDictonaries.body[i].dic_word_no;
+        }
+
+        int nHintIndex = 0;
+        int nOpenHintIndex = 3;
+        for (int i = 0; i < listDicIndex.Length; i++)
+        {
+            for (int j = 0; j < stPacketAnswerDictonaries.body.Length; j++)
+            {
+                if (listDicIndex[i] == stPacketAnswerDictonaries.body[j].dic_word_no)
+                {
+                    Debug.Log("Init Rat Page - Hint Score : " + stPacketAnswerDictonaries.body[j].dic_word_no + ", " + stPacketAnswerDictonaries.body[j].score);
+                    if (stPacketAnswerDictonaries.body[j].score < 0)
+                    {
+                        m_listHintURL[nOpenHintIndex] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[j].word_name;
+                        nOpenHintIndex++;
+                    }
+                    else
+                    {
+                        m_listHintURL[nHintIndex] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[j].word_name;
+                        nHintIndex++;
+                    }
+                    break;
+                }
+            }
+        }
+
+        StartCoroutine("GetTexture");
+    }
+
+    public void PlayExam()
+    {
+        m_bIsPlayExam = true;
+    }
+
     public void InitRATPage()
     {
         m_goTutorialMsg.SetActive(false);
@@ -81,6 +141,9 @@ public class CUIsRATManager : MonoBehaviour
         //m_ifAnswer.text = "";
 
         m_ifAnswerTmp.text = "";
+
+        m_nOpenHint = 0;
+        m_fScore = 0f;
 
         for (int i = 0; i < m_listImageHintTutorial.Length; i++)
         {
@@ -92,6 +155,10 @@ public class CUIsRATManager : MonoBehaviour
         if (quizData.exm_time != quizData.progress_time)
         {
             CUIsSpaceScreenLeft.Instance.SetRATTutorial(false);
+
+            if (quizData.sets[0].questions[0].test_answers[0].test_anwr_idx == 0)
+                m_nQuizIndex = 0;
+            else m_nQuizIndex = 1;
         }
 
         if ( CUIsSpaceScreenLeft.Instance.IsRATTutorial() )
@@ -126,11 +193,13 @@ public class CUIsRATManager : MonoBehaviour
             m_listTxtHintWord[13].text = "작";
             m_listTxtHintWord[14].text = "승";
             m_listTxtHintWord[15].text = "음";
+
+            StartCoroutine("GetTexture");
         }
         else
         {
             //Quiz quizData = CQuizData.Instance.GetQuiz("RAT");
-
+            StopCoroutine("ProcessPlayExam");
             m_txtQuizTitle.text = quizData.sets[m_nQuizIndex].questions[0].qst_cnnt;
 
             string[] listHintWord = quizData.sets[m_nQuizIndex].qst_brws_cnnt.Split(", ");
@@ -150,21 +219,51 @@ public class CUIsRATManager : MonoBehaviour
                 m_nRemainTime = quizData.progress_time;
                 StartCoroutine("ProcessPlayExam");
 
-                STPacketAnswerDictionaries stPacketAnswerDictonaries = CQuizData.Instance.GetAnswerDictionaries(quizData.sets[m_nQuizIndex].questions[0].qst_dics);
+                StartCoroutine("ProcessDisplayHintImage");
 
-                for (int i = 0; i < 5; i++)
-                {
-                    // TODO 230312
-                    //m_listHintURL[i] = quizData.sets[0].questions[0].qst_dics[i].dic_wrd_nm;
-                    //m_listHintURL[i] = quizData.sets[0].questions[0].qst_dics;
+                //STPacketAnswerDictionaries stPacketAnswerDictonaries = CQuizData.Instance.GetAnswerDictionaries(quizData.sets[m_nQuizIndex].questions[0].qst_dics);
 
-                    if (stPacketAnswerDictonaries.body[i] == null)
-                        break;
+                //int[] listDicIndex = new int[stPacketAnswerDictonaries.body.Length];
 
-                    m_listHintURL[i] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[i].word_name;
+                //for(int i = 0; i < listDicIndex.Length; i++)
+                //{
+                //    listDicIndex[i] = stPacketAnswerDictonaries.body[i].dic_word_no;
+                //}
 
-                    Debug.Log("RAT Quiz 01 : " + m_listHintURL[i]);
-                }
+                //int nHintIndex = 0;
+                //int nOpenHintIndex = 3;
+                //for (int i = 0; i < listDicIndex.Length; i++)
+                //{
+                //    for(int j = 0; j < stPacketAnswerDictonaries.body.Length; j++)
+                //    {
+                //        if( listDicIndex[i] == stPacketAnswerDictonaries.body[j].dic_word_no)
+                //        {
+                //            Debug.Log("Init Rat Page - Hint Score : " + stPacketAnswerDictonaries.body[j].dic_word_no + ", " + stPacketAnswerDictonaries.body[j].score);
+                //            if(stPacketAnswerDictonaries.body[j].score < 0)
+                //            {
+                //                m_listHintURL[nOpenHintIndex] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[j].word_name;
+                //                nOpenHintIndex++;
+                //            } else
+                //            {
+                //                m_listHintURL[nHintIndex] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[j].word_name;
+                //                nHintIndex++;
+                //            }
+                //            break;
+                //        }
+                //    }
+                //}
+
+
+
+                //for (int i = 0; i < 5; i++)
+                //{
+                //    if (stPacketAnswerDictonaries.body[i] == null)
+                //        break;
+
+                //    m_listHintURL[i] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[i].word_name;
+
+                //    Debug.Log("RAT Quiz 01 : " + m_listHintURL[i]);
+                //}
                 // TODO
                 //string strWordHind = quizData.sets[0].questions[0].qst_brws_cnnt;
                 //string[] listWordHint = strWordHind.Split(',');
@@ -175,21 +274,54 @@ public class CUIsRATManager : MonoBehaviour
 
             } else
             {
-                STPacketAnswerDictionaries stPacketAnswerDictonaries = CQuizData.Instance.GetAnswerDictionaries(quizData.sets[m_nQuizIndex].questions[0].qst_dics);
+                m_nRemainTime = quizData.progress_time;
+                StartCoroutine("ProcessPlayExam");
+                StartCoroutine("ProcessDisplayHintImage");
+                //STPacketAnswerDictionaries stPacketAnswerDictonaries = CQuizData.Instance.GetAnswerDictionaries(quizData.sets[m_nQuizIndex].questions[0].qst_dics);
 
-                for (int i = 0; i < 5; i++)
-                {
-                    // TODO 230312
-                    //m_listHintURL[i] = quizData.sets[0].questions[0].qst_dics[i].dic_wrd_nm;
-                    //m_listHintURL[i] = quizData.sets[0].questions[0].qst_dics;
 
-                    if (stPacketAnswerDictonaries.body[i] == null)
-                        break;
+                //int[] listDicIndex = new int[stPacketAnswerDictonaries.body.Length];
 
-                    m_listHintURL[i] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[i].word_name;
+                //for (int i = 0; i < listDicIndex.Length; i++)
+                //{
+                //    Debug.Log("InitRATPage Index " + i + ", " + stPacketAnswerDictonaries.body[i].dic_word_no + ", " + stPacketAnswerDictonaries.body[i].score);
+                //    listDicIndex[i] = stPacketAnswerDictonaries.body[i].dic_word_no;
+                //}
 
-                    Debug.Log("RAT Quiz 02 : " + m_listHintURL[i]);
-                }
+                //int nHintIndex = 0;
+                //int nOpenHintIndex = 3;
+                //for (int i = 0; i < listDicIndex.Length; i++)
+                //{
+                //    for (int j = 0; j < stPacketAnswerDictonaries.body.Length; j++)
+                //    {
+                //        if (listDicIndex[i] == stPacketAnswerDictonaries.body[j].dic_word_no)
+                //        {
+                //            Debug.Log("Init Rat Page - Hint Score : " + stPacketAnswerDictonaries.body[j].dic_word_no + ", " + stPacketAnswerDictonaries.body[j].score);
+                //            if (stPacketAnswerDictonaries.body[j].score < 0)
+                //            {
+                //                m_listHintURL[nOpenHintIndex] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[j].word_name;
+                //                nOpenHintIndex++;
+                //            }
+                //            else
+                //            {
+                //                m_listHintURL[nHintIndex] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[j].word_name;
+                //                nHintIndex++;
+                //            }
+                //            break;
+                //        }
+                //    }
+                //}
+
+
+                //for (int i = 0; i < 5; i++)
+                //{
+                //    if (stPacketAnswerDictonaries.body[i] == null)
+                //        break;
+
+                //    m_listHintURL[i] = Server.Instance.GetCurURL() + stPacketAnswerDictonaries.body[i].word_name;
+
+                //    Debug.Log("RAT Quiz 02 : " + m_listHintURL[i]);
+                //}
                 // TODO
                 //for (int i = 0; i < 5; i++)
                 //{
@@ -204,7 +336,7 @@ public class CUIsRATManager : MonoBehaviour
             }
         }
 
-        StartCoroutine("GetTexture");
+        //StartCoroutine("GetTexture");
 
         m_listImageHint[3].color = new Color(1, 1, 1, 0);
         m_listImageHint[4].color = new Color(1, 1, 1, 0);
@@ -220,6 +352,7 @@ public class CUIsRATManager : MonoBehaviour
         m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         while (true)
         {
+            //Debug.Log("ProcessPlayExam !!!");
             yield return new WaitForSeconds(1f);
 
             m_nRemainTime--;
@@ -241,12 +374,6 @@ public class CUIsRATManager : MonoBehaviour
 
         ShowPopupTimeOver();
     }
-
-    //public void ShowTutorialMsg()
-    //{
-    //    m_goTutorialMsg.SetActive(true);
-    //}
-
     public void ShowTutorialMsg()
     {
         //m_goTutorialMsg.SetActive(true);
@@ -282,11 +409,19 @@ public class CUIsRATManager : MonoBehaviour
             return;
         }
 
+        StopCoroutine("ProcessPlayExam");
         // 상태값 API 호출 -----------------------------
         //Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswer.text);
-        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text);
-        Server.Instance.RequestPUTQuestionsStatus(CQuizData.Instance.GetQuiz("RAT").part_idx, 1);
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text, m_fScore);
 
+        if ( m_nQuizIndex < 1 )
+        {
+            m_nQuizIndex++;
+            InitRATPage();
+            return;
+        }
+
+        Server.Instance.RequestPUTQuestionsStatus(CQuizData.Instance.GetQuiz("RAT").part_idx, 1);
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
             if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING"))
@@ -295,18 +430,31 @@ public class CUIsRATManager : MonoBehaviour
             }
         }
 
-        if ( m_nQuizIndex < 1 )
-        {
-            m_nQuizIndex++;
-            InitRATPage();
-            return;
-        }
-        
         ShowPopupSendAnswer();
     }
 
     public void OnClickHint(int nIndex)
     {
+        if(nIndex == 4)
+        {
+            if (m_nOpenHint == 0)
+                return;
+        }
+
+        m_nOpenHint = nIndex;
+
+        if (nIndex == 3)
+        {
+            if( m_fScore > -1f)
+                m_fScore = -1f;
+        }
+        else
+        {
+            m_fScore = -2f;
+        }
+
+        Debug.Log("OnClick Score : "+ m_fScore);
+
         if(CUIsSpaceScreenLeft.Instance.IsRATTutorial())
             m_listImageHintTutorial[nIndex].SetActive(true);
         m_listImageHint[nIndex].color = new Color(1, 1, 1, 1);
@@ -328,11 +476,26 @@ public class CUIsRATManager : MonoBehaviour
     public void ShowPopupSendAnswer()
     {
         m_goPopupSendAnswer.SetActive(true);
-        int nMin = (int)(m_nRemainTime / 60);
-        int nSec = (int)(m_nRemainTime % 60);
+        //int nMin = (int)(m_nRemainTime / 60);
+        //int nSec = (int)(m_nRemainTime % 60);
 
-        m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+        //m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+        //StartCoroutine("ProcessToLobbySendAnswer");
     }
+
+    //IEnumerator ProcessToLobbySendAnswer()
+    //{
+    //    while (true)
+    //    {
+    //        int nRemainTime = m_nRemainTime;
+    //        int nMin = (int)(nRemainTime / 60);
+    //        int nSec = (int)(nRemainTime % 60);
+
+    //        m_txtSendAnswerRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //}
 
     public void ShowPopupTimeOver()
     {
@@ -384,6 +547,7 @@ public class CUIsRATManager : MonoBehaviour
 
     public void OnClickPopupSendAnswerNext()
     {
+        StopCoroutine("ProcessToLobbySendAnswer");
         CUIsSpaceScreenLeft.Instance.HideAllPages();
         CUIsSpaceScreenLeft.Instance.ShowHPTSPage();
     }
@@ -397,7 +561,8 @@ public class CUIsRATManager : MonoBehaviour
     {
         StopCoroutine("ProcessToLobbyRemainTime");
         Server.Instance.RequestPUTActionExit();
-        StopCoroutine("ProcessPlayExam");
+        //StopCoroutine("ProcessPlayExam");
+        //m_bIsPlayExam = false;
         HideAllPopup();
         CUIsSpaceScreenLeft.Instance.HideRightAllPage();
         CUIsSpaceManager.Instance.ScreenActive(false);
@@ -410,12 +575,26 @@ public class CUIsRATManager : MonoBehaviour
 
     public void OnClickPopupTimeover()
     {
-        StopCoroutine("ProcessPlayExam");
-        HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
-        //CUIsSpaceManager.Instance.ScreenActive(false);
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text, m_fScore);
 
-        CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("RAT").part_idx, 1);
-        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        Server.Instance.RequestPUTQuestionsStatus(CQuizData.Instance.GetQuiz("RAT").part_idx, 1);
+        if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING"))
+            {
+                Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+            }
+        }
+
+        StopCoroutine("ProcessToLobbySendAnswer");
+        CUIsSpaceScreenLeft.Instance.HideAllPages();
+        CUIsSpaceScreenLeft.Instance.ShowHPTSPage();
+        //StopCoroutine("ProcessPlayExam");
+        //HideAllPopup();
+        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        ////CUIsSpaceManager.Instance.ScreenActive(false);
+
+        //CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("RAT").part_idx, 1);
+        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
     }
 }

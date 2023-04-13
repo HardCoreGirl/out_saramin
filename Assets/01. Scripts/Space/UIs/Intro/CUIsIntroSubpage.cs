@@ -116,7 +116,7 @@ public class CUIsIntroSubpage : MonoBehaviour
         {
             m_listMsg[m_nSubpage] = m_listMsg[m_nSubpage].Replace("{$NAME$}", CQuizData.Instance.GetUserName());
 
-            Debug.Log("MSG : " + m_listMsg[m_nSubpage]);
+            //Debug.Log("MSG : " + m_listMsg[m_nSubpage]);
         }
 
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) m_fTypingInterval = 0.001f;
