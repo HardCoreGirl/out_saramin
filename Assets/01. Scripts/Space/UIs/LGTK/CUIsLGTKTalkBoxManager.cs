@@ -185,7 +185,12 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
             //strChatMsg = quizLGTK.sets[m_nStage].questions[0].qst_cnnt;
             strChatMsg = quizLGTK.sets[m_nStage].dir_cnnt;
-            m_strQuizMsg = quizLGTK.sets[m_nStage].questions[0].qst_cnnt;
+
+            if(quizLGTK.sets[m_nStage].questions[0].qst_cnnt.Contains("$$$") || quizLGTK.sets[m_nStage].questions[0].qst_cnnt.Contains("###")) 
+            {
+                m_strQuizMsg = quizLGTK.sets[m_nStage].questions[0].qst_cnnt.Substring(3, quizLGTK.sets[m_nStage].questions[0].qst_cnnt.Length - 3);
+            } else
+                m_strQuizMsg = quizLGTK.sets[m_nStage].questions[0].qst_cnnt;
             for (int i = 0; i < m_nAnswerCnt; i++)
             {
                 m_listAnswer[i] = quizLGTK.sets[m_nStage].questions[0].answers[i].anwr_cnnt;
@@ -562,7 +567,21 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                         if (m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().IsSelected())
                         {
                             listAnswer[nAnswerIndex] = m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswerIndex();
-                            CUIsLGTKManager.Instance.AddListAnswers(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
+
+                            // 데이터 베이스 선택적 표시를 위한 처리
+                            //CUIsLGTKManager.Instance.AddListAnswers(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
+                            if( CUIsLGTKManager.Instance.GetQuizPlanetIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                            {
+                                Debug.Log("Add Planet Answer !!!!!!!!!!!!!!!!!!!!!!!! : " + m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
+                                CUIsLGTKManager.Instance.AddListPlanetAnswers(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
+                            }
+
+                            if (CUIsLGTKManager.Instance.GetQuizFairwayIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                            {
+                                Debug.Log("Add Fairway Answer !!!!!!!!!!!!!!!!!!!!!!!! : " + m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
+                                CUIsLGTKManager.Instance.AddListFairwayAnswers(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
+                            }
+
                             AddChatAnswer(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
                             Debug.Log("ListAnswer [" + i + "] : " + listAnswer[nAnswerIndex]);
                             nAnswerIndex++;
@@ -571,7 +590,20 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                     Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, listAnswer);
                 } else
                 {
-                    CUIsLGTKManager.Instance.AddListAnswers(GetObjAnswwer());
+                    //CUIsLGTKManager.Instance.AddListAnswers(GetObjAnswwer());
+                    // 데이터 베이스 선택적 표시를 위한 처리
+                    if (CUIsLGTKManager.Instance.GetQuizPlanetIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                    {
+                        Debug.Log("Add Planet Answer !!!!!!!!!!!!!!!!!!!!!!!!");
+                        CUIsLGTKManager.Instance.AddListPlanetAnswers(GetObjAnswwer());
+                    }
+
+                    if (CUIsLGTKManager.Instance.GetQuizFairwayIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                    {
+                        Debug.Log("Add Fairway Answer !!!!!!!!!!!!!!!!!!!!!!!!");
+                        CUIsLGTKManager.Instance.AddListFairwayAnswers(GetObjAnswwer());
+                    }
+
                     AddChatAnswer(GetObjAnswwer());
                     Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, GetAnswerIndex());
                 }
@@ -579,9 +611,21 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             else
             {
                 SetSBCTAnswer();
+
                 Debug.Log("Send!!!!! Answer : " + GetSBCTAnswer());
                 //CUIsLGTKManager.Instance.AddListAnswers(GetSBCTAnswer());
-                CUIsLGTKManager.Instance.AddListSBCTAnswer(GetSBCTAnswer());
+                //CUIsLGTKManager.Instance.AddListSBCTAnswer(GetSBCTAnswer());
+                // 데이터 베이스 선택적 표시를 위한 처리
+                if (CUIsLGTKManager.Instance.GetQuizPlanetIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                {
+                    CUIsLGTKManager.Instance.AddListPlanetAnswers(GetSBCTAnswer());
+                }
+
+                if (CUIsLGTKManager.Instance.GetQuizFairwayIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                {
+                    CUIsLGTKManager.Instance.AddListFairwayAnswers(GetSBCTAnswer());
+                }
+
                 AddChatAnswer(GetSBCTAnswer());
                 Server.Instance.RequestPUTAnswerSubject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, quizLGTK.sets[m_nStage].questions[0].answers[0].anwr_idx, GetSBCTAnswer());
             }
@@ -678,7 +722,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         //if (m_ifAnswer.text.Equals("")) DisableBtnSendAnswer();
         //else EnableBtnSendAnswer();
 
-        Debug.Log("OnChangeSBCTAnswer : " + m_ifAnswerTMP.text);
+        //Debug.Log("OnChangeSBCTAnswer : " + m_ifAnswerTMP.text);
         if ( m_ifAnswerTMP.text.Equals("")) DisableBtnSendAnswer();
         else EnableBtnSendAnswer();
     }

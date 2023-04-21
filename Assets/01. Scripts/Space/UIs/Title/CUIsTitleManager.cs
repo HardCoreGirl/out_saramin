@@ -36,10 +36,10 @@ public class CUIsTitleManager : MonoBehaviour
         //m_ifToken.text = "DEV2";
         //CSpaceAppEngine.Instance.SetServerType(m_ifToken.text);
 
-        if( CSpaceAppEngine.Instance.GetBuildType() != 0 )
-        {
-            m_goDebug.GetComponent<RectTransform>().localPosition = new Vector3(9999f, 9999f, 1f);
-        }
+        //if( CSpaceAppEngine.Instance.GetBuildType() != 0 )
+        //{
+        //    m_goDebug.GetComponent<RectTransform>().localPosition = new Vector3(9999f, 9999f, 1f);
+        //}
     }
 
     // Update is called once per frame
@@ -65,14 +65,24 @@ public class CUIsTitleManager : MonoBehaviour
 
         Debug.Log("FinishIntro : " + PlayerPrefs.GetInt("FinishIntro", 0));
 
+        
+
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
+            //Application.Quit();
+
+
+            CSpaceAppEngine.Instance.StartTest();
             Server.Instance.RequestGETQuestions(0);
             Server.Instance.RequestGETGuides(0);
             CUIsSpaceManager.Instance.HideTitle();
+            CUIsSpaceManager.Instance.ShowLobby();
 
             if (CSpaceAppEngine.Instance.IsIntro())
+            {
                 CUIsSpaceManager.Instance.ShowIntro();
+                //CUIsSpaceManager.Instance.ShowOutro();
+            }
             else
                 CUIsSpaceManager.Instance.ScreenActive(false, true);
             return;

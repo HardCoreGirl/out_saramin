@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+
 public class CUIsSpaceManager : MonoBehaviour
 {
     #region SingleTon
@@ -37,20 +39,25 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public GameObject m_goIntro;
 
+    public GameObject m_goLobby;
     public GameObject m_goLeftPage;
     public GameObject m_goCenterPage;
     public GameObject m_goRightPage;
 
+    public GameObject m_goOutro;
+
     public bool m_bIsActive = false;
 
     public GameObject m_goUICommonPopupsFinish;
+
+    public Text m_txtAuthMsg;
+    public GameObject m_goAuthFail;
 
     // Start is called before the first frame update
     void Start()
     {
         HideAllPage();
         HideAllCommonPopups();
-
         ShowTitle();
         ScreenActive(true);
     }
@@ -63,11 +70,22 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public void HideAllPage()
     {
-
+        HideLobby();
         HideLeftPage();
         HideCenterPage();
         HideRightPage();
         HideIntro();
+        HideOutro();
+    }
+
+    public void ShowLobby()
+    {
+        m_goLobby.SetActive(true);
+    }
+
+    public void HideLobby()
+    {
+        m_goLobby.SetActive(false);
     }
 
     public void ShowLeftPage()
@@ -107,6 +125,17 @@ public class CUIsSpaceManager : MonoBehaviour
     {
         //ScreenActive(false);
         m_goRightPage.SetActive(false);
+    }
+
+    public void ShowOutro()
+    {
+        m_goOutro.SetActive(true);
+        m_goOutro.GetComponent<CUIsOutroManager>().InitUIs();
+    }
+
+    public void HideOutro()
+    {
+        m_goOutro.SetActive(false);
     }
 
     public void ShowTitle()
@@ -168,6 +197,7 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public void ShowIntro()
     {
+        CSpaceAppEngine.Instance.StartIntro();
         m_goIntro.SetActive(true);
         m_goIntro.GetComponent<CUIsIntroManager>().InitIntro();
     }
@@ -175,5 +205,20 @@ public class CUIsSpaceManager : MonoBehaviour
     public void HideIntro()
     {
         m_goIntro.SetActive(false);
+    }
+
+    public void UpdateAuthMsg(string strMsg)
+    {
+        m_txtAuthMsg.text = strMsg;
+    }    
+
+    public void ShowAuthFail()
+    {
+        m_goAuthFail.SetActive(true);
+    }
+
+    public void HideAuthFail()
+    {
+        m_goAuthFail.SetActive(false);
     }
 }

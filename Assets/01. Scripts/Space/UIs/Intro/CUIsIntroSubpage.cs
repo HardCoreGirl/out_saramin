@@ -13,6 +13,7 @@ public class CUIsIntroSubpage : MonoBehaviour
     public GameObject m_goBlack;
 
     public GameObject m_goName;
+    public Text m_txtName;
     public TMPro.TMP_InputField m_ifName;
 
     private string[] m_listMsg = new string[11];
@@ -70,20 +71,23 @@ public class CUIsIntroSubpage : MonoBehaviour
         m_goBlack.SetActive(false);
         StopCoroutine("ProcessPage");
 
-        if (m_nSubpage == 4)
-        {
-            if (m_ifName.text.Equals("")) return;
+        //if (m_nSubpage == 4)
+        //{
+        //    if (m_ifName.text.Equals("")) return;
 
-            CQuizData.Instance.SetUserName(m_ifName.text);
-            PlayerPrefs.SetString("UserName", m_ifName.text);
-        }
+        //    CQuizData.Instance.SetUserName(m_ifName.text);
+        //    PlayerPrefs.SetString("UserName", m_ifName.text);
+        //}
 
         m_nSubpage++;
 
         if( m_nSubpage == 4 )
         {
             m_goName.SetActive(true);
-        } else
+            m_txtName.text = "";
+            StartCoroutine("ProcessDisplayUserName");
+        } 
+        else
         {
             m_goName.SetActive(false);
         }
@@ -91,13 +95,20 @@ public class CUIsIntroSubpage : MonoBehaviour
         StartCoroutine("ProcessPage");
     }
 
+    IEnumerator ProcessDisplayUserName()
+    {
+        for(int i = 0; i <= CQuizData.Instance.GetUserName().Length; i++)
+        {
+            m_txtName.text = CQuizData.Instance.GetUserName().Substring(0, i);
+            yield return new WaitForSeconds(m_fTypingInterval);
+        }
+    }
+
     public void OnClickFinishSubpage()
     {
-        CSpaceAppEngine.Instance.PlayFinishRobo();
+        //CSpaceAppEngine.Instance.PlayFinishRobo();
         CUIsSpaceManager.Instance.ScreenActive(false, true);
         CUIsSpaceManager.Instance.HideIntro();
-
-        PlayerPrefs.SetInt("FinishIntro", 1);
     }
 
     IEnumerator ProcessPage()
@@ -119,17 +130,52 @@ public class CUIsIntroSubpage : MonoBehaviour
             //Debug.Log("MSG : " + m_listMsg[m_nSubpage]);
         }
 
-        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) m_fTypingInterval = 0.001f;
-        for (int i = 0; i < m_listMsg[m_nSubpage].Length; i++)
+        if( m_nSubpage == 9 )
         {
-            m_txtMsg.text = m_listMsg[m_nSubpage].Substring(0, i);
+            CSpaceAppEngine.Instance.PlayFinishRobo();
+            for (int i = 0; i < m_listMsg[m_nSubpage].Length; i++)
+            {
+                m_txtMsg.text = m_listMsg[m_nSubpage].Substring(0, i);
 
-            yield return new WaitForSeconds(m_fTypingInterval);
+                if (i == 40)
+                {
+                    Debug.Log(m_txtMsg.text);
+                    CUIsLobbyManager.Instance.PlayIntroOutline(0);
+                    yield return new WaitForSeconds(5f);
+                }
+                else if (i == 58)
+                {
+                    CSpaceAppEngine.Instance.PlayLookatRight();
+                    Debug.Log(m_txtMsg.text);
+                    CUIsLobbyManager.Instance.PlayIntroOutline(2);
+                    yield return new WaitForSeconds(5f);
+                }
+                else if (i == 87)
+                {
+                    Debug.Log(m_txtMsg.text);
+                    CUIsLobbyManager.Instance.PlayIntroOutline(1);
+                    yield return new WaitForSeconds(5f);
+
+                    CUIsLobbyManager.Instance.HideIntroOutlineAll();
+                    CSpaceAppEngine.Instance.PlayLookatCenter();
+                }
+
+                yield return new WaitForSeconds(m_fTypingInterval);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < m_listMsg[m_nSubpage].Length; i++)
+            {
+                m_txtMsg.text = m_listMsg[m_nSubpage].Substring(0, i);
+
+                yield return new WaitForSeconds(m_fTypingInterval);
+            }
         }
 
         m_txtMsg.text = m_listMsg[m_nSubpage];
-        
-        if( m_nSubpage == 10 )
+
+        if ( m_nSubpage == 10 )
         {
             m_goBtnLast.SetActive(true);
         }

@@ -13,7 +13,7 @@ public class CUIsIntroManager : MonoBehaviour
     private string m_strIntroMsg;
 
     private int m_nPage;
-    private float m_fTypingInterval = 0.01f;
+    private float m_fTypingInterval = 0.005f;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +30,8 @@ public class CUIsIntroManager : MonoBehaviour
         m_strIntroMsg = "머나먼 우주, 당신은 우주탐사선 ‘파이어니어’와 함께 여정을 시작한다.\n어쩌고 저쩌고 된 마디씩 별 있습니다.내일 언덕 무성할 마디씩 그리워 하나 이웃 별 있습니다.이국 마리아 같이 잠, 흙으로 봅니다.\n오랜 동면 끝에 일어난 당신은 알 수 없는 부작용을 느끼는데...";
 
         HideAllPage();
-        m_nPage = 0;
-        ShowPage(0);
+        m_nPage = 2;
+        ShowPage(2);
     }
 
     public void HideAllPage()
@@ -49,6 +49,7 @@ public class CUIsIntroManager : MonoBehaviour
             StartCoroutine("ProcessIntro");
         } else if( nPage == 3)
         {
+            CSpaceAppEngine.Instance.StartTest();
             m_listIntroPage[nPage].GetComponent<CUIsIntroSubpage>().InitIntroSubpage();
         }
     }

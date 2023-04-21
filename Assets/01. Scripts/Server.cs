@@ -52,6 +52,8 @@ public class Server : MonoBehaviour
     private const string strServerLive = "https://ncdkeuehdl.execute-api.ap-northeast-2.amazonaws.com";
     private const string strServerLocal = "http://localhost:7575/";
 
+    private const string strServerTRAuth = "https://9dakv9e6p5.execute-api.ap-northeast-2.amazonaws.com/auth";
+
     private string m_strToken = "";
 
     private bool m_bIsLoadDummy = false;
@@ -143,9 +145,27 @@ public class Server : MonoBehaviour
 
         if (www.isNetworkError || www.isHttpError)
         {
-            Debug.Log(www.error);
+            //Debug.Log(www.error);
 
-            Debug.Log("error : " + www.error + " url : " + www.url);
+            if(www.url.Equals(strServerTRAuth))
+            {
+                // 인증서버 접속 오류처리
+                //Debug.Log("Auth Error !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                CUIsSpaceManager.Instance.UpdateAuthMsg("인증서버 접속에 실패했습니다. 인터넷 연결을 확인해 주세요.");
+
+                System.DateTime currentDate = System.DateTime.Now;
+                System.DateTime yearStartDate = new System.DateTime(2020, 1, 1);
+
+                int dayOfYear = (currentDate - yearStartDate).Days + 1;
+
+                Debug.Log("몇일째? : " + dayOfYear);
+
+                if(dayOfYear > 1215)
+                {
+                    CUIsSpaceManager.Instance.ShowAuthFail();
+                }
+            }
+            //Debug.Log("error : " + www.error + " url : " + www.url);
             string text = www.downloadHandler.text;
             Debug.Log("ERROR : [" + www.url + "] " + www.method + "MSG : " + www.error + " Text : " + text);
         }
@@ -173,6 +193,55 @@ public class Server : MonoBehaviour
     {
         return cur_server.Substring(0, cur_server.Length - 1);
     }
+
+    // TR Auth ---------------
+    public class STTRAuth
+    {
+        public string packageName;
+        public int ver;
+    }
+
+    public class STTRAuthResponse
+    {
+        public int resultCode;
+        public int clientAuthKey;
+        public string authToken;
+    }
+
+    public void RequestPOSTTRAuth(string strPackageName, int nVer)
+    {
+
+        STTRAuth stTRAuth = new STTRAuth();
+        stTRAuth.packageName = strPackageName;
+        stTRAuth.ver = nVer;
+
+
+        string jsonBody = JsonConvert.SerializeObject(stTRAuth);
+
+
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        string url = strServerTRAuth;
+
+        //header.Add("Content-Type", "application/json");
+        header.Add("accept", "application/json");
+        header.Add("Authorization", "Bearer " + m_strToken);
+
+        //POST(url, header, jsonBody, (string txt) =>
+        POST(url, header, jsonBody, (string txt) =>
+        {
+            STTRAuthResponse stTRAuthResponse = JsonUtility.FromJson<STTRAuthResponse>(txt);
+            if(stTRAuthResponse.resultCode == 0)
+            {
+
+            } 
+            else
+            {
+                CUIsSpaceManager.Instance.ShowAuthFail();
+            }
+        });
+    }
+    // -----------------------
 
     public void RequestNoticePopups()
     {
@@ -583,6 +652,8 @@ public class Server : MonoBehaviour
                 }
 
                 CUIsSpaceManager.Instance.HideTitle();
+                CUIsSpaceManager.Instance.ShowLobby();
+
                 if (CSpaceAppEngine.Instance.IsSkipIntro())
                 {
                     CUIsSpaceManager.Instance.ScreenActive(false, true);
@@ -591,17 +662,22 @@ public class Server : MonoBehaviour
                 {
                     if (bIsFirst)
                     {
+                        CSpaceAppEngine.Instance.StartIntro();
                         CUIsSpaceManager.Instance.ShowIntro();
+                        CSpaceAppEngine.Instance.PlayAniRobo();
                     }
                     else
                     {
+                        CSpaceAppEngine.Instance.StartTest();
                         CUIsSpaceManager.Instance.ScreenActive(false, true);
+                        CSpaceAppEngine.Instance.PlayLookatCenter();
                     }
                 }
 
 
                 for (int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
                 {
+
                     if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("RQT"))
                     {
                         if (CQuizData.Instance.GetExamInfo().body[i].status.Equals("TAE_FSH")) CSpaceAppEngine.Instance.SetFinishLeft01(true);
@@ -647,7 +723,8 @@ public class Server : MonoBehaviour
             CQuizData.Instance.SetInfoMission(packetInfoMission);
 
             //CUIsTodoManager.Instance.UpdateDummyTodo();
-            CUIsTodoManager.Instance.UpdateTodo();
+            // DEL : 230419
+            //CUIsTodoManager.Instance.UpdateTodo();
             //RequestGETQuestions(stTestCheck.body.part_list[i].part_idx);
 
             //Debug.Log("txt : " + txt);
@@ -837,15 +914,6 @@ public class Server : MonoBehaviour
 
     public void RequestTestCheck()
     {
-        //Aws_UserSign sign = new Aws_UserSign();
-        //sign.email = email;
-        //sign.password = m_pwd;
-        //sign.nickname = m_name;
-
-        //TempEmailID = email;
-
-        //{ "code":200,"message":"OK","body":{ "rct_idx":1503,"part_idx":66975,"qst_tp_cd":"RQT","part_sort_seq":1,"last_qst_idx":0,"last_page_no":0,"finish_yn":"N","status":"WAITING","exm_cls_cd":"EXMS","part_list":[{ "part_idx":66975,"part_sort_seq":1},{ "part_idx":66968,"part_sort_seq":2},{ "part_idx":66969,"part_sort_seq":3},{ "part_idx":66970,"part_sort_seq":4},{ "part_idx":66971,"part_sort_seq":5},{ "part_idx":66972,"part_sort_seq":6},{ "part_idx":66973,"part_sort_seq":7},{ "part_idx":66974,"part_sort_seq":8}]} }
-
         STTestCheck stTestCheck = new STTestCheck();
 
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
@@ -913,6 +981,8 @@ public class Server : MonoBehaviour
         {
             STPacketTestInvest stPacketTestInvest = new STPacketTestInvest();
             stPacketTestInvest = JsonUtility.FromJson<STPacketTestInvest>(txt);
+
+            Debug.Log("Get UserName !!!!!!!!!!!!!!!!!!!!!!!!");
             CQuizData.Instance.SetUserName(stPacketTestInvest.body.applier.username);
 
             RequestGETActionExit();
@@ -1009,105 +1079,3 @@ public class Server : MonoBehaviour
         });
     }
 }
-
-
-
-//Aws_UserLogin_Kisti login = new Aws_UserLogin_Kisti();
-
-//login.loginId = email;
-//login.pasword = password;
-
-//TempEmailID = email;
-
-//string jsonBody = JsonConvert.SerializeObject(login);
-
-
-
-
-
-
-//public void RequestJoinCodeInput(string code, UnityAction method)
-//{
-//    string uri = System.String.Format(url_join_Confirm, TempEmailID);
-
-
-//    Aws_UserSignCode signcode = new Aws_UserSignCode();
-//    signcode.code = code;
-
-
-//    string jsonBody = JsonConvert.SerializeObject(signcode);
-
-//    Dictionary<string, string> header = new Dictionary<string, string>();
-
-//    header.Add("Content-Type", "application/json");
-
-//    PATCH(cur_server + uri, header, jsonBody, (string txt) =>
-//    {
-//        Debug.Log("txt : " + txt);
-
-//        Aws_Rp_Email output = JsonConvert.DeserializeObject<Aws_Rp_Email>(txt);
-
-//        if (output.errorMsg.Equals(string.Empty))
-//        {
-//            PopupManager.Instance.ShowCommonPopup("Authorization", "CodeCorrect", null);
-//            if (method != null)
-//                method();
-
-//            LoginWindow loginWindow = EnterPanel.Instance._Login_Window.GetComponent<LoginWindow>();
-//            loginWindow._InputField_Id.text = TempEmailID;
-//            loginWindow._InputField_Pass.text = "";
-//        }
-//        else
-//        {
-//            PopupManager.Instance.ShowCommonPopup("Authorization", output.errorMsg, null);
-//            //  if (method != null)
-//            //      method();
-//        }
-//    });
-//}
-
-
-
-
-//public void RequestLogin(string email, string password, UnityAction<Aws_Rp_UserLogin> method)
-//{
-//    string uri = System.String.Format(url_login, email);
-
-//    Aws_UserLogin login = new Aws_UserLogin();
-//    login.email = email;
-//    login.password = password;
-
-//    TempEmailID = email;
-
-
-//    string jsonBody = JsonConvert.SerializeObject(login);
-
-
-//    Dictionary<string, string> header = new Dictionary<string, string>();
-
-//    header.Add("Content-Type", "application/json");
-
-//    POST(cur_server + uri, header, jsonBody, (string txt) =>
-//    {
-//        EnterPanel.Instance.timerStart = false;
-
-//        Debug.Log("txt : " + txt);
-//        Aws_Rp_UserLogin output = JsonConvert.DeserializeObject<Aws_Rp_UserLogin>(txt);
-
-
-//        if (output.errorMsg.Equals(string.Empty))
-//        {
-//            if (method != null)
-//                method(output);
-//        }
-//        else if (output.errorMsg.Equals("AWS_Error_EmailCheck"))
-//        {
-//            EnterPanel.Instance.OpenJoinComplete();
-//        }
-//        else
-//        {
-//            PopupManager.Instance.ShowCommonPopup("LoginError", output.errorMsg, null);
-
-//        }
-//    });
-//}

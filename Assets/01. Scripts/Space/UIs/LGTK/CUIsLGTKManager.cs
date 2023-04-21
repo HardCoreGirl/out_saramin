@@ -76,6 +76,10 @@ public class CUIsLGTKManager : MonoBehaviour
 
     private List<string> m_listSBCTAnswer;
 
+    private List<string> m_listPlanetAnswer;
+    private List<string> m_listFairwayAnswer;
+    
+
     private bool m_bIsFirstQuiz = true;
 
     private bool m_bIsActive = true;
@@ -109,6 +113,9 @@ public class CUIsLGTKManager : MonoBehaviour
 
         m_listAnswers = new List<string>();
         m_listSBCTAnswer = new List<string>();
+
+        m_listPlanetAnswer = new List<string>();
+        m_listFairwayAnswer = new List<string>();
 
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
@@ -271,7 +278,7 @@ public class CUIsLGTKManager : MonoBehaviour
     {
         for (int i = 0; i < m_listDatabase.Count; i++)
         {
-            Debug.Log("ShowDatabaseChildren!!");
+            //Debug.Log("ShowDatabaseChildren!!");
             m_listDatabase[i].GetComponent<CObjectLGTKDatabase>().UpdateDatabase(nParentIndx);
         }
 
@@ -573,6 +580,26 @@ public class CUIsLGTKManager : MonoBehaviour
         return m_bIsTutorial;
     }
 
+    public void AddListPlanetAnswers(string strAnswer)
+    {
+        m_listPlanetAnswer.Add(strAnswer);
+    }
+
+    public List<string> GetListPlanetAnswers()
+    {
+        return m_listPlanetAnswer;
+    }
+
+    public void AddListFairwayAnswers(string strAnswer)
+    {
+        m_listFairwayAnswer.Add(strAnswer);
+    }
+
+    public List<string> GetListFairwayAnswers()
+    {
+        return m_listFairwayAnswer;
+    }
+
     public void AddListAnswers(string strAnswer)
     {
         m_listAnswers.Add(strAnswer);
@@ -601,5 +628,15 @@ public class CUIsLGTKManager : MonoBehaviour
     public void HideBlur()
     {
         m_goBlur.SetActive(false);
+    }
+
+    public int GetQuizPlanetIndex()
+    {
+        return m_nQuizPlanetIndex;
+    }
+
+    public int GetQuizFairwayIndex()
+    {
+        return m_nQuizFairwayIndex;
     }
 }

@@ -40,6 +40,8 @@ public class CSpaceAppEngine : MonoBehaviour
 
     public Text m_txtDebug;
 
+    public GameObject[] m_listInGameBoard = new GameObject[3];
+
     public GameObject[] m_goMissionClear = new GameObject[4];
 
     private string m_strServerType = "LOCAL";
@@ -65,28 +67,29 @@ public class CSpaceAppEngine : MonoBehaviour
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "f34667ff-fca0-4b64-bab9-7b4e1183c5d8";
+    private string m_strToken = "c0b66aa4-08a4-4002-928e-7945d1574774";
+
+    private int m_nBoardIndex = 0;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log("CSpaceAppEngine 01");
-        UpdateMissionClear();
-        //HideAllObjectOutline();
-        //Server.Instance.GetComponent()
-        //Server.Instance.RequestTest();
-        //Server.Instance.SetToken("aW5kZXB0aEFwcDojQClAIXRsYWNtZDEyKSM=");
-        //Server.Instance.RequestTestCheck();
-        //foreach(var s in WWW.GetResopseHeader())
-        //{
-        //    Debug.Log(s);
-        //}
+        //UpdateMissionClear();
+        m_listInGameBoard[0].SetActive(true);
+        m_listInGameBoard[1].SetActive(false);
+        m_listInGameBoard[2].SetActive(false);
+
+        CUIsSpaceManager.Instance.UpdateAuthMsg("");
+        CUIsSpaceManager.Instance.HideAuthFail();
+        Server.Instance.RequestPOSTTRAuth("saraminxx", 1000);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (m_nBoardIndex != 2)
+            return;
         //m_txtDebug.text = "Width : " + Screen.width.ToString() + ", Height : " + Screen.height.ToString();
 
         m_vecMouseDownPos = Input.mousePosition;
@@ -99,7 +102,7 @@ public class CSpaceAppEngine : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                if( !CUIsSpaceManager.Instance.IsScreenActive() )
+                if ( !CUIsSpaceManager.Instance.IsScreenActive() )
                 {
                     //Debug.Log("GetMouseButtonDown : " + hit.collider.name);
                     //if( !m_bIsQuizLoaded)
@@ -203,6 +206,7 @@ public class CSpaceAppEngine : MonoBehaviour
                             return;                               
                             
                         CUIsSpaceManager.Instance.ScreenActive(true);
+
                         if (GetServerType().Equals("LOCAL"))
                         {
                             //Server.Instance.RequestGETQuestions(0);
@@ -321,17 +325,38 @@ public class CSpaceAppEngine : MonoBehaviour
 
     public void UpdateMissionClear()
     {
+        bool bIsAllClear = true;
         if (m_bIsFinishLeft01) m_goMissionClear[0].SetActive(true);
-        else if (!m_bIsFinishLeft01) m_goMissionClear[0].SetActive(false);
+        else if (!m_bIsFinishLeft01)
+        {
+            bIsAllClear = false;
+            m_goMissionClear[0].SetActive(false);
+        }
 
         if (m_bIsFinishLeft02) m_goMissionClear[1].SetActive(true);
-        else if (!m_bIsFinishLeft02) m_goMissionClear[1].SetActive(false);
+        else if (!m_bIsFinishLeft02)
+        {
+            bIsAllClear = false;
+            m_goMissionClear[1].SetActive(false);
+        }
 
         if (m_bIsFinishCenter) m_goMissionClear[2].SetActive(true);
-        else if (!m_bIsFinishCenter) m_goMissionClear[2].SetActive(false);
-
+        else if (!m_bIsFinishCenter)
+        {
+            bIsAllClear = false;
+            m_goMissionClear[2].SetActive(false);
+        }
         if (m_bIsFinishRight) m_goMissionClear[3].SetActive(true);
-        else if (!m_bIsFinishRight) m_goMissionClear[3].SetActive(false);
+        else if (!m_bIsFinishRight)
+        {
+            bIsAllClear = false;
+            m_goMissionClear[3].SetActive(false);
+        }
+
+        if(bIsAllClear)
+        {
+            CUIsSpaceManager.Instance.ShowOutro();
+        }
     }
 
     public void SetFinishLeft01(bool bIsFinish) { m_bIsFinishLeft01 = bIsFinish; }
@@ -354,11 +379,46 @@ public class CSpaceAppEngine : MonoBehaviour
 
     public void PlayFinishRobo()
     {
+        m_aniRobo.Play("Robot01");
+    }
+
+    public void PlayLookatCenter()
+    {
+        m_aniRobo.Play("Robot02");
+    }
+
+
+public void PlayLookatRight()
+    {
         m_aniRobo.Play("Robot03");
+    }
+
+
+    public void PlayMoveCenter()
+    {
+        m_aniRobo.Play("Robot04");
     }
 
     public string GetToken()
     {
         return m_strToken;
+    }
+
+    public void StartTest()
+    {
+        m_listInGameBoard[0].SetActive(false);
+        m_listInGameBoard[1].SetActive(false);
+        m_listInGameBoard[2].SetActive(true);
+
+        m_nBoardIndex = 2;
+    }
+
+    public void StartIntro()
+    {
+        m_listInGameBoard[0].SetActive(false);
+        m_listInGameBoard[1].SetActive(true);
+        m_listInGameBoard[2].SetActive(false);
+
+        m_nBoardIndex = 1;
     }
 }

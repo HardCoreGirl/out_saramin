@@ -25,6 +25,9 @@ public class CObjectLGTKDatabase : MonoBehaviour
 
     private bool m_bIsDynamic = false;
     private int m_nDynamicState = 0;
+
+    private bool m_bIsPlanet = false;
+    private bool m_bIsFairway = false;
     //private STGuidesBodyContents m_stGuideContent;
     //private STGuidesBodyContents m_stGuideContentChirend;
     // Start is called before the first frame update
@@ -88,6 +91,18 @@ public class CObjectLGTKDatabase : MonoBehaviour
 
                 m_strTitle = m_txtMainTitle.text;
 
+                if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("행성"))
+                {
+                    Debug.Log("InitLGTkDatabase 01 Planet : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title);
+                    m_bIsPlanet = true;
+                }
+
+                if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("항로"))
+                {
+                    Debug.Log("InitLGTkDatabase 01 Fairway : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title);
+                    m_bIsFairway = true;
+                }
+
                 string strTitle = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
                 if (strTitle.Substring(strTitle.Length - 2, 2).Equals("자료"))
                     m_nDynamicState = 0;
@@ -127,6 +142,21 @@ public class CObjectLGTKDatabase : MonoBehaviour
             if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
             {
                 m_bIsDynamic = true;
+
+                if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("행성"))
+                {
+                    Debug.Log("InitLGTkDatabase 02 Planet : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title);
+                    m_bIsPlanet = true;
+                }
+
+                if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("항로"))
+                {
+                    Debug.Log("InitLGTkDatabase 02 Fairway : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title);
+                    m_bIsFairway = true;
+                }
+
+
+
                 string strTitle = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
                 if (strTitle.Substring(strTitle.Length - 2, 2).Equals("자료"))
                     m_nDynamicState = 0;
@@ -179,6 +209,31 @@ public class CObjectLGTKDatabase : MonoBehaviour
                 gameObject.SetActive(false);
             else
             {
+                if( m_bIsPlanet )
+                {
+                    for(int i = 0; i < CUIsLGTKManager.Instance.GetListPlanetAnswers().Count; i++)
+                    {
+                        if (CUIsLGTKManager.Instance.GetListPlanetAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                        {
+                            gameObject.SetActive(true);
+                            break;
+                        }
+                    }
+                }
+
+                if( m_bIsFairway )
+                {
+                    for (int i = 0; i < CUIsLGTKManager.Instance.GetListFairwayAnswers().Count; i++)
+                    {
+                        if (CUIsLGTKManager.Instance.GetListFairwayAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                        {
+                            gameObject.SetActive(true);
+                            break;
+                        }
+                    }
+                }
+
+
                 if( m_bIsDynamic )
                 {
                     if( m_nDynamicState == 0 )
@@ -219,10 +274,41 @@ public class CObjectLGTKDatabase : MonoBehaviour
         if (!CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
             return;
 
+        //Debug.Log("UpdateDatebaseDynamic !!!!!");
         bool bIsExist = false;
         for (int i = 0; i < CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children.Length; i++)
         {
-            if( m_nDynamicState == 0 )
+            Debug.Log("UpdateDatebaseDynamic !!!!! : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title);
+            if (m_bIsPlanet)
+            {
+                Debug.Log("UpdateDatebaseDynamic 01 - 00 !!!!! : " + CUIsLGTKManager.Instance.GetListPlanetAnswers().Count);
+                for (int j = 0; j < CUIsLGTKManager.Instance.GetListPlanetAnswers().Count; j++)
+                {
+                    Debug.Log("UpdateDatebaseDynamic !!!!! 02 : " + CUIsLGTKManager.Instance.GetListPlanetAnswers()[j]);
+                    if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListPlanetAnswers()[j]))
+                    {
+                        Debug.Log("UpdateDatebaseDynamic !!!!! 03 : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title);
+                        //gameObject.SetActive(true);
+                        bIsExist = true;
+                        break;
+                    }
+                }
+            }
+
+            if (m_bIsFairway)
+            {
+                for (int j = 0; j < CUIsLGTKManager.Instance.GetListFairwayAnswers().Count; j++)
+                {
+                    if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListFairwayAnswers()[j]))
+                    {
+                        //gameObject.SetActive(true);
+                        bIsExist = true;
+                        break;
+                    }
+                }
+            }
+
+            if ( m_nDynamicState == 0 )
             {
                 for (int j = 0; j < CUIsLGTKManager.Instance.GetListAnswers().Count; j++)
                 {
