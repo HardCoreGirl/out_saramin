@@ -52,12 +52,15 @@ public class CUIsAPTManager : MonoBehaviour
     public Text m_txtPopupOverExityMsg;
     public Text m_txtPopupOverExitRemainTime;
 
+    public GameObject m_goPopupToLobbyTutorial;
+
     private int[] m_listAnswerState = new int[29];
 
     private int m_nAPT1Cnt = 0;
     private int m_nAPT2Cnt = 0;
 
     private bool m_bIsTutorial = true;
+    private bool m_bIsQuizActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -78,12 +81,6 @@ public class CUIsAPTManager : MonoBehaviour
         for (int i = 0; i < m_listAnswerState.Length; i++)
         {
             m_listAnswerState[i] = 2;
-        }
-
-        if( CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
-        {
-            ShowAPTPage(0);
-            return;
         }
 
         ShowAPTPage(0);
@@ -165,10 +162,39 @@ public class CUIsAPTManager : MonoBehaviour
 
     }
 
+    public void ShowPage()
+    {
+        m_listAPTPage[0].SetActive(true);
+        this.gameObject.transform.localPosition = new Vector3(0, 0, 0f);
+    }
+
+    public void HideAgreePage()
+    {
+        m_listAPTPage[0].SetActive(false);
+    }
+
+    public void HidePage()
+    {
+        SetQuizActive(false);
+        this.gameObject.transform.localPosition = new Vector3(999f, 999f, 999f);
+    }
+
+    public void SetQuizActive(bool bIsActive)
+    {
+        m_bIsQuizActive = bIsActive;
+    }
+
+    public bool IsQuizActive()
+    {
+        return m_bIsQuizActive;
+    }
+
+    // Popup ---------------------------------------------------
     public void HideAllPopup()
     {
         HidePopupTimeOverAPTD1();
         HidePopupSendAnswerAPTD1();
+        HidePopupToLobbyTutorial();
         for (int i = 0; i < m_listPopup.Length; i++)
             HidePopup(i);
     }
@@ -358,8 +384,10 @@ public class CUIsAPTManager : MonoBehaviour
     {
         Server.Instance.RequestPUTActionExit();
         HideAllPopup();
-        CUIsSpaceManager.Instance.ScreenActive(false);
-        gameObject.SetActive(false);
+        //CUIsSpaceManager.Instance.ScreenActive(false);
+        //gameObject.SetActive(false);
+
+        HidePage();
     }
 
     public void OnClickPopupToLobbyExit()
@@ -381,5 +409,27 @@ public class CUIsAPTManager : MonoBehaviour
         HideAllPopup();
     }
 
+    // Popup ToLobby Tutorail ------------------------------------
+    public void ShowPopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(true);
+    }
 
+    public void HidePopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(false);
+    }
+
+    public void OnClickPopupToLobbyTutorialToLobby()
+    {
+        HideAllPopup();
+        HidePage();
+    }
+
+    public void OnClickPopupToLobbyTutorialExit()
+    {
+        HidePopupToLobbyTutorial();
+    }
+
+    //-----------------------------------------------
 }

@@ -35,6 +35,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     }
     #endregion
 
+    public GameObject m_goBG;
+
     public GameObject[] m_listPage = new GameObject[2];
     public GameObject[] m_listToturialPage = new GameObject[2];
     public GameObject[] m_listMissionClear = new GameObject[2];
@@ -75,6 +77,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public Text m_txtToLobbyOverRemainTime;
     public Text m_txtToLobbyOverRemainCnt;
 
+    public GameObject m_goPopupToLobbyTutorial;
+
     private int m_nOpenQuiz;
 
     private int m_nRemainTime = 30;
@@ -92,6 +96,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     private int m_nRQTExitCount = 0;
     private int m_nRQTMaxExitCount = 5;
 
+    private bool m_bIsLeftQuizActive = true;
+    private bool m_bIsRightQuizActive = true;
 
 
     // Start is called before the first frame update
@@ -120,11 +126,37 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         if (CSpaceAppEngine.Instance.IsFinishLeft02()) ShowMissionClear(1);
         else HideMissionClear(1);
 
-
+        m_goBG.SetActive(true);
 
         SetCSTTutorial(true);
 
         ShowPage(0);
+    }
+
+    public void SetLeftQuizActive(bool bActive)
+    {
+        m_bIsLeftQuizActive = bActive;
+    }
+
+    public bool IsLeftQuizActive()
+    {
+        return m_bIsLeftQuizActive;
+    }
+
+    public void SetRightQuizActive(bool bActive)
+    {
+        m_bIsRightQuizActive = bActive;
+    }
+
+    public bool IsRightQuizActive()
+    {
+        return m_bIsRightQuizActive;
+    }
+
+    public void OnClickAgreeClose()
+    {
+        HideAllPopup();
+        HideAllPages();
     }
 
     public void OnClickClose()
@@ -132,9 +164,10 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         //CUIsSpaceManager.Instance.HideLeftPage();
         if (IsRQTTutorial())
         {
-            HideAllPopup();
-            HideAllPages();
-            CUIsSpaceManager.Instance.ScreenActive(false);
+            //HideAllPopup();
+            //HideAllPages();
+            //CUIsSpaceManager.Instance.ScreenActive(false);
+            ShowPopupToLobbyTutorial();
             return;
         }
 
@@ -153,18 +186,21 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public void InitCSTQuiz()
     {
         HideAllPages();
+        m_goBG.SetActive(true);
         ShowCSTPage();
     }
 
     public void InitRATQuiz()
     {
         HideAllPages();
+        m_goBG.SetActive(true);
         ShowRATPage();
     }
 
     public void InitHPTSQuiz()
     {
         HideAllPages();
+        m_goBG.SetActive(true);
         ShowHPTSPage();
     }
 
@@ -194,13 +230,15 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
                 {
                     Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("RQT").idx, true);
                 }
+            } else
+            {
+                ShowPage(1, true);
+                HideAllQuiz();
             }
-
-            //ShowPage(1, true);
-            //HideAllQuiz();
         }
         else
         {
+            CUIsSpaceScreenLeft.Instance.SetRightQuizActive(true);
             if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
             {
                 if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING"))
@@ -219,6 +257,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
                     Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
                 } else if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("TAE"))
                 {
+                    Debug.Log("HPTS TAE");
                     Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("HPTS").idx, true);
                 }
 
@@ -258,6 +297,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
             } else
             {
                 HideAllPages();
+                m_goBG.SetActive(true);
                 ShowCSTPage();
             }
 
@@ -368,7 +408,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
     public void HideAllPages()
     {
-        for(int i = 0; i < m_listPage.Length; i++)
+        m_goBG.SetActive(false);
+        for (int i = 0; i < m_listPage.Length; i++)
         {
             HidePage(i);
         }
@@ -377,6 +418,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public void ShowPage(int nPage, bool bTutorial = false)
     {
         HideAllPages();
+        m_goBG.SetActive(true);
         m_listPage[nPage].SetActive(true);
 
         if (nPage == 0)
@@ -543,6 +585,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         HidePopupTimeover();
         HidePopupToLobby();
         HidePopupToLobbyOver();
+        HidePopupToLobbyTutorial();
     }
     public void ShowPopupFinish()
     {
@@ -803,6 +846,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     // CST -------------------------------------------------------------
     public void HideRightAllPage()
     {
+        m_goBG.SetActive(false);
         HideCSTPage();
         HideRATPage();
         HideHPTSPage();
@@ -866,6 +910,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public void ShowHPTSPage()
     {
         m_goHPTSPage.SetActive(true);
+        m_goHPTSPage.GetComponent<CUIsHPTSManager>().InitHPTSPage();
+        //InitHPTSPage();
     }
 
     public void HideHPTSPage()
@@ -894,5 +940,29 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         m_listMissionClear[nIndex].SetActive(false);
     }
+
+    // Popup ToLobby Tutorail ------------------------------------
+    public void ShowPopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(true);
+    }
+
+    public void HidePopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(false);
+    }
+
+    public void OnClickPopupToLobbyTutorialToLobby()
+    {
+        HideAllPopup();
+        HideAllPages();
+    }
+
+    public void OnClickPopupToLobbyTutorialExit()
+    {
+        HidePopupToLobbyTutorial();
+    }
+
+    //-----------------------------------------------
 }
 

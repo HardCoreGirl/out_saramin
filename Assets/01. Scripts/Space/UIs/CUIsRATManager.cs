@@ -34,6 +34,8 @@ public class CUIsRATManager : MonoBehaviour
     public Text m_txtToLobbyOverMsg;
     public Text m_txtToLobbyOverRemainTime;
 
+    public GameObject m_goPopupToLobbyTutorial;
+
     private int m_nTutorialStep = 0;
     private int m_nRemainTime = 0;
 
@@ -46,10 +48,12 @@ public class CUIsRATManager : MonoBehaviour
 
     private bool m_bIsPlayExam = false;
 
+    private bool m_bIsFirstQuiz = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        InitRATPage();
+        //InitRATPage();
     }
 
     // Update is called once per frame
@@ -149,16 +153,23 @@ public class CUIsRATManager : MonoBehaviour
         {
             m_listImageHintTutorial[i].SetActive(false);
         }
-
         Quiz quizData = CQuizData.Instance.GetQuiz("RAT");
 
-        if (quizData.exm_time != quizData.progress_time)
+        if (m_bIsFirstQuiz)
         {
-            CUIsSpaceScreenLeft.Instance.SetRATTutorial(false);
+            if (quizData.exm_time != quizData.progress_time)
+            {
+                CUIsSpaceScreenLeft.Instance.SetRATTutorial(false);
 
-            if (quizData.sets[0].questions[0].test_answers[0].test_anwr_idx == 0)
-                m_nQuizIndex = 0;
-            else m_nQuizIndex = 1;
+                if (quizData.sets[0].questions[0].test_answers[0].test_anwr_idx == 0)
+                {
+                    m_nQuizIndex = 0;
+                }
+                else
+                {
+                    m_nQuizIndex = 1;
+                }
+            }
         }
 
         if ( CUIsSpaceScreenLeft.Instance.IsRATTutorial() )
@@ -204,7 +215,7 @@ public class CUIsRATManager : MonoBehaviour
 
             string[] listHintWord = quizData.sets[m_nQuizIndex].qst_brws_cnnt.Split(", ");
 
-            for(int i = 0; i < m_listTxtHintWord.Length; i++)
+            for (int i = 0; i < m_listTxtHintWord.Length; i++)
             {
                 if (i >= listHintWord.Length)
                     break;
@@ -274,7 +285,9 @@ public class CUIsRATManager : MonoBehaviour
 
             } else
             {
-                m_nRemainTime = quizData.progress_time;
+                if( m_bIsFirstQuiz )
+                    m_nRemainTime = quizData.progress_time;
+
                 StartCoroutine("ProcessPlayExam");
                 StartCoroutine("ProcessDisplayHintImage");
                 //STPacketAnswerDictionaries stPacketAnswerDictonaries = CQuizData.Instance.GetAnswerDictionaries(quizData.sets[m_nQuizIndex].questions[0].qst_dics);
@@ -352,24 +365,31 @@ public class CUIsRATManager : MonoBehaviour
         m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         while (true)
         {
-            //Debug.Log("ProcessPlayExam !!!");
-            yield return new WaitForSeconds(1f);
-
-            m_nRemainTime--;
-
-            nMin = (int)(m_nRemainTime / 60);
-            nSec = (int)(m_nRemainTime % 60);
-
-            m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
-
-            if ((nRequestTimer % 5) == 0)
+            if (!CUIsSpaceScreenLeft.Instance.IsRightQuizActive())
             {
-                Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz("RAT").part_idx);
+                yield return new WaitForSeconds(0.1f);
             }
-            nRequestTimer++;
+            else
+            {
+                //Debug.Log("ProcessPlayExam !!!");
+                yield return new WaitForSeconds(1f);
 
-            if (m_nRemainTime <= 0)
-                break;
+                m_nRemainTime--;
+
+                nMin = (int)(m_nRemainTime / 60);
+                nSec = (int)(m_nRemainTime % 60);
+
+                m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+                if ((nRequestTimer % 5) == 0)
+                {
+                    Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz("RAT").part_idx);
+                }
+                nRequestTimer++;
+
+                if (m_nRemainTime <= 0)
+                    break;
+            }
         }
 
         ShowPopupTimeOver();
@@ -412,10 +432,14 @@ public class CUIsRATManager : MonoBehaviour
         StopCoroutine("ProcessPlayExam");
         // 상태값 API 호출 -----------------------------
         //Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswer.text);
+        // TODO 230428
         Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text, m_fScore);
 
         if ( m_nQuizIndex < 1 )
         {
+            //Quiz quizData = CQuizData.Instance.GetQuiz("RAT");
+            //quizData.sets[0].questions[0].test_answers[0].test_anwr_idx = CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx;
+            m_bIsFirstQuiz = false;
             m_nQuizIndex++;
             InitRATPage();
             return;
@@ -462,7 +486,10 @@ public class CUIsRATManager : MonoBehaviour
 
     public void OnClickExit()
     {
-        ShowPopupToLobby();
+        if (CUIsSpaceScreenLeft.Instance.IsRATTutorial())
+            ShowPopupToLobbyTutorial();
+        else
+            ShowPopupToLobby();
     }
 
     public void HideAllPopup()
@@ -471,6 +498,7 @@ public class CUIsRATManager : MonoBehaviour
         m_goPopupTimeover.SetActive(false);
         m_goPopupToLobby.SetActive(false);
         m_goPopupToLobbyOver.SetActive(false);
+        HidePopupToLobbyTutorial();
     }
 
     public void ShowPopupSendAnswer()
@@ -596,5 +624,26 @@ public class CUIsRATManager : MonoBehaviour
 
         //CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("RAT").part_idx, 1);
         //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+    }
+
+    public void ShowPopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(true);
+    }
+
+    public void HidePopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(false);
+    }
+
+    public void OnClickPopupToLobbyTutorialToLobby()
+    {
+        HideAllPopup();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+    }
+
+    public void OnClickPopupToLobbyTutorialClose()
+    {
+        HidePopupToLobbyTutorial();
     }
 }

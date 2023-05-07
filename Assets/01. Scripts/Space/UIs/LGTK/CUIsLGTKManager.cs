@@ -39,6 +39,8 @@ public class CUIsLGTKManager : MonoBehaviour
 
     public GameObject m_goTalkBox;
 
+    public GameObject m_goFirstDatabase;
+
     public GameObject m_goPopupFinish;
     public GameObject m_goPopupTimeOver;
     public GameObject m_goPopupToLobby;
@@ -86,6 +88,7 @@ public class CUIsLGTKManager : MonoBehaviour
 
     private int m_nQuizPlanetIndex = 0;
     private int m_nQuizFairwayIndex = 0;
+    private List<int> m_listFairwayIndex;
 
 
     // Start is called before the first frame update
@@ -110,6 +113,8 @@ public class CUIsLGTKManager : MonoBehaviour
 
         if (CUIsLGTKManager.Instance.IsTutorial())
             HideTalkBox();
+
+        m_listFairwayIndex = new List<int>();
 
         m_listAnswers = new List<string>();
         m_listSBCTAnswer = new List<string>();
@@ -205,6 +210,7 @@ public class CUIsLGTKManager : MonoBehaviour
 
             if (quizLGTK.sets[i].questions[0].qst_cnnt.Contains("###"))
             {
+                m_listFairwayIndex.Add(quizLGTK.sets[i].questions[0].set_dir_idx);
                 m_nQuizFairwayIndex = quizLGTK.sets[i].questions[0].set_dir_idx;
                 Debug.Log("PlayQuiz 03 : " + quizLGTK.sets[i].questions[0].set_dir_idx);
             }
@@ -298,6 +304,9 @@ public class CUIsLGTKManager : MonoBehaviour
 
     public void UpdateDatabaseDetail(string strTitle, string strImageURL)
     {
+        if (m_goFirstDatabase.activeSelf)
+            m_goFirstDatabase.SetActive(false);
+
         StopCoroutine("ProcessDatabaseDetail");
         Debug.Log("UpdateDatabaseDetail URL : " + strImageURL);
         m_txtDatabaseDetailTitle.text = strTitle;
@@ -540,7 +549,7 @@ public class CUIsLGTKManager : MonoBehaviour
         m_bIsActive = false;
         HidePopupToLobbyTutorial();
         gameObject.GetComponent<RectTransform>().localPosition = new Vector3(9999f, 9999f, 0);
-        CUIsSpaceManager.Instance.ScreenActive(false, true);
+        //CUIsSpaceManager.Instance.ScreenActive(false, true);
         //CUIsSpaceManager.Instance.HideCenterPage();
     }
 
@@ -638,5 +647,10 @@ public class CUIsLGTKManager : MonoBehaviour
     public int GetQuizFairwayIndex()
     {
         return m_nQuizFairwayIndex;
+    }
+
+    public List<int> GetListQuizFairwayIndex()
+    {
+        return m_listFairwayIndex;
     }
 }

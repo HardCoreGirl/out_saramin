@@ -16,8 +16,8 @@ public class CUIsIntroSubpage : MonoBehaviour
     public Text m_txtName;
     public TMPro.TMP_InputField m_ifName;
 
-    private string[] m_listMsg = new string[11];
-    private string[] m_listBtnMsg = new string[11];
+    private string[] m_listMsg = new string[12];
+    private string[] m_listBtnMsg = new string[12];
 
     private int m_nSubpage = 0;
 
@@ -45,8 +45,13 @@ public class CUIsIntroSubpage : MonoBehaviour
         m_listMsg[6] = "너무 걱정마세요. 제가 {$NAME$} 탐사원님이\n기억을 되찾고 우주탐사선 생활에 적응하실 수 있도록 도와드릴게요.";
         m_listMsg[7] = "별 말씀을요! 그럼 제일 먼저 탐사원님의 미션수행 절차에 대해서 알려드리겠습니다.";
         m_listMsg[8] = "탐사원님의 데스크 오른쪽 아래를 보시면, [TO DO LIST]가 있습니다. 주어진 시간동안 여기 적힌 미션들을\n 모두 완수해주셔야 합니다. 어떤 미션을 완수해야 하는지 확인해보시겠어요?";
-        m_listMsg[9] = "데스크에 세 개의 시스템이 보이시죠? 왼쪽은 [우주탐사원 관리 시스템], 오른쪽은 [기체 점검 시스템],\n 그리고 가운데는 [파이어니어 메인 시스템]입니다. 각 시스템에서 필요한 미션을 수행하실 수 있어요.\n미션 내용은 시스템 화면에 나타나 있을 겁니다. 한번 확인해보시겠어요?";
-        m_listMsg[10] = "이제 미션 수행 방법을 숙지하신 것 같네요. 어떤 미션을 먼저 시작할지는 탐사원님이 자유롭게 정하시면 됩니다.\n미션을 진행하시는 동안 저는 늘 탐사원님 곁에 있을게요. 다시 안내가 필요하시면 저를 불러주세요.";
+        //m_listMsg[8] = "파이어니어데스크에 세 개의 시스템이 보이시죠?\n왼쪽은[우주탐사원 관리 시스템], 오른쪽은[기체 점검 시스템], 그리고 가운데는[파이어니어 메인 시스템]입니다.\n각 시스템을 클릭하셔서 미션을 수행하실 수 있어요.";
+        //m_listMsg[9] = "데스크에 세 개의 시스템이 보이시죠? 왼쪽은 [우주탐사원 관리 시스템], 오른쪽은 [기체 점검 시스템],\n 그리고 가운데는 [파이어니어 메인 시스템]입니다. 각 시스템에서 필요한 미션을 수행하실 수 있어요.\n미션 내용은 시스템 화면에 나타나 있을 겁니다. 한번 확인해보시겠어요?";
+        //m_listMsg[9] = "데스크에 세 개의 시스템이 보이시죠? 왼쪽은[우주탐사원 관리 시스템], 오른쪽은[기체 점검 시스템],\n그리고 가운데는[파이어니어 메인 시스템]입니다. 각 시스템을 클릭하셔서 미션을 수행하실 수 있어요.";
+        m_listMsg[9] = "데스크에 세 개의 시스템이 보이시죠? 왼쪽은 [우주탐사원 관리 시스템], 오른쪽은 [기체 점검 시스템],\n 그리고 가운데는 [파이어니어 메인 시스템]입니다. 각 시스템에서 필요한 미션을 수행하실 수 있어요.";
+        m_listMsg[10] = "탐사원님이 해결하셔야 하는 미션은 총 4개입니다. 각 시스템을 클릭하시면 해당 미션에 대한 안내를 확인\n하실 수 있습니다. 미션을 완료하시면 각 시스템에 <MISSION CLEAR> 라고 표기될 거에요.";
+        //m_listMsg[11] = "이제 미션 수행 방법을 숙지하신 것 같네요. 어떤 미션을 먼저 시작할지는 탐사원님이 자유롭게 정하시면 됩니다.\n미션을 진행하시는 동안 저는 늘 탐사원님 곁에 있을게요. 다시 안내가 필요하시면 저를 불러주세요.";
+        m_listMsg[11] = "이제 미션 수행 방법을 숙지하신 것 같네요. 어떤 미션을 먼저 시작할지는 탐사원님이 자유롭게 정하시면 됩니다.\n미션을 진행하시는 동안 저는 늘 탐사원님을 응원하고 있을게요.";
 
         m_listBtnMsg[0] = "...?";
         m_listBtnMsg[1] = "...넌 누구야?";
@@ -58,7 +63,9 @@ public class CUIsIntroSubpage : MonoBehaviour
         m_listBtnMsg[7] = "부탁해.";
         m_listBtnMsg[8] = "알겠어.";
         m_listBtnMsg[9] = "알겠어.";
-        m_listBtnMsg[10] = "고마워. 이제 미션을 시작할게.";
+        //m_listBtnMsg[10] = "고마워. 이제 미션을 시작할게.";
+        m_listBtnMsg[10] = "알겠어.";
+        m_listBtnMsg[11] = "고마워. 이제 미션을 시작할게.";
 
 
         m_goBlack.SetActive(true);
@@ -86,7 +93,11 @@ public class CUIsIntroSubpage : MonoBehaviour
             m_goName.SetActive(true);
             m_txtName.text = "";
             StartCoroutine("ProcessDisplayUserName");
-        } 
+        }
+        else if(m_nSubpage == 8 )
+        {
+            m_nSubpage++;
+        }
         else
         {
             m_goName.SetActive(false);
@@ -175,7 +186,7 @@ public class CUIsIntroSubpage : MonoBehaviour
 
         m_txtMsg.text = m_listMsg[m_nSubpage];
 
-        if ( m_nSubpage == 10 )
+        if ( m_nSubpage == 11 )
         {
             m_goBtnLast.SetActive(true);
         }

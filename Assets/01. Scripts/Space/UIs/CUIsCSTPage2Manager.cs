@@ -64,6 +64,8 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     public Text m_txtToLobbyOverMsg;
     public Text m_txtToLobbyOverRemainTime;
 
+    public GameObject m_goPopupToLobbyTutorial;
+
     public GameObject[] m_listLeftContents = new GameObject[25];
     public GameObject[] m_listRightContents = new GameObject[25];
 
@@ -77,7 +79,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitCSTPage2();
+        //InitCSTPage2();
     }
 
     // Update is called once per frame
@@ -350,24 +352,31 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         while (true)
         {
-            yield return new WaitForSeconds(1f);
-
-            m_nRemainTime--;
-
-            nMin = (int)(m_nRemainTime / 60);
-            nSec = (int)(m_nRemainTime % 60);
-
-            m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
-
-            if ((nRequestTimer % 5) == 0)
+            if (!CUIsSpaceScreenLeft.Instance.IsRightQuizActive())
             {
-                Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz("CST").part_idx);
+                yield return new WaitForSeconds(0.1f);
             }
-            nRequestTimer++;
+            else
+            {
+                yield return new WaitForSeconds(1f);
+
+                m_nRemainTime--;
+
+                nMin = (int)(m_nRemainTime / 60);
+                nSec = (int)(m_nRemainTime % 60);
+
+                m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+                if ((nRequestTimer % 5) == 0)
+                {
+                    Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz("CST").part_idx);
+                }
+                nRequestTimer++;
 
 
-            if (m_nRemainTime <= 0)
-                break;
+                if (m_nRemainTime <= 0)
+                    break;
+            }
         }
 
         for (int i = 0; i < 25; i++)
@@ -462,7 +471,10 @@ public class CUIsCSTPage2Manager : MonoBehaviour
 
     public void OnClickExit()
     {
-        ShowPopupToLobby();
+        if (CUIsSpaceScreenLeft.Instance.IsCSTTutorial())
+            ShowPopupToLobbyTutorial();
+        else
+            ShowPopupToLobby();
     }
 
     public void HideAllPopup()
@@ -471,6 +483,7 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         m_goPopupTimeover.SetActive(false);
         m_goPopupToLobby.SetActive(false);
         m_goPopupToLobbyOver.SetActive(false);
+        HidePopupToLobbyTutorial();
     }
 
     public void ShowPopupSendAnswer()
@@ -598,10 +611,11 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     {
         StopCoroutine("ProcessToLobbyRemainTime");
         Server.Instance.RequestPUTActionExit();
-        StopCoroutine("ProcessPlayExam");
+        //StopCoroutine("ProcessPlayExam");
+        CUIsSpaceScreenLeft.Instance.SetRightQuizActive(false);
         HideAllPopup();
         CUIsSpaceScreenLeft.Instance.HideRightAllPage();
-        CUIsSpaceManager.Instance.ScreenActive(false);
+        //CUIsSpaceManager.Instance.ScreenActive(false);
     }
 
     public void OnClickPopupToLobbyContinue()
@@ -620,5 +634,26 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
 
         OnClickPopupSendAnswerNext();
+    }
+
+    public void ShowPopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(true);
+    }
+
+    public void HidePopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(false);
+    }
+
+    public void OnClickPopupToLobbyTutorialToLobby()
+    {
+        HideAllPopup();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+    }
+
+    public void OnClickPopupToLobbyTutorialClose()
+    {
+        HidePopupToLobbyTutorial();
     }
 }

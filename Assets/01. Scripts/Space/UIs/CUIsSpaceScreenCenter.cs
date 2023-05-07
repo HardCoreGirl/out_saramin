@@ -16,6 +16,7 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
     public GameObject m_goBtnPlay;
 
     private bool m_bIsFirst = true;
+    private bool m_bIsFirstAgree = true;
     
     // Start is called before the first frame update
     void Start()
@@ -39,8 +40,9 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
             UpdateButtonPlay();
         } else
         {
+            m_goAgree.SetActive(true);
             m_goLGTKMain.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-            m_goLGTKMain.GetComponent<CUIsLGTKManager>().ReplayQuiz();
+            //m_goLGTKMain.GetComponent<CUIsLGTKManager>().ReplayQuiz();
         }
         //m_goLGTKMain.GetComponent<CUIsLGTKManager>().InitLGTK();
     }
@@ -91,21 +93,29 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
 
     public void OnClickPlay()
     {
-
-        if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        if( m_bIsFirstAgree )
         {
-            if (CQuizData.Instance.GetExamInfoDetail("LGTK").status.Equals("WAITING"))
+            m_bIsFirstAgree = false;
+            if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
             {
-                Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("LGTK").idx);
-            } else
-            {
-                if (CQuizData.Instance.GetQuiz("LGTK").sets[0].questions[0].test_answers[0].test_anwr_idx != 0)
+                if (CQuizData.Instance.GetExamInfoDetail("LGTK").status.Equals("WAITING"))
                 {
-                    m_goLGTKMain.GetComponent<CUIsLGTKManager>().SetTutorial(false);
+                    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("LGTK").idx);
+                }
+                else
+                {
+                    if (CQuizData.Instance.GetQuiz("LGTK").sets[0].questions[0].test_answers[0].test_anwr_idx != 0)
+                    {
+                        m_goLGTKMain.GetComponent<CUIsLGTKManager>().SetTutorial(false);
+                    }
                 }
             }
+            m_goAgree.SetActive(false);
+            m_goLGTKMain.GetComponent<CUIsLGTKManager>().InitLGTK();
+        } else
+        {
+            m_goAgree.SetActive(false);
+            m_goLGTKMain.GetComponent<CUIsLGTKManager>().ReplayQuiz();
         }
-        m_goAgree.SetActive(false);
-        m_goLGTKMain.GetComponent<CUIsLGTKManager>().InitLGTK();
     }
 }

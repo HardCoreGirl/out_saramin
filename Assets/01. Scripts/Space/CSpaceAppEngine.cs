@@ -44,8 +44,8 @@ public class CSpaceAppEngine : MonoBehaviour
 
     public GameObject[] m_goMissionClear = new GameObject[4];
 
-    private string m_strServerType = "LOCAL";
-    //private string m_strServerType = "DEV2";
+    //private string m_strServerType = "LOCAL";
+    private string m_strServerType = "DEV2";
 
     //public GameObject[] m_listObjectOutline = new GameObject[3];
 
@@ -61,20 +61,28 @@ public class CSpaceAppEngine : MonoBehaviour
     private bool m_bIsFinishCenter = false;
     private bool m_bIsFinishRight = false;
 
-    private bool m_bIsIntro = true;
-    //private bool m_bIsIntro = false;
+    //private bool m_bIsIntro = true;
+    private bool m_bIsIntro = false;
 
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "c0b66aa4-08a4-4002-928e-7945d1574774";
+    private string m_strToken = "a8c778fc-1bf0-4a33-96b5-ed152208a92f";
 
     private int m_nBoardIndex = 0;
 
+    private int m_nAuthOverDay = 1234;
 
     // Start is called before the first frame update
     void Start()
     {
+        System.DateTime currentDate = System.DateTime.Now;
+        System.DateTime yearStartDate = new System.DateTime(2020, 1, 1);
+
+        int dayOfYear = (currentDate - yearStartDate).Days + 1;
+
+        Debug.Log("Today : " + dayOfYear);
+
         //UpdateMissionClear();
         m_listInGameBoard[0].SetActive(true);
         m_listInGameBoard[1].SetActive(false);
@@ -88,6 +96,8 @@ public class CSpaceAppEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        return;
+
         if (m_nBoardIndex != 2)
             return;
         //m_txtDebug.text = "Width : " + Screen.width.ToString() + ", Height : " + Screen.height.ToString();
@@ -241,7 +251,7 @@ public class CSpaceAppEngine : MonoBehaviour
                             } else
                             {
                                 Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD1").idx);
-                                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
+                                //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
                             }
 
                         }
@@ -300,6 +310,11 @@ public class CSpaceAppEngine : MonoBehaviour
         //}
     }
 
+    public int GetAuthOverDay()
+    {
+        return m_nAuthOverDay;
+    }
+
     //public void ShowObjectOutline(int nIndex)
     //{
     //    HideAllObjectOutline();
@@ -326,34 +341,48 @@ public class CSpaceAppEngine : MonoBehaviour
     public void UpdateMissionClear()
     {
         bool bIsAllClear = true;
-        if (m_bIsFinishLeft01) m_goMissionClear[0].SetActive(true);
+        int nTodoCnt = 0;
+        if (m_bIsFinishLeft01)
+            m_goMissionClear[0].SetActive(true);
         else if (!m_bIsFinishLeft01)
         {
             bIsAllClear = false;
+            nTodoCnt++;
             m_goMissionClear[0].SetActive(false);
         }
 
-        if (m_bIsFinishLeft02) m_goMissionClear[1].SetActive(true);
+        if (m_bIsFinishLeft02)
+            m_goMissionClear[1].SetActive(true);
         else if (!m_bIsFinishLeft02)
         {
             bIsAllClear = false;
+            nTodoCnt++;
             m_goMissionClear[1].SetActive(false);
         }
 
-        if (m_bIsFinishCenter) m_goMissionClear[2].SetActive(true);
+        if (m_bIsFinishCenter)
+            m_goMissionClear[2].SetActive(true);
         else if (!m_bIsFinishCenter)
         {
             bIsAllClear = false;
+            nTodoCnt++;
             m_goMissionClear[2].SetActive(false);
         }
         if (m_bIsFinishRight) m_goMissionClear[3].SetActive(true);
         else if (!m_bIsFinishRight)
         {
             bIsAllClear = false;
+            nTodoCnt++;
             m_goMissionClear[3].SetActive(false);
         }
 
-        if(bIsAllClear)
+        //CUIsTodoManager.Instance.UpdateTodoCnt(nTodoCnt);
+        //CUIsTodoManager.Instance.UpdateSlot(0, m_bIsFinishLeft01);
+        //CUIsTodoManager.Instance.UpdateSlot(1, m_bIsFinishLeft02);
+        //CUIsTodoManager.Instance.UpdateSlot(2, m_bIsFinishCenter);
+        //CUIsTodoManager.Instance.UpdateSlot(3, m_bIsFinishRight);
+
+        if (bIsAllClear)
         {
             CUIsSpaceManager.Instance.ShowOutro();
         }
@@ -364,7 +393,9 @@ public class CSpaceAppEngine : MonoBehaviour
     public void SetFinishLeft02(bool bIsFinish) { m_bIsFinishLeft02 = bIsFinish; }
     public bool IsFinishLeft02() { return m_bIsFinishLeft02; }
     public void SetFinishCenter(bool bIsFinish) { m_bIsFinishCenter = bIsFinish; }
+    public bool IsFinishCenter() { return m_bIsFinishCenter; }
     public void SetFinishRight(bool bIsFinish) { m_bIsFinishRight = bIsFinish; }
+    public bool IsFinishRight() { return m_bIsFinishRight; }
 
     public void SetIsIntro(bool bIsIntro) { m_bIsIntro = bIsIntro; }
     public bool IsIntro() { return m_bIsIntro; }

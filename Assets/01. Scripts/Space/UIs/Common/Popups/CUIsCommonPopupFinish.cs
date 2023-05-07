@@ -36,20 +36,13 @@ public class CUIsCommonPopupFinish : MonoBehaviour
     public void OnClickOK()
     {
         Server.Instance.RequestPUTQuestionsStatus(m_nPartIndex, 1);
-        Debug.Log("OnClick!!!!!!!!!!!! 01");
         if (m_nFinishType == 0) CSpaceAppEngine.Instance.SetFinishLeft01(true);
         else if (m_nFinishType == 1) CSpaceAppEngine.Instance.SetFinishLeft02(true);
         else if (m_nFinishType == 2) CSpaceAppEngine.Instance.SetFinishCenter(true);
         else if (m_nFinishType == 3) CSpaceAppEngine.Instance.SetFinishRight(true);
 
-        Debug.Log("OnClick!!!!!!!!!!!! 02");
         CSpaceAppEngine.Instance.UpdateMissionClear();
-
-        Debug.Log("OnClick!!!!!!!!!!!! 03");
-        //Server.Instance.RequestPUTQuestionsStatus(m_nPartIndex, 1);
         CUIsSpaceManager.Instance.ScreenActive(false, true);
-        Debug.Log("OnClick!!!!!!!!!!!! 04");
         CUIsSpaceManager.Instance.HideCommonPopupsFinish();
-        Debug.Log("OnClick!!!!!!!!!!!! 05");
     }
 }

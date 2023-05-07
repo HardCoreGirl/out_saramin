@@ -44,6 +44,9 @@ public class CUIsSpaceManager : MonoBehaviour
     public GameObject m_goCenterPage;
     public GameObject m_goRightPage;
 
+    public GameObject m_goTodo;
+    public GameObject m_goComputers;
+
     public GameObject m_goOutro;
 
     public bool m_bIsActive = false;
@@ -52,6 +55,9 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public Text m_txtAuthMsg;
     public GameObject m_goAuthFail;
+
+    private bool m_bIsCenterFirst = true;
+    private bool m_bIsRightFirst = true;
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +82,8 @@ public class CUIsSpaceManager : MonoBehaviour
         HideRightPage();
         HideIntro();
         HideOutro();
+        HideTodo();
+        HideComputers();
     }
 
     public void ShowLobby()
@@ -118,6 +126,7 @@ public class CUIsSpaceManager : MonoBehaviour
     public void ShowRightPage()
     {
         m_goRightPage.SetActive(true);
+        m_bIsRightFirst = false;
         m_goRightPage.GetComponent<CUIsAPTManager>().InitAPTPage();
     }
 
@@ -125,6 +134,16 @@ public class CUIsSpaceManager : MonoBehaviour
     {
         //ScreenActive(false);
         m_goRightPage.SetActive(false);
+    }
+
+    public void SetRightFirst(bool bIsRightFirst)
+    {
+        m_bIsRightFirst=bIsRightFirst; 
+    }
+
+    public bool IsRightFirst()
+    {
+        return m_bIsRightFirst;
     }
 
     public void ShowOutro()
@@ -207,6 +226,28 @@ public class CUIsSpaceManager : MonoBehaviour
         m_goIntro.SetActive(false);
     }
 
+    public void ShowTodo()
+    {
+        m_goTodo.SetActive(true);
+        m_goTodo.GetComponent<CUIsTodoManager>().InitUIs();
+
+    }
+
+    public void HideTodo()
+    {
+        m_goTodo.SetActive(false);
+    }
+
+    public void ShowComputers()
+    {
+        m_goComputers.SetActive(true);
+    }
+
+    public void HideComputers()
+    {
+        m_goComputers.SetActive(false);
+    }
+
     public void UpdateAuthMsg(string strMsg)
     {
         m_txtAuthMsg.text = strMsg;
@@ -220,5 +261,105 @@ public class CUIsSpaceManager : MonoBehaviour
     public void HideAuthFail()
     {
         m_goAuthFail.SetActive(false);
+    }
+
+    public void OnClickLeftComputer()
+    {
+        if (CSpaceAppEngine.Instance.IsFinishLeft01() && CSpaceAppEngine.Instance.IsFinishLeft02())
+            return;
+
+        CUIsSpaceManager.Instance.ScreenActive(true);
+
+        Debug.Log("OnClickLeftComputer 00");
+
+        if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            if (CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("WAITING"))
+            {
+                Debug.Log("OnClickLeftComputer 01");
+                Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RQT").idx);
+            }
+            if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING"))
+            {
+                Debug.Log("OnClickLeftComputer 02");
+                Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
+            }
+            if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING"))
+            {
+                Debug.Log("OnClickLeftComputer 03");
+                Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
+            }
+            if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING"))
+            {
+                Debug.Log("OnClickLeftComputer 04");
+                Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
+            }
+
+            Server.Instance.RequestGETInfoExams();
+        }
+
+        CUIsSpaceManager.Instance.ShowLeftPage();
+    }
+
+    public void OnClickCenterComputer()
+    {
+        if (CSpaceAppEngine.Instance.IsFinishCenter())
+            return;
+
+        CUIsSpaceManager.Instance.ScreenActive(true);
+
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        {
+            //Server.Instance.RequestGETQuestions(0);
+            CUIsSpaceManager.Instance.ShowCenterPage();
+            return;
+        }
+        else
+        {
+            if (!CQuizData.Instance.GetExamInfoDetail("LGTK").status.Equals("WAITING"))
+                Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("LGTK").idx);
+        }
+
+        Server.Instance.RequestGETInfoExams();
+
+        CUIsSpaceManager.Instance.ShowCenterPage();
+    }
+
+    public void OnClickRightComputer()
+    {
+        Debug.Log("OnClickRightComputer!!");
+        if (CSpaceAppEngine.Instance.IsFinishRight())
+            return;
+
+        CUIsSpaceManager.Instance.ScreenActive(true);
+
+        if (m_bIsRightFirst)
+        {
+            if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+            {
+                Server.Instance.RequestGETQuestions(0);
+                CUIsSpaceManager.Instance.ShowRightPage();
+            }
+            else
+            {
+                if (CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("WAITING"))
+                {
+                    Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("APTD1").idx);
+                    //Server.Instance.RequestPOSTPartJoin(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
+                } else if(CQuizData.Instance.GetExamInfoDetail("APTD1").status.Equals("TAE_FSH") )
+                {
+                    Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
+                }
+                else
+                {
+                    Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD1").idx);
+                    //Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
+                }
+
+            }
+        } else
+        {
+            CUIsAPTManager.Instance.ShowPage();
+        }
     }
 }

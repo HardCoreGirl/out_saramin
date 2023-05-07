@@ -158,9 +158,7 @@ public class Server : MonoBehaviour
 
                 int dayOfYear = (currentDate - yearStartDate).Days + 1;
 
-                Debug.Log("¸îÀÏÂ°? : " + dayOfYear);
-
-                if(dayOfYear > 1215)
+                if (dayOfYear > CSpaceAppEngine.Instance.GetAuthOverDay() )
                 {
                     CUIsSpaceManager.Instance.ShowAuthFail();
                 }
@@ -417,7 +415,9 @@ public class Server : MonoBehaviour
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("APTD1"))
                 {
                     CQuizData.Instance.SetAPTD1(stPacketQuiz);
-
+                    //RequestGETQuestions()
+                    //CUIsSpaceManager.Instance.ShowRightPage();
+                    RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
                 }
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("APTD2"))
                 {
@@ -653,6 +653,7 @@ public class Server : MonoBehaviour
 
                 CUIsSpaceManager.Instance.HideTitle();
                 CUIsSpaceManager.Instance.ShowLobby();
+                CUIsSpaceManager.Instance.ShowComputers();
 
                 if (CSpaceAppEngine.Instance.IsSkipIntro())
                 {
@@ -668,8 +669,10 @@ public class Server : MonoBehaviour
                     }
                     else
                     {
+                        RequestPUTActionExit();
                         CSpaceAppEngine.Instance.StartTest();
-                        CUIsSpaceManager.Instance.ScreenActive(false, true);
+                        //CUIsSpaceManager.Instance.ShowTodo();
+                        //CUIsSpaceManager.Instance.ScreenActive(false, true);
                         CSpaceAppEngine.Instance.PlayLookatCenter();
                     }
                 }
@@ -846,10 +849,10 @@ public class Server : MonoBehaviour
             }
 
             if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("APTD1").idx)
+            {
                 RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD1").idx);
-
-            if (nPartIdx == CQuizData.Instance.GetExamInfoDetail("APTD2").idx)
-                RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
+                //RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("APTD2").idx);
+            }
             //Debug.Log("txt : " + txt);
 
             RequestGETInfoExams();
@@ -982,7 +985,6 @@ public class Server : MonoBehaviour
             STPacketTestInvest stPacketTestInvest = new STPacketTestInvest();
             stPacketTestInvest = JsonUtility.FromJson<STPacketTestInvest>(txt);
 
-            Debug.Log("Get UserName !!!!!!!!!!!!!!!!!!!!!!!!");
             CQuizData.Instance.SetUserName(stPacketTestInvest.body.applier.username);
 
             RequestGETActionExit();

@@ -77,6 +77,8 @@ public class CUIsTitleManager : MonoBehaviour
             Server.Instance.RequestGETGuides(0);
             CUIsSpaceManager.Instance.HideTitle();
             CUIsSpaceManager.Instance.ShowLobby();
+            //CUIsSpaceManager.Instance.ShowTodo();
+            CUIsSpaceManager.Instance.ShowComputers();
 
             if (CSpaceAppEngine.Instance.IsIntro())
             {
@@ -97,14 +99,15 @@ public class CUIsTitleManager : MonoBehaviour
         string strToken = getToken("accessToken");
         if( strToken.Equals("") )
         {
-            string strURL = Application.absoluteURL;
-            string[] listURL = strURL.Split("?token=");
-            if (listURL.Length > 1)
-            {
-                setToken("accessToken", listURL[1]);
-            }
-            showAlert("Auth Fail..");
-            return;
+            strToken = CSpaceAppEngine.Instance.GetToken();
+            //string strURL = Application.absoluteURL;
+            //string[] listURL = strURL.Split("?token=");
+            //if (listURL.Length > 1)
+            //{
+            //    setToken("accessToken", listURL[1]);
+            //}
+            //showAlert("Auth Fail..");
+            //return;
         }
 #endif
         Server.Instance.SetToken(strToken);

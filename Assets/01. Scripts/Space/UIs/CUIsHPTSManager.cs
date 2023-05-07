@@ -34,10 +34,12 @@ public class CUIsHPTSManager : MonoBehaviour
     public Text m_txtToLobbyOverMsg;
     public Text m_txtToLobbyOverRemainTime;
 
+    public GameObject m_goPopupToLobbyTutorial;
+
     // Start is called before the first frame update
     void Start()
     {
-        InitHPTSPage();
+        //InitHPTSPage();
     }
 
     // Update is called once per frame
@@ -85,10 +87,13 @@ public class CUIsHPTSManager : MonoBehaviour
             //Quiz quizData = CQuizData.Instance.GetQuiz("HPTS");
             if (m_nQuizIndex == 0)
             {
+                Debug.Log("InitHPTS 01");
+
                 m_txtBtnSendAnswer.text = "다음문제 (1/2)";
                 //m_nRemainTime = 60;
                 //m_nRemainTime = quizData.exm_time;
                 m_nRemainTime = quizData.progress_time;
+                StopCoroutine("ProcessPlayExam");
                 StartCoroutine("ProcessPlayExam");
 
                 m_txtTitleMsg.text = quizData.sets[0].dir_cnnt;
@@ -238,6 +243,9 @@ public class CUIsHPTSManager : MonoBehaviour
             }
             else
             {
+                StopCoroutine("ProcessPlayExam");
+                StartCoroutine("ProcessPlayExam");
+
                 m_txtBtnSendAnswer.text = "답변 제출하기";
 
                 m_txtTitleMsg.text = quizData.sets[m_nQuizIndex].dir_cnnt;
@@ -342,23 +350,31 @@ public class CUIsHPTSManager : MonoBehaviour
         m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         while (true)
         {
-            yield return new WaitForSeconds(1f);
-
-            m_nRemainTime--;
-
-            nMin = (int)(m_nRemainTime / 60);
-            nSec = (int)(m_nRemainTime % 60);
-
-            m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
-
-            if ((nRequestTimer % 5) == 0)
+            if( !CUIsSpaceScreenLeft.Instance.IsRightQuizActive() )
             {
-                Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz("HPTS").part_idx);
-            }
-            nRequestTimer++;
+                yield return new WaitForSeconds(0.1f);
+            } else
+            {
+                //Debug.Log("ProcessPlayExam 01");
+                yield return new WaitForSeconds(1f);
 
-            if (m_nRemainTime <= 0)
-                break;
+                m_nRemainTime--;
+
+                nMin = (int)(m_nRemainTime / 60);
+                nSec = (int)(m_nRemainTime % 60);
+
+                m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+                if ((nRequestTimer % 5) == 0)
+                {
+                    Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz("HPTS").part_idx);
+                }
+                nRequestTimer++;
+
+                if (m_nRemainTime <= 0)
+                    break;
+
+            }
         }
 
         ShowPopupTimeOver();
@@ -366,7 +382,10 @@ public class CUIsHPTSManager : MonoBehaviour
 
     public void OnClickExit()
     {
-        ShowPopupToLobby();
+        if (CUIsSpaceScreenLeft.Instance.IsHPTSTutorial())
+            ShowPopupToLobbyTutorial();
+        else
+            ShowPopupToLobby();
     }
 
     //public void ShowTutorialMsg()
@@ -426,6 +445,7 @@ public class CUIsHPTSManager : MonoBehaviour
         m_goPopupTimeover.SetActive(false);
         m_goPopupToLobby.SetActive(false);
         m_goPopupToLobbyOver.SetActive(false);
+        HidePopupToLobbyTutorial();
     }
 
     public void ShowPopupSendAnswer()
@@ -540,5 +560,26 @@ public class CUIsHPTSManager : MonoBehaviour
 
         CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("HPTS").part_idx, 1);
         CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+    }
+
+    public void ShowPopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(true);
+    }
+
+    public void HidePopupToLobbyTutorial()
+    {
+        m_goPopupToLobbyTutorial.SetActive(false);
+    }
+
+    public void OnClickPopupToLobbyTutorialToLobby()
+    {
+        HideAllPopup();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+    }
+
+    public void OnClickPopupToLobbyTutorialClose()
+    {
+        HidePopupToLobbyTutorial();
     }
 }

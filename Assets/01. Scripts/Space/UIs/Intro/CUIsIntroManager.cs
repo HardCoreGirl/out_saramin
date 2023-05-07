@@ -50,6 +50,7 @@ public class CUIsIntroManager : MonoBehaviour
         } else if( nPage == 3)
         {
             CSpaceAppEngine.Instance.StartTest();
+            //CUIsSpaceManager.Instance.ShowTodo();
             m_listIntroPage[nPage].GetComponent<CUIsIntroSubpage>().InitIntroSubpage();
         }
     }

@@ -66,10 +66,14 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
     private int m_nMultiAnswer;
 
     private float m_fChatHeight = 15f;
+
+    private int m_nLastAnswerIndex = 0;
+    private List<int> m_listAnswerIndex;
     // Start is called before the first frame update
     void Start()
     {
         //InitLGTKTalkBoxMansger();
+        //m_listAnswerIndex = new List<int>();
     }
 
     // Update is called once per frame
@@ -159,15 +163,20 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
             //{
                 if (m_nStage == 0)
                 {
+                    Debug.Log("InitLGTKTalkBoxMansger 00 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    m_listAnswerIndex = new List<int>();
                     for (int i = 0; i < quizLGTK.sets.Length; i++)
                     {
-                        //Debug.Log("InitLGTKTalkBoxMansger Answer Index : " + quizLGTK.sets[i].questions[0].test_answers[0].test_anwr_idx);
+                        Debug.Log("InitLGTKTalkBoxMansger Answer Index : " + quizLGTK.sets[i].questions[0].test_answers[0].test_anwr_idx);
                         if ( quizLGTK.sets[i].questions[0].test_answers[0].test_anwr_idx == 0)
                         {
                             break;
                         } else
                         {
-                            m_nStage = i + 1;
+                            //m_nStage = i + 1;
+                            m_nLastAnswerIndex = i + 1;
+                            m_listAnswerIndex.Add(quizLGTK.sets[i].questions[0].qst_idx);
+                            Debug.Log("InitLGTKTalkBoxMansger Answer Index 02 : " + quizLGTK.sets[i].questions[0].qst_idx);
                         }
                     }
                 }
@@ -255,6 +264,22 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
     IEnumerator ProcessQuiz()
     {
         float fWaitTime = 2.0f;
+        bool bIsPass = false;
+
+        if (m_listAnswerIndex != null)
+        {
+            for (int i = 0; i < m_listAnswerIndex.Count; i++)
+            {
+                Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
+                if (m_listAnswerIndex[i] == quizLGTK.sets[m_nStage].questions[0].qst_idx)
+                {
+                    fWaitTime = 0.01f;
+                    bIsPass = true;
+                    break;
+                }
+            }
+        }
+
         for (int i = 0; i < m_listChat.Length; i++)
         {
             if( !CUIsLGTKManager.Instance.IsQuizActive() )
@@ -354,69 +379,125 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                 }
             }
 
-
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
-            string strQuizType = quizLGTK.sets[m_nStage].questions[0].qst_ans_cd;
-
-            if (strQuizType.Equals("SBCT"))
+            if ( bIsPass )
             {
-                m_goSBCTAnswer.SetActive(true);
-                //m_goSBCTAnswer.GetComponentInChildren<InputField>().text = "";
-                //m_goSBCTAnswer.GetComponent<TMPro.TMP_InputField>().text = "";
-                m_goSBCTAnswer.GetComponentInChildren<TMPro.TMP_InputField>().text = "";
-                m_goScrollView.SetActive(false);
-            }
-            else
-            {
-                SetMultiAnswer(quizLGTK.sets[m_nStage].questions[0].qst_ans_cnt);
-                m_goSBCTAnswer.SetActive(false);
-                m_goScrollView.SetActive(true);
-                m_goContentAnswer.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 60 + (m_nAnswerCnt * 40) + ((m_nAnswerCnt - 1) * 10));
+                string strQuizType = quizLGTK.sets[m_nStage].questions[0].qst_ans_cd;
 
-                int[] listAnswerSort = new int[m_nAnswerCnt];
-                for(int i = 0; i < listAnswerSort.Length; i++)
+                if (strQuizType.Equals("SBCT"))
                 {
-                    listAnswerSort[i] = quizLGTK.sets[m_nStage].questions[0].answers[i].anwr_idx;
+                    string strAnswer = quizLGTK.sets[m_nStage].questions[0].test_answers[0].test_anwr_sbct;
 
-                    //Debug.Log("ListAnswerSort : " + listAnswerSort[i]);
-                }
-
-                System.Array.Reverse(listAnswerSort);
-
-                int[] listSortIndex = new int[m_nAnswerCnt];
-
-                for (int i = 0; i < listAnswerSort.Length; i++)
-                {
-                    //Debug.Log("ListAnswerSort After : " + listAnswerSort[i]);
-                    for(int j = 0; j < listSortIndex.Length; j++)
+                    if (quizLGTK.sets[m_nStage].questions[0].qst_cnnt.Contains("$$$"))
                     {
-                        if(listAnswerSort[i] == quizLGTK.sets[m_nStage].questions[0].answers[j].anwr_idx)
+                        CUIsLGTKManager.Instance.AddListPlanetAnswers(strAnswer);
+                    }
+
+                    if (quizLGTK.sets[m_nStage].questions[0].qst_cnnt.Contains("###"))
+                    {
+                        CUIsLGTKManager.Instance.AddListFairwayAnswers(strAnswer);
+                    }
+
+                    AddChatAnswer(strAnswer);
+                } 
+                else
+                {
+                    for(int x = 0; x < quizLGTK.sets[m_nStage].questions[0].test_answers.Length; x++)
+                    {
+                        for(int y = 0; y < quizLGTK.sets[m_nStage].questions[0].answers.Length; y++)
                         {
-                            listSortIndex[i] = j;
-                            break;
+                            if (quizLGTK.sets[m_nStage].questions[0].answers[y].anwr_idx == quizLGTK.sets[m_nStage].questions[0].test_answers[x].test_anwr_idx)
+                            {
+                                string strAnswer = quizLGTK.sets[m_nStage].questions[0].answers[y].anwr_cnnt;
+                                AddChatAnswer(strAnswer);
+
+                                if(quizLGTK.sets[m_nStage].questions[0].qst_cnnt.Contains("$$$"))
+                                {
+                                    CUIsLGTKManager.Instance.AddListPlanetAnswers(strAnswer);
+                                }
+
+                                if (quizLGTK.sets[m_nStage].questions[0].qst_cnnt.Contains("###"))
+                                {
+                                    CUIsLGTKManager.Instance.AddListFairwayAnswers(strAnswer);
+                                }
+
+                                break;
+                            }
                         }
+                       ;
                     }
                 }
 
-                //for(int i = 0; i < listSortIndex.Length; i++)
-                //{
-                //    Debug.Log("Sort Index : " + listSortIndex[i]);
-                //}
+                CUIsLGTKManager.Instance.UpdateDatabaseDynamic();
 
+                m_nStage++;
 
-                for (int i = 0; i < m_nAnswerCnt; i++)
+                InitLGTKTalkBoxMansger();
+            } else
+            {
+                
+                string strQuizType = quizLGTK.sets[m_nStage].questions[0].qst_ans_cd;
+
+                if (strQuizType.Equals("SBCT"))
                 {
-                    int nConvAnswerIndex = listSortIndex[i];
-                    m_listAnswerObject[i] = Instantiate(Resources.Load("Prefabs/LGTKTalkBoxAnswer") as GameObject);
-                    m_listAnswerObject[i].transform.parent = m_goContentAnswer.transform;
-                    //m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, quizLGTK.sets[m_nStage].questions[0].answers[i].anwr_idx, m_listAnswer[i]);
-                    m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, quizLGTK.sets[m_nStage].questions[0].answers[nConvAnswerIndex].anwr_idx, quizLGTK.sets[m_nStage].questions[0].answers[nConvAnswerIndex].anwr_cnnt);
+                    m_goSBCTAnswer.SetActive(true);
+                    //m_goSBCTAnswer.GetComponentInChildren<InputField>().text = "";
+                    //m_goSBCTAnswer.GetComponent<TMPro.TMP_InputField>().text = "";
+                    m_goSBCTAnswer.GetComponentInChildren<TMPro.TMP_InputField>().text = "";
+                    m_goScrollView.SetActive(false);
+                }
+                else
+                {
+                    SetMultiAnswer(quizLGTK.sets[m_nStage].questions[0].qst_ans_cnt);
+                    m_goSBCTAnswer.SetActive(false);
+                    m_goScrollView.SetActive(true);
+                    m_goContentAnswer.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 60 + (m_nAnswerCnt * 40) + ((m_nAnswerCnt - 1) * 10));
 
+                    int[] listAnswerSort = new int[m_nAnswerCnt];
+                    for (int i = 0; i < listAnswerSort.Length; i++)
+                    {
+                        listAnswerSort[i] = quizLGTK.sets[m_nStage].questions[0].answers[i].anwr_idx;
+
+                        //Debug.Log("ListAnswerSort : " + listAnswerSort[i]);
+                    }
+
+                    System.Array.Reverse(listAnswerSort);
+
+                    int[] listSortIndex = new int[m_nAnswerCnt];
+
+                    for (int i = 0; i < listAnswerSort.Length; i++)
+                    {
+                        //Debug.Log("ListAnswerSort After : " + listAnswerSort[i]);
+                        for (int j = 0; j < listSortIndex.Length; j++)
+                        {
+                            if (listAnswerSort[i] == quizLGTK.sets[m_nStage].questions[0].answers[j].anwr_idx)
+                            {
+                                listSortIndex[i] = j;
+                                break;
+                            }
+                        }
+                    }
+
+                    //for(int i = 0; i < listSortIndex.Length; i++)
+                    //{
+                    //    Debug.Log("Sort Index : " + listSortIndex[i]);
+                    //}
+
+
+                    for (int i = 0; i < m_nAnswerCnt; i++)
+                    {
+                        int nConvAnswerIndex = listSortIndex[i];
+                        m_listAnswerObject[i] = Instantiate(Resources.Load("Prefabs/LGTKTalkBoxAnswer") as GameObject);
+                        m_listAnswerObject[i].transform.parent = m_goContentAnswer.transform;
+                        //m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, quizLGTK.sets[m_nStage].questions[0].answers[i].anwr_idx, m_listAnswer[i]);
+                        m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().InitLGTKTalkBoxAnswer(i, quizLGTK.sets[m_nStage].questions[0].answers[nConvAnswerIndex].anwr_idx, quizLGTK.sets[m_nStage].questions[0].answers[nConvAnswerIndex].anwr_cnnt);
+
+
+                    }
+
+                    m_goScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
 
                 }
-
-                m_goScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
-
             }
         }
     }
@@ -576,10 +657,17 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                                 CUIsLGTKManager.Instance.AddListPlanetAnswers(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
                             }
 
-                            if (CUIsLGTKManager.Instance.GetQuizFairwayIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                            //if (CUIsLGTKManager.Instance.GetQuizFairwayIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                            //{
+                            //    Debug.Log("Add Fairway Answer !!!!!!!!!!!!!!!!!!!!!!!! : " + m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
+                            //    CUIsLGTKManager.Instance.AddListFairwayAnswers(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
+                            //}
+
+                            List<int> listQuizFairwayIndex = CUIsLGTKManager.Instance.GetListQuizFairwayIndex();
+                            for (int j = 0; j < listQuizFairwayIndex.Count; j++)
                             {
-                                Debug.Log("Add Fairway Answer !!!!!!!!!!!!!!!!!!!!!!!! : " + m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
-                                CUIsLGTKManager.Instance.AddListFairwayAnswers(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
+                                if( listQuizFairwayIndex[j] == quizLGTK.sets[m_nStage].questions[0].set_dir_idx )
+                                    CUIsLGTKManager.Instance.AddListFairwayAnswers(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
                             }
 
                             AddChatAnswer(m_listAnswerObject[i].GetComponent<CObjectLGTKTalkBoxAnswer>().GetAnswer());
@@ -598,10 +686,17 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                         CUIsLGTKManager.Instance.AddListPlanetAnswers(GetObjAnswwer());
                     }
 
-                    if (CUIsLGTKManager.Instance.GetQuizFairwayIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                    //if (CUIsLGTKManager.Instance.GetQuizFairwayIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                    //{
+                    //    Debug.Log("Add Fairway Answer !!!!!!!!!!!!!!!!!!!!!!!!");
+                    //    CUIsLGTKManager.Instance.AddListFairwayAnswers(GetObjAnswwer());
+                    //}
+
+                    List<int> listQuizFairwayIndex = CUIsLGTKManager.Instance.GetListQuizFairwayIndex();
+                    for (int j = 0; j < listQuizFairwayIndex.Count; j++)
                     {
-                        Debug.Log("Add Fairway Answer !!!!!!!!!!!!!!!!!!!!!!!!");
-                        CUIsLGTKManager.Instance.AddListFairwayAnswers(GetObjAnswwer());
+                        if (listQuizFairwayIndex[j] == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                            CUIsLGTKManager.Instance.AddListFairwayAnswers(GetObjAnswwer());
                     }
 
                     AddChatAnswer(GetObjAnswwer());
@@ -621,9 +716,27 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                     CUIsLGTKManager.Instance.AddListPlanetAnswers(GetSBCTAnswer());
                 }
 
-                if (CUIsLGTKManager.Instance.GetQuizFairwayIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                //if (CUIsLGTKManager.Instance.GetQuizFairwayIndex() == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                //{
+                //    string[] strAnswer = GetSBCTAnswer().Split(",");
+                //    for(int i = 0; i < strAnswer.Length; i++)
+                //    {
+                //        string strConvAnswer = strAnswer[i].Replace(" ", "");
+
+                //        if( !strConvAnswer.Equals(""))
+                //        {
+                //            CUIsLGTKManager.Instance.AddListFairwayAnswers(strConvAnswer);
+                //        }
+                //        //Debug.Log("OnClickTalkBoxSend : [" + strConvAnswer + "]");
+                //    }
+                //    //CUIsLGTKManager.Instance.AddListFairwayAnswers(GetSBCTAnswer());
+                //}
+
+                List<int> listQuizFairwayIndex = CUIsLGTKManager.Instance.GetListQuizFairwayIndex();
+                for (int j = 0; j < listQuizFairwayIndex.Count; j++)
                 {
-                    CUIsLGTKManager.Instance.AddListFairwayAnswers(GetSBCTAnswer());
+                    if (listQuizFairwayIndex[j] == quizLGTK.sets[m_nStage].questions[0].set_dir_idx)
+                        CUIsLGTKManager.Instance.AddListFairwayAnswers(GetSBCTAnswer());
                 }
 
                 AddChatAnswer(GetSBCTAnswer());

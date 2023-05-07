@@ -193,11 +193,11 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         }
 
         m_nQuizType = 1;
-        //m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").exm_time;
         m_nRemainTime = CQuizData.Instance.GetQuiz("APTD2").progress_time;
-
-        //m_nRemainTime = 10;
+        //m_nRemainTime = 60;
         DelQuizList();
+
+        m_goQuizListContent.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 720f);
 
         for (int i = 0; i < 21; i++)
         {
@@ -426,26 +426,31 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         while (true)
         {
-            yield return new WaitForSeconds(1f);
-
-            m_nRemainTime--;
-
-            nMin = (int)(m_nRemainTime / 60);
-            nSec = (int)(m_nRemainTime % 60);
-
-            m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
-
-            
-            if( (nRequestTimer % 5) == 0 )
+            if( !CUIsAPTManager.Instance.IsQuizActive() )
             {
-                string strKey = "APTD1";
-                if (m_nQuizType != 0) strKey = "APTD2";
-                Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz(strKey).part_idx);
-            }
-            nRequestTimer++;
+                yield return new WaitForSeconds(0.1f);
+            } else
+            {
+                yield return new WaitForSeconds(1f);
 
-            if (m_nRemainTime <= 0)
-                break;
+                m_nRemainTime--;
+
+                nMin = (int)(m_nRemainTime / 60);
+                nSec = (int)(m_nRemainTime % 60);
+
+                m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
+
+                if ((nRequestTimer % 5) == 0)
+                {
+                    string strKey = "APTD1";
+                    if (m_nQuizType != 0) strKey = "APTD2";
+                    Server.Instance.RequestPOSTPartTimer(CQuizData.Instance.GetQuiz(strKey).part_idx);
+                }
+                nRequestTimer++;
+
+                if (m_nRemainTime <= 0)
+                    break;
+            }
         }
 
         if( m_nQuizType == 0 )
@@ -461,6 +466,12 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
     public void OnClickExit()
     {
+        if(IsTutorial())
+        {
+            CUIsAPTManager.Instance.ShowPopupToLobbyTutorial();
+            return;
+        }
+
         CUIsAPTManager.Instance.ShowPopupToLobby();
         //CUIsAPTManager.Instance.ShowPopup(2);
         //CUIsSpaceManager.Instance.ScreenActive(false);
