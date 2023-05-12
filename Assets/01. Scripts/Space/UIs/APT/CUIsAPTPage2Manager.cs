@@ -423,6 +423,8 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
         int nRequestTimer = 0;
 
+        m_nRemainTime = 310;
+
         m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         while (true)
         {
@@ -437,6 +439,17 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
                 nMin = (int)(m_nRemainTime / 60);
                 nSec = (int)(m_nRemainTime % 60);
+
+                if( m_nRemainTime <= 60 )
+                {
+                    m_txtRemainTime.color = new Color(1, 0, 0);
+                } else if (m_nRemainTime <= 300)
+                {
+                    m_txtRemainTime.color = new Color(1, 0.6588235f, 0);
+                } else
+                {
+                    m_txtRemainTime.color = new Color(0, 0.5215687f, 1);
+                }
 
                 m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
 

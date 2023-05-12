@@ -90,7 +90,7 @@ public class CUIsHPTSManager : MonoBehaviour
                 Debug.Log("InitHPTS 01");
 
                 m_txtBtnSendAnswer.text = "다음문제 (1/2)";
-                //m_nRemainTime = 60;
+                //m_nRemainTime = 120;
                 //m_nRemainTime = quizData.exm_time;
                 m_nRemainTime = quizData.progress_time;
                 StopCoroutine("ProcessPlayExam");

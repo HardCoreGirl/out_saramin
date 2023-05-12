@@ -58,7 +58,19 @@ public class CUIsOutroManager : MonoBehaviour
             StartCoroutine("ProcessMsg");
         } else
         {
+            //Application.OpenURL("www.naver.com");
 
+            string strExUrl;
+            if( CSpaceAppEngine.Instance.IsFaceTest() )
+            {
+                strExUrl = "/exams_setting";
+            } else
+            {
+                strExUrl = "/exam_end";
+            }
+
+            string url = Server.Instance.GetCurURL() + strExUrl;
+            Application.ExternalEval("window.location.href='" + url + "'");
         }
     }
 
