@@ -69,7 +69,7 @@ public class CUIsOutroManager : MonoBehaviour
                 strExUrl = "/exam_end";
             }
 
-            string url = Server.Instance.GetCurURL() + strExUrl;
+            string url = Server.Instance.GetFaceTestCurURL() + strExUrl;
             Application.ExternalEval("window.location.href='" + url + "'");
         }
     }

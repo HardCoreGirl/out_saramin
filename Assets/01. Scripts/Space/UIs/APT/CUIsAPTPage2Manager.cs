@@ -326,7 +326,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             for (int i = 0; i < quizAPT.sets[nRealIndex].questions[0].answers.Length; i++)
             {
                 //Debug.Log("Show Quiz 003 AnswerIndex : " + quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx);
-                m_listAnswerIndex[3 -i] = quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx;
+                m_listAnswerIndex[i] = quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx;
             }
 
             m_txtMainTitle.text = (nRealIndex + 1).ToString() + "¹ø ¹®Ç×";
@@ -423,7 +423,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
         int nRequestTimer = 0;
 
-        m_nRemainTime = 310;
+        //m_nRemainTime = 310;
 
         m_txtRemainTime.text = nMin.ToString("00") + ":" + nSec.ToString("00");
         while (true)

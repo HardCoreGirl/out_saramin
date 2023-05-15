@@ -14,6 +14,7 @@ public class CUIsAPTPage1Manager : MonoBehaviour
     public Text m_txtAnswerCnt;
     public Image m_imgAnswerCntBG;
 
+    public GameObject m_goAnswerContentScrollRect;
     public GameObject m_goAnswerContent;
 
     public Toggle m_toggleAgree;
@@ -143,7 +144,10 @@ public class CUIsAPTPage1Manager : MonoBehaviour
 
             goList.GetComponent<CObjectAPTQuizList>().InitAPTQuizList(i, strQuizName, strQuizState);
         }
-        
+
+        m_goAnswerContentScrollRect.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
+
+
     }
 
     public void OnClickPlayQuiz()

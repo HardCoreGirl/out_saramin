@@ -44,8 +44,8 @@ public class CSpaceAppEngine : MonoBehaviour
 
     public GameObject[] m_goMissionClear = new GameObject[4];
 
-    private string m_strServerType = "LOCAL";
-    //private string m_strServerType = "DEV2";
+    //private string m_strServerType = "LOCAL";
+    private string m_strServerType = "DEV2";
 
     //public GameObject[] m_listObjectOutline = new GameObject[3];
 
@@ -67,11 +67,11 @@ public class CSpaceAppEngine : MonoBehaviour
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "59054cf1-3fbb-47a6-9bdd-1fab20631841";
+    private string m_strToken = "4690c689-7c48-48af-a2b2-2826b8d13ebf";
 
     private int m_nBoardIndex = 0;
 
-    private int m_nAuthOverDay = 1234;
+    private int m_nAuthOverDay = 1241;
 
     private bool m_bIsFaceTest = false;
 
@@ -454,6 +454,11 @@ public void PlayLookatRight()
         m_listInGameBoard[2].SetActive(false);
 
         m_nBoardIndex = 1;
+    }
+
+    public void SetFactTest(bool bIsFaceTest)
+    {
+        m_bIsFaceTest = bIsFaceTest;
     }
 
     public bool IsFaceTest()

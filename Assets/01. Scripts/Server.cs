@@ -49,6 +49,7 @@ public class Server : MonoBehaviour
     #endregion
 
     private const string strServerDev2 = "https://applier-api-dev2.indepth.thepllab.com/";
+    private const string strServerDev2FaceTest = "https://applier-dev2.indepth.thepllab.com/";
     private const string strServerLive = "https://ncdkeuehdl.execute-api.ap-northeast-2.amazonaws.com";
     private const string strServerLocal = "http://localhost:7575/";
 
@@ -190,6 +191,17 @@ public class Server : MonoBehaviour
     public string GetCurURL()
     {
         return cur_server.Substring(0, cur_server.Length - 1);
+    }
+
+    public string GetFaceTestCurURL()
+    {
+        if(CSpaceAppEngine.Instance.GetServerType().Equals("DEV2"))
+        {
+            return strServerDev2FaceTest.Substring(0, strServerDev2FaceTest.Length - 1);
+        } else
+        {
+            return strServerDev2FaceTest.Substring(0, strServerDev2FaceTest.Length - 1);
+        }
     }
 
     // TR Auth ---------------
@@ -521,10 +533,48 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         PUT(url, header, jsonBody, (string txt) =>
         {
+            STPacketQuestionStatus stPacketQuestionStatus;
+            stPacketQuestionStatus = JsonUtility.FromJson<STPacketQuestionStatus>(txt);
 
+            if ( stPacketQuestionStatus.code == 200 )
+            {
+                if (stPacketQuestionStatus.body.video_part_yn.Equals("Y"))
+                {
+                    CSpaceAppEngine.Instance.SetFactTest(true);
+                }
+                else
+                {
+                    CSpaceAppEngine.Instance.SetFactTest(false);
+                }
+            }
             //Debug.Log("txt : " + txt);
         });
     }
+
+    //public void RequestPUTQuestionsStatus(int nPartIdx, int nStatus)
+    //{
+    //    if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
+
+    //    string jsonBody = JsonConvert.SerializeObject(null);
+
+    //    string strStatus = "TAE_FSH";
+    //    if (nStatus == 0) strStatus = "TAE";
+
+    //    Dictionary<string, string> header = new Dictionary<string, string>();
+    //    string url = cur_server + "api/v1/questions/" + nPartIdx.ToString() + "/" + strStatus;
+
+    //    //header.Add("Content-Type", "application/json");
+    //    header.Add("accept", "application/json");
+    //    header.Add("Authorization", "Bearer " + m_strToken);
+    //    header.Add("Content-Type", "application/json");
+
+    //    //POST(url, header, jsonBody, (string txt) =>
+    //    PUT(url, header, jsonBody, (string txt) =>
+    //    {
+
+    //        //Debug.Log("txt : " + txt);
+    //    });
+    //}
     #endregion
 
     #region »çÀü

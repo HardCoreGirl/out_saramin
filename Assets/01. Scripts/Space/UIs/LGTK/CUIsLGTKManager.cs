@@ -56,6 +56,7 @@ public class CUIsLGTKManager : MonoBehaviour
     public GameObject m_goDatabaseContent;
 
     public Text m_txtDatabaseDetailTitle;
+    public GameObject m_goDatabaseDetailScrollView;
     public GameObject m_goDatabaseDetail;
     public Image m_imgDatabaseDetail;
 
@@ -344,6 +345,8 @@ public class CUIsLGTKManager : MonoBehaviour
             m_imgDatabaseDetail.sprite = Sprite.Create(myTexture, rect, new Vector2(760, myTexture.height * fRate));
             m_goDatabaseDetail.GetComponent<RectTransform>().sizeDelta = new Vector2(0, myTexture.height * fRate);
             m_imgDatabaseDetail.color = new Color(1, 1, 1, 1);
+
+            m_goDatabaseDetailScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
         }
     }
 

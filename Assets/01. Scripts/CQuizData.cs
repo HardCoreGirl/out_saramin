@@ -319,6 +319,25 @@ public class STPacketAnswerDictionariesBody
     public int dic_cate_no;
 }
 
+// QuestionsStatus --------------------------------
+public class STPacketQuestionStatus
+{
+    public int code;
+    public string message;
+    public STPacketQuestionStatusBody body;
+
+}
+
+[Serializable]
+public class STPacketQuestionStatusBody
+{
+    public string status;
+    public string video_part_yn;
+    public int next_part_idx;
+    public string scale_type;
+}
+// -------------------------------------------------
+
 
 // -------------------------------------------------
 
@@ -444,6 +463,8 @@ public class CQuizData : MonoBehaviour
     public STPacketInfoMission m_packetInfoMission;
 
     public STGuides m_stGuides;
+
+    public STPacketQuestionStatus m_packetQuestionStatus;
 
     public STPacketAnswerDictionaries m_packetAnswerDictionaries;
 
@@ -650,6 +671,16 @@ public class CQuizData : MonoBehaviour
     public STGuides GetGuides()
     {
         return m_stGuides;
+    }
+
+    public void SetQuestionStatus(STPacketQuestionStatus stPacketQuestionStatus)
+    {
+        m_packetQuestionStatus = stPacketQuestionStatus;
+    }
+
+    public STPacketQuestionStatus GetQuestionStatus()
+    {
+        return m_packetQuestionStatus;
     }
 
     public void SetAnswerDictionaries(STPacketAnswerDictionaries packetAnswerDictionaries)

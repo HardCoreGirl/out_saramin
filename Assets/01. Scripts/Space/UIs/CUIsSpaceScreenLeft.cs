@@ -397,7 +397,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
         Debug.Log("ProcessUpdateScrollView");
         yield return new WaitForEndOfFrame();
-
+         
         m_goScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
     }
 

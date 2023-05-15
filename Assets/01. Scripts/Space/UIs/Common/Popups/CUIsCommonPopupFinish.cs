@@ -27,6 +27,7 @@ public class CUIsCommonPopupFinish : MonoBehaviour
 
     public void InitCommonPopupFinish(int nPartIdex, int nType = 0, string strMainMsg = "미션 제출완료", string strSubMsg = "해당 미션을 성공적으로 제출하였습니다.")
     {
+        Debug.Log("InitCommonPopupFinish !!!!!!");
         m_nPartIndex = nPartIdex;
         m_txtMainMsg.text = strMainMsg;
         m_txtSubMsg.text = strSubMsg;

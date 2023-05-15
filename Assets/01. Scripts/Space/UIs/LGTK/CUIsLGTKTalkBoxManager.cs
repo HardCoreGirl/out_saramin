@@ -632,6 +632,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         } else
         {
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
+            Debug.Log("!!!!!!!!!!!!!!!!!!!!!" + quizLGTK.sets[m_nStage]);
             if( quizLGTK.sets[m_nStage].questions[0].qst_ans_cd.Equals("OBJ") ) // °´°ü½Ä
             {
                 if( GetMultiAnswer() > 1 )  // ¸ÖÆ¼

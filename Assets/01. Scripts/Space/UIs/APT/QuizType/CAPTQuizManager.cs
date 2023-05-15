@@ -97,7 +97,7 @@ public class CAPTQuizManager : MonoBehaviour
             }
             else
             {
-                m_listStrAnswerURL[3 - i] = Server.Instance.GetCurURL() + m_quizInfo.sets[nIndex].questions[0].answers[i].anwr_cnnt;
+                m_listStrAnswerURL[i] = Server.Instance.GetCurURL() + m_quizInfo.sets[nIndex].questions[0].answers[i].anwr_cnnt;
             }
             
         }
@@ -233,7 +233,7 @@ public class CAPTQuizManager : MonoBehaviour
             }
             else
             {
-                m_listTxtAnswer[3-i].text = m_quizInfo.sets[m_nIndex].questions[0].answers[i].anwr_cnnt;
+                m_listTxtAnswer[i].text = m_quizInfo.sets[m_nIndex].questions[0].answers[i].anwr_cnnt;
             }
         }
     }
@@ -252,7 +252,7 @@ public class CAPTQuizManager : MonoBehaviour
             return;
         }
 
-        //Debug.Log("APT OnClick : " + CUIsAPTPage2Manager.Instance.GetQuizIndex() + ", " + CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex));
+        Debug.Log("APT OnClick : " + CUIsAPTPage2Manager.Instance.GetQuizIndex() + ", " + CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex));
 
         Server.Instance.RequestPUTAnswerObject(CUIsAPTPage2Manager.Instance.GetQuizIndex(), CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex));
 
