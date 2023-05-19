@@ -413,6 +413,8 @@ public class CUIsHPTSManager : MonoBehaviour
 
     public void OnClickSendAnswer()
     {
+        //CUIsSpaceScreenLeft.Instance.SetHPTSTutorial(false);
+
         if (CUIsSpaceScreenLeft.Instance.IsHPTSTutorial())
         {
             if (m_nTutorialStep == 0)

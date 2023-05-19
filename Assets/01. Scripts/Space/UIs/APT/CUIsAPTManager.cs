@@ -239,6 +239,7 @@ public class CUIsAPTManager : MonoBehaviour
             }
         }
 
+        CUIsAPTPage2Manager.Instance.SetTutorial(false);
         m_listAPTPage[1].GetComponent<CUIsAPTPage2Manager>().StopQuiz();
         m_listAPTPage[1].GetComponent<CUIsAPTPage2Manager>().InitAPTD2();
     }

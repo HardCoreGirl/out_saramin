@@ -21,10 +21,10 @@ public class Server : MonoBehaviour
                 _instance = Instantiate(Resources.Load<Server>("Prefabs/Network/Server"));
             }
 
-            _instance.cur_server = strServerLocal;
+            //_instance.cur_server = strServerLocal;
 
-            if (CSpaceAppEngine.Instance.GetServerType().Equals("DEV2"))
-                _instance.cur_server = strServerDev2;
+            //if (CSpaceAppEngine.Instance.GetServerType().Equals("DEV2"))
+            //    _instance.cur_server = strServerDev2;
             //_instance.cur_server = strServerLocal;
 
             return _instance;
@@ -63,6 +63,7 @@ public class Server : MonoBehaviour
 
     [HideInInspector]
     public string cur_server = "";
+    public string cur_pllab_server = "";
 
     // Start is called before the first frame update
     void Start()
@@ -188,10 +189,29 @@ public class Server : MonoBehaviour
         m_strToken = strToken;
     }
 
+    public void SetCurURL(string strURL)
+    {
+        cur_server = strURL + "/";
+        Debug.Log("SetCurURL : " + cur_server);
+    }
+
     public string GetCurURL()
     {
+        Debug.Log("GetCurURL : " + cur_server);
         return cur_server.Substring(0, cur_server.Length - 1);
     }
+
+    public void SetPLLabCurURL(string strURL)
+    {
+        cur_pllab_server = strURL + "/";
+    }
+
+    public string GetPLLabCurURL()
+    {
+        return cur_pllab_server.Substring(0, cur_pllab_server.Length - 1);
+    }
+
+
 
     public string GetFaceTestCurURL()
     {

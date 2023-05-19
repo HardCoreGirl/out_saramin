@@ -38,14 +38,15 @@ public class CSpaceAppEngine : MonoBehaviour
     }
     #endregion
 
+    public TMPro.TMP_Text m_txtAuthInfo;
     public Text m_txtDebug;
 
     public GameObject[] m_listInGameBoard = new GameObject[3];
 
     public GameObject[] m_goMissionClear = new GameObject[4];
 
-    //private string m_strServerType = "LOCAL";
-    private string m_strServerType = "DEV2";
+    private string m_strServerType = "LOCAL";
+    //private string m_strServerType = "DEV2";
 
     //public GameObject[] m_listObjectOutline = new GameObject[3];
 
@@ -61,23 +62,37 @@ public class CSpaceAppEngine : MonoBehaviour
     private bool m_bIsFinishCenter = false;
     private bool m_bIsFinishRight = false;
 
-    //private bool m_bIsIntro = true;
-    private bool m_bIsIntro = false;
+    private bool m_bIsIntro = true;
+    //private bool m_bIsIntro = false;
 
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "4690c689-7c48-48af-a2b2-2826b8d13ebf";
+    private string m_strToken = "68922e52-dc60-402a-806f-ba44ede2875d";
 
     private int m_nBoardIndex = 0;
 
-    private int m_nAuthOverDay = 1241;
+    private string m_strVer = "230517.01";
+    private int m_nAuthOverDay = 1244;
 
     private bool m_bIsFaceTest = false;
 
-    // Start is called before the first frame update
-    void Start()
+    [System.Serializable]
+    public class HostConfig
     {
+        public string APP_API_HOST;
+        public string APP_PLLAB_HOST;
+    }
+
+ //   {
+	//"APP_API_HOST":"1111",
+	//"APP_PLLAB_HOST":"2222"
+ //   }
+
+// Start is called before the first frame update
+void Start()
+    {
+        StartCoroutine("ProcessLoadServerInfo");
         //Debug.Log(Server.Instance.GetCurURL());
         System.DateTime currentDate = System.DateTime.Now;
         System.DateTime yearStartDate = new System.DateTime(2020, 1, 1);
@@ -331,6 +346,33 @@ public class CSpaceAppEngine : MonoBehaviour
     //        m_listObjectOutline[i].SetActive(false);
     //    }
     //}
+
+    IEnumerator ProcessLoadServerInfo()
+    {
+        m_txtAuthInfo.text = "";
+
+        string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "config.txt");
+
+        UnityWebRequest www = UnityWebRequest.Get(filePath);
+        yield return www.SendWebRequest();
+
+        string strUrl = "";
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            string fileContents = www.downloadHandler.text;
+            HostConfig hcData = JsonUtility.FromJson<HostConfig>(fileContents);
+
+            //Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 02 : " + hcData.APP_API_HOST);
+            //Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 03 : " + hcData.APP_PLLAB_HOST);
+
+            Server.Instance.SetCurURL(hcData.APP_API_HOST);
+            Server.Instance.SetPLLabCurURL(hcData.APP_PLLAB_HOST);
+            strUrl = hcData.APP_API_HOST;
+        }
+
+        m_txtAuthInfo.text = "Dev Build (Ver." + m_strVer + ") API_HOST_URL : " + strUrl;
+    }
 
     public void SetServerType(string strServerType)
     {

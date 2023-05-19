@@ -1,0 +1,4 @@
+{
+	"APP_API_HOST":"https://applier-api-dev2.indepth.thepllab.com",
+	"APP_PLLAB_HOST":"https://applier-dev2.indepth.thepllab.com"
+}
