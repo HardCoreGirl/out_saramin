@@ -270,28 +270,28 @@ public class CUIsSpaceManager : MonoBehaviour
 
         CUIsSpaceManager.Instance.ScreenActive(true);
 
-        Debug.Log("OnClickLeftComputer 00");
+        //Debug.Log("OnClickLeftComputer 00");
 
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
             if (CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("WAITING"))
             {
-                Debug.Log("OnClickLeftComputer 01");
+                //Debug.Log("OnClickLeftComputer 01");
                 Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RQT").idx);
             }
             if (CQuizData.Instance.GetExamInfoDetail("CST").status.Equals("WAITING"))
             {
-                Debug.Log("OnClickLeftComputer 02");
+                //Debug.Log("OnClickLeftComputer 02");
                 Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("CST").idx);
             }
             if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING"))
             {
-                Debug.Log("OnClickLeftComputer 03");
+                //Debug.Log("OnClickLeftComputer 03");
                 Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("RAT").idx);
             }
             if (CQuizData.Instance.GetExamInfoDetail("HPTS").status.Equals("WAITING"))
             {
-                Debug.Log("OnClickLeftComputer 04");
+                //Debug.Log("OnClickLeftComputer 04");
                 Server.Instance.RequestGetPartJoin(CQuizData.Instance.GetExamInfoDetail("HPTS").idx);
             }
 

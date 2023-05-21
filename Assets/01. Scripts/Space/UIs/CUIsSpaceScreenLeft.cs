@@ -4,6 +4,8 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
+using DG.Tweening;
+
 public class CUIsSpaceScreenLeft : MonoBehaviour
 {
     #region SingleTon
@@ -130,6 +132,11 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
         SetCSTTutorial(true);
 
+        gameObject.GetComponent<RectTransform>().localPosition = new Vector3(-443f, -224f, 0);
+        gameObject.GetComponent<RectTransform>().localScale = new Vector3(0.2f, 0.2f, 0);
+        gameObject.GetComponent<RectTransform>().DOLocalMove(new Vector3(0, 0, 0), CSpaceAppEngine.Instance.GetFadeTime());
+        gameObject.GetComponent<RectTransform>().DOScale(new Vector3(1, 1, 1), CSpaceAppEngine.Instance.GetFadeTime());
+
         ShowPage(0);
     }
 
@@ -156,7 +163,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public void OnClickAgreeClose()
     {
         HideAllPopup();
-        HideAllPages();
+        PageFadeOut();
+        //HideAllPages();
     }
 
     public void OnClickClose()
@@ -720,7 +728,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         StopCoroutine("ProcessRQTQuiz");
         HideAllPopup();
-        HideAllPages();
+        PageFadeOut();
+        //HideAllPages();
         CUIsSpaceManager.Instance.ScreenActive(false);
     }
 
@@ -746,10 +755,12 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         StopCoroutine("ProcessRQTQuiz");
         HideAllPopup();
-        HideAllPages();
+        PageFadeOut();
+        //HideAllPages();
         //CUIsSpaceManager.Instance.ScreenActive(false);
 
         CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("RQT").part_idx, 0);
+        //CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
         CUIsSpaceScreenLeft.Instance.HideRightAllPage();
     }
     // -------------------------------------------------------------
@@ -789,7 +800,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         Server.Instance.RequestPUTActionExit();
         StopCoroutine("ProcessRQTQuiz");
         HideAllPopup();
-        HideAllPages();
+        PageFadeOut();
+        //HideAllPages();
         CUIsSpaceManager.Instance.ScreenActive(false);
 
     }
@@ -955,7 +967,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public void OnClickPopupToLobbyTutorialToLobby()
     {
         HideAllPopup();
-        HideAllPages();
+        PageFadeOut();
+        //HideAllPages();
     }
 
     public void OnClickPopupToLobbyTutorialExit()
@@ -964,5 +977,22 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     }
 
     //-----------------------------------------------
+
+    public void PageFadeOut()
+    {
+        Debug.Log("PageFadeOut");
+        //gameObject.GetComponent<RectTransform>().localPosition = new Vector3(-443f, -224f, 0);
+        //gameObject.GetComponent<RectTransform>().localScale = new Vector3(0.2f, 0.2f, 0);
+        gameObject.GetComponent<RectTransform>().DOLocalMove(new Vector3(-443, -224, 0), CSpaceAppEngine.Instance.GetFadeTime());
+        gameObject.GetComponent<RectTransform>().DOScale(new Vector3(0.2f, 0.2f, 1), CSpaceAppEngine.Instance.GetFadeTime()).OnComplete(HideAllPages);
+    }
+
+    public void PageFadeOutRightPage()
+    {
+        gameObject.GetComponent<RectTransform>().DOLocalMove(new Vector3(-443, -224, 0), CSpaceAppEngine.Instance.GetFadeTime());
+        gameObject.GetComponent<RectTransform>().DOScale(new Vector3(0.2f, 0.2f, 1), CSpaceAppEngine.Instance.GetFadeTime()).OnComplete(HideRightAllPage);
+    }
+
+
 }
 

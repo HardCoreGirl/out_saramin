@@ -529,7 +529,8 @@ public class CUIsHPTSManager : MonoBehaviour
         HideAllPopup();
 
         CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("HPTS").part_idx, 1);
-        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
         //CUIsSpaceManager.Instance.ScreenActive(false);
     }
 
@@ -544,7 +545,8 @@ public class CUIsHPTSManager : MonoBehaviour
         Server.Instance.RequestPUTActionExit();
         StopCoroutine("ProcessPlayExam");
         HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
         CUIsSpaceManager.Instance.ScreenActive(false);
     }
 
@@ -557,11 +559,12 @@ public class CUIsHPTSManager : MonoBehaviour
     {
         StopCoroutine("ProcessPlayExam");
         HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
         //CUIsSpaceManager.Instance.ScreenActive(false);
 
         CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("HPTS").part_idx, 1);
-        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
     }
 
     public void ShowPopupToLobbyTutorial()
@@ -577,7 +580,8 @@ public class CUIsHPTSManager : MonoBehaviour
     public void OnClickPopupToLobbyTutorialToLobby()
     {
         HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
     }
 
     public void OnClickPopupToLobbyTutorialClose()

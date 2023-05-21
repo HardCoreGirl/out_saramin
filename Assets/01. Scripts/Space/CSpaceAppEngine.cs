@@ -68,7 +68,7 @@ public class CSpaceAppEngine : MonoBehaviour
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "68922e52-dc60-402a-806f-ba44ede2875d";
+    private string m_strToken = "9dd56c85-13df-46c7-acde-f116e9cd659c";
 
     private int m_nBoardIndex = 0;
 
@@ -76,6 +76,8 @@ public class CSpaceAppEngine : MonoBehaviour
     private int m_nAuthOverDay = 1244;
 
     private bool m_bIsFaceTest = false;
+
+    private float m_fFadeTime = 0.5f;
 
     [System.Serializable]
     public class HostConfig
@@ -463,12 +465,26 @@ void Start()
         m_aniRobo.Play("Robot02");
     }
 
+    public void PlayLookatCenterTalk()
+    {
+        m_aniRobo.Play("Robot02_talk");
+    }
 
-public void PlayLookatRight()
+    public void PlayTalk()
+    {
+        m_aniRobo.Play("Robot00_talk");
+    }
+
+
+    public void PlayLookatRight()
     {
         m_aniRobo.Play("Robot03");
     }
 
+    public void PlayLookatRightTalk()
+    {
+        m_aniRobo.Play("Robot03_talk");
+    }
 
     public void PlayMoveCenter()
     {
@@ -506,5 +522,10 @@ public void PlayLookatRight()
     public bool IsFaceTest()
     {
         return m_bIsFaceTest;
+    }
+
+    public float GetFadeTime()
+    {
+        return m_fFadeTime;
     }
 }

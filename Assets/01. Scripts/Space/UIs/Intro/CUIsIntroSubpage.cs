@@ -144,15 +144,21 @@ public class CUIsIntroSubpage : MonoBehaviour
         if( m_nSubpage == 9 )
         {
             CSpaceAppEngine.Instance.PlayFinishRobo();
+            yield return new WaitForSeconds(1f);
+            CSpaceAppEngine.Instance.PlayLookatCenterTalk();
             for (int i = 0; i < m_listMsg[m_nSubpage].Length; i++)
             {
                 m_txtMsg.text = m_listMsg[m_nSubpage].Substring(0, i);
 
                 if (i == 40)
                 {
+                    //CSpaceAppEngine.Instance.PlayLookatRight();
+                    CSpaceAppEngine.Instance.PlayLookatCenter();
                     Debug.Log(m_txtMsg.text);
                     CUIsLobbyManager.Instance.PlayIntroOutline(0);
                     yield return new WaitForSeconds(5f);
+
+                    CSpaceAppEngine.Instance.PlayLookatRightTalk(); 
                 }
                 else if (i == 58)
                 {
@@ -160,28 +166,50 @@ public class CUIsIntroSubpage : MonoBehaviour
                     Debug.Log(m_txtMsg.text);
                     CUIsLobbyManager.Instance.PlayIntroOutline(2);
                     yield return new WaitForSeconds(5f);
+
+                    CSpaceAppEngine.Instance.PlayLookatRightTalk();
                 }
                 else if (i == 87)
                 {
                     Debug.Log(m_txtMsg.text);
+                    CSpaceAppEngine.Instance.PlayLookatRight();
+
                     CUIsLobbyManager.Instance.PlayIntroOutline(1);
                     yield return new WaitForSeconds(5f);
 
+                    //CSpaceAppEngine.Instance.PlayLookatRightTalk();
                     CUIsLobbyManager.Instance.HideIntroOutlineAll();
-                    CSpaceAppEngine.Instance.PlayLookatCenter();
+                    CSpaceAppEngine.Instance.PlayLookatCenterTalk();
                 }
 
                 yield return new WaitForSeconds(m_fTypingInterval);
             }
+
+            CSpaceAppEngine.Instance.PlayLookatCenter();
+            //CSpaceAppEngine.Instance.PlayLookatRight();
         }
-        else
+        else if(m_nSubpage >= 10)
         {
+            CSpaceAppEngine.Instance.PlayLookatCenterTalk();
             for (int i = 0; i < m_listMsg[m_nSubpage].Length; i++)
             {
                 m_txtMsg.text = m_listMsg[m_nSubpage].Substring(0, i);
 
                 yield return new WaitForSeconds(m_fTypingInterval);
             }
+            CSpaceAppEngine.Instance.PlayLookatCenter();
+        }
+        else
+        {
+            //Robot00_talk
+            CSpaceAppEngine.Instance.PlayTalk();
+            for (int i = 0; i < m_listMsg[m_nSubpage].Length; i++)
+            {
+                m_txtMsg.text = m_listMsg[m_nSubpage].Substring(0, i);
+
+                yield return new WaitForSeconds(m_fTypingInterval);
+            }
+            CSpaceAppEngine.Instance.PlayAniRobo();
         }
 
         m_txtMsg.text = m_listMsg[m_nSubpage];
