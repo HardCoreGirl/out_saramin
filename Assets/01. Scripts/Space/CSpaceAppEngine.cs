@@ -45,8 +45,8 @@ public class CSpaceAppEngine : MonoBehaviour
 
     public GameObject[] m_goMissionClear = new GameObject[4];
 
-    private string m_strServerType = "LOCAL";
-    //private string m_strServerType = "DEV2";
+    //private string m_strServerType = "LOCAL";
+    private string m_strServerType = "DEV2";
 
     //public GameObject[] m_listObjectOutline = new GameObject[3];
 
@@ -62,8 +62,8 @@ public class CSpaceAppEngine : MonoBehaviour
     private bool m_bIsFinishCenter = false;
     private bool m_bIsFinishRight = false;
 
-    private bool m_bIsIntro = true;
-    //private bool m_bIsIntro = false;
+    //private bool m_bIsIntro = true;
+    private bool m_bIsIntro = false;
 
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
@@ -72,8 +72,8 @@ public class CSpaceAppEngine : MonoBehaviour
 
     private int m_nBoardIndex = 0;
 
-    private string m_strVer = "230517.01";
-    private int m_nAuthOverDay = 1244;
+    private string m_strVer = "230522.01";
+    private int m_nAuthOverDay = 1248;
 
     private bool m_bIsFaceTest = false;
 
