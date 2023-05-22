@@ -45,8 +45,10 @@ public class CSpaceAppEngine : MonoBehaviour
 
     public GameObject[] m_goMissionClear = new GameObject[4];
 
-    //private string m_strServerType = "LOCAL";
-    private string m_strServerType = "DEV2";
+    public GameObject[] m_goMissionActive = new GameObject[3];
+
+    private string m_strServerType = "LOCAL";
+    //private string m_strServerType = "DEV2";
 
     //public GameObject[] m_listObjectOutline = new GameObject[3];
 
@@ -62,13 +64,17 @@ public class CSpaceAppEngine : MonoBehaviour
     private bool m_bIsFinishCenter = false;
     private bool m_bIsFinishRight = false;
 
-    //private bool m_bIsIntro = true;
-    private bool m_bIsIntro = false;
+    private bool m_bIsActiveLeft = false;
+    private bool m_bIsActiveCenter = false;
+    private bool m_bIsActiveRight = false;
+
+    private bool m_bIsIntro = true;
+    //private bool m_bIsIntro = false;
 
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "9dd56c85-13df-46c7-acde-f116e9cd659c";
+    private string m_strToken = "60c5ba57-33ec-41bc-8766-0e8560a14576";
 
     private int m_nBoardIndex = 0;
 
@@ -78,6 +84,8 @@ public class CSpaceAppEngine : MonoBehaviour
     private bool m_bIsFaceTest = false;
 
     private float m_fFadeTime = 0.5f;
+
+    private float m_fNoneInputTime = 0;
 
     [System.Serializable]
     public class HostConfig
@@ -116,6 +124,22 @@ void Start()
     // Update is called once per frame
     void Update()
     {
+        m_fNoneInputTime += Time.deltaTime;
+        if( m_fNoneInputTime >= (60 * 5) )
+        {
+            Debug.Log("Logout !!!!!!");
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            m_fNoneInputTime = 0;
+        }
+
+        if( Input.anyKey )
+        {
+            m_fNoneInputTime = 0;
+        }
+
         return;
 
         if (m_nBoardIndex != 2)
@@ -130,6 +154,7 @@ void Start()
 
         if(Input.GetMouseButtonDown(0))
         {
+            
             if (hit.collider != null)
             {
                 if ( !CUIsSpaceManager.Instance.IsScreenActive() )
@@ -385,6 +410,32 @@ void Start()
         return m_strServerType;
     }
 
+    public void HideMissionActive()
+    {
+        m_goMissionActive[0].SetActive(false);
+        m_goMissionActive[1].SetActive(false);
+        m_goMissionActive[2].SetActive(false);
+    }
+
+    public void UpdateMissionActive()
+    {
+        HideMissionActive();
+        if ( !IsActiveLeft() )
+        {
+            m_goMissionActive[0].SetActive(true);
+        }
+
+        if (!IsActiveCenter())
+        {
+            m_goMissionActive[1].SetActive(true);
+        }
+
+        if (!IsActiveRight())
+        {
+            m_goMissionActive[2].SetActive(true);
+        }
+    }
+
     public void UpdateMissionClear()
     {
         bool bIsAllClear = true;
@@ -443,6 +494,13 @@ void Start()
     public bool IsFinishCenter() { return m_bIsFinishCenter; }
     public void SetFinishRight(bool bIsFinish) { m_bIsFinishRight = bIsFinish; }
     public bool IsFinishRight() { return m_bIsFinishRight; }
+
+    public void SetActiveLeft(bool bIsActive) {  m_bIsActiveLeft = bIsActive; }
+    public bool IsActiveLeft() { return m_bIsActiveLeft; }
+    public void SetActiveCenter(bool bIsActive) { m_bIsActiveCenter = bIsActive; }
+    public bool IsActiveCenter() { return m_bIsActiveCenter; }
+    public void SetActiveRight(bool bIsActive) { m_bIsActiveRight = bIsActive; }
+    public bool IsActiveRight() { return m_bIsActiveRight; }
 
     public void SetIsIntro(bool bIsIntro) { m_bIsIntro = bIsIntro; }
     public bool IsIntro() { return m_bIsIntro; }

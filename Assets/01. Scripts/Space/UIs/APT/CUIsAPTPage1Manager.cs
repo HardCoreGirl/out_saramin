@@ -113,6 +113,7 @@ public class CUIsAPTPage1Manager : MonoBehaviour
             m_imgAnswerCntBG.color = new Color(0.3098039f, 0.3098039f, 0.3098039f);
         }
 
+        Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!! 03 MaxCnt : " + nMaxQuizCnt);
         for (int i = 0; i < nMaxQuizCnt; i++)
         {
             GameObject goList = Instantiate(Resources.Load("Prefabs/APTQuizList01") as GameObject);
@@ -146,8 +147,6 @@ public class CUIsAPTPage1Manager : MonoBehaviour
         }
 
         m_goAnswerContentScrollRect.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
-
-
     }
 
     public void OnClickPlayQuiz()
