@@ -529,9 +529,11 @@ public class CUIsHPTSManager : MonoBehaviour
         HideAllPopup();
 
         CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("HPTS").part_idx, 1);
-        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
-        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        //CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
         //CUIsSpaceManager.Instance.ScreenActive(false);
+
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
 
     public void OnClickPopupSendAnswerContinue()
@@ -545,8 +547,9 @@ public class CUIsHPTSManager : MonoBehaviour
         Server.Instance.RequestPUTActionExit();
         StopCoroutine("ProcessPlayExam");
         HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
-        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        //CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceManager.Instance.FadeOutComputer();
         CUIsSpaceManager.Instance.ScreenActive(false);
     }
 
@@ -563,8 +566,9 @@ public class CUIsHPTSManager : MonoBehaviour
         //CUIsSpaceManager.Instance.ScreenActive(false);
 
         CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("HPTS").part_idx, 1);
-        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
-        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        //CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
 
     public void ShowPopupToLobbyTutorial()
@@ -580,8 +584,9 @@ public class CUIsHPTSManager : MonoBehaviour
     public void OnClickPopupToLobbyTutorialToLobby()
     {
         HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
-        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        //CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
 
     public void OnClickPopupToLobbyTutorialClose()

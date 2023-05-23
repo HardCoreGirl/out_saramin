@@ -4,6 +4,8 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
+using DG.Tweening;
+
 public class CUIsSpaceManager : MonoBehaviour
 {
     #region SingleTon
@@ -35,6 +37,7 @@ public class CUIsSpaceManager : MonoBehaviour
     }
     #endregion
 
+    public GameObject m_goLobbyObject;
     public GameObject m_goUITitle;
 
     public GameObject m_goIntro;
@@ -86,6 +89,12 @@ public class CUIsSpaceManager : MonoBehaviour
         HideComputers();
     }
 
+    public void HideAllPageFadeOut()
+    {
+        HideAllPage();
+        FadeOutComputer();
+    }
+
     public void ShowLobby()
     {
         m_goLobby.SetActive(true);
@@ -121,6 +130,7 @@ public class CUIsSpaceManager : MonoBehaviour
     {
         //ScreenActive(false);
         m_goCenterPage.SetActive(false);
+        FadeOutComputer();
     }
 
     public void ShowRightPage()
@@ -298,7 +308,14 @@ public class CUIsSpaceManager : MonoBehaviour
             Server.Instance.RequestGETInfoExams();
         }
 
-        CUIsSpaceManager.Instance.ShowLeftPage();
+        //CUIsSpaceManager.Instance.ShowLeftPage();
+        FadeInLeftComputer();
+    }
+
+    public void FadeInLeftComputer()
+    {
+        m_goLobbyObject.transform.DOMove(new Vector3(32.9f, 16.6f, 0), 1f);
+        m_goLobbyObject.transform.DOScale(new Vector3(5f, 5f, 5f), 1f).OnComplete(ShowLeftPage);
     }
 
     public void OnClickCenterComputer()
@@ -322,11 +339,27 @@ public class CUIsSpaceManager : MonoBehaviour
 
         Server.Instance.RequestGETInfoExams();
 
+        FadeInCenterComputer();
+        //CUIsSpaceManager.Instance.ShowCenterPage();
+    }
+
+    public void FadeInCenterComputer()
+    {
+        m_goLobbyObject.transform.DOMove(new Vector3(-0.03f, 5.31f, 0), 1f);
+        m_goLobbyObject.transform.DOScale(new Vector3(2.58f, 2.58f, 2.58f), 1f).OnComplete(ShowCenterComputer);
+    }
+
+    public void ShowCenterComputer()
+    {
         CUIsSpaceManager.Instance.ShowCenterPage();
     }
 
     public void OnClickRightComputer()
     {
+        //FadeInRightComputer();
+        //return;
+
+
         Debug.Log("OnClickRightComputer!!");
         if (CSpaceAppEngine.Instance.IsFinishRight())
             return;
@@ -358,6 +391,31 @@ public class CUIsSpaceManager : MonoBehaviour
 
             }
         } else
+        {
+            //CUIsAPTManager.Instance.ShowPage();
+            FadeInRightComputer();
+        }
+    }
+
+    public void FadeInRightComputer()
+    {
+        m_goLobbyObject.transform.DOMove(new Vector3(-33.2f, 16.7f, 0), 1f);
+        m_goLobbyObject.transform.DOScale(new Vector3(5f, 5f, 5f), 1f).OnComplete(ShowRightComputer);
+    }
+
+    public void FadeOutComputer()
+    {
+        m_goLobbyObject.transform.DOMove(new Vector3(0, 0, 0), 1f);
+        m_goLobbyObject.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
+    }
+
+    public void ShowRightComputer()
+    {
+        if (m_bIsRightFirst)
+        {
+            CUIsSpaceManager.Instance.ShowRightPage();
+        }
+        else
         {
             CUIsAPTManager.Instance.ShowPage();
         }

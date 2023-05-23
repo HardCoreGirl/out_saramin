@@ -132,10 +132,10 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
 
         SetCSTTutorial(true);
 
-        gameObject.GetComponent<RectTransform>().localPosition = new Vector3(-443f, -224f, 0);
-        gameObject.GetComponent<RectTransform>().localScale = new Vector3(0.2f, 0.2f, 0);
-        gameObject.GetComponent<RectTransform>().DOLocalMove(new Vector3(0, 0, 0), CSpaceAppEngine.Instance.GetFadeTime());
-        gameObject.GetComponent<RectTransform>().DOScale(new Vector3(1, 1, 1), CSpaceAppEngine.Instance.GetFadeTime());
+        //gameObject.GetComponent<RectTransform>().localPosition = new Vector3(-443f, -224f, 0);
+        //gameObject.GetComponent<RectTransform>().localScale = new Vector3(0.2f, 0.2f, 0);
+        //gameObject.GetComponent<RectTransform>().DOLocalMove(new Vector3(0, 0, 0), CSpaceAppEngine.Instance.GetFadeTime());
+        //gameObject.GetComponent<RectTransform>().DOScale(new Vector3(1, 1, 1), CSpaceAppEngine.Instance.GetFadeTime());
 
         ShowPage(0);
     }
@@ -163,8 +163,8 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public void OnClickAgreeClose()
     {
         HideAllPopup();
-        PageFadeOut();
-        //HideAllPages();
+        //PageFadeOut();
+        HideAllPages();
     }
 
     public void OnClickClose()
@@ -728,9 +728,10 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         StopCoroutine("ProcessRQTQuiz");
         HideAllPopup();
-        PageFadeOut();
-        //HideAllPages();
-        CUIsSpaceManager.Instance.ScreenActive(false);
+        //PageFadeOut();
+        HideAllPages();
+        CUIsSpaceManager.Instance.FadeOutComputer();
+        //CUIsSpaceManager.Instance.ScreenActive(false);
     }
 
     public void OnClickSendAnswerContinue()
@@ -755,13 +756,14 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     {
         StopCoroutine("ProcessRQTQuiz");
         HideAllPopup();
-        PageFadeOut();
-        //HideAllPages();
+        //PageFadeOut();
+        HideAllPages();
         //CUIsSpaceManager.Instance.ScreenActive(false);
 
         CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("RQT").part_idx, 0);
         //CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
         CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
     // -------------------------------------------------------------
 
@@ -800,9 +802,10 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         Server.Instance.RequestPUTActionExit();
         StopCoroutine("ProcessRQTQuiz");
         HideAllPopup();
-        PageFadeOut();
-        //HideAllPages();
-        CUIsSpaceManager.Instance.ScreenActive(false);
+        //PageFadeOut();
+        HideAllPages();
+        CUIsSpaceManager.Instance.FadeOutComputer();
+        //CUIsSpaceManager.Instance.ScreenActive(false);
 
     }
 
@@ -967,8 +970,9 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
     public void OnClickPopupToLobbyTutorialToLobby()
     {
         HideAllPopup();
-        PageFadeOut();
-        //HideAllPages();
+        //PageFadeOut();
+        HideAllPages();
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
 
     public void OnClickPopupToLobbyTutorialExit()

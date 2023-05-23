@@ -446,8 +446,16 @@ public class Server : MonoBehaviour
                 }
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("APTD1"))
                 {
-                    if (CQuizData.Instance.GetAPTD1().body.sets.Length > 0)
+                    //if (CQuizData.Instance.GetAPTD1().body.sets.Length > 0)
+                    //{
+                    //    Debug.Log("APTD1 Init ....");
+                    //    return;
+                    //}
+
+                    if(CQuizData.Instance.GetAPTD1() != null)
+                    {
                         return;
+                    }
 
                     CQuizData.Instance.SetAPTD1(stPacketQuiz);
                     //RequestGETQuestions()
@@ -457,7 +465,8 @@ public class Server : MonoBehaviour
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("APTD2"))
                 {
                     CQuizData.Instance.SetAPTD2(stPacketQuiz);
-                    CUIsSpaceManager.Instance.ShowRightPage();
+                    //CUIsSpaceManager.Instance.ShowRightPage();
+                    CUIsSpaceManager.Instance.FadeInRightComputer();
                 }
                 else if (stPacketQuiz.body.qst_tp_cd.Equals("CST"))
                 {

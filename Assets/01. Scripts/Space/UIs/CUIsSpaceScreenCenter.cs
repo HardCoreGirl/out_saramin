@@ -50,6 +50,7 @@ public class CUIsSpaceScreenCenter : MonoBehaviour
     public void OnClickExit()
     {
         CUIsSpaceManager.Instance.HideAllPage();
+        //CUIsSpaceManager.Instance.HideAllPageFadeOut();
     }
 
     public void OnClickDetail()

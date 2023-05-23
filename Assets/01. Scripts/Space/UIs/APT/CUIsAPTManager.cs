@@ -177,6 +177,7 @@ public class CUIsAPTManager : MonoBehaviour
     {
         SetQuizActive(false);
         this.gameObject.transform.localPosition = new Vector3(999f, 999f, 999f);
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
 
     public void SetQuizActive(bool bIsActive)

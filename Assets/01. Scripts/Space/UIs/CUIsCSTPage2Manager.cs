@@ -614,9 +614,10 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         //StopCoroutine("ProcessPlayExam");
         CUIsSpaceScreenLeft.Instance.SetRightQuizActive(false);
         HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
-        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        //CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
         //CUIsSpaceManager.Instance.ScreenActive(false);
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
 
     public void OnClickPopupToLobbyContinue()
@@ -650,8 +651,9 @@ public class CUIsCSTPage2Manager : MonoBehaviour
     public void OnClickPopupToLobbyTutorialToLobby()
     {
         HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
-        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        //CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
 
     public void OnClickPopupToLobbyTutorialClose()

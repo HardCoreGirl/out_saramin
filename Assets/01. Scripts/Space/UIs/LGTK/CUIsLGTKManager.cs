@@ -525,6 +525,8 @@ public class CUIsLGTKManager : MonoBehaviour
 
         gameObject.GetComponent<RectTransform>().localPosition = new Vector3(9999f, 9999f, 0);
         CUIsSpaceManager.Instance.ScreenActive(false, true);
+
+        CUIsSpaceManager.Instance.FadeOutComputer();
         //CUIsSpaceManager.Instance.HideCenterPage();
     }
 
@@ -552,6 +554,8 @@ public class CUIsLGTKManager : MonoBehaviour
         m_bIsActive = false;
         HidePopupToLobbyTutorial();
         gameObject.GetComponent<RectTransform>().localPosition = new Vector3(9999f, 9999f, 0);
+
+        CUIsSpaceManager.Instance.FadeOutComputer();
         //CUIsSpaceManager.Instance.ScreenActive(false, true);
         //CUIsSpaceManager.Instance.HideCenterPage();
     }

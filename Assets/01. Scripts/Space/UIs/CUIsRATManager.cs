@@ -592,8 +592,9 @@ public class CUIsRATManager : MonoBehaviour
         //StopCoroutine("ProcessPlayExam");
         //m_bIsPlayExam = false;
         HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
-        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        //CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceManager.Instance.FadeOutComputer();
         CUIsSpaceManager.Instance.ScreenActive(false);
     }
 
@@ -640,8 +641,9 @@ public class CUIsRATManager : MonoBehaviour
     public void OnClickPopupToLobbyTutorialToLobby()
     {
         HideAllPopup();
-        CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
-        //CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        //CUIsSpaceScreenLeft.Instance.PageFadeOutRightPage();
+        CUIsSpaceScreenLeft.Instance.HideRightAllPage();
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
 
     public void OnClickPopupToLobbyTutorialClose()

@@ -41,14 +41,16 @@ public class CSpaceAppEngine : MonoBehaviour
     public TMPro.TMP_Text m_txtAuthInfo;
     public Text m_txtDebug;
 
+    public GameObject m_goLogout;
+
     public GameObject[] m_listInGameBoard = new GameObject[3];
 
     public GameObject[] m_goMissionClear = new GameObject[4];
 
     public GameObject[] m_goMissionActive = new GameObject[3];
 
-    private string m_strServerType = "LOCAL";
-    //private string m_strServerType = "DEV2";
+    //private string m_strServerType = "LOCAL";
+    private string m_strServerType = "DEV2";
 
     //public GameObject[] m_listObjectOutline = new GameObject[3];
 
@@ -74,18 +76,20 @@ public class CSpaceAppEngine : MonoBehaviour
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "60c5ba57-33ec-41bc-8766-0e8560a14576";
+    private string m_strToken = "2cd0036f-feee-4f42-b614-b6e7f5f43665";
 
     private int m_nBoardIndex = 0;
 
-    private string m_strVer = "230522.01";
-    private int m_nAuthOverDay = 1248;
+    private string m_strVer = "230523.01";
+    private int m_nAuthOverDay = 1250;
 
     private bool m_bIsFaceTest = false;
 
     private float m_fFadeTime = 0.5f;
 
     private float m_fNoneInputTime = 0;
+
+    private bool m_bIsLogout = false;
 
     [System.Serializable]
     public class HostConfig
@@ -124,9 +128,14 @@ void Start()
     // Update is called once per frame
     void Update()
     {
+        if (m_bIsLogout)
+            return;
+
         m_fNoneInputTime += Time.deltaTime;
         if( m_fNoneInputTime >= (60 * 5) )
         {
+            m_bIsLogout = true;
+            m_goLogout.SetActive(true);
             Debug.Log("Logout !!!!!!");
         }
 
@@ -585,5 +594,11 @@ void Start()
     public float GetFadeTime()
     {
         return m_fFadeTime;
+    }
+
+    public void OnClickLogout()
+    {
+        string url = "https://applier-dev2.indepth.thepllab.com/";
+        Application.ExternalEval("window.location.href='" + url + "'");
     }
 }

@@ -171,7 +171,7 @@ public class CUIsIntroSubpage : MonoBehaviour
                 }
                 else if (i == 87)
                 {
-                    Debug.Log(m_txtMsg.text);
+                    //Debug.Log(m_txtMsg.text);
                     CSpaceAppEngine.Instance.PlayLookatRight();
 
                     CUIsLobbyManager.Instance.PlayIntroOutline(1);
