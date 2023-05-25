@@ -301,6 +301,7 @@ public class CUIsAPTManager : MonoBehaviour
     {
         CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("APTD2").part_idx, 3);
         CUIsSpaceManager.Instance.HideRightPage();
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
 
     public void ShowPopupSendAnswerAPTD2()
@@ -338,6 +339,7 @@ public class CUIsAPTManager : MonoBehaviour
         
         CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("APTD2").part_idx, 3);
         CUIsSpaceManager.Instance.HideRightPage();
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
 
 

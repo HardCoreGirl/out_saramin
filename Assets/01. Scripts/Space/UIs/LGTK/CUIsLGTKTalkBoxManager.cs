@@ -263,6 +263,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
     IEnumerator ProcessQuiz()
     {
+        //float fWaitTime = 0.2f;
         float fWaitTime = 2.0f;
         bool bIsPass = false;
 
@@ -324,7 +325,7 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         }
 
 
-        Debug.Log("ProcessQuiz 01");
+        //Debug.Log("ProcessQuiz 01");
         GameObject goChatQuiz = Instantiate(Resources.Load("Prefabs/LGTKTalkBoxChat") as GameObject);
         goChatQuiz.transform.parent = m_goContentChat.transform;
         goChatQuiz.GetComponent<CObjecctLGTKTalkBoxChat>().UpdateChat(m_strQuizMsg, true);
@@ -632,7 +633,6 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
         } else
         {
             Quiz quizLGTK = CQuizData.Instance.GetQuiz("LGTK");
-            Debug.Log("!!!!!!!!!!!!!!!!!!!!!" + quizLGTK.sets[m_nStage]);
             if( quizLGTK.sets[m_nStage].questions[0].qst_ans_cd.Equals("OBJ") ) // °´°ü½Ä
             {
                 if( GetMultiAnswer() > 1 )  // ¸ÖÆ¼
@@ -748,7 +748,14 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                         // TODO 230509
                         strSBCTAnswer = RemoveSPString(strSBCTAnswer);
                         CUIsLGTKManager.Instance.AddListFairwayAnswers(strSBCTAnswer);
+
+                        if (CUIsLGTKManager.Instance.IsFairwayActive())
+                            CUIsLGTKManager.Instance.ShowFairwayActive();
+
                         //CUIsLGTKManager.Instance.AddListFairwayAnswers(GetSBCTAnswer());
+
+                        //CUIsLGTKManager.Instance.UpdateDatabaseFairway();
+
                     }
                 }
 

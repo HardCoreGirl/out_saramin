@@ -105,6 +105,7 @@ public class CUIsAnswer : MonoBehaviour
                 //Debug.Log("Finish Exam");
                 CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("RQT").part_idx);
                 CUIsSpaceManager.Instance.HideLeftPage();
+                CUIsSpaceManager.Instance.FadeOutComputer();
                 return;
              }
         }

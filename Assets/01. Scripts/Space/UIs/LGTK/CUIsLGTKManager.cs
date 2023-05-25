@@ -293,6 +293,27 @@ public class CUIsLGTKManager : MonoBehaviour
 
     }
 
+    public bool IsFairwayActive()
+    {
+        for (int i = 0; i < m_listDatabase.Count; i++)
+        {
+            //Debug.Log("ShowDatabaseChildren!!");
+
+            if (m_listDatabase[i].GetComponent<CObjectLGTKDatabase>().IsFairwayActive())
+                return true;
+        }
+
+        return false;
+    }
+
+    public void ShowFairwayActive()
+    {
+        for (int i = 0; i < m_listDatabase.Count; i++)
+        {
+            m_listDatabase[i].GetComponent<CObjectLGTKDatabase>().ShowFairwayActive();
+        }
+    }
+
     public void UpdateDatabaseDynamic()
     {
         for (int i = 0; i < m_listDatabase.Count; i++)
@@ -301,6 +322,14 @@ public class CUIsLGTKManager : MonoBehaviour
         }
 
         UpdateDatabase();
+    }
+
+    public void UpdateDatabaseFairway()
+    {
+        for (int i = 0; i < m_listDatabase.Count; i++)
+        {
+            m_listDatabase[i].GetComponent<CObjectLGTKDatabase>().UpdateFairway();
+        }
     }
 
     public void UpdateDatabaseDetail(string strTitle, string strImageURL)
@@ -465,6 +494,7 @@ public class CUIsLGTKManager : MonoBehaviour
         Debug.Log("OnClickPopupFinishOK");
         CUIsSpaceManager.Instance.ShowCommonPopupsFinish(CQuizData.Instance.GetQuiz("LGTK").part_idx, 2);
         CUIsSpaceManager.Instance.HideCenterPage();
+        //CUIsSpaceManager.Instance.FadeOutComputer();
 
 
     }

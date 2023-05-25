@@ -62,6 +62,8 @@ public class CUIsSpaceManager : MonoBehaviour
     private bool m_bIsCenterFirst = true;
     private bool m_bIsRightFirst = true;
 
+    private bool m_bIsPlayFadein = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -107,6 +109,7 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public void ShowLeftPage()
     {
+        m_bIsPlayFadein = false;
         m_goLeftPage.SetActive(true);
         m_goLeftPage.GetComponent<CUIsSpaceScreenLeft>().InitUIs();
     }
@@ -275,8 +278,16 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public void OnClickLeftComputer()
     {
+        if (!CSpaceAppEngine.Instance.IsActiveLeft())
+            return;
+
         if (CSpaceAppEngine.Instance.IsFinishLeft01() && CSpaceAppEngine.Instance.IsFinishLeft02())
             return;
+
+        if (m_bIsPlayFadein)
+            return;
+
+        m_bIsPlayFadein = true;
 
         CUIsSpaceManager.Instance.ScreenActive(true);
 
@@ -320,10 +331,45 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public void OnClickCenterComputer()
     {
+        if (!CSpaceAppEngine.Instance.IsActiveCenter())
+            return;
+
         if (CSpaceAppEngine.Instance.IsFinishCenter())
             return;
 
-        CUIsSpaceManager.Instance.ScreenActive(true);
+        if (m_bIsPlayFadein)
+            return;
+
+        m_bIsPlayFadein = true;
+        //CUIsSpaceManager.Instance.ScreenActive(true);
+
+        //if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
+        //{
+        //    //Server.Instance.RequestGETQuestions(0);
+        //    CUIsSpaceManager.Instance.ShowCenterPage();
+        //    return;
+        //}
+        //else
+        //{
+        //    if (!CQuizData.Instance.GetExamInfoDetail("LGTK").status.Equals("WAITING"))
+        //        Server.Instance.RequestGETQuestions(CQuizData.Instance.GetExamInfoDetail("LGTK").idx);
+        //}
+
+        //Server.Instance.RequestGETInfoExams();
+
+        FadeInCenterComputer();
+        //CUIsSpaceManager.Instance.ShowCenterPage();
+    }
+
+    public void FadeInCenterComputer()
+    {
+        m_goLobbyObject.transform.DOMove(new Vector3(-0.03f, 5.31f, 0), 1f);
+        m_goLobbyObject.transform.DOScale(new Vector3(2.58f, 2.58f, 2.58f), 1f).OnComplete(ShowCenterComputer);
+    }
+
+    public void ShowCenterComputer()
+    {
+        m_bIsPlayFadein = false;
 
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
@@ -339,18 +385,6 @@ public class CUIsSpaceManager : MonoBehaviour
 
         Server.Instance.RequestGETInfoExams();
 
-        FadeInCenterComputer();
-        //CUIsSpaceManager.Instance.ShowCenterPage();
-    }
-
-    public void FadeInCenterComputer()
-    {
-        m_goLobbyObject.transform.DOMove(new Vector3(-0.03f, 5.31f, 0), 1f);
-        m_goLobbyObject.transform.DOScale(new Vector3(2.58f, 2.58f, 2.58f), 1f).OnComplete(ShowCenterComputer);
-    }
-
-    public void ShowCenterComputer()
-    {
         CUIsSpaceManager.Instance.ShowCenterPage();
     }
 
@@ -359,12 +393,17 @@ public class CUIsSpaceManager : MonoBehaviour
         //FadeInRightComputer();
         //return;
 
+        if (!CSpaceAppEngine.Instance.IsActiveRight())
+            return;
 
-        Debug.Log("OnClickRightComputer!!");
         if (CSpaceAppEngine.Instance.IsFinishRight())
             return;
 
-        CUIsSpaceManager.Instance.ScreenActive(true);
+        if (m_bIsPlayFadein)
+            return;
+        m_bIsPlayFadein = true;
+
+        //CUIsSpaceManager.Instance.ScreenActive(true);
 
         if (m_bIsRightFirst)
         {
@@ -411,6 +450,8 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public void ShowRightComputer()
     {
+        m_bIsPlayFadein = false;
+
         if (m_bIsRightFirst)
         {
             CUIsSpaceManager.Instance.ShowRightPage();

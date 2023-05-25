@@ -165,6 +165,7 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         HideAllPopup();
         //PageFadeOut();
         HideAllPages();
+        CUIsSpaceManager.Instance.FadeOutComputer();
     }
 
     public void OnClickClose()

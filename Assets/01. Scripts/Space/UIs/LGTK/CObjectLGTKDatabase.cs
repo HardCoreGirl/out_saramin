@@ -28,6 +28,8 @@ public class CObjectLGTKDatabase : MonoBehaviour
 
     private bool m_bIsPlanet = false;
     private bool m_bIsFairway = false;
+
+    private int m_nFairwayDatabaseIndex = 0;
     //private STGuidesBodyContents m_stGuideContent;
     //private STGuidesBodyContents m_stGuideContentChirend;
     // Start is called before the first frame update
@@ -101,6 +103,7 @@ public class CObjectLGTKDatabase : MonoBehaviour
                 {
                     //Debug.Log("InitLGTkDatabase 01 Fairway : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title);
                     m_bIsFairway = true;
+                    m_nFairwayDatabaseIndex = m_nDatabaseIndex;
                 }
 
                 string strTitle = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
@@ -155,6 +158,7 @@ public class CObjectLGTKDatabase : MonoBehaviour
                     Debug.Log("InitLGTkDatabase 02 Fairway : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title);
 
                     m_bIsFairway = true;
+                    m_nFairwayDatabaseIndex = m_nDatabaseIndex;
                 }
 
 
@@ -187,6 +191,14 @@ public class CObjectLGTKDatabase : MonoBehaviour
         }
     }
 
+    public void UpdateFairway()
+    {
+        if( m_bIsFairway)
+            CUIsLGTKManager.Instance.UpdateDatabaseChildren(m_nFairwayDatabaseIndex);
+    }
+
+    
+
     public string GetRegData()
     {
         return m_txtRegData.text;
@@ -201,6 +213,38 @@ public class CObjectLGTKDatabase : MonoBehaviour
     {
         if (m_nParentIndex == nParentIndex)
             gameObject.SetActive(true);
+    }
+
+    public bool IsFairwayActive()
+    {
+        if (m_nType == 1)
+        {
+            if (m_bIsFairway)
+            {
+                return gameObject.activeSelf;
+            }
+        }
+
+        return false;
+    }
+
+    public void ShowFairwayActive()
+    {
+        if (m_nType == 1)
+        {
+            if (m_bIsFairway)
+            {
+                for (int i = 0; i < CUIsLGTKManager.Instance.GetListFairwayAnswers().Count; i++)
+                {
+                    if (CUIsLGTKManager.Instance.GetListFairwayAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                    {
+                        gameObject.SetActive(true);
+                        break;
+                    }
+                }
+            }
+
+        }
     }
 
     public void UpdateDatabase(int nParentIndex)
@@ -227,6 +271,7 @@ public class CObjectLGTKDatabase : MonoBehaviour
                 {
                     for (int i = 0; i < CUIsLGTKManager.Instance.GetListFairwayAnswers().Count; i++)
                     {
+                        //Debug.Log("LGTKDatabase FairwayAnswer :  " + CUIsLGTKManager.Instance.GetListFairwayAnswers()[i]);
                         if (CUIsLGTKManager.Instance.GetListFairwayAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
                         {
                             gameObject.SetActive(true);

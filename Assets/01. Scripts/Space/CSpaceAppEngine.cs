@@ -76,12 +76,12 @@ public class CSpaceAppEngine : MonoBehaviour
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "2cd0036f-feee-4f42-b614-b6e7f5f43665";
+    private string m_strToken = "e474efd6-bc50-409b-bff1-dc7076776471";
 
     private int m_nBoardIndex = 0;
 
-    private string m_strVer = "230523.01";
-    private int m_nAuthOverDay = 1250;
+    private string m_strVer = "230525.01";
+    private int m_nAuthOverDay = 1252;
 
     private bool m_bIsFaceTest = false;
 
@@ -135,8 +135,8 @@ void Start()
         if( m_fNoneInputTime >= (60 * 5) )
         {
             m_bIsLogout = true;
+            Time.timeScale = 0;
             m_goLogout.SetActive(true);
-            Debug.Log("Logout !!!!!!");
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -429,20 +429,20 @@ void Start()
     public void UpdateMissionActive()
     {
         HideMissionActive();
-        if ( !IsActiveLeft() )
-        {
-            m_goMissionActive[0].SetActive(true);
-        }
+        //if ( !IsActiveLeft() )
+        //{
+        //    m_goMissionActive[0].SetActive(true);
+        //}
 
-        if (!IsActiveCenter())
-        {
-            m_goMissionActive[1].SetActive(true);
-        }
+        //if (!IsActiveCenter())
+        //{
+        //    m_goMissionActive[1].SetActive(true);
+        //}
 
-        if (!IsActiveRight())
-        {
-            m_goMissionActive[2].SetActive(true);
-        }
+        //if (!IsActiveRight())
+        //{
+        //    m_goMissionActive[2].SetActive(true);
+        //}
     }
 
     public void UpdateMissionClear()
