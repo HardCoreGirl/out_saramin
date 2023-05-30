@@ -80,8 +80,8 @@ public class CSpaceAppEngine : MonoBehaviour
 
     private int m_nBoardIndex = 0;
 
-    private string m_strVer = "230525.01";
-    private int m_nAuthOverDay = 1252;
+    private string m_strVer = "230529.01";
+    private int m_nAuthOverDay = 1255;
 
     private bool m_bIsFaceTest = false;
 
@@ -598,7 +598,8 @@ void Start()
 
     public void OnClickLogout()
     {
-        string url = "https://applier-dev2.indepth.thepllab.com/";
+        //string url = "https://applier-dev2.indepth.thepllab.com/";
+        string url = Server.Instance.GetPLLabCurURL() + "/";
         Application.ExternalEval("window.location.href='" + url + "'");
     }
 }
