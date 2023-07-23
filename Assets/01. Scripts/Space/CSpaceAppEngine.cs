@@ -76,12 +76,12 @@ public class CSpaceAppEngine : MonoBehaviour
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "e474efd6-bc50-409b-bff1-dc7076776471";
+    private string m_strToken = "eeeace4e-535b-4cde-978e-1ad2e4679b5f";
 
     private int m_nBoardIndex = 0;
 
-    private string m_strVer = "230529.01";
-    private int m_nAuthOverDay = 1255;
+    private string m_strVer = "230723.01";
+    private int m_nAuthOverDay = 1323;
 
     private bool m_bIsFaceTest = false;
 
@@ -453,35 +453,51 @@ void Start()
             m_goMissionClear[0].SetActive(true);
         else if (!m_bIsFinishLeft01)
         {
-            bIsAllClear = false;
-            nTodoCnt++;
-            m_goMissionClear[0].SetActive(false);
+            if (IsActiveLeft())
+            {
+                bIsAllClear = false;
+                nTodoCnt++;
+                m_goMissionClear[0].SetActive(false);
+            }
         }
 
         if (m_bIsFinishLeft02)
             m_goMissionClear[1].SetActive(true);
         else if (!m_bIsFinishLeft02)
         {
-            bIsAllClear = false;
-            nTodoCnt++;
-            m_goMissionClear[1].SetActive(false);
+            if (IsActiveLeft())
+            {
+                bIsAllClear = false;
+                nTodoCnt++;
+                m_goMissionClear[1].SetActive(false);
+            }
         }
 
         if (m_bIsFinishCenter)
+        {
             m_goMissionClear[2].SetActive(true);
+        }
         else if (!m_bIsFinishCenter)
         {
-            bIsAllClear = false;
-            nTodoCnt++;
-            m_goMissionClear[2].SetActive(false);
+            if (IsActiveCenter())
+            {
+                bIsAllClear = false;
+                nTodoCnt++;
+                m_goMissionClear[2].SetActive(false);
+            }
         }
+
         if (m_bIsFinishRight) m_goMissionClear[3].SetActive(true);
         else if (!m_bIsFinishRight)
         {
-            bIsAllClear = false;
-            nTodoCnt++;
-            m_goMissionClear[3].SetActive(false);
+            if (IsActiveRight())
+            {
+                bIsAllClear = false;
+                nTodoCnt++;
+                m_goMissionClear[3].SetActive(false);
+            }
         }
+
 
         //CUIsTodoManager.Instance.UpdateTodoCnt(nTodoCnt);
         //CUIsTodoManager.Instance.UpdateSlot(0, m_bIsFinishLeft01);

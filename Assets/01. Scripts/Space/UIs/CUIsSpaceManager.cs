@@ -161,6 +161,7 @@ public class CUIsSpaceManager : MonoBehaviour
 
     public void ShowOutro()
     {
+        Debug.Log("ShowOutro !!!!!!!!!!!!!!!");
         m_goOutro.SetActive(true);
         m_goOutro.GetComponent<CUIsOutroManager>().InitUIs();
     }

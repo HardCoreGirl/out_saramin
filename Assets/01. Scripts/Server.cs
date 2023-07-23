@@ -324,7 +324,7 @@ public class Server : MonoBehaviour
         {
             TextAsset textAsset = Resources.Load<TextAsset>("Scripts/dummy_guides");
             Debug.Log("LOCAL Guides : " + textAsset.text);
-            STGuides stGuides= JsonUtility.FromJson<STGuides>(textAsset.text);
+            STGuides stGuides = JsonUtility.FromJson<STGuides>(textAsset.text);
             CQuizData.Instance.SetGuides(stGuides);
             return;
         }
@@ -735,22 +735,22 @@ public class Server : MonoBehaviour
 
                 for (int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
                 {
-                    Debug.Log("Active!!!!!!!!!!!!!!! 00 : " + CQuizData.Instance.GetExamInfo().body[i].qstTpCd);
+                    //Debug.Log("Active!!!!!!!!!!!!!!! 00 : " + CQuizData.Instance.GetExamInfo().body[i].qstTpCd);
                     if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("RQT"))
                     {
-                        Debug.Log("Active!!!!!!!!!!!!!!! 01");
+                        //Debug.Log("Active!!!!!!!!!!!!!!! 01");
                         CSpaceAppEngine.Instance.SetActiveLeft(true);
                     }
 
                     if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("LGTK"))
                     {
-                        Debug.Log("Active!!!!!!!!!!!!!!! 02");
+                        //Debug.Log("Active!!!!!!!!!!!!!!! 02");
                         CSpaceAppEngine.Instance.SetActiveCenter(true);
                     }
 
                     if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("APTD1"))
                     {
-                        Debug.Log("Active!!!!!!!!!!!!!!! 03");
+                        //Debug.Log("Active!!!!!!!!!!!!!!! 03");
                         CSpaceAppEngine.Instance.SetActiveRight(true);
                     }
                 }

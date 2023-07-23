@@ -433,6 +433,8 @@ public class CUIsRATManager : MonoBehaviour
         // 상태값 API 호출 -----------------------------
         //Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswer.text);
         // TODO 230428
+        Debug.Log("RAT INDEX !!!!!!!!!!!!!!!! : " + m_nQuizIndex);
+
         Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text, m_fScore);
 
         if ( m_nQuizIndex < 1 )

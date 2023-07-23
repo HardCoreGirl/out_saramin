@@ -23,8 +23,8 @@ public class CObjectLGTKDatabase : MonoBehaviour
     private string m_strTitle;
     private string m_strImageURL;
 
-    private bool m_bIsDynamic = false;
-    private int m_nDynamicState = 0;
+    //private bool m_bIsDynamic = false;
+    //private int m_nDynamicState = 0;
 
     private bool m_bIsPlanet = false;
     private bool m_bIsFairway = false;
@@ -67,7 +67,7 @@ public class CObjectLGTKDatabase : MonoBehaviour
             m_txtSecurityGrade.text = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].security_grade;
         }
 
-        if(m_nDepth == 1)
+        if (m_nDepth == 1)
         {
             m_listDepthContent[0].SetActive(true);
             m_listDepthContent[1].SetActive(false);
@@ -78,7 +78,8 @@ public class CObjectLGTKDatabase : MonoBehaviour
             if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].image_path.Equals(""))
             {
                 m_nType = 0;
-            } else
+            }
+            else
             {
                 m_nType = 1;
                 m_strImageURL = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].image_path;
@@ -86,53 +87,50 @@ public class CObjectLGTKDatabase : MonoBehaviour
 
             m_listMainType[m_nType].SetActive(true);
 
-            if(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
+            //    //if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 3).Equals("$$$"))
+            if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
             {
-                //m_txtMainTitle.text = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
                 m_txtMainTitle.text = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(1, CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Length - 1);
-
-                m_strTitle = m_txtMainTitle.text;
-
-                if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("Çà¼º"))
-                {
-                    //Debug.Log("InitLGTkDatabase 01 Planet : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title);
-                    m_bIsPlanet = true;
-                }
-
-                if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("Ç×·Î"))
-                {
-                    //Debug.Log("InitLGTkDatabase 01 Fairway : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title);
-                    m_bIsFairway = true;
-                    m_nFairwayDatabaseIndex = m_nDatabaseIndex;
-                }
-
-                string strTitle = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
-                if (strTitle.Substring(strTitle.Length - 2, 2).Equals("ÀÚ·á"))
-                    m_nDynamicState = 0;
-                else
-                    m_nDynamicState = 1;
-
-                //bool bIsExist = false;
-                //for(int i = 0; i < CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children.Length; i++)
-                //{
-                //    for(int j = 0; j < CUIsLGTKManager.Instance.GetListAnswers().Count; j++)
-                //    {
-                //        if(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListAnswers()[j]))
-                //        {
-                //            bIsExist = true;
-                //            break;
-                //        }
-                //    }
-                //}
-
+                m_bIsPlanet = true;
                 gameObject.SetActive(false);
-            }    
+                //} else if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 3).Equals("###"))
+
+            }
+            else if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("#"))
+            {
+                m_txtMainTitle.text = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(1, CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Length - 1);
+                m_bIsFairway = true;
+                m_nFairwayDatabaseIndex = m_nDatabaseIndex;
+                gameObject.SetActive(false);
+            }
+            //if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
+            //{
+            //    m_txtMainTitle.text = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(1, CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Length - 1);
+
+            //    m_strTitle = m_txtMainTitle.text;
+
+            //    Debug.Log("!!!!!!!!!!!!!! : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Length);
+
+            //    if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("Çà¼º"))
+            //    {
+            //        m_bIsPlanet = true;
+            //    }
+
+            //    if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("Ç×·Î"))
+            //    {
+            //        m_bIsFairway = true;
+            //        m_nFairwayDatabaseIndex = m_nDatabaseIndex;
+            //    }
+
+            //    gameObject.SetActive(false);
+            //}
             else
             {
                 m_txtMainTitle.text = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
                 m_strTitle = m_txtMainTitle.text;
             }
-        } else
+        }
+        else
         {
             m_listDepthContent[0].SetActive(false);
             m_listDepthContent[1].SetActive(true);
@@ -143,36 +141,41 @@ public class CObjectLGTKDatabase : MonoBehaviour
             m_strImageURL = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].image_path;
 
             if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
+                //if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 9).Equals("$¼±ÅÃ Ç×·Î ¿¹Ãø"))
             {
-                m_bIsDynamic = true;
-
-                if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("Çà¼º"))
-                {
-                    //Debug.Log("InitLGTkDatabase 02 Planet : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title);
-                    m_bIsPlanet = true;
-                }
-
-                if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("Ç×·Î"))
-                {
-                    //Debug.Log("InitLGTkDatabase 02 Fairway : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title);
-                    Debug.Log("InitLGTkDatabase 02 Fairway : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title);
-
-                    m_bIsFairway = true;
-                    m_nFairwayDatabaseIndex = m_nDatabaseIndex;
-                }
-
-
-
-                string strTitle = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title;
-                if (strTitle.Substring(strTitle.Length - 2, 2).Equals("ÀÚ·á"))
-                    m_nDynamicState = 0;
-                else
-                    m_nDynamicState = 1;
-                //Debug.Log("´ÙÀÌ³ª¹Í : " + strTitle.Length);
-                //Debug.Log("´ÙÀÌ³ª¹Í ÅØ½ºÆ®!!! : " + strTitle.Substring(strTitle.Length - 2, 2));
+                m_bIsPlanet = true;
+            }
+            else if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("#"))
+            //else if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 9).Equals("$¼±ÅÃ Çà¼º ÀÚ·á"))
+            {
+                m_bIsFairway = true;
+                m_nFairwayDatabaseIndex = m_nDatabaseIndex;
             }
 
             gameObject.SetActive(false);
+
+            //if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
+            //{
+            //    // TODO DEL
+            //    //m_bIsDynamic = true;
+
+            //    if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("Çà¼º"))
+            //    {
+            //        //Debug.Log("InitLGTkDatabase 02 Planet : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title);
+            //        m_bIsPlanet = true;
+            //    }
+
+            //    if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Contains("Ç×·Î"))
+            //    {
+            //        //Debug.Log("InitLGTkDatabase 02 Fairway : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title);
+            //        Debug.Log("InitLGTkDatabase 02 Fairway : " + CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title);
+
+            //        m_bIsFairway = true;
+            //        m_nFairwayDatabaseIndex = m_nDatabaseIndex;
+            //    }
+            //}
+
+            //gameObject.SetActive(false);
         }
         //    m_stGuideContent = CQuizData.Instance.GetGuides().body.contents[m_nMainIndex];
         //else
@@ -236,7 +239,10 @@ public class CObjectLGTKDatabase : MonoBehaviour
             {
                 for (int i = 0; i < CUIsLGTKManager.Instance.GetListFairwayAnswers().Count; i++)
                 {
-                    if (CUIsLGTKManager.Instance.GetListFairwayAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                    // Fix Fairway
+                    //if (CUIsLGTKManager.Instance.GetListFairwayAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                    string strFairwayAnswer = RemoveSPString(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title);
+                    if (CUIsLGTKManager.Instance.GetListFairwayAnswers()[i].Equals(strFairwayAnswer) )
                     {
                         gameObject.SetActive(true);
                         break;
@@ -249,6 +255,7 @@ public class CObjectLGTKDatabase : MonoBehaviour
 
     public void UpdateDatabase(int nParentIndex)
     {
+        //Debug.Log("UpdateDatebase 0000 !!!!!");
         if (m_nParentIndex == nParentIndex)
         {
             if (gameObject.activeSelf)
@@ -265,6 +272,8 @@ public class CObjectLGTKDatabase : MonoBehaviour
                             break;
                         }
                     }
+
+                    return;
                 }
 
                 if( m_bIsFairway )
@@ -272,53 +281,67 @@ public class CObjectLGTKDatabase : MonoBehaviour
                     for (int i = 0; i < CUIsLGTKManager.Instance.GetListFairwayAnswers().Count; i++)
                     {
                         //Debug.Log("LGTKDatabase FairwayAnswer :  " + CUIsLGTKManager.Instance.GetListFairwayAnswers()[i]);
-                        if (CUIsLGTKManager.Instance.GetListFairwayAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                        //if (CUIsLGTKManager.Instance.GetListFairwayAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                        string strFairwayAnswer = RemoveSPString(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title);
+                        if (CUIsLGTKManager.Instance.GetListFairwayAnswers()[i].Equals(strFairwayAnswer))
                         {
                             gameObject.SetActive(true);
                             break;
                         }
                     }
-                }
 
-
-                if( m_bIsDynamic )
-                {
-                    if( m_nDynamicState == 0 )
-                    {
-                        for (int i = 0; i < CUIsLGTKManager.Instance.GetListAnswers().Count; i++)
-                        {
-                            if (CUIsLGTKManager.Instance.GetListAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
-                            {
-                                gameObject.SetActive(true);
-                                break;
-                            }
-                        }
-                        return;
-                    } else
-                    {
-                        for (int i = 0; i < CUIsLGTKManager.Instance.GetListSBCTAnswer().Count; i++)
-                        {
-                            if (CUIsLGTKManager.Instance.GetListSBCTAnswer()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
-                            {
-                                gameObject.SetActive(true);
-                                break;
-                            }
-                        }
-                        return;
-                    }
+                    return;
                 }
 
                 gameObject.SetActive(true);
+
+                //if (m_bIsDynamic)
+                // TODO DEL
+                //{
+                //    if (m_nDynamicState == 0)
+                //    {
+                //        Debug.Log("Dynamic 0004");
+                //        for (int i = 0; i < CUIsLGTKManager.Instance.GetListAnswers().Count; i++)
+                //        {
+                //            Debug.Log("Dynamic 0005");
+                //            if (CUIsLGTKManager.Instance.GetListAnswers()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                //            {
+                //                Debug.Log("Dynamic 0006");
+                //                gameObject.SetActive(true);
+                //                break;
+                //            }
+                //        }
+                //        return;
+                //    }
+                //    else
+                //    {
+                //        Debug.Log("Dynamic 0007");
+                //        for (int i = 0; i < CUIsLGTKManager.Instance.GetListSBCTAnswer().Count; i++)
+                //        {
+                //            Debug.Log("Dynamic 0008");
+                //            if (CUIsLGTKManager.Instance.GetListSBCTAnswer()[i].Equals(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[m_nSubIndex].title))
+                //            {
+                //                Debug.Log("Dynamic 0009");
+                //                gameObject.SetActive(true);
+                //                break;
+                //            }
+                //        }
+                //        return;
+                //    }
+                //}
+
+                //gameObject.SetActive(true);
             }
         }
     }
 
     public void UpdateDatabaseDynamic()
     {
+        //Debug.Log("UpdateDatebaseDynamic 000 !!!!!");
         if (m_nDepth != 1)
             return;
         
-        if (!CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$"))
+        if (!(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("$") || CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].title.Substring(0, 1).Equals("#")))
             return;
 
         //Debug.Log("UpdateDatebaseDynamic !!!!!");
@@ -346,7 +369,9 @@ public class CObjectLGTKDatabase : MonoBehaviour
             {
                 for (int j = 0; j < CUIsLGTKManager.Instance.GetListFairwayAnswers().Count; j++)
                 {
-                    if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListFairwayAnswers()[j]))
+                    //if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListFairwayAnswers()[j]))
+                    string strFairwayAnswer = RemoveSPString(CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title);
+                    if (strFairwayAnswer.Equals(CUIsLGTKManager.Instance.GetListFairwayAnswers()[j]))
                     {
                         //gameObject.SetActive(true);
                         bIsExist = true;
@@ -355,29 +380,46 @@ public class CObjectLGTKDatabase : MonoBehaviour
                 }
             }
 
-            if ( m_nDynamicState == 0 )
-            {
-                for (int j = 0; j < CUIsLGTKManager.Instance.GetListAnswers().Count; j++)
-                {
-                    if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListAnswers()[j]))
-                    {
-                        bIsExist = true;
-                        break;
-                    }
-                }
-            } else
-            {
-                for (int j = 0; j < CUIsLGTKManager.Instance.GetListSBCTAnswer().Count; j++)
-                {
-                    if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListSBCTAnswer()[j]))
-                    {
-                        bIsExist = true;
-                        break;
-                    }
-                }
-            }
+            // TODO DEL
+            //if (m_nDynamicState == 0)
+            //{
+            //    for (int j = 0; j < CUIsLGTKManager.Instance.GetListAnswers().Count; j++)
+            //    {
+            //        Debug.Log("Dynamic 0001");
+            //        if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListAnswers()[j]))
+            //        {
+            //            Debug.Log("Dynamic 0002");
+            //            bIsExist = true;
+            //            break;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    for (int j = 0; j < CUIsLGTKManager.Instance.GetListSBCTAnswer().Count; j++)
+            //    {
+            //        Debug.Log("Dynamic 0011");
+            //        if (CQuizData.Instance.GetGuides().body.contents[m_nMainIndex].children[i].title.Equals(CUIsLGTKManager.Instance.GetListSBCTAnswer()[j]))
+            //        {
+            //            Debug.Log("Dynamic 0012");
+            //            bIsExist = true;
+            //            break;
+            //        }
+            //    }
+            //}
         }
 
         gameObject.SetActive(bIsExist);
     }
+
+    public string RemoveSPString(string strValue)
+    {
+        string pattern = "[^0-9a-zA-Z°¡-ÆR]"; //¼ýÀÚ, ¿µ¹®ÀÚ, ÇÑ±Û ÀÌ¿ÜÀÇ ¹®ÀÚ¸¦ Ã£À½
+        string resultString = System.Text.RegularExpressions.Regex.Replace(strValue, pattern, "");
+        pattern = @"\s+";
+        resultString = System.Text.RegularExpressions.Regex.Replace(resultString, pattern, "");
+
+        return resultString;
+    }
 }
+
