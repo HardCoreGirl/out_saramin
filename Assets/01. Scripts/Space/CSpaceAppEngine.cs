@@ -76,12 +76,12 @@ public class CSpaceAppEngine : MonoBehaviour
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "eeeace4e-535b-4cde-978e-1ad2e4679b5f";
+    private string m_strToken = "df38b687-c4dd-433f-ac30-140232a4d98f";
 
     private int m_nBoardIndex = 0;
 
-    private string m_strVer = "230723.01";
-    private int m_nAuthOverDay = 1323;
+    private string m_strVer = "230806.01";
+    private int m_nAuthOverDay = 1334;
 
     private bool m_bIsFaceTest = false;
 
@@ -90,6 +90,9 @@ public class CSpaceAppEngine : MonoBehaviour
     private float m_fNoneInputTime = 0;
 
     private bool m_bIsLogout = false;
+
+    // TODO 활동로그 남기기
+    private int m_nPlayExamTime = 0;
 
     [System.Serializable]
     public class HostConfig
@@ -104,7 +107,7 @@ public class CSpaceAppEngine : MonoBehaviour
  //   }
 
 // Start is called before the first frame update
-void Start()
+    void Start()
     {
         StartCoroutine("ProcessLoadServerInfo");
         //Debug.Log(Server.Instance.GetCurURL());
@@ -407,7 +410,9 @@ void Start()
             strUrl = hcData.APP_API_HOST;
         }
 
-        m_txtAuthInfo.text = "Dev Build (Ver." + m_strVer + ") API_HOST_URL : " + strUrl;
+        // TODO AUTH
+        //m_txtAuthInfo.text = "Dev Build (Ver." + m_strVer + ") API_HOST_URL : " + strUrl;
+        m_txtAuthInfo.text = "";
     }
 
     public void SetServerType(string strServerType)
@@ -617,5 +622,26 @@ void Start()
         //string url = "https://applier-dev2.indepth.thepllab.com/";
         string url = Server.Instance.GetPLLabCurURL() + "/";
         Application.ExternalEval("window.location.href='" + url + "'");
+    }
+
+    // TODO 활동로그 남기기
+    public void PlayExamTime()
+    {
+        StartCoroutine("ProcessPlayExamTime");
+    }
+
+    IEnumerator ProcessPlayExamTime()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(1);
+
+            m_nPlayExamTime++;
+        }
+    }
+
+    public int GetPlayExamTime()
+    {
+        return m_nPlayExamTime;
     }
 }

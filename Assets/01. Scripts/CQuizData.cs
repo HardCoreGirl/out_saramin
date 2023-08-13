@@ -338,6 +338,18 @@ public class STPacketQuestionStatusBody
 }
 // -------------------------------------------------
 
+// TODO 활동로그 남기기
+// Action Log ---------------------------------------
+[Serializable]
+public class STPacketActionLog
+{
+    public string strCategory;
+    public string strActionPage;
+    public string strActionUrl;
+    public int nActionTime;
+}
+// --------------------------------------------------
+
 
 // -------------------------------------------------
 

@@ -115,6 +115,11 @@ public class CUIsTitleManager : MonoBehaviour
         //Server.Instance.RequestTestInvest();
         Server.Instance.RequestGETInfoExams(true);
         Server.Instance.ReuquestGETInfoMissions();
+
+        // TODO 활동로그 남기기
+        CSpaceAppEngine.Instance.PlayExamTime();
+        Server.Instance.RequestPOSTActionLog("test", "main", "test.com");
+
         //CUIsSpaceManager.Instance.HideTitle();
 
         //if (CSpaceAppEngine.Instance.IsIntro())

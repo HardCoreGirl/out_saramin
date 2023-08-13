@@ -53,7 +53,9 @@ public class Server : MonoBehaviour
     private const string strServerLive = "https://ncdkeuehdl.execute-api.ap-northeast-2.amazonaws.com";
     private const string strServerLocal = "http://localhost:7575/";
 
-    private const string strServerTRAuth = "https://9dakv9e6p5.execute-api.ap-northeast-2.amazonaws.com/auth";
+    // TODO AUTH
+    //private const string strServerTRAuth = "https://9dakv9e6p5.execute-api.ap-northeast-2.amazonaws.com/auth";
+    private const string strServerTRAuth = "https://9dakv9e6p5.execute-api.ap-northeast-2.amazonaws.com/auth!!";
 
     private string m_strToken = "";
 
@@ -153,7 +155,8 @@ public class Server : MonoBehaviour
             {
                 // 인증서버 접속 오류처리
                 //Debug.Log("Auth Error !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                CUIsSpaceManager.Instance.UpdateAuthMsg("인증서버 접속에 실패했습니다. 인터넷 연결을 확인해 주세요.");
+                // TODO AUTH
+                //CUIsSpaceManager.Instance.UpdateAuthMsg("인증서버 접속에 실패했습니다. 인터넷 연결을 확인해 주세요.");
 
                 System.DateTime currentDate = System.DateTime.Now;
                 System.DateTime yearStartDate = new System.DateTime(2020, 1, 1);
@@ -563,7 +566,9 @@ public class Server : MonoBehaviour
         header.Add("Content-Type", "application/json");
 
         //POST(url, header, jsonBody, (string txt) =>
-        PUT(url, header, jsonBody, (string txt) =>
+        //PUT(url, header, jsonBody, (string txt) =>
+        // TODO 활동로그 남기기
+        POST(url, header, jsonBody, (string txt) =>
         {
             STPacketQuestionStatus stPacketQuestionStatus;
             stPacketQuestionStatus = JsonUtility.FromJson<STPacketQuestionStatus>(txt);
@@ -661,7 +666,9 @@ public class Server : MonoBehaviour
         header.Add("Authorization", "Bearer " + m_strToken);
         header.Add("Content-Type", "application/json");
 
-        PUT(url, header, jsonBody, (string txt) =>
+        // PUT(url, header, jsonBody, (string txt) =>
+        // TODO 활동로그 남기기
+        POST(url, header, jsonBody, (string txt) =>
         {
         });
     }
@@ -692,7 +699,9 @@ public class Server : MonoBehaviour
         header.Add("Content-Type", "application/json");
 
         //POST(url, header, jsonBody, (string txt) =>
-        PUT(url, header, jsonBody, (string txt) =>
+        //PUT(url, header, jsonBody, (string txt) =>
+        // TODO 활동로그 남기기
+        POST(url, header, jsonBody, (string txt) =>
         {
             //Debug.Log("txt : " + txt);
         });
@@ -881,7 +890,9 @@ public class Server : MonoBehaviour
         header.Add("Authorization", "Bearer " + m_strToken);
 
         //POST(url, header, jsonBody, (string txt) =>
-        PUT(url, header, jsonBody, (string txt) =>
+        //PUT(url, header, jsonBody, (string txt) =>
+        // TODO 활동로그 남기기
+        POST(url, header, jsonBody, (string txt) =>
         {
             STPacketActionExit packetActionExit = new STPacketActionExit();
             packetActionExit = JsonUtility.FromJson<STPacketActionExit>(txt);
@@ -895,6 +906,45 @@ public class Server : MonoBehaviour
                 // TODO : 나가기 실패
             }
             
+            //Debug.Log("txt : " + txt);
+        });
+    }
+
+    // TODO 활동로그 남기기
+    public void RequestPOSTActionLog(string strCategory, string strActionPage, string strActionURL)
+    {
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
+
+        STPacketActionLog stPacketActionLog = new STPacketActionLog();
+        stPacketActionLog.strCategory = strCategory;
+        stPacketActionLog.strActionPage = strActionPage;
+        stPacketActionLog.strActionUrl = strActionURL;
+        stPacketActionLog.nActionTime = CSpaceAppEngine.Instance.GetPlayExamTime();
+
+        string jsonBody = JsonConvert.SerializeObject(stPacketActionLog);
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        string url = cur_server + "api/v1/action/log";
+
+        header.Add("accept", "application/json");
+        header.Add("Authorization", "Bearer " + m_strToken);
+
+        //POST(url, header, jsonBody, (string txt) =>
+        POST(url, header, jsonBody, (string txt) =>
+        {
+            STPacketActionExit packetActionExit = new STPacketActionExit();
+            packetActionExit = JsonUtility.FromJson<STPacketActionExit>(txt);
+
+            if (packetActionExit.code == 200)
+            {
+                CQuizData.Instance.SetExitCount(packetActionExit.body);
+                // TODO : 나가기 기능
+            }
+            else if (packetActionExit.code == 400)
+            {
+                // TODO : 나가기 실패
+            }
+
             //Debug.Log("txt : " + txt);
         });
     }
