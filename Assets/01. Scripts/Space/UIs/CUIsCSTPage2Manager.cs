@@ -571,7 +571,13 @@ public class CUIsCSTPage2Manager : MonoBehaviour
             //Debug.Log("Left Answer [" + i + "] : " + m_listLeftContents[i].GetComponent<CUIsCSTListAnswerTmp>().GetAnswerString());
         }
 
-        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].answers[0].anwr_idx, listLeftAnswer.ToArray());
+        // TODO 활동로그 남기기
+        CSpaceAppEngine.Instance.SetPage("CST");
+        Server.Instance.RequestPostAnswerUpdateTime(CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].test_qst_idx, m_nRemainTime);
+
+        // TODO 로그 확장
+        //Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].answers[0].anwr_idx, listLeftAnswer.ToArray());
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].answers[0].anwr_idx, listLeftAnswer.ToArray(), CQuizData.Instance.GetQuiz("CST").sets[0].questions[0].qst_idx);
 
         List<string> listRightAnswer = new List<string>();
         for (int i = 0; i < 25; i++)
@@ -588,7 +594,13 @@ public class CUIsCSTPage2Manager : MonoBehaviour
         Debug.Log("OnClickPopupSendAnswerNext");
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
         {
-            Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].answers[0].anwr_idx, listRightAnswer.ToArray());
+            // TODO 활동로그 남기기
+            CSpaceAppEngine.Instance.SetPage("CST");
+            Server.Instance.RequestPostAnswerUpdateTime(CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].test_qst_idx, m_nRemainTime);
+
+            // TODO 로그 확장
+            //Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].answers[0].anwr_idx, listRightAnswer.ToArray());
+            Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].test_qst_idx, CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].answers[0].anwr_idx, listRightAnswer.ToArray(), CQuizData.Instance.GetQuiz("CST").sets[0].questions[1].qst_idx);
 
             if (CQuizData.Instance.GetExamInfoDetail("RAT").status.Equals("WAITING"))
             {

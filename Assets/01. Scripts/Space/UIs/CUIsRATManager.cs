@@ -434,8 +434,15 @@ public class CUIsRATManager : MonoBehaviour
         //Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswer.text);
         // TODO 230428
         Debug.Log("RAT INDEX !!!!!!!!!!!!!!!! : " + m_nQuizIndex);
+        Debug.Log("RemainTime : " + GetRemainTime());
 
-        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text, m_fScore);
+        // TODO 활동로그 남기기
+        CSpaceAppEngine.Instance.SetPage("RAT");
+        Server.Instance.RequestPostAnswerUpdateTime(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, GetRemainTime());
+
+        // TODO 로그 확장
+        //Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text, m_fScore);
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].qst_idx, m_fScore);
 
         if ( m_nQuizIndex < 1 )
         {
@@ -607,7 +614,13 @@ public class CUIsRATManager : MonoBehaviour
 
     public void OnClickPopupTimeover()
     {
-        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text, m_fScore);
+        // TODO 활동로그 남기기
+        CSpaceAppEngine.Instance.SetPage("RAT");
+        Server.Instance.RequestPostAnswerUpdateTime(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, GetRemainTime());
+
+        // TODO 로그 확장
+        //Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text, m_fScore);
+        Server.Instance.RequestPUTAnswerSubject(CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].test_qst_idx, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].answers[0].anwr_idx, m_ifAnswerTmp.text, CQuizData.Instance.GetQuiz("RAT").sets[m_nQuizIndex].questions[0].qst_idx, m_fScore);
 
         Server.Instance.RequestPUTQuestionsStatus(CQuizData.Instance.GetQuiz("RAT").part_idx, 1);
         if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
@@ -651,5 +664,11 @@ public class CUIsRATManager : MonoBehaviour
     public void OnClickPopupToLobbyTutorialClose()
     {
         HidePopupToLobbyTutorial();
+    }
+
+    // TODO 활동로그 남기기
+    public int GetRemainTime()
+    {
+        return m_nRemainTime;
     }
 }

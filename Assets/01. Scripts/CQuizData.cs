@@ -175,6 +175,17 @@ public class STPacketAnswer
     public string[] contents;
 }
 
+// TODO 활동로그 남기기
+// Answer Update Time ---------------------------------------
+[Serializable]
+public class STPacketAnswerUpdateTime
+{
+    public int applier_idx;
+    public int question_idx;
+    public int processing_time;
+}
+// --------------------------------------------------
+
 // Test Invest ---------------------------------
 public class STPacketTestInvest
 {
@@ -343,10 +354,10 @@ public class STPacketQuestionStatusBody
 [Serializable]
 public class STPacketActionLog
 {
-    public string strCategory;
-    public string strActionPage;
-    public string strActionUrl;
-    public int nActionTime;
+    public string category;
+    public string actionPage;
+    public string actionUrl;
+    public double actionTime;
 }
 // --------------------------------------------------
 

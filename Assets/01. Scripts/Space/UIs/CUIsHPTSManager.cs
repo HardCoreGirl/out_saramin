@@ -6,6 +6,37 @@ using UnityEngine.UI;
 
 public class CUIsHPTSManager : MonoBehaviour
 {
+    // TODO 활동로그 남기기
+    #region SingleTon
+    public static CUIsHPTSManager _instance = null;
+
+    public static CUIsHPTSManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.Log("CUIsHPTSManager install null");
+
+            return _instance;
+        }
+    }
+
+    void Awake()
+    {
+        if (_instance == null)
+            _instance = this;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            _instance = null;
+        }
+    }
+    #endregion
+
+
     public GameObject m_goTutorialMsg;
 
     public Text m_txtBtnSendAnswer;
@@ -592,5 +623,11 @@ public class CUIsHPTSManager : MonoBehaviour
     public void OnClickPopupToLobbyTutorialClose()
     {
         HidePopupToLobbyTutorial();
+    }
+
+    // TODO 활동로그 남기기
+    public int GetRemainTime()
+    {
+        return m_nRemainTime;
     }
 }

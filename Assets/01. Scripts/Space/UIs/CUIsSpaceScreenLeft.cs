@@ -230,6 +230,9 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         // 상태값 API 호출 -----------------------------
         if (nIndex == 0)
         {
+            // TODO 활동로그 남기기
+            CSpaceAppEngine.Instance.SetPage("RQT");
+
             if (!CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
             {
                 if (CQuizData.Instance.GetExamInfoDetail("RQT").status.Equals("WAITING"))
@@ -998,6 +1001,10 @@ public class CUIsSpaceScreenLeft : MonoBehaviour
         gameObject.GetComponent<RectTransform>().DOScale(new Vector3(0.2f, 0.2f, 1), CSpaceAppEngine.Instance.GetFadeTime()).OnComplete(HideRightAllPage);
     }
 
-
+    // TODO 활동로그 남기기
+    public int GetRemainTime()
+    {
+        return m_nRemainTime;
+    }
 }
 

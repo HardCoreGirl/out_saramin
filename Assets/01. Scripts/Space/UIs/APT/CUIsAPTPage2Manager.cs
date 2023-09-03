@@ -56,6 +56,8 @@ public class CUIsAPTPage2Manager : MonoBehaviour
 
     private int m_nQuizType; // 0 : APTD1, 1 : APTD2
     private int m_nQuizIndex;
+    // TODO 로그 확장
+    private int m_nRealQstIndex;
     private int[] m_listAnswerIndex = new int[4];
 
     private int m_nRemainTime;
@@ -323,6 +325,9 @@ public class CUIsAPTPage2Manager : MonoBehaviour
             //m_nQuizType = 0;
             m_nQuizIndex = quizAPT.sets[nRealIndex].questions[0].test_qst_idx;
 
+            // TODO 로그 확장
+            m_nRealQstIndex = quizAPT.sets[nRealIndex].questions[0].qst_idx;
+
             for (int i = 0; i < quizAPT.sets[nRealIndex].questions[0].answers.Length; i++)
             {
                 //Debug.Log("Show Quiz 003 AnswerIndex : " + quizAPT.sets[nRealIndex].questions[0].answers[i].anwr_idx);
@@ -477,6 +482,7 @@ public class CUIsAPTPage2Manager : MonoBehaviour
         }
     }
 
+    
     public void OnClickExit()
     {
         if(IsTutorial())
@@ -526,6 +532,12 @@ public class CUIsAPTPage2Manager : MonoBehaviour
     public int GetQuizIndex()
     {
         return m_nQuizIndex;
+    }
+
+    // TODO 로그 확장
+    public int GetRealQstIndex()
+    {
+        return m_nRealQstIndex;
     }
 
     public int GetAnswerIndex(int nIndex)

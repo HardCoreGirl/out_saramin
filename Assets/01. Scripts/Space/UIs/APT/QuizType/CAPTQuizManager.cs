@@ -253,7 +253,15 @@ public class CAPTQuizManager : MonoBehaviour
 
         Debug.Log("APT OnClick : " + CUIsAPTPage2Manager.Instance.GetQuizIndex() + ", " + CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex));
 
-        Server.Instance.RequestPUTAnswerObject(CUIsAPTPage2Manager.Instance.GetQuizIndex(), CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex));
+        // TODO 활동로그 남기기
+        CSpaceAppEngine.Instance.SetPage("APT");
+        Server.Instance.RequestPostAnswerUpdateTime(CUIsAPTPage2Manager.Instance.GetQuizIndex(), CUIsAPTPage2Manager.Instance.GetRemainTime());
+
+        // TODO 로그 확장
+        //Server.Instance.RequestPUTAnswerObject(CUIsAPTPage2Manager.Instance.GetQuizIndex(), CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex));
+        Server.Instance.RequestPUTAnswerObject(CUIsAPTPage2Manager.Instance.GetQuizIndex(), CUIsAPTPage2Manager.Instance.GetAnswerIndex(nIndex), CUIsAPTPage2Manager.Instance.GetRealQstIndex());
+
+
 
         Debug.Log("OnClickAnswer " + m_nIndex + ", " + m_nQuizListIndex);
         CUIsAPTManager.Instance.SetAnswerState(m_nIndex, 0);

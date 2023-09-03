@@ -560,6 +560,9 @@ public class Server : MonoBehaviour
         Dictionary<string, string> header = new Dictionary<string, string>();
         string url = cur_server + "api/v1/questions/" + nPartIdx.ToString() + "/" + strStatus;
 
+        // TODO 활동로그 남기기
+        RequestPOSTActionLog(url);
+
         //header.Add("Content-Type", "application/json");
         header.Add("accept", "application/json");
         header.Add("Authorization", "Bearer " + m_strToken);
@@ -642,13 +645,21 @@ public class Server : MonoBehaviour
     #endregion
 
     #region 응시답안
-    public void RequestPUTAnswerObject(int nQuestIndex, int nAnswer)
+    // TODO 로그 확장
+    //public void RequestPUTAnswerObject(int nQuestIndex, int nAnswer)
+    //{
+    //    Debug.Log("RequestPUTAnswerObject Single - QuestIdx : " + nQuestIndex + ", Answer : " + nAnswer);
+    //    RequestPUTAnswerObject(nQuestIndex, new int[] { nAnswer });
+    //}
+    public void RequestPUTAnswerObject(int nQuestIndex, int nAnswer, int nRealQstIndex)
     {
         Debug.Log("RequestPUTAnswerObject Single - QuestIdx : " + nQuestIndex + ", Answer : " + nAnswer);
-        RequestPUTAnswerObject(nQuestIndex, new int[] { nAnswer });
+        RequestPUTAnswerObject(nQuestIndex, new int[] { nAnswer }, nRealQstIndex);
     }
 
-    public void RequestPUTAnswerObject(int nQuestIndex, int[] listAnswer)
+    // TODO 로그 확장
+    //public void RequestPUTAnswerObject(int nQuestIndex, int[] listAnswer)
+    public void RequestPUTAnswerObject(int nQuestIndex, int[] listAnswer, int nRealQstIndex)
     {
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
 
@@ -662,6 +673,20 @@ public class Server : MonoBehaviour
         Dictionary<string, string> header = new Dictionary<string, string>();
         string url = cur_server + "api/v1/answer";
 
+        // TODO 활동로그 남기기
+        string strActionLogAnswer = "";
+        for(int i = 0; i < listAnswer.Length; i++)
+        {
+            if (i != 0)
+                strActionLogAnswer += ",";
+
+            strActionLogAnswer += listAnswer[i].ToString();
+        }
+        // TODO 로그 확장
+        //string strActionLog = "/api/v1/answer?answer_type=OBJ&answer_idx=" + nQuestIndex.ToString() + "&answers=" + strActionLogAnswer;
+        string strActionLog = "/api/v1/answer?answer_type=OBJ&answer_idx=" + nQuestIndex.ToString() + "&question_idx=" + nRealQstIndex.ToString() + "&answers=" + strActionLogAnswer;
+        RequestPOSTActionLog(strActionLog);
+
         header.Add("accept", "application/json");
         header.Add("Authorization", "Bearer " + m_strToken);
         header.Add("Content-Type", "application/json");
@@ -673,12 +698,21 @@ public class Server : MonoBehaviour
         });
     }
 
-    public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string strContent, float fScore = 0f)
+    // TODO 로그 확장
+    //public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string strContent, float fScore = 0f)
+    //{
+    //    RequestPUTAnswerSubject(nQuestIndex, nAnswerIndex, new string[] { strContent }, fScore);
+    //}
+    public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string strContent, int nRealQstIndex, float fScore = 0f)
     {
-        RequestPUTAnswerSubject(nQuestIndex, nAnswerIndex, new string[] { strContent }, fScore);
+        RequestPUTAnswerSubject(nQuestIndex, nAnswerIndex, new string[] { strContent }, nRealQstIndex, fScore);
     }
 
-    public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string[] listContent, float fSocre = 0f)
+
+
+    //public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string[] listContent, float fSocre = 0f)
+    // TODO 로그 확장
+    public void RequestPUTAnswerSubject(int nQuestIndex, int nAnswerIndex, string[] listContent, int nRealQstIndex, float fSocre = 0f)
     {
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
 
@@ -694,6 +728,21 @@ public class Server : MonoBehaviour
         Dictionary<string, string> header = new Dictionary<string, string>();
         string url = cur_server + "api/v1/answer";
 
+        // TODO 활동로그 남기기
+        string strActionLogAnswer = "";
+        for (int i = 0; i < listContent.Length; i++)
+        {
+            if (i != 0)
+                strActionLogAnswer += ",";
+
+            strActionLogAnswer += listContent;
+        }
+
+        // TODO 로그 확장
+        //string strActionLog = "/api/v1/answer?answer_type=SBCT&answer_idx=" + nQuestIndex.ToString() + "&answers=" + strActionLogAnswer;
+        string strActionLog = "/api/v1/answer?answer_type=SBCT&answer_idx=" + nQuestIndex.ToString() + "&question_idx=" + nRealQstIndex.ToString() + "&answers=" + strActionLogAnswer;
+        RequestPOSTActionLog(strActionLog);
+
         header.Add("accept", "application/json");
         header.Add("Authorization", "Bearer " + m_strToken);
         header.Add("Content-Type", "application/json");
@@ -701,6 +750,48 @@ public class Server : MonoBehaviour
         //POST(url, header, jsonBody, (string txt) =>
         //PUT(url, header, jsonBody, (string txt) =>
         // TODO 활동로그 남기기
+        POST(url, header, jsonBody, (string txt) =>
+        {
+            //Debug.Log("txt : " + txt);
+        });
+    }
+
+    // TODO 활동로그 남기기
+    public void RequestPostAnswerUpdateTime(int nQuestIdx, int nProcessTime)
+    {
+        if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
+
+        //for (int i = 0; i < CQuizData.Instance.GetExamInfo().body.Length; i++)
+        //{
+        //    if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("RQT"))
+        //    {
+
+        //    }
+        //}
+
+        STPacketAnswerUpdateTime stPacketAnswerUpdateTime = new STPacketAnswerUpdateTime();
+        stPacketAnswerUpdateTime.applier_idx = CQuizData.Instance.GetExamInfo().body[0].applierIdx;
+        //stPacketAnswerUpdateTime.applier_idx = 50;
+        stPacketAnswerUpdateTime.question_idx = nQuestIdx;
+        stPacketAnswerUpdateTime.processing_time = nProcessTime;
+        //stPacketAnswer.answer_type = "SBCT";
+        //stPacketAnswer.answer_idx = nQuestIndex;
+        //stPacketAnswer.answers = new int[] { nAnswerIndex };
+        //stPacketAnswer.contents = listContent;
+        //stPacketAnswer.demerit_score = fSocre;
+
+        string jsonBody = JsonConvert.SerializeObject(stPacketAnswerUpdateTime);
+
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        string url = cur_server + "api/v1/answer/" + nQuestIdx.ToString() + "/update-time";
+
+        // TODO 활동로그 남기기
+        //RequestPOSTActionLog(url);
+
+        header.Add("accept", "application/json");
+        header.Add("Authorization", "Bearer " + m_strToken);
+        header.Add("Content-Type", "application/json");
+
         POST(url, header, jsonBody, (string txt) =>
         {
             //Debug.Log("txt : " + txt);
@@ -747,7 +838,6 @@ public class Server : MonoBehaviour
                     //Debug.Log("Active!!!!!!!!!!!!!!! 00 : " + CQuizData.Instance.GetExamInfo().body[i].qstTpCd);
                     if (CQuizData.Instance.GetExamInfo().body[i].qstTpCd.Equals("RQT"))
                     {
-                        //Debug.Log("Active!!!!!!!!!!!!!!! 01");
                         CSpaceAppEngine.Instance.SetActiveLeft(true);
                     }
 
@@ -886,6 +976,9 @@ public class Server : MonoBehaviour
         Dictionary<string, string> header = new Dictionary<string, string>();
         string url = cur_server + "api/v1/action/exit";
 
+        // TODO 활동로그 남기기
+        RequestPOSTActionLog("/api/v1/action/exit");
+
         header.Add("accept", "application/json");
         header.Add("Authorization", "Bearer " + m_strToken);
 
@@ -911,15 +1004,21 @@ public class Server : MonoBehaviour
     }
 
     // TODO 활동로그 남기기
-    public void RequestPOSTActionLog(string strCategory, string strActionPage, string strActionURL)
+    public void RequestPOSTActionLog(string strActionURL)
     {
         if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL")) return;
 
+        //Debug.Log("POSTActionLog : " + strActionURL);
         STPacketActionLog stPacketActionLog = new STPacketActionLog();
-        stPacketActionLog.strCategory = strCategory;
-        stPacketActionLog.strActionPage = strActionPage;
-        stPacketActionLog.strActionUrl = strActionURL;
-        stPacketActionLog.nActionTime = CSpaceAppEngine.Instance.GetPlayExamTime();
+        stPacketActionLog.category = CSpaceAppEngine.Instance.GetCaterogy();
+        stPacketActionLog.actionPage = CSpaceAppEngine.Instance.GetPage();
+        stPacketActionLog.actionUrl = strActionURL;
+        stPacketActionLog.actionTime = CSpaceAppEngine.Instance.GetPlayExamTime();
+
+        //stPacketActionLog.category = "exam";
+        //stPacketActionLog.actionPage = "main";
+        //stPacketActionLog.actionUrl = "/api/v1/guides/1";
+        //stPacketActionLog.actionTime = 100;
 
         string jsonBody = JsonConvert.SerializeObject(stPacketActionLog);
 
@@ -927,25 +1026,12 @@ public class Server : MonoBehaviour
         string url = cur_server + "api/v1/action/log";
 
         header.Add("accept", "application/json");
+        header.Add("Content-Type", "application/json");
         header.Add("Authorization", "Bearer " + m_strToken);
 
         //POST(url, header, jsonBody, (string txt) =>
         POST(url, header, jsonBody, (string txt) =>
         {
-            STPacketActionExit packetActionExit = new STPacketActionExit();
-            packetActionExit = JsonUtility.FromJson<STPacketActionExit>(txt);
-
-            if (packetActionExit.code == 200)
-            {
-                CQuizData.Instance.SetExitCount(packetActionExit.body);
-                // TODO : 나가기 기능
-            }
-            else if (packetActionExit.code == 400)
-            {
-                // TODO : 나가기 실패
-            }
-
-            //Debug.Log("txt : " + txt);
         });
     }
     #endregion

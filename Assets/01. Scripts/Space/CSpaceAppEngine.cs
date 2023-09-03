@@ -76,12 +76,13 @@ public class CSpaceAppEngine : MonoBehaviour
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "df38b687-c4dd-433f-ac30-140232a4d98f";
+    private string m_strToken = "40da277a-72f9-4bb6-b475-dc31b13b9c58";
 
     private int m_nBoardIndex = 0;
 
-    private string m_strVer = "230806.01";
-    private int m_nAuthOverDay = 1334;
+    private string m_strVer = "230903.01";
+    private int m_nAuthOverDay = 1360;
+    //private int m_nAuthOverDay = 1310;
 
     private bool m_bIsFaceTest = false;
 
@@ -93,6 +94,8 @@ public class CSpaceAppEngine : MonoBehaviour
 
     // TODO 활동로그 남기기
     private int m_nPlayExamTime = 0;
+    private string m_strCategory = "";
+    private string m_strPage = "";
 
     [System.Serializable]
     public class HostConfig
@@ -126,6 +129,18 @@ public class CSpaceAppEngine : MonoBehaviour
         CUIsSpaceManager.Instance.UpdateAuthMsg("");
         CUIsSpaceManager.Instance.HideAuthFail();
         Server.Instance.RequestPOSTTRAuth("saraminxx", 1000);
+
+        int[] test = new int[] { 23, 43 };
+
+        string strTest = "";
+        for(int i = 0; i < test.Length; i++)
+        {
+            if (i != 0)
+                strTest += ",";
+            strTest += test[i];
+        }
+
+        Debug.Log(strTest);
     }
 
     // Update is called once per frame
@@ -643,5 +658,25 @@ public class CSpaceAppEngine : MonoBehaviour
     public int GetPlayExamTime()
     {
         return m_nPlayExamTime;
+    }
+
+    public void SetCaterogy(string strCaterogy)
+    {
+        m_strCategory = strCaterogy;
+    }
+
+    public string GetCaterogy()
+    {
+        return m_strCategory;
+    }
+
+    public void SetPage(string strPage)
+    {
+        m_strPage = strPage;
+    }
+
+    public string GetPage()
+    {
+        return m_strPage;
     }
 }

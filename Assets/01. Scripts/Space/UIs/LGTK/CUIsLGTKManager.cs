@@ -690,4 +690,11 @@ public class CUIsLGTKManager : MonoBehaviour
     {
         return m_listFairwayIndex;
     }
+
+
+    // TODO 활동로그 남기기
+    public int GetRemainTime()
+    {
+        return m_nRemainTime;
+    }
 }

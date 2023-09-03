@@ -110,6 +110,14 @@ public class CUIsHPTSQuiz : MonoBehaviour
         m_listTxtWord[nIndex].color = Color.white;
 
         if (!CUIsSpaceScreenLeft.Instance.IsHPTSTutorial())
-            Server.Instance.RequestPUTAnswerObject(m_qstInfo.test_qst_idx, m_qstInfo.answers[nIndex - 1].anwr_idx);
+        {
+            // TODO 활동로그 남기기
+            CSpaceAppEngine.Instance.SetPage("HPTS");
+            Server.Instance.RequestPostAnswerUpdateTime(m_qstInfo.test_qst_idx, CUIsHPTSManager.Instance.GetRemainTime());
+
+            // TODO 로그 확장
+            //Server.Instance.RequestPUTAnswerObject(m_qstInfo.test_qst_idx, m_qstInfo.answers[nIndex - 1].anwr_idx);
+            Server.Instance.RequestPUTAnswerObject(m_qstInfo.test_qst_idx, m_qstInfo.answers[nIndex - 1].anwr_idx, m_qstInfo.qst_idx);
+        }
     }
 }

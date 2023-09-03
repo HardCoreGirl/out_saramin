@@ -94,8 +94,14 @@ public class CUIsAnswer : MonoBehaviour
         if (!CUIsSpaceScreenLeft.Instance.IsRQTTutorial())
         {
             Quiz quizRQT = CQuizData.Instance.GetQuiz("RQT", CUIsSpaceScreenLeft.Instance.IsRQTTutorial());
-            
-            Server.Instance.RequestPUTAnswerObject(quizRQT.sets[m_nQuizIndex].questions[0].test_qst_idx, m_listAnswer[nIndex].anwr_idx);
+
+            // TODO 활동로그 남기기
+            CSpaceAppEngine.Instance.SetPage("RQT");
+            Server.Instance.RequestPostAnswerUpdateTime(quizRQT.sets[m_nQuizIndex].questions[0].test_qst_idx, CUIsSpaceScreenLeft.Instance.GetRemainTime());
+
+            // TODO 로그 확장
+            //Server.Instance.RequestPUTAnswerObject(quizRQT.sets[m_nQuizIndex].questions[0].test_qst_idx, m_listAnswer[nIndex].anwr_idx);
+            Server.Instance.RequestPUTAnswerObject(quizRQT.sets[m_nQuizIndex].questions[0].test_qst_idx, m_listAnswer[nIndex].anwr_idx, quizRQT.sets[m_nQuizIndex].questions[0].qst_idx);
 
             Debug.Log("Exam Cnt : " + quizRQT.sets.Length + ", QuizIndex : " + m_nQuizIndex);
 

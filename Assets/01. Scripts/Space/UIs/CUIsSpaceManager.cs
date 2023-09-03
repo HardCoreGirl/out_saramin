@@ -290,6 +290,9 @@ public class CUIsSpaceManager : MonoBehaviour
 
         m_bIsPlayFadein = true;
 
+        // TODO 활동로그 남기기
+        CSpaceAppEngine.Instance.SetCaterogy("우주탐사원 관리 시스템");
+
         CUIsSpaceManager.Instance.ScreenActive(true);
 
         //Debug.Log("OnClickLeftComputer 00");
@@ -342,6 +345,10 @@ public class CUIsSpaceManager : MonoBehaviour
             return;
 
         m_bIsPlayFadein = true;
+
+        // TODO 활동로그 남기기
+        CSpaceAppEngine.Instance.SetCaterogy("파이어니어 메인 시스템");
+        CSpaceAppEngine.Instance.SetPage("LGTK");
         //CUIsSpaceManager.Instance.ScreenActive(true);
 
         //if (CSpaceAppEngine.Instance.GetServerType().Equals("LOCAL"))
@@ -403,6 +410,9 @@ public class CUIsSpaceManager : MonoBehaviour
         if (m_bIsPlayFadein)
             return;
         m_bIsPlayFadein = true;
+
+        // TODO 활동로그 남기기
+        CSpaceAppEngine.Instance.SetCaterogy("기체 점검 시스템");
 
         //CUIsSpaceManager.Instance.ScreenActive(true);
 

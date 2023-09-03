@@ -677,7 +677,14 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                             nAnswerIndex++;
                         }
                     }
-                    Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, listAnswer);
+
+                    // TODO 활동로그 남기기
+                    CSpaceAppEngine.Instance.SetPage("LGTK");
+                    Server.Instance.RequestPostAnswerUpdateTime(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, CUIsAPTPage2Manager.Instance.GetRemainTime());
+
+                    // TODO 로그 확장
+                    //Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, listAnswer);
+                    Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, listAnswer, quizLGTK.sets[m_nStage].questions[0].qst_idx);
                 } else
                 {
                     //CUIsLGTKManager.Instance.AddListAnswers(GetObjAnswwer());
@@ -702,7 +709,13 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                     }
 
                     AddChatAnswer(GetObjAnswwer());
-                    Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, GetAnswerIndex());
+                    // TODO 활동로그 남기기
+                    CSpaceAppEngine.Instance.SetPage("LGTK");
+                    Server.Instance.RequestPostAnswerUpdateTime(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, CUIsLGTKManager.Instance.GetRemainTime());
+
+                    // TODO 로그 확장
+                    //Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, GetAnswerIndex());
+                    Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, GetAnswerIndex(), quizLGTK.sets[m_nStage].questions[0].qst_idx);
                 }
             }
             else
@@ -763,7 +776,14 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
                 //AddChatAnswer(GetSBCTAnswer());
                 //Server.Instance.RequestPUTAnswerSubject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, quizLGTK.sets[m_nStage].questions[0].answers[0].anwr_idx, GetSBCTAnswer());
                 AddChatAnswer(strSBCTAnswer);
-                Server.Instance.RequestPUTAnswerSubject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, quizLGTK.sets[m_nStage].questions[0].answers[0].anwr_idx, strSBCTAnswer);
+
+                // TODO 활동로그 남기기
+                CSpaceAppEngine.Instance.SetPage("LGTK");
+                Server.Instance.RequestPostAnswerUpdateTime(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, CUIsLGTKManager.Instance.GetRemainTime());
+
+                // TODO 로그 확장
+                //Server.Instance.RequestPUTAnswerSubject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, quizLGTK.sets[m_nStage].questions[0].answers[0].anwr_idx, strSBCTAnswer);
+                Server.Instance.RequestPUTAnswerSubject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, quizLGTK.sets[m_nStage].questions[0].answers[0].anwr_idx, strSBCTAnswer, quizLGTK.sets[m_nStage].questions[0].qst_idx);
             }
 
             CUIsLGTKManager.Instance.UpdateDatabaseDynamic();
