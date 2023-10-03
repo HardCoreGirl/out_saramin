@@ -680,7 +680,9 @@ public class CUIsLGTKTalkBoxManager : MonoBehaviour
 
                     // TODO 활동로그 남기기
                     CSpaceAppEngine.Instance.SetPage("LGTK");
-                    Server.Instance.RequestPostAnswerUpdateTime(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, CUIsAPTPage2Manager.Instance.GetRemainTime());
+                    // TODO 로그 확장 2
+                    //Server.Instance.RequestPostAnswerUpdateTime(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, CUIsAPTPage2Manager.Instance.GetRemainTime());
+                    Server.Instance.RequestPostAnswerUpdateTime(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, CUIsLGTKManager.Instance.GetRemainTime());
 
                     // TODO 로그 확장
                     //Server.Instance.RequestPUTAnswerObject(quizLGTK.sets[m_nStage].questions[0].test_qst_idx, listAnswer);

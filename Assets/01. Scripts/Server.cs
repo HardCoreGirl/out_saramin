@@ -151,23 +151,24 @@ public class Server : MonoBehaviour
         {
             //Debug.Log(www.error);
 
-            if(www.url.Equals(strServerTRAuth))
-            {
-                // 인증서버 접속 오류처리
-                //Debug.Log("Auth Error !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                // TODO AUTH
-                //CUIsSpaceManager.Instance.UpdateAuthMsg("인증서버 접속에 실패했습니다. 인터넷 연결을 확인해 주세요.");
+            // TODO 인증 제거
+            //if (www.url.Equals(strServerTRAuth))
+            //{
+            //    // 인증서버 접속 오류처리
+            //    //Debug.Log("Auth Error !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            //    // TODO AUTH
+            //    //CUIsSpaceManager.Instance.UpdateAuthMsg("인증서버 접속에 실패했습니다. 인터넷 연결을 확인해 주세요.");
 
-                System.DateTime currentDate = System.DateTime.Now;
-                System.DateTime yearStartDate = new System.DateTime(2020, 1, 1);
+            //    System.DateTime currentDate = System.DateTime.Now;
+            //    System.DateTime yearStartDate = new System.DateTime(2020, 1, 1);
 
-                int dayOfYear = (currentDate - yearStartDate).Days + 1;
+            //    int dayOfYear = (currentDate - yearStartDate).Days + 1;
 
-                if (dayOfYear > CSpaceAppEngine.Instance.GetAuthOverDay() )
-                {
-                    CUIsSpaceManager.Instance.ShowAuthFail();
-                }
-            }
+            //    if (dayOfYear > CSpaceAppEngine.Instance.GetAuthOverDay() )
+            //    {
+            //        CUIsSpaceManager.Instance.ShowAuthFail();
+            //    }
+            //}
             //Debug.Log("error : " + www.error + " url : " + www.url);
             string text = www.downloadHandler.text;
             Debug.Log("ERROR : [" + www.url + "] " + www.method + "MSG : " + www.error + " Text : " + text);
@@ -685,6 +686,7 @@ public class Server : MonoBehaviour
         // TODO 로그 확장
         //string strActionLog = "/api/v1/answer?answer_type=OBJ&answer_idx=" + nQuestIndex.ToString() + "&answers=" + strActionLogAnswer;
         string strActionLog = "/api/v1/answer?answer_type=OBJ&answer_idx=" + nQuestIndex.ToString() + "&question_idx=" + nRealQstIndex.ToString() + "&answers=" + strActionLogAnswer;
+        Debug.Log("ActionLog : " + strActionLog);
         RequestPOSTActionLog(strActionLog);
 
         header.Add("accept", "application/json");
@@ -735,12 +737,14 @@ public class Server : MonoBehaviour
             if (i != 0)
                 strActionLogAnswer += ",";
 
-            strActionLogAnswer += listContent;
+            // TODO 로그 확장 2
+            strActionLogAnswer += listContent[i];
         }
 
         // TODO 로그 확장
         //string strActionLog = "/api/v1/answer?answer_type=SBCT&answer_idx=" + nQuestIndex.ToString() + "&answers=" + strActionLogAnswer;
         string strActionLog = "/api/v1/answer?answer_type=SBCT&answer_idx=" + nQuestIndex.ToString() + "&question_idx=" + nRealQstIndex.ToString() + "&answers=" + strActionLogAnswer;
+        Debug.Log("ActionLog : " + strActionLog);
         RequestPOSTActionLog(strActionLog);
 
         header.Add("accept", "application/json");
@@ -755,6 +759,9 @@ public class Server : MonoBehaviour
             //Debug.Log("txt : " + txt);
         });
     }
+
+    // TODO 로그 확장 - 로그 남기기
+    private int m_nLogIndex = 0;
 
     // TODO 활동로그 남기기
     public void RequestPostAnswerUpdateTime(int nQuestIdx, int nProcessTime)
@@ -779,6 +786,15 @@ public class Server : MonoBehaviour
         //stPacketAnswer.answers = new int[] { nAnswerIndex };
         //stPacketAnswer.contents = listContent;
         //stPacketAnswer.demerit_score = fSocre;
+
+        // TODO 로그 확장 - 로그 남기기
+        //CUIsSpaceManager.Instance.UpdateAuthMsg("AnswerUpdateTime 0 : " + m_nLogIndex.ToString() + ", " + nQuestIdx.ToString());
+        if (nProcessTime == 0)
+        {
+            m_nLogIndex++;
+            CUIsSpaceManager.Instance.UpdateAuthMsg("AnswerUpdateTime 0 : " + m_nLogIndex.ToString() + ", " + nQuestIdx.ToString());
+            Debug.Log("RequestPostAnswerUpdateTime Zero : " + m_nLogIndex.ToString() + ", " + nQuestIdx.ToString());
+        }
 
         string jsonBody = JsonConvert.SerializeObject(stPacketAnswerUpdateTime);
 

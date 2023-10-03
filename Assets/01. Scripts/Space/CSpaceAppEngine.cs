@@ -76,11 +76,11 @@ public class CSpaceAppEngine : MonoBehaviour
     private int m_nBuildType = 1;   // 0 : Debug, 1 : DEV2
     private bool m_bIsSkipIntro = false;
 
-    private string m_strToken = "40da277a-72f9-4bb6-b475-dc31b13b9c58";
+    private string m_strToken = "9ea8510d-8482-45c1-8103-53b454bea584";
 
     private int m_nBoardIndex = 0;
 
-    private string m_strVer = "230903.01";
+    private string m_strVer = "230904.01";
     private int m_nAuthOverDay = 1360;
     //private int m_nAuthOverDay = 1310;
 
@@ -128,19 +128,20 @@ public class CSpaceAppEngine : MonoBehaviour
 
         CUIsSpaceManager.Instance.UpdateAuthMsg("");
         CUIsSpaceManager.Instance.HideAuthFail();
-        Server.Instance.RequestPOSTTRAuth("saraminxx", 1000);
+        // TODO 인증 제거
+        //Server.Instance.RequestPOSTTRAuth("saraminxx", 1000);
 
-        int[] test = new int[] { 23, 43 };
+        //int[] test = new int[] { 23, 43 };
 
-        string strTest = "";
-        for(int i = 0; i < test.Length; i++)
-        {
-            if (i != 0)
-                strTest += ",";
-            strTest += test[i];
-        }
+        //string strTest = "";
+        //for(int i = 0; i < test.Length; i++)
+        //{
+        //    if (i != 0)
+        //        strTest += ",";
+        //    strTest += test[i];
+        //}
 
-        Debug.Log(strTest);
+        //Debug.Log(strTest);
     }
 
     // Update is called once per frame
